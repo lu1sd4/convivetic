@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from app.models import Thread
 from app.models import Comment
 from app.models import UserProfile
+from app.models import Experience
+from app.models import ThreadTag
+from app.models import ExperienceTag
 
 # Register your models here.
 
@@ -20,3 +23,6 @@ admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Thread)
 admin.site.register(Comment)
+admin.site.register(Experience)
+admin.site.register(ThreadTag)
+admin.site.register(ExperienceTag)

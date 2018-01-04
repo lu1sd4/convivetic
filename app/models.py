@@ -17,6 +17,12 @@ GENDER_CHOICES = [
 	('F', 'Femenino')
 ]
 
+STATUS_CHOICES = [
+	('P', 'Pendiente'),
+	('A', 'Aprobado'),
+	('R', 'Rechazado')
+]
+
 class UserProfile(models.Model):
 	user = models.OneToOneField(
 		User,
@@ -64,6 +70,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+class ThreadTag(models.Model):
+	name = models.CharField(max_length=20)
+
 class Thread(models.Model):
 	author = models.ForeignKey(
 		User,
@@ -76,7 +85,34 @@ class Thread(models.Model):
 	)
 	pub_date = models.DateField(
 		default=date.today
+	)
+	video_url = models.CharField(
+		max_length=50,
+		null=True,
+		blank=True
+	)
+	audio_url = models.CharField(
+		max_length=100,
+		null=True,
+		blank=True
+	)
+	img = models.ImageField(
+		upload_to="uploads/",
+		null=True,
+		blank=True
+	)
+	status = models.CharField(
+		max_length = 20,
+		choices = STATUS_CHOICES,
+		default = 'R'
+	)
+	views = models.PositiveIntegerField(
+		default = 0
 	)	
+	likes = models.PositiveIntegerField(
+		default = 0
+	)
+	tags = models.ManyToManyField(ThreadTag)
 
 class Comment(models.Model):
 	thread = models.ForeignKey(
@@ -94,3 +130,61 @@ class Comment(models.Model):
 	pub_date = models.DateField(
 		default=date.today
 	)
+	video_url = models.CharField(
+		max_length=50,
+		null=True,
+		blank=True
+	)
+	audio_url = models.CharField(
+		max_length=100,
+		null=True,
+		blank=True
+	)
+	img = models.ImageField(
+		upload_to="uploads/",
+		null=True,
+		blank=True
+	)
+
+class ExperienceTag(models.Model):
+	name = models.CharField(max_length=20)
+
+class Experience(models.Model):
+	author = models.ForeignKey(
+		User,
+		on_delete=models.SET_NULL,
+		null=True
+	)
+	content = models.TextField(
+		default="Experience content"
+	)
+	pub_date = models.DateField(
+		default=date.today
+	)
+	video_url = models.CharField(
+		max_length=50,
+		null=True,
+		blank=True
+	)
+	audio_url = models.CharField(
+		max_length=100,
+		null=True,
+		blank=True
+	)
+	img = models.ImageField(
+		upload_to="uploads/",
+		null=True,
+		blank=True
+	)
+	status = models.CharField(
+		max_length = 20,
+		choices = STATUS_CHOICES,
+		default = 'R'
+	)
+	views = models.PositiveIntegerField(
+		default = 0
+	)
+	likes = models.PositiveIntegerField(
+		default = 0
+	)
+	tags = models.ManyToManyField(ExperienceTag)
