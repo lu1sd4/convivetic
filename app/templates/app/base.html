@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>ConviveTIC</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/dist/css/tether.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/bootstrap/dist/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
+</head>
+<body>
+
+	<header></header>
+	<nav></nav>
+	
+	
+	{% block content %} {% endblock %}
+	
+	<footer></footer>
+	
+	{% block scripts %} 
+
+		<script type="text/javascript" src="{% static 'app/libs/jquery/dist/jquery.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'app/libs/tether/dist/js/tether.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'app/libs/popper.js/dist/umd/popper.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'app/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+		<script type="text/javascript" src="{% static 'app/libs/angular/angular.min.js' %}"></script>
+  
+	{% endblock %}	
+
+</body>
+</html>
