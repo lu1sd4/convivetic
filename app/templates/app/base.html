@@ -11,15 +11,31 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
 </head>
 <body>
-
+	
 	<header>
+		<nav class="nav">
+		  <a class="nav-link active" href="#">Quiénes Somos</a>
+		  <a class="nav-link" href="#">Foros</a>
+		  <a class="nav-link" href="#">Experiencias</a>
+		  <a class="nav-link" href="#">Ingreso</a>
+		  <a class="nav-link" href="#">Contacto</a>
+		</nav>
+
+		<div class="subheader">
 		
+		</div>
 	</header>
-	<nav></nav>
-	
-	
+
+	<br>
 	{% block content %} {% endblock %}
+	<br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br>
+	<br><br>
 	
+	
+	
+	<footer class="con-footer-pinfo"></footer>
+	<footer class="con-footer-secondary"></footer>
 	<footer></footer>
 	
 	{% block scripts %} 
