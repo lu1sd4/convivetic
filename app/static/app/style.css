@@ -204,11 +204,12 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-top: 1.5em;
+  margin-top: 0.2em;
 }
 .forum-section .forum-c .f-aside {
   display: flex;
   flex-direction: column;
+  margin-top: 2em;
 }
 .forum-section .forum-c .f-aside .forum-invitation {
   border: 2px solid #dadada;
@@ -230,6 +231,7 @@ header {
   padding: 30px 25px;
   margin-right: 40px;
   margin-left: 15px;
+  margin-top: 2em;
 }
 .forum-section .forum-c .forum .f-image {
   margin-right: 20px;
@@ -273,4 +275,9 @@ header {
 .forum-section .forum-c .forum .forum-item .forum-publisher .f-name {
   margin-bottom: 0;
   font-weight: 300;
+}
+.block-expl {
+  background-color: #f7f7f7;
+  height: 500px;
+  margin-top: 3.5em;
 }
