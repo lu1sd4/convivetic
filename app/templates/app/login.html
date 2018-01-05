@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>ConviveTIC</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/dist/css/tether.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/bootstrap/dist/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
+</head>
+<body>
+	<div class="login-container">
+		<div class="login-box rounded">
+			<div class="login-dec">
+				<h2>Bienvenido a <strong>ConviveTIC</strong></h2>
+				<h5>Inicia sesión para continuar</h5>
+			</div>
+			<div class="login-form">
+				<img class="login-logo" src="{% static 'app/img/ConviveTIC-logo.png' %}">
+				<p class="text-center"><small>¿No tienes cuenta? <a href="#">Regístrate</a></small></p>
+				<form method="post" action="{% url 'login' %}">
+				{% csrf_token %}
+					<div class="form-group">
+					    {{ form.username.label_tag }}
+					    {{ form.username }}
+					</div>
+					<div class="form-group">
+					    {{ form.password.label_tag }}
+					    {{ form.password }}
+				    </div>
+				    <div class="form-group">
+						<input type="submit" value="Iniciar sesión" class="btn btn-primary"/>
+						<input type="hidden" name="next" value="{{ next }}" />
+					</div>
+				</form>
+				<div class="forgot-password text-center">
+					<a href="#"><p><small>¿Olvidaste tu contraseña?</small></p></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

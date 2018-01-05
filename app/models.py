@@ -68,7 +68,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    instance.userprofile.save()
 
 class ThreadTag(models.Model):
 	name = models.CharField(max_length=20)
@@ -79,7 +79,10 @@ class Thread(models.Model):
 		on_delete=models.SET_NULL,
 		null=True
 	)
-	title = models.CharField(max_length=100)
+	title = models.CharField(
+		max_length=100,
+		default=''
+	)
 	description = models.TextField(
 		default="Thread description"
 	)
@@ -149,11 +152,15 @@ class Comment(models.Model):
 class ExperienceTag(models.Model):
 	name = models.CharField(max_length=20)
 
-class Experience(models.Model):
+class Experience(models.Model):	
 	author = models.ForeignKey(
 		User,
 		on_delete=models.SET_NULL,
 		null=True
+	)
+	title = models.CharField(
+		max_length = 100,
+		default = ''
 	)
 	content = models.TextField(
 		default="Experience content"

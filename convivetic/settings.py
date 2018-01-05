@@ -25,7 +25,7 @@ SECRET_KEY = '9u7ysc$0@*&m*n319=)ea^#+lwz$erc=ebl0rd9kg=4zb7ep*@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '192.168.1.52']
 
 
 # Application definition
@@ -122,3 +122,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 MEDIA_ROOT = 'app/static/media'
 MEDIA_URL = '/app/static/media/'
+
+# Auth options
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
