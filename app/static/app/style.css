@@ -98,10 +98,30 @@ header {
   justify-content: flex-start;
   margin-top: 1.5em;
 }
+.forum-section .forum-c .f-aside {
+  display: flex;
+  flex-direction: column;
+}
+.forum-section .forum-c .f-aside .forum-invitation {
+  border: 2px solid #dadada;
+  padding: 25px;
+  text-align: center;
+  width: 350px;
+}
+.forum-section .forum-c .f-aside .forum-invitation h5 {
+  font-weight: 500;
+}
+.forum-section .forum-c .f-aside .forum-invitation p {
+  font-weight: 300;
+}
+.forum-section .forum-c .f-aside .forum-invitation button {
+  background-color: #008489;
+}
 .forum-section .forum-c .forum {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
   padding: 30px 25px;
   margin-right: 40px;
+  margin-left: 15px;
 }
 .forum-section .forum-c .forum .f-image {
   margin-right: 20px;
