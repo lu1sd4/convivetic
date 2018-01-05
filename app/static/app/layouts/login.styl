@@ -1,55 +1,107 @@
+/*
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+
+*/
+
 .login-container
 
-	background-image url('img/background.jpg')
-	min-height 100vh
-	background-size cover
-	display flex
-	flex-direction column	
+	@media (min-width 576px)
+		background-image url('img/background.jpg')
+		min-height 100vh
+		background-size cover
+		display flex
+		flex-direction column	
 
-	&::before,&::after
-		box-flex 1
-		flex-grow 1
-		content ''
-		display block
-		height 24px
-	&::before
-		min-height 30px
+		&::before,&::after
+			box-flex 1
+			flex-grow 1
+			content ''
+			display block
+			height 24px
+		&::before
+			min-height 30px
 
 	.login-box
 
+		width 100%
 		display flex
-		width 900px
 		flex-shrink 0
 		box-shadow 0 4px 4px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2)
 		min-height 500px
 		margin 0 auto
 		flex-direction row
 
-		input[type=text],
-		input[type=password]
-		input[type=submit]
+		@media (min-width 576px)
+			width 450px
 
-			width 100%
+		@media (min-width 768px)
+			width 600px
+
+		@media (min-width: 992px)
+			width 900px
 
 		.login-dec
 
-			border-bottom-left-radius 4px
-			border-top-left-radius 4px
-			width 65%
-			padding 20px 20px
-			background-color rgba(254,254,254,.2)
-			h1,h2,h3,h4,h5
-				font-weight 300
-				color white
+			display none
+
+			@media (min-width 768px)
+				display block
+				border-bottom-left-radius 4px
+				border-top-left-radius 4px
+				width 65%
+				padding 20px 20px
+				background-color rgba(254,254,254,.2)
+				h1,h2,h3,h4,h5
+					font-weight 300
+					color white
 		
 		.login-form		
 
-			border-bottom-right-radius 4px
-			border-top-right-radius 4px
-			width 35%
 			background #fff
 			padding 28px 30px
-			position relative
+			position relative			
+
+			// Dont show bg	
+			min-height 100vh		
+			width 100%
+
+			// Show this one only
+			@media (min-width 576px)
+				border-radius 
+				min-height 0
+				border-top-left-radius 0px
+				border-top-right-radius 0px
+				border-bottom-right-radius 4px
+				border-top-right-radius 4px
+
+			// Display along with the other one
+			@media (min-width 768px)
+				width 35%
+				border-top-left-radius 0px
+				border-top-right-radius 0px
+				border-bottom-right-radius 4px
+				border-top-right-radius 4px
+
+			input[type=text],
+			input[type=password]
+			input[type=submit]
+
+				width 100%
 
 			.login-logo
 
