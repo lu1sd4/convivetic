@@ -13,10 +13,6 @@ nav a:hover {
 header {
   box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.28);
 }
-h2 {
-  font-weight: 400;
-  color: #777;
-}
 .subheader {
   height: 200px;
 }
@@ -27,4 +23,126 @@ h2 {
 .con-footer-secondary {
   background-color: #455a64;
   height: 60px;
+}
+.p-container {
+  padding-left: 80px;
+  padding-right: 80px;
+}
+.exp-section .exp-section-title {
+  color: #484848;
+  font-size: 28px;
+  margin-top: 1em;
+}
+.exp-section .experiences-c {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: -0.5em;
+}
+.exp-section .experiences-c .experience {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 1.7em;
+  height: 370px;
+  width: 320px;
+}
+.exp-section .experiences-c .experience .detail-c {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.exp-section .experiences-c .experience .detail-c .popular-data-c {
+  display: flex;
+  margin-bottom: 0.3em;
+  margin-top: 0.4em;
+  font-weight: 300;
+}
+.exp-section .experiences-c .experience .detail-c .popular-data-c svg {
+  color: #008489;
+}
+.exp-section .experiences-c .experience .detail-c .popular-data-c .views {
+  flex-basis: 30%;
+}
+.exp-section .experiences-c .experience .detail-c .exp-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 0.3em;
+  color: #484848;
+}
+.exp-section .experiences-c .experience .detail-c .content-c p {
+  font-weight: 300;
+}
+.exp-section .experiences-c .experience .detail-c .publisher {
+  font-weight: 300;
+  color: #484848;
+}
+.exp-section .more-exp {
+  display: flex;
+  font-size: 18px;
+  margin-top: 2.5em;
+  margin-left: 15px;
+}
+.exp-section .more-exp a {
+  color: #008489;
+}
+.exp-section .more-exp i {
+  font-size: 17px;
+}
+.forum-section {
+  margin-top: 3.2em;
+}
+.forum-section .forum-c {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 1.5em;
+}
+.forum-section .forum-c .forum {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  padding: 30px 25px;
+  margin-right: 40px;
+}
+.forum-section .forum-c .forum .f-image {
+  margin-right: 20px;
+}
+.forum-section .forum-c .forum .forum-item {
+  display: flex;
+  flex-grow: 2;
+  margin-bottom: 1.5em;
+}
+.forum-section .forum-c .forum .forum-item .for-data {
+  display: flex;
+}
+.forum-section .forum-c .forum .forum-item .for-data a {
+  color: #008489;
+  font-weight: 600;
+  max-width: 400px;
+}
+.forum-section .forum-c .forum .forum-item .for-data .comment-c {
+  position: relative;
+}
+.forum-section .forum-c .forum .forum-item .for-data .comment-c svg {
+  color: #9e9e9e;
+  font-size: 40px;
+}
+.forum-section .forum-c .forum .forum-item .for-data .comment-c .comment-counter {
+  color: #9e9e9e;
+  font-weight: 300;
+  font-size: 15px;
+  position: absolute;
+  top: 7px;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.forum-section .forum-c .forum .forum-item .forum-publisher .f-date {
+  margin-bottom: 0;
+  font-weight: 300;
+  font-size: 15px;
+}
+.forum-section .forum-c .forum .forum-item .forum-publisher .f-name {
+  margin-bottom: 0;
+  font-weight: 300;
 }
