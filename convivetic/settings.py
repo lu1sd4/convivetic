@@ -122,3 +122,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
 MEDIA_ROOT = 'app/static/media'
 MEDIA_URL = '/app/static/media/'
+
+# Auth options
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
