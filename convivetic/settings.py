@@ -127,3 +127,4 @@ MEDIA_URL = '/app/static/media/'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
