@@ -16,6 +16,22 @@ header {
 .con-footer-pinfo {
   background-color: #303c42;
   height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.con-footer-pinfo figure {
+  width: 16.6%;
+  max-width: 300px;
+  margin-right: 10px;
+}
+.con-footer-pinfo figure figcaption {
+  background-color: rgba(0,0,0,0.3) !important;
+}
+[class*=" imghvr-"],
+[class^="imghvr-"] {
+  background-color: transparent !important;
 }
 .con-footer-secondary {
   background-color: #455a64;
@@ -182,7 +198,7 @@ header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: -0.5em;
 }
 .exp-section .experiences-c .experience {
@@ -224,7 +240,7 @@ header {
 }
 .exp-section .more-exp {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: 18px;
   margin-top: 2.5em;
   margin-left: 15px;
@@ -245,7 +261,7 @@ header {
 .forum-section .forum-c {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 0.2em;
 }
 .forum-section .forum-c .f-aside {
@@ -320,7 +336,7 @@ header {
 }
 .more-forum {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: 18px;
   margin-top: 1.5em;
   margin-left: 15px;
@@ -341,7 +357,7 @@ header {
 }
 .block-expl .contact-section {
   display: flex;
-  justify-content: centersd;
+  justify-content: center;
 }
 .block-expl .contact-c {
   display: flex;
