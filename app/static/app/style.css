@@ -13,16 +13,69 @@ nav a:hover {
 header {
   box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.28);
 }
-.subheader {
-  height: 200px;
-}
 .con-footer-pinfo {
   background-color: #303c42;
   height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.con-footer-pinfo figure {
+  width: 16.6%;
+  max-width: 300px;
+  margin-right: 10px;
+}
+.con-footer-pinfo figure figcaption {
+  background-color: rgba(0,0,0,0.3) !important;
+}
+[class*=" imghvr-"],
+[class^="imghvr-"] {
+  background-color: transparent !important;
 }
 .con-footer-secondary {
   background-color: #455a64;
   height: 60px;
+}
+.subheader {
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.subheader .subheader-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1400px;
+  padding: 10px;
+}
+.subheader .subheader-c .sub-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.subheader .subheader-c .sub-content h4 {
+  color: #484848;
+  font-weight: 300;
+  font-size: 29px;
+}
+.subheader .subheader-c .sub-content h4 span {
+  font-weight: 700;
+}
+.subheader .subheader-c .sub-content .search-box {
+  border: 1px solid rgba(0,0,0,0.26);
+  margin-top: 1em;
+  padding: 5px 10px;
+  width: 100%;
+}
+.subheader .subheader-c .sub-content .search-box .input-box {
+  border: none;
+  color: #484848;
+  width: 90%;
+}
+.subheader .subheader-c .sub-content .search-box svg {
+  color: rgba(0,0,0,0.26);
 }
 @media (min-width: 576px) {
   .login-container {
@@ -138,7 +191,7 @@ header {
 }
 .exp-section .exp-section-title {
   color: #484848;
-  font-size: 28px;
+  font-size: 26px;
   margin-top: 1em;
 }
 .exp-section .experiences-c {
@@ -187,6 +240,7 @@ header {
 }
 .exp-section .more-exp {
   display: flex;
+  justify-content: flex-start;
   font-size: 18px;
   margin-top: 2.5em;
   margin-left: 15px;
@@ -200,16 +254,42 @@ header {
 .forum-section {
   margin-top: 3.2em;
 }
+.forum-section .for-section-title {
+  font-size: 26px;
+  color: #484848;
+}
 .forum-section .forum-c {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-top: 1.5em;
+  margin-top: 0.2em;
+}
+.forum-section .forum-c .f-aside {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+.forum-section .forum-c .f-aside .forum-invitation {
+  border: 2px solid #dadada;
+  padding: 25px;
+  text-align: center;
+  width: 350px;
+}
+.forum-section .forum-c .f-aside .forum-invitation h5 {
+  font-weight: 500;
+}
+.forum-section .forum-c .f-aside .forum-invitation p {
+  font-weight: 300;
+}
+.forum-section .forum-c .f-aside .forum-invitation button {
+  background-color: #008489;
 }
 .forum-section .forum-c .forum {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
   padding: 30px 25px;
   margin-right: 40px;
+  margin-left: 15px;
+  margin-top: 2em;
 }
 .forum-section .forum-c .forum .f-image {
   margin-right: 20px;
@@ -253,4 +333,85 @@ header {
 .forum-section .forum-c .forum .forum-item .forum-publisher .f-name {
   margin-bottom: 0;
   font-weight: 300;
+}
+.more-forum {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 18px;
+  margin-top: 1.5em;
+  margin-left: 15px;
+}
+.more-forum a {
+  color: #008489;
+}
+.more-forum i {
+  font-size: 17px;
+}
+.block-expl {
+  background-color: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  margin-top: 3.5em;
+}
+.block-expl .contact-section {
+  display: flex;
+  justify-content: center;
+}
+.block-expl .contact-c {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 800px;
+  width: 100%;
+}
+.block-expl .contact-c .left-c {
+  margin-right: 30px;
+}
+.block-expl .contact-c .left-c h4 {
+  color: #484848;
+  font-weight: 600;
+}
+.block-expl .contact-c .left-c p {
+  font-weight: 300;
+  max-width: 300px;
+  font-size: 21px;
+  color: #484848;
+}
+.block-expl .contact-c .left-c button {
+  background-color: #008489;
+  font-size: 18px;
+  padding: 10px 25px;
+}
+.start-section {
+  height: 563px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
+.start-section .start-c {
+  height: 100%;
+  overflow: hidden;
+}
+.start-section .start-content {
+  position: relative;
+}
+.start-section .start-content .float-content {
+  position: absolute;
+  top: 120px;
+  left: 20%;
+}
+.start-section .start-content .float-content p {
+  max-width: 300px;
+  font-weight: 700;
+  font-size: 50px;
+  color: #484848;
+  line-height: 1.2;
+}
+.start-section .start-content .float-content button {
+  background-color: #008489;
+  font-size: 20px;
+  padding: 13px 25px;
 }
