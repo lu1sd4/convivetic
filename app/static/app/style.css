@@ -138,14 +138,14 @@ header {
 }
 .exp-section .exp-section-title {
   color: #484848;
-  font-size: 28px;
+  font-size: 26px;
   margin-top: 1em;
 }
 .exp-section .experiences-c {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: -0.5em;
 }
 .exp-section .experiences-c .experience {
@@ -187,6 +187,7 @@ header {
 }
 .exp-section .more-exp {
   display: flex;
+  justify-content: center;
   font-size: 18px;
   margin-top: 2.5em;
   margin-left: 15px;
@@ -200,10 +201,14 @@ header {
 .forum-section {
   margin-top: 3.2em;
 }
+.forum-section .for-section-title {
+  font-size: 26px;
+  color: #484848;
+}
 .forum-section .forum-c {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: 0.2em;
 }
 .forum-section .forum-c .f-aside {
@@ -276,8 +281,84 @@ header {
   margin-bottom: 0;
   font-weight: 300;
 }
+.more-forum {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  margin-top: 1.5em;
+  margin-left: 15px;
+}
+.more-forum a {
+  color: #008489;
+}
+.more-forum i {
+  font-size: 17px;
+}
 .block-expl {
   background-color: #f7f7f7;
-  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
   margin-top: 3.5em;
+}
+.block-expl .contact-section {
+  display: flex;
+  justify-content: centersd;
+}
+.block-expl .contact-c {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 800px;
+  width: 100%;
+}
+.block-expl .contact-c .left-c {
+  margin-right: 30px;
+}
+.block-expl .contact-c .left-c h4 {
+  color: #484848;
+  font-weight: 600;
+}
+.block-expl .contact-c .left-c p {
+  font-weight: 300;
+  max-width: 300px;
+  font-size: 21px;
+  color: #484848;
+}
+.block-expl .contact-c .left-c button {
+  background-color: #008489;
+  font-size: 18px;
+  padding: 10px 25px;
+}
+.start-section {
+  height: 563px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
+.start-section .start-c {
+  height: 100%;
+  overflow: hidden;
+}
+.start-section .start-content {
+  position: relative;
+}
+.start-section .start-content .float-content {
+  position: absolute;
+  top: 120px;
+  left: 20%;
+}
+.start-section .start-content .float-content p {
+  max-width: 300px;
+  font-weight: 700;
+  font-size: 50px;
+  color: #484848;
+  line-height: 1.2;
+}
+.start-section .start-content .float-content button {
+  background-color: #008489;
+  font-size: 20px;
+  padding: 13px 25px;
 }
