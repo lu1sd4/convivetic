@@ -13,9 +13,6 @@ nav a:hover {
 header {
   box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.28);
 }
-.subheader {
-  height: 200px;
-}
 .con-footer-pinfo {
   background-color: #303c42;
   height: 300px;
@@ -23,6 +20,46 @@ header {
 .con-footer-secondary {
   background-color: #455a64;
   height: 60px;
+}
+.subheader {
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.subheader .subheader-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1400px;
+  padding: 10px;
+}
+.subheader .subheader-c .sub-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.subheader .subheader-c .sub-content h4 {
+  color: #484848;
+  font-weight: 300;
+  font-size: 29px;
+}
+.subheader .subheader-c .sub-content h4 span {
+  font-weight: 700;
+}
+.subheader .subheader-c .sub-content .search-box {
+  border: 1px solid rgba(0,0,0,0.26);
+  margin-top: 1em;
+  padding: 5px 10px;
+  width: 100%;
+}
+.subheader .subheader-c .sub-content .search-box .input-box {
+  border: none;
+  color: #484848;
+  width: 90%;
+}
+.subheader .subheader-c .sub-content .search-box svg {
+  color: rgba(0,0,0,0.26);
 }
 @media (min-width: 576px) {
   .login-container {

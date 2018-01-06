@@ -1,3 +1,10 @@
+texts-color = #484848
+shadow-color = rgba(0,0,0,.26)
+icon-gray-color = rgba(0,0,0,.26)
+links-color = #008489
+blocks-background = #f7f7f7
+
+
 body
 	background-color #fff
 
@@ -13,8 +20,7 @@ nav
 header
 	box-shadow 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28)
 
-.subheader
-	height 200px
+
 
 .con-footer-pinfo
 	background-color #303c42
@@ -24,9 +30,49 @@ header
 	background-color #455a64
 	height 60px
 
+.subheader
+	height 220px
+	display flex
+	justify-content center
+	align-items center
 
-texts-color = #484848
-shadow-color = rgba(0,0,0,.26)
-links-color = #008489
-blocks-background = #f7f7f7
+	.subheader-c
+		display flex
+		justify-content center
+		align-items center
+		max-width 1400px
+		padding 10px
+		
+		.sub-content
+			display flex
+			justify-content center
+			flex-direction column
+			
+			h4
+				color texts-color
+				font-weight 300
+				font-size 29px
+				
+				span
+					font-weight 700
+			
+			.search-box
+				border 1px solid icon-gray-color
+				margin-top 1em
+				padding 5px 10px
+				width 100%
+				
+				.input-box
+					border none
+					color texts-color
+					width 90%
+				
+				svg
+					color icon-gray-color
+					
+				
+
+
+
+
 
