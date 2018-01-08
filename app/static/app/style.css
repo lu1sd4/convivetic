@@ -335,6 +335,12 @@ header {
     width: 97% !important;
   }
 }
+@media (min-width: 768px) {
+  .forum-section .forum-c .f-aside {
+    margin-right: 0% !important;
+    width: 97% !important;
+  }
+}
 @media (min-width: 992px) {
   .forum-section .forum-c .f-aside {
     margin-right: 3% !important;
