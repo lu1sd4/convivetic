@@ -598,7 +598,12 @@ header {
   font-size: 20px;
   padding: 13px 25px;
 }
-@media (min-width: 576px) {
+[ng:cloak],
+[ng-cloak],
+.ng-cloak {
+  display: none !important;
+}
+@media (min-width: 768px) {
   .register-container {
     background-image: url("img/background.jpg");
     min-height: 100vh;
@@ -625,31 +630,19 @@ header {
   margin: 0 auto;
   background: #fff;
   padding: 30px;
-  height: 100vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  min-height: 100v;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.register-container .register-box .register-section {
-  overflow: hidden;
-  -moz-transition: 1s ease-in-out opacity;
-  -ms-transition: 1s ease-in-out opacity;
-  -o-transition: 1s ease-in-out opacity;
-  transition: 1s ease-in-out opacity;
-  opacity: 1;
-}
-.register-container .register-box .register-section.ng-hide-add,
-.register-container .register-box .register-section.ng-hide-remove {
-  -webkit-transition: 1s ease-in-out opacity;
-}
-.register-container .register-box .register-section.ng-hide {
-  opacity: 0;
-}
-@media (min-width: 576px) {
+@media (min-width: 768px) {
   .register-container .register-box {
     width: 60%;
     max-width: 450px;
-    height: auto;
+    min-height: 0;
+    max-height: 90vh;
   }
 }
 @media (min-width: 992px) {
@@ -657,6 +650,38 @@ header {
     width: 70%;
     max-width: 600px;
   }
+}
+.register-container .register-box .register-logo {
+  height: 80px;
+  margin-bottom: 0.5rem;
+}
+.register-container .register-box .register-section-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  overflow: hidden;
+  position: relative;
+}
+.register-container .register-box .register-section {
+  -moz-transition: 0.5s ease-in-out opacity;
+  -ms-transition: 0.5s ease-in-out opacity;
+  -o-transition: 0.5s ease-in-out opacity;
+  transition: 0.5s ease-in-out opacity;
+  opacity: 1;
+}
+.register-container .register-box .register-section.ng-hide-add,
+.register-container .register-box .register-section.ng-hide-remove {
+  -webkit-transition: 0.5s ease-in-out opacity;
+}
+.register-container .register-box .register-section.ng-hide-remove-active {
+  transition-delay: 0.5s;
+}
+.register-container .register-box .register-section.ng-hide {
+  opacity: 0;
+}
+.register-container .register-box .register-section.ng-hide-animate {
+  position: absolute;
 }
 .register-container .register-box .register-state-container {
   display: flex;
@@ -678,8 +703,21 @@ header {
   padding-left: 0;
   justify-content: center;
   align-items: center;
+  margin-bottom: 0.5rem;
 }
 .register-container .register-box .register-yesno li {
   margin-left: 10px;
   margin-right: 10px;
+}
+.register-container .register-box .register-yesno li label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register-container .register-box .register-yesno li label input[type=radio] {
+  margin-bottom: 0;
+  margin-right: 5px;
+}
+.register-container .register-box textarea {
+  resize: none;
 }
