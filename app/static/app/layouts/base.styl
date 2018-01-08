@@ -24,25 +24,56 @@ header
 
 .con-footer-pinfo
 	background-color #303c42
-	height 300px
+	height auto
 	display flex
 	align-items center
 	justify-content center
 	flex-direction row
+	padding-left 1.2%
 	
-	figure
-		width 16.6%
-		max-width 300px
-		margin-right 10px
+	.gallery-container
+		padding 1em
+		max-width 1760px
 		
-		figcaption
-			background-color rgba(0,0,0,.3) !important
+		@media (max-width 575.99px)
+			padding 0px !important
+	
+		figure
+			width 14.7%
+			margin-right 1.66666666667%
+			
+
+			@media (max-width 575.99px)
+				margin-right 0% !important
+				width 100%
+
+			// Small devices (landscape phones, 576px and up)
+			@media (min-width 576px)
+				margin-right 2% !important
+				width 47% !important
+				
+
+			// Medium devices (tablets, 768px and up)
+			@media (min-width 768px)
+				margin-right 2.7% !important
+				width 30% !important
+
+			// Extra large devices (large desktops, 1200px and up)
+			@media (min-width 1200px)
+				width 18% !important
+				margin-right 1.6% !important
+				
+
+			figcaption
+				background-color rgba(0,0,0,.3) !important
 	
 
 [class*=" imghvr-"], 
 [class^="imghvr-"]
 	background-color transparent !important
 	
+	img
+		width 100% !important
 
 .con-footer-secondary
 	background-color #455a64
