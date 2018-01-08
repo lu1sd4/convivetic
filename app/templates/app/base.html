@@ -14,23 +14,36 @@
 <body>
 	
 	<header>
-		<nav class="nav">
-		  <a class="nav-link active" href="#">Quiénes Somos</a>
-		  <a class="nav-link" href="#">Foros</a>
-		  <a class="nav-link" href="#">Experiencias</a>
-		  <a class="nav-link" href="#">Ingreso</a>
-		  <a class="nav-link" href="#">Contacto</a>
-	  		{% if request.user.is_authenticated %}
-	  			<a class="nav-link" href="{% url 'logout' %}">
-	  				{{ request.user.username }}
-	  			</a>
-		  	{% else %}
-		  		<a class="nav-link" href="{% url 'login' %}">
-		  			Iniciar sesión
-		  		</a>
-		  	{% endif %}
-		  </a>
-		</nav>
+
+		<div class="nav-c">
+			<nav class="nav">
+			  <a class="nav-link active" href="#">Quiénes Somos</a>
+			  <a class="nav-link" href="#">Foros</a>
+			  <a class="nav-link" href="#">Experiencias</a>
+			  <a class="nav-link" href="#">Ingreso</a>
+			  <a class="nav-link" href="#">Contacto</a>
+		  		{% if request.user.is_authenticated %}
+		  			<a class="nav-link" href="{% url 'logout' %}">
+		  				{{ request.user.username }}
+		  			</a>
+			  	{% else %}
+			  		<a class="nav-link" href="{% url 'login' %}">
+			  			Iniciar sesión
+			  		</a>
+			  	{% endif %}
+			  </a>
+			</nav>
+			<div class="nav-mobile">
+				<button class=""><i class="fa fa-bars"></i></button>
+				<ul>
+					<li>Quiénes Somos</li>
+					<li>Foros</li>
+					<li>Experiencias</li>
+					<li>Ingreso</li>
+					<li>Contacto</li>
+				</ul>
+			</div>
+		</div>
 
 		<div class="subheader">
 			<div class="subheader-c">

@@ -13,6 +13,44 @@ nav a:hover {
 header {
   box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.28);
 }
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.nav-c {
+  display: flex;
+  justify-content: center;
+}
+.nav-c nav {
+  max-width: 1760px;
+}
+@media (max-width: 767.99px) {
+  .nav-c nav {
+    display: none;
+  }
+}
+.nav-c .nav-mobile {
+  display: none;
+  width: 100%;
+}
+.nav-c .nav-mobile ul {
+  width: 100%;
+}
+.nav-c .nav-mobile ul li {
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,0.26);
+  height: 47px;
+  font-size: 15px;
+}
+.nav-c .nav-mobile ul li:hover {
+  background-color: #008489;
+  color: #fff;
+}
+@media (max-width: 767.99px) {
+  .nav-c .nav-mobile {
+    display: flex;
+  }
+}
 .con-footer-pinfo {
   background-color: #303c42;
   height: auto;
