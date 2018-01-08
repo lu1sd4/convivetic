@@ -1,5 +1,145 @@
-<form action="signup" method="post">
-	{{ user_form.as_p }}
-	{{ profile_form.as_p }}
-	<input type="submit" value="Save"/>
-</form>
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>ConviveTIC</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/dist/css/tether.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/bootstrap/dist/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/bootstrap-select/dist/css/bootstrap-select.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/select/select.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
+</head>
+<body ng-app='conviveticApp'>
+	<div class="register-container">
+		<div class="register-box rounded" ng-controller="signupController as signupCtrl">
+			<div class="register-header">
+				<h3 class="text-center">Registro</h3>
+				<p class="text-center">Llena los campos para registrarte en ConviveTIC {[{ signupCtrl.x }]} </p>				
+				<div class="register-state-container">
+					<div class="register-state-circle rounded-circle" ng-class="{'active' : signupCtrl.state == signupCtrl.pageOne}"></div>
+					<div class="register-state-circle rounded-circle" ng-class="{'active' : signupCtrl.state == signupCtrl.pageTwo}"></div>
+					<div class="register-state-circle rounded-circle" ng-class="{'active' : signupCtrl.state == signupCtrl.pageThree}"></div>
+				</div>
+				<hr>
+			</div>
+			<div class="register-form">
+				<form action="signup" method="post">
+					{% csrf_token %}
+					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageOne">
+						<div class="row">
+							<div class="col">
+								{% render_field user_form.username class+="form-control" placeholder=user_form.username.label %}
+							</div>
+							<div class="col">
+								{% render_field user_form.password class+="form-control" placeholder=user_form.password.label %}
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								{% render_field user_form.first_name class+="form-control" placeholder=user_form.first_name.label %}
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								{% render_field user_form.last_name class+="form-control" placeholder=user_form.last_name.label %}
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								{% render_field user_form.email class+="form-control" placeholder=user_form.email.label %}
+							</div>
+						</div>
+					</div>
+					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageTwo">
+						<div class="row">
+							<div class="col" style="display:flex; justify-content: center; align-items: center">
+								{{ profile_form.gender.label_tag }}
+								&nbsp;&nbsp;
+								{% render_field profile_form.gender %}
+							</div>
+							<div class="col" style="display:flex; justify-content: center; align-items: center">
+								{{ profile_form.title.label_tag }}
+								&nbsp;&nbsp;
+								{% render_field profile_form.title %}
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								{% render_field profile_form.birth_date class+="form-control" placeholder=profile_form.birth_date.label %}
+							</div>
+							<div class="col">
+								{% render_field profile_form.phone_number class+="form-control" placeholder=profile_form.phone_number.label %}
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								{% render_field profile_form.nationality class+="form-control" placeholder=profile_form.nationality.label %}
+							</div>
+							<div class="col">
+								{% render_field profile_form.country_of_residence class+="form-control" placeholder=profile_form.country_of_residence.label %}
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col">
+								{% render_field profile_form.bio class+="form-control" placeholder=profile_form.bio.label rows="3" %}
+							</div>
+						</div>			
+					</div>
+					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageThree">
+						<div class="row">
+							<div class="col">
+								{{ profile_form.is_conflict_participant.label_tag }}
+								{% render_field profile_form.is_conflict_participant class+="register-yesno" %}
+							</div>
+						</div>	
+						<div class="row">
+							<div class="col">
+								{{ profile_form.is_conflict_victim.label_tag }}
+								{% render_field profile_form.is_conflict_victim class+="register-yesno" %}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								{{ profile_form.is_living_in_conflict_zone.label_tag }}
+								{% render_field profile_form.is_living_in_conflict_zone class+="register-yesno" %}
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="register-bottom">
+				<hr>
+				<div class="register-button-container text-center">
+					<button ng-show="signupCtrl.isPrevious" ng-click="signupCtrl.previousPart()" class="btn">Anterior</button>
+					<button ng-show="signupCtrl.isNext" ng-click="signupCtrl.nextPart()" class="btn btn-primary">Siguiente</button>
+					<button ng-show="signupCtrl.isLast" class="btn btn-primary">Guardar</button>
+				</div>
+			</div>			
+		</div>
+	</div>
+
+	<script type="text/javascript" src="{% static 'app/libs/jquery/dist/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/tether/dist/js/tether.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/popper.js/dist/umd/popper.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/angular/angular.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/angular-animate/angular-animate.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/bootstrap-select/dist/js/bootstrap-select.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/select/select.js' %}"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+	<script type="text/javascript" src="{% static 'app/logic/app.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/controllers/signupCtrl.js' %}"></script>
+
+</body>
+</html>
+

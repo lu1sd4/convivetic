@@ -17,6 +17,11 @@ GENDER_CHOICES = [
 	('F', 'Femenino')
 ]
 
+YES_NO_CHOICES = [
+	(True, 'Si'),
+	(False, 'No')
+]
+
 STATUS_CHOICES = [
 	('P', 'Pendiente'),
 	('A', 'Aprobado'),
@@ -30,12 +35,19 @@ class UserProfile(models.Model):
 	)
 	title = models.CharField(
 		choices = PERSON_TITLE_CHOICES,
-		max_length = 50
+		max_length = 50,
+		blank=False,
+		default='Don'
 	)
-	birth_date = models.DateField()
+	birth_date = models.DateField(
+		null = True,
+		blank = True
+	)
 	gender = models.CharField(
 		choices = GENDER_CHOICES,
-		max_length = 50
+		max_length = 50,
+		blank=False,
+		default='M'
 	)
 	nationality = models.CharField(
 		max_length = 50
@@ -45,31 +57,26 @@ class UserProfile(models.Model):
 	)
 	phone_number = models.CharField(
 		max_length = 15,
-		blank = True
+		blank = True,
+		null=True
 	)
 	bio = models.TextField(
-		default="User bio",
-		blank=True
+		default="",
+		blank=True,
+		null=True
 	)
 	is_conflict_participant = models.BooleanField(
-		default=False
+		default=False,
+		choices=YES_NO_CHOICES
 	)
 	is_conflict_victim = models.BooleanField(
-		default=False
+		default=False,
+		choices=YES_NO_CHOICES
 	)
 	is_living_in_conflict_zone = models.BooleanField(
-		default=False
+		default=False,
+		choices=YES_NO_CHOICES
 	)
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.userprofile.save()
-
 class ThreadTag(models.Model):
 	name = models.CharField(max_length=20)
 

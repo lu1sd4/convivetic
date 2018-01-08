@@ -604,3 +604,88 @@ header {
   font-size: 20px;
   padding: 13px 25px;
 }
+@media (min-width: 576px) {
+  .register-container {
+    background-image: url("img/background.jpg");
+    min-height: 100vh;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+  }
+  .register-container::before,
+  .register-container::after {
+    box-flex: 1;
+    flex-grow: 1;
+    content: '';
+    display: block;
+    height: 24px;
+  }
+  .register-container::before {
+    min-height: 30px;
+  }
+}
+.register-container .register-box {
+  width: 100%;
+  flex-shrink: 0;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  margin: 0 auto;
+  background: #fff;
+  padding: 30px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.register-container .register-box .register-section {
+  overflow: hidden;
+  -moz-transition: 1s ease-in-out opacity;
+  -ms-transition: 1s ease-in-out opacity;
+  -o-transition: 1s ease-in-out opacity;
+  transition: 1s ease-in-out opacity;
+  opacity: 1;
+}
+.register-container .register-box .register-section.ng-hide-add,
+.register-container .register-box .register-section.ng-hide-remove {
+  -webkit-transition: 1s ease-in-out opacity;
+}
+.register-container .register-box .register-section.ng-hide {
+  opacity: 0;
+}
+@media (min-width: 576px) {
+  .register-container .register-box {
+    width: 60%;
+    max-width: 450px;
+    height: auto;
+  }
+}
+@media (min-width: 992px) {
+  .register-container .register-box {
+    width: 70%;
+    max-width: 600px;
+  }
+}
+.register-container .register-box .register-state-container {
+  display: flex;
+  justify-content: center;
+}
+.register-container .register-box .register-state-container .register-state-circle {
+  width: 10px;
+  height: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: rgba(0,0,0,0.26);
+}
+.register-container .register-box .register-state-container .register-state-circle.active {
+  background-color: #008489;
+}
+.register-container .register-box .register-yesno {
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+  justify-content: center;
+  align-items: center;
+}
+.register-container .register-box .register-yesno li {
+  margin-left: 10px;
+  margin-right: 10px;
+}
