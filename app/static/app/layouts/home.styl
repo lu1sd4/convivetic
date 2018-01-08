@@ -1,8 +1,13 @@
 .p-container
 	padding-left 80px
 	padding-right 80px
+	
+	@media (max-width 991.99px)
+		padding-left 40px !important
+		padding-right 40px !important
 
 .exp-section
+	
 	.exp-section-title
 		color texts-color
 		font-size 26px
@@ -14,44 +19,81 @@
 		flex-wrap wrap
 		justify-content flex-start
 		margin-top -0.5em
+		max-width 1760px
+		margin-left 15px
 
 		.experience
 			box-shadow 0 2px 5px 0 shadow-color
-			margin-left 15px
-			margin-right 15px
 			margin-top 1.7em
-			height 370px
-			width 320px
+			height auto
+			margin-right 1.66666666667%
+			width 15%
 			
-			.detail-c
-				padding-left 12px
-				padding-right 12px
-		
-				.popular-data-c
-					display flex
-					margin-bottom 0.3em
-					margin-top 0.4em
-					font-weight 300
-					
-					svg
-						color links-color
-					
-					.views 
-						flex-basis 30%
-					
-				.exp-title
-					font-size 17px
-					font-weight 700
-					margin-top 0.3em
-					color texts-color
+			@media (max-width 575.99px)
+				margin-right 1.66666666667%
+				width 95%
+
+			@media (min-width 576px)
+				margin-right 1.66666666667%
+				width 95%
 				
-				.content-c 
-					p
+			// Medium devices (tablets, 768px and up)
+			@media (min-width 768px)
+				margin-right 2% !important
+				width 48% !important
+
+			// Large devices (desktops, 992px and up)
+			@media (min-width 992px)
+				margin-right 3.333% !important
+				width 30% !important
+
+			// Extra large devices (large desktops, 1200px and up)
+			@media (min-width 1200px)
+				margin-right 2% !important
+				width 23% !important
+
+			@media(min-width 1800px)
+				margin-right 1.66666666667% !important;
+				width 15% !important
+				
+			
+			img 
+				width 100%
+			
+			.exp-data
+				padding-left 8px
+				padding-right 8px
+				padding-bottom 10px				
+				
+				.detail-c
+					padding-left 12px
+					padding-right 12px
+			
+					.popular-data-c
+						display flex
+						margin-bottom 0.3em
+						margin-top 0.4em
 						font-weight 300
-				
-				.publisher
-					font-weight 300
-					color texts-color
+						
+						svg
+							color links-color
+						
+						.views 
+							flex-basis 30%
+						
+					.exp-title
+						font-size 17px
+						font-weight 700
+						margin-top 0.3em
+						color texts-color
+					
+					.content-c 
+						p
+							font-weight 300
+					
+					.publisher
+						font-weight 300
+						color texts-color
 
 	.more-exp
 		display flex
@@ -69,6 +111,7 @@
 
 .forum-section
 	margin-top 3.2em
+	max-width 1760px
 	
 	.for-section-title
 		font-size 26px
@@ -79,17 +122,40 @@
 		flex-wrap wrap
 		justify-content flex-start
 		margin-top 0.2em
+		margin-left 15px
 		
 		.f-aside
 			display flex
 			flex-direction column
 			margin-top 2em
+			width 20%
+			
+			@media (max-width: 575.99px)
+				margin-right 1.66666666667%
+				width 97% !important
+				
+			@media (max-width 768px)
+				margin-right 0% !important
+				width 97% !important
+
+			@media (min-width 992px)
+				margin-right 3% !important
+				width 47% !important
+				
+			// Extra large devices (large desktops, 1200px and up)
+			@media (min-width 1200px)
+				margin-right 2% !important
+				width 48% !important
+			
+			@media(min-width 1760px)
+				margin-right 3.33% !important
+				width 20% !important
 			
 			.forum-invitation
 				border 2px solid #dadada
 				padding 25px
 				text-align center
-				width 350px
+				width 100%
 				
 				h5
 					font-weight 500
@@ -104,9 +170,57 @@
 		.forum
 			box-shadow 0 2px 5px 0 shadow-color
 			padding 30px 25px
-			margin-right 40px
-			margin-left 15px
+			margin-right 3.33%
 			margin-top 2em
+			width 35%
+			
+			@media (max-width: 575.99px)
+				margin-right 1.66666666667%
+				width 95%
+
+				.forum-item
+					flex-direction column
+					margin-bottom 2em !important
+					
+					.f-image
+						display flex
+						justify-content center
+						margin-right 0px !important
+					
+					.forum-inline
+						margin-top 1em !important
+						
+						.for-data
+							flex-direction column !important
+							
+							a
+								text-align center
+							
+							.comment-c
+								width 45px !important
+
+
+			@media (max-width 768px)
+				margin-right 0% !important
+				width 97% !important
+				
+			@media (min-width 768px)
+				margin-right 0% !important
+				width 97% !important
+
+			@media (min-width 992px)
+				margin-right 3% !important
+				width 47% !important
+				
+			// Extra large devices (large desktops, 1200px and up)
+			@media (min-width 1200px)
+				margin-right 2% !important
+				width 48% !important
+			
+			@media(min-width 1760px)
+				margin-right 3.33% !important
+				width 35% !important
+				
 			
 			.f-image
 				margin-right 20px
@@ -172,12 +286,18 @@
 	display flex
 	align-items center
 	justify-content center
-	height 400px
+	height auto
+	min-height 400px
 	margin-top 3.5em
+	padding 20px
 	
 	.contact-section
 		display flex
 		justify-content center
+		
+		@media (max-width 768px)
+			padding-top 2em
+			padding-bottom 2em
 
 	.contact-c
 		display flex
@@ -185,6 +305,31 @@
 		flex-wrap wrap
 		max-width 800px
 		width 100%
+		
+		@media (max-width 575.99px)
+			align-items center !important
+			width 80%
+			
+			.left-c
+				h4
+					font-size 20px
+				
+				p
+					font-size 18px !important
+
+		@media (max-width 768px)
+			display block !important
+			
+			.left-c
+				p
+					max-width 600px !important
+			
+			.right-c
+				margin-top 2em
+				
+		.right-c
+			img
+				width 100%
 		
 		.left-c
 			margin-right 30px
@@ -225,6 +370,14 @@
 			position absolute
 			top 120px
 			left 20%
+			
+			@media (max-width: 575.99px)
+
+				p
+					font-size 40px !important
+				
+				button
+					font-size 17px !important
 			
 			p
 				max-width 300px
