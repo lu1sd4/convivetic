@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.template import loader
 from django.views.generic import TemplateView
 from django.views.generic import FormView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
+from django.db import transaction
 
 from .forms import LoginForm
 from .forms import UserForm
@@ -20,26 +22,23 @@ class Login(LoginView):
 	authentication_form = LoginForm
 	redirect_authenticated_user = True
 
-class Signup(FormView):
-	template_name = 'app/signup.html'
-	def get(self, request, *args, **kwargs):
-		user_form = UserForm()
-		user_form.prefix = 'user_form'
-		profile_form = ProfileForm()
-		profile_form.prefix = 'profile_form'
-		return self.render_to_response(self.get_context_data(user_form = user_form, profile_form = profile_form)) 
-
-	def post(self, request, *args, **kwargs):
-		user_form = UserForm(self.request.POST, prefix='user_form')
-		profile_form = SocialForm(self.request.POST, prefix='profile_form')
+@transaction.atomic
+def register_user(request):
+	if request.method == "POST":
+		user_form = UserForm(request.POST, prefix="user")
+		profile_form = ProfileForm(request.POST, prefix="profile")
 		if user_form.is_valid() and profile_form.is_valid():
-			user_form.save()
-			profile_form.save()                       
-			return HttpResponseRedirect('index')
-		else:
-			return self.form_invalid(user_form, profile_form , **kwargs)
-
-	def form_invalid(self, user_form, profile_form, **kwargs):
-		user_form.prefix = 'user_form'
-		profile_form.prefix = 'profile_form'
-		return self.render_to_response(self.get_context_data(user_form = user_form, profile_form = profile_form)) 
+			user = user_form.save(commit=False)			
+			user.save()			
+			profile = profile_form.save(commit=False)
+			profile.user = user
+			profile.save()
+			return redirect('/')
+	else:
+		user_form = UserForm(prefix="user")
+		profile_form = ProfileForm(prefix="profile")
+	context = {
+		"user_form": user_form,
+		"profile_form": profile_form
+	}
+	return render(request, 'app/signup.html', context)
