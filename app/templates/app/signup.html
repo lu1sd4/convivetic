@@ -13,11 +13,13 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/select/select.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
 </head>
-<body ng-app='conviveticApp'>
+<body ng-app='conviveticApp' ng-cloak>
 	<div class="register-container">
 		<div class="register-box rounded" ng-controller="signupController as signupCtrl">
 			<div class="register-header">
-				<h3 class="text-center">Registro</h3>
+				<div class="text-center">
+					<img class="register-logo" src="{% static 'app/img/ConviveTIC-logo.png' %}">
+				</div>
 				<p class="text-center">Llena los campos para registrarte en ConviveTIC {[{ signupCtrl.x }]} </p>				
 				<div class="register-state-container">
 					<div class="register-state-circle rounded-circle" ng-class="{'active' : signupCtrl.state == signupCtrl.pageOne}"></div>
@@ -29,33 +31,36 @@
 			<div class="register-form">
 				<form action="signup" method="post">
 					{% csrf_token %}
+					<div class="register-section-container">
 					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageOne">
-						<div class="row">
-							<div class="col">
-								{% render_field user_form.username class+="form-control" placeholder=user_form.username.label %}
+						<ng-form name="partOneForm">
+							<div class="row">
+								<div class="col">
+									{% render_field user_form.username class+="form-control" placeholder=user_form.username.label ng-model="username" %}
+								</div>
+								<div class="col">
+									{% render_field user_form.password class+="form-control" placeholder=user_form.password.label ng-model="password" %}
+								</div>
 							</div>
-							<div class="col">
-								{% render_field user_form.password class+="form-control" placeholder=user_form.password.label %}
+							<br>
+							<div class="row">
+								<div class="col">
+									{% render_field user_form.first_name class+="form-control" placeholder=user_form.first_name.label ng-model="first_name" %}
+								</div>
 							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col">
-								{% render_field user_form.first_name class+="form-control" placeholder=user_form.first_name.label %}
+							<br>
+							<div class="row">
+								<div class="col">
+									{% render_field user_form.last_name class+="form-control" placeholder=user_form.last_name.label ng-model="last_name" %}
+								</div>
 							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col">
-								{% render_field user_form.last_name class+="form-control" placeholder=user_form.last_name.label %}
+							<br>
+							<div class="row">
+								<div class="col">
+									{% render_field user_form.email class+="form-control" placeholder=user_form.email.label ng-model="email" %}
+								</div>
 							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col">
-								{% render_field user_form.email class+="form-control" placeholder=user_form.email.label %}
-							</div>
-						</div>
+						</ng-form>
 					</div>
 					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageTwo">
 						<div class="row">
@@ -115,14 +120,15 @@
 							</div>
 						</div>
 					</div>
+					</div>
 				</form>
 			</div>
 			<div class="register-bottom">
 				<hr>
 				<div class="register-button-container text-center">
-					<button ng-show="signupCtrl.isPrevious" ng-click="signupCtrl.previousPart()" class="btn">Anterior</button>
-					<button ng-show="signupCtrl.isNext" ng-click="signupCtrl.nextPart()" class="btn btn-primary">Siguiente</button>
-					<button ng-show="signupCtrl.isLast" class="btn btn-primary">Guardar</button>
+					<button ng-click="signupCtrl.previousPart()" class="btn btn-secondary" ng-disabled="!signupCtrl.isPrevious">Anterior</button>
+					<button ng-click="signupCtrl.nextPart()" class="btn" ng-class="signupCtrl.isLast ? 'btn-success' : 'btn-primary'">{[{ signupCtrl.nextText }]}
+					</button>
 				</div>
 			</div>			
 		</div>
