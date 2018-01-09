@@ -1,7 +1,361 @@
  {% extends 'app/base.html' %}
+ {% load static %}
 
  {% block content %}
 
- hola mundo
+ <div class="container-fluid gral-f-container">
+
+ 	<div class="forums-container" ng-controller="forumsController as fCtrl">
+	 	<div class="forum-header">
+
+	 		<div class="top-section">
+	 			<div class="forum-header-normal" ng-show="fCtrl.currentState == fCtrl.normalState ">
+	 				<h3 class="head-title">Foros</h3>
+
+	 				<button class="btn btn-primary" ng-click="fCtrl.newDiscussion()">Nueva Discusión</button>
+
+			 	</div>
+
+			 	<div class="forum-header-new" ng-show="fCtrl.currentState == fCtrl.newState">
+			 		<h3 class="head-title">Nuevo Foro</h3>
+
+			 		<div class="options-c">
+			 			<button class="cancel-btn btn btn-secondary" ng-click="fCtrl.cancelNewDiscussion()">Cancelar</button>
+			 			<button class="publish-btn btn btn-primary">Publicar Discusión</button>	
+			 		</div>
+			 	</div>
+	 		</div>
+
+
+
+	 		<div class="filter-section" ng-show="fCtrl.currentState == fCtrl.normalState ">
+	 			<ul>
+	 				<li class="active"><a href="#">Popular</a></li>
+	 				<li><a href="#">Nuevo</a></li>
+	 			</ul>
+	 		</div>
+	 	</div>
+
+	 	<div class="forum-s" ng-show="fCtrl.currentState == fCtrl.normalState ">
+	 		<div class="forum">
+
+				<div class="forum-item">
+
+					<div class="f-image">
+						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+					</div>
+					
+
+					<div class="forum-inline">
+
+						<div class="for-data">
+							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ? espacios de paz ?</a>
+
+							<div class="comment-c">
+								<i class="far fa-comment"></i>
+								<div class="comment-counter">10</div>
+							</div>
+
+						</div>
+					
+
+						<div class="forum-publisher">
+							<p class="f-date">04/12/12</p>
+							<p class="f-name">Daniel Rico</p>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="forum-item">
+
+					<div class="f-image">
+						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+					</div>
+					
+
+					<div class="forum-inline">
+
+						<div class="for-data">
+							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de pazaasdasdas asdasdasdasdas?</a>
+
+							<div class="comment-c">
+								<i class="far fa-comment"></i>
+								<div class="comment-counter">10</div>
+							</div>
+
+						</div>
+					
+
+						<div class="forum-publisher">
+							<p class="f-date">04/12/12</p>
+							<p class="f-name">Daniel Rico</p>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="forum-item">
+
+					<div class="f-image">
+						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+					</div>
+					
+
+					<div class="forum-inline">
+
+						<div class="for-data">
+							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
+
+							<div class="comment-c">
+								<i class="far fa-comment"></i>
+								<div class="comment-counter">10</div>
+							</div>
+
+						</div>
+					
+
+						<div class="forum-publisher">
+							<p class="f-date">04/12/12</p>
+							<p class="f-name">Daniel Rico</p>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="forum-item">
+
+					<div class="f-image">
+						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+					</div>
+					
+
+					<div class="forum-inline">
+
+						<div class="for-data">
+							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
+
+							<div class="comment-c">
+								<i class="far fa-comment"></i>
+								<div class="comment-counter">10</div>
+							</div>
+
+						</div>
+					
+
+						<div class="forum-publisher">
+							<p class="f-date">04/12/12</p>
+							<p class="f-name">Daniel Rico</p>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="forum-item">
+
+					<div class="f-image">
+						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+					</div>
+					
+
+					<div class="forum-inline">
+
+						<div class="for-data">
+							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ? espacios de paz ?</a>
+
+							<div class="comment-c">
+								<i class="far fa-comment"></i>
+								<div class="comment-counter">10</div>
+							</div>
+
+						</div>
+					
+
+						<div class="forum-publisher">
+							<p class="f-date">04/12/12</p>
+							<p class="f-name">Daniel Rico</p>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="forum-item">
+
+					<div class="f-image">
+						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+					</div>
+					
+
+					<div class="forum-inline">
+
+						<div class="for-data">
+							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de pazaasdasdas asdasdasdasdas?</a>
+
+							<div class="comment-c">
+								<i class="far fa-comment"></i>
+								<div class="comment-counter">10</div>
+							</div>
+
+						</div>
+					
+
+						<div class="forum-publisher">
+							<p class="f-date">04/12/12</p>
+							<p class="f-name">Daniel Rico</p>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="forum-item">
+
+					<div class="f-image">
+						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+					</div>
+					
+
+					<div class="forum-inline">
+
+						<div class="for-data">
+							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
+
+							<div class="comment-c">
+								<i class="far fa-comment"></i>
+								<div class="comment-counter">10</div>
+							</div>
+
+						</div>
+					
+
+						<div class="forum-publisher">
+							<p class="f-date">04/12/12</p>
+							<p class="f-name">Daniel Rico</p>
+						</div>
+
+					</div>
+				</div>
+				
+				<div class="forum-item">
+
+					<div class="f-image">
+						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+					</div>
+					
+
+					<div class="forum-inline">
+
+						<div class="for-data">
+							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
+
+							<div class="comment-c">
+								<i class="far fa-comment"></i>
+								<div class="comment-counter">10</div>
+							</div>
+
+						</div>
+					
+
+						<div class="forum-publisher">
+							<p class="f-date">04/12/12</p>
+							<p class="f-name">Daniel Rico</p>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="forum-item">
+
+					<div class="f-image">
+						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+					</div>
+					
+
+					<div class="forum-inline">
+
+						<div class="for-data">
+							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ? espacios de paz ?</a>
+
+							<div class="comment-c">
+								<i class="far fa-comment"></i>
+								<div class="comment-counter">10</div>
+							</div>
+
+						</div>
+					
+
+						<div class="forum-publisher">
+							<p class="f-date">04/12/12</p>
+							<p class="f-name">Daniel Rico</p>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<div class="forum-footer">
+				<button class="btn btn-primary">Cargar Más</button>
+			</div>	
+	 	</div>
+
+
+	 	<div class="new-forum" ng-show="fCtrl.currentState == fCtrl.newState ">
+	 		
+	 		<form>
+			  <div class="form-group">
+			    
+			   <input type="text" class="form-control title-input" aria-describedby="titleHelp" placeholder="Escribe el Título del foro">
+
+			    <small id="titleHelp" class="form-text text-muted">Debe ser un titulo que describa claramante la temática</small>
+			  </div>
+			  <div class="form-group">
+			    
+			   <textarea class="form-control" rows="15" placeholder="Escribe una explicación"></textarea>
+			  </div>
+
+			  <div class="forum-type">
+			  	<div class="form-check">
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+				  <label class="form-check-label" for="exampleRadios1">
+				    Video
+				  </label>
+				</div>
+
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+				  <label class="form-check-label" for="exampleRadios2">
+				    Audio
+				  </label>
+				</div>
+
+				
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option2">
+				  <label class="form-check-label" for="exampleRadios3">
+				    Imagen
+				  </label>
+				</div>
+
+			  </div>
+			  	
+
+			  <div class="form-group f-type-data">
+    			<label for="exampleFormControlFile">Adjunte el recurso</label>
+				    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+				</div>
+			</form>
+
+	 	</div>
+	 
+		
+
+ 	</div>
+ 	
+ </div>
 
  {% endblock%}
+
+ {% block scripts %} 
+ 	<script type="text/javascript" src="{% static 'app/logic/controllers/forumsCtrl.js' %}"></script>
+
+ {% endblock %}

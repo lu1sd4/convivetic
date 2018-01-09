@@ -1,0 +1,222 @@
+m-width = 900px
+
+.gral-f-container
+	background-color blocks-background
+	display flex
+	justify-content center
+	margin-top 0.5em
+	padding-bottom 4em
+	padding-left 25px
+	padding-right 25px
+	
+
+.forums-container
+	background-color #fff
+	box-shadow 0 2px 5px 0 shadow-color
+	padding 30px 45px
+	display flex
+	flex-direction column
+	justify-content center
+	padding-top 2em
+	padding-bottom 2em
+	max-width m-width
+	margin-top 3em
+	width 100%
+	
+
+	
+	@media (max-width 768px)
+		padding 30px 20px !important 
+
+	
+	.forum-footer
+		display flex
+		justify-content center
+		
+		button
+			min-width 125px
+			width 30%
+			
+
+	.new-forum
+		margin-top 4em
+		
+		.form-control::-webkit-input-placeholder  
+			color #ebebeb   /* WebKit, Blink, Edge */
+		.form-control:-moz-placeholder  
+			color #ebebeb   /* Mozilla Firefox 4 to 18 */
+		.form-control::-moz-placeholder  
+			color #ebebeb   /* Mozilla Firefox 19+ */
+		.form-control:-ms-input-placeholder  
+			color #ebebeb   /* Internet Explorer 10-11 */
+		.form-control::-ms-input-placeholder  
+			color #ebebeb   /* Microsoft Edge */
+			
+		.title-input
+			font-size 20px
+			height 104px
+			
+		.forum-type
+			display flex
+			justify-content space-around
+		
+		.f-type-data
+			margin-top 2em
+			
+			@media (max-width 575.99px)
+				input
+					overflow hidden
+					width 100%
+			
+
+
+	
+
+	.forum-header
+		display flex
+		flex-direction column
+		
+		.filter-section
+			margin-top 2.5em
+
+			ul
+				border-bottom 1px solid shadow-color
+				display flex
+				
+				li
+					margin-right 10px
+					padding 7px 0px
+					
+					a
+						color icon-gray-color
+						text-decoration none
+						width 100%
+					
+				li.active
+					a
+						color links-color
+				
+		
+		.top-section
+			.forum-header-normal
+				display flex
+				align-items center
+				
+				h3
+					font-weight 300
+					font-size 30px
+					margin-right auto
+				
+				button
+					margin-left auto
+					background-color links-color
+		
+			.forum-header-new
+				display flex
+				
+				@media (max-width 575.99px)
+					flex-direction column
+					
+					.options-c
+						margin-left inherit !important
+				
+				h3
+					font-weight 300
+					font-size 30px
+					margin-right auto
+				
+				.options-c
+					margin-left auto
+					margin-top 3px
+					
+					.publish-btn
+						background-color links-color
+					
+					.publish-btn:hover
+						background-color dark-links-color
+
+
+	.forum
+		
+		margin-top 2.5em
+
+		@media (max-width: 767.99px)
+			padding 0 5px
+			width 100%
+
+			.forum-item
+				flex-direction column
+				margin-bottom 2em !important
+				
+				.f-image
+					display flex
+					justify-content center
+					margin-right 0px !important
+					width 100% !important
+				
+				.forum-inline
+					margin-top 1em !important
+					width 100% !important
+					
+					.for-data
+						flex-direction column !important
+						
+						a
+							text-align center
+						
+						.comment-c
+							margin-left inherit !important
+							margin-right auto
+							width 45px !important
+			
+		
+		.f-image
+			margin-right 2.6%
+			width 10%
+		
+		.forum-inline
+			width 88.4%
+		
+		.forum-item
+			display flex
+			flex-grow 2
+			margin-bottom 3.1em
+
+		
+			.for-data
+				display flex
+				
+				a
+					color links-color 
+					font-weight 600
+					max-width 630px
+				
+				.comment-c
+					position relative
+					margin-left auto
+					
+					svg
+						color #9e9e9e
+						font-size 40px
+						
+					.comment-counter
+						color #9e9e9e
+						font-weight 300
+						font-size 15px
+						position absolute
+						top 7px
+						text-align center
+						left 0
+						right 0
+						margin auto
+						
+			
+			.forum-publisher
+				.f-date
+					margin-bottom 0
+					font-weight 300
+					font-size 15px
+				
+				.f-name 
+					margin-bottom 0
+					font-weight 300
