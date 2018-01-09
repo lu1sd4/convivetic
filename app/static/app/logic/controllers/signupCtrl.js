@@ -12,7 +12,8 @@
 		
 		var that = this;
 
-		that.pageOne = 1;		 
+		that.pageOne = 1;
+		that.pageOneSubmitted = false; 
 		that.pageTwo = 2;
 		that.pageThree = 3;
 
@@ -26,14 +27,11 @@
 		that.changeState = changeState;
 
 		function nextPart(){
-			if(that.state < that.pageThree){
-				if($scope.partOneForm.$valid){
-					alert("valid");
-					that.changeState(1);		
-				} else {
-					alert("wdf")
-				}
-			}
+			if(that.state == that.pageOne){
+				that.pageOneSubmitted = true;
+				if($scope.partOneForm.$valid)
+					that.changeState(1);				
+			}			
 		}
 		
 		function previousPart(){

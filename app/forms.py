@@ -34,6 +34,7 @@ class UserForm(auth_forms.UserCreationForm):
 	def __init__(self, *args, **kwargs):
 		super(UserForm, self).__init__(*args, **kwargs)
 		self.fields['email'].required = True
+		self.fields['password'].min_length = 8
 
 class ProfileForm(forms.ModelForm):
 	class Meta:
