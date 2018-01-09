@@ -34,6 +34,7 @@ class Login(LoginView):
 	authentication_form = LoginForm
 	redirect_authenticated_user = True
 
+<<<<<<< HEAD
 class UsernameCheck(View):
 	def get(self, request, *args, **kwargs):
 		username = self.kwargs['user_id']
@@ -45,6 +46,10 @@ def username_present(username):
 	if User.objects.filter(username=username).exists():
 		return True
 	return False
+=======
+class Forums(TemplateView):
+	template_name = 'app/forums.html'
+>>>>>>> f59eda76ab49b2723942faef6f2a4fbe6ba1afaa
 
 @transaction.atomic
 def register_user(request):

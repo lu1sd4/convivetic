@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" >
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,14 +11,14 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/imagehover.css/1.0/css/imagehover.min.css">
 </head>
-<body>
+<body ng-app='conviveticApp' ng-cloak>
 	
-	<header>
+	<header ng-controller="homeController as hCtrl">
 
 		<div class="nav-c">
 			<nav class="nav">
 			  <a class="nav-link active" href="#">Quiénes Somos</a>
-			  <a class="nav-link" href="#">Foros</a>
+			  <a class="nav-link" href="{% url 'forums' %}">Foros</a>
 			  <a class="nav-link" href="#">Experiencias</a>
 			  <a class="nav-link" href="#">Ingreso</a>
 			  <a class="nav-link" href="#">Contacto</a>
@@ -33,9 +33,9 @@
 			  	{% endif %}
 			  </a>
 			</nav>
-			<div class="nav-mobile">
-				<button class=""><i class="fa fa-bars"></i></button>
-				<ul>
+			<div class="nav-mobile" ng-class="{'active' : hCtrl.mMenuIsActive == true}">
+				<button ng-click="hCtrl.getMobileMenu()"><i class="fa fa-bars"></i></button>
+				<ul class="menu-list">
 					<li>Quiénes Somos</li>
 					<li>Foros</li>
 					<li>Experiencias</li>
@@ -63,7 +63,6 @@
 		</div>
 	</header>
 
-	<br>
 	{% block content %} {% endblock %}
 	
 	<footer class="con-footer-pinfo">
@@ -118,16 +117,22 @@
 	</footer>
 	<footer class="con-footer-secondary"></footer>
 	
-	{% block scripts %} 
 
-		<script type="text/javascript" src="{% static 'app/libs/jquery/dist/jquery.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'app/libs/tether/dist/js/tether.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'app/libs/popper.js/dist/umd/popper.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'app/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'app/libs/angular/angular.min.js' %}"></script>
-		<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
-  
-	{% endblock %}	
+	<script type="text/javascript" src="{% static 'app/libs/jquery/dist/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/tether/dist/js/tether.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/popper.js/dist/umd/popper.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/angular/angular.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/angular-animate/angular-animate.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/angular-messages/angular-messages.min.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'app/logic/app.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/controllers/signupCtrl.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/controllers/homeCtrl.js' %}"></script>
+
+	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+  	
+  	{% block scripts %} {% endblock %}	
 
 </body>
 </html>

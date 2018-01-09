@@ -2,6 +2,7 @@ texts-color = #484848
 shadow-color = rgba(0,0,0,.26)
 icon-gray-color = rgba(0,0,0,.26)
 links-color = #008489
+dark-links-color = #007478
 blocks-background = #f7f7f7
 primary-color = #008489
 
@@ -36,16 +37,37 @@ ul
 			display none
 	
 	.nav-mobile
-		display none
+		display flex
 		width 100%
+		
+		@media (min-width 768px)
+			display none
+		
+		.menu-list
+			display none
+			/*-webkit-transition max-height 1s 
+			-moz-transition max-height 1s 
+			-ms-transition max-height 1s 
+			-o-transition max-height 1s 
+			transition max-height 1s*/
+		
+		button
+			height 43px
+			width 43px
+
+			
+			svg
+				font-size 25px
+				height 100%
+				width 100%
 		
 		ul
 			width 100%
 			
 			li
-				padding 10px
+				padding 8px
 				border 1px solid shadow-color
-				height 47px
+				height 43px
 				font-size 15px
 			
 			li:hover
@@ -53,8 +75,13 @@ ul
 				color #ffff
 				
 		
-		@media (max-width 767.99px)
+		/*@media (max-width 767.99px)
+			display flex*/
+	
+	.nav-mobile.active
+		.menu-list
 			display flex
+			flex-direction column
 			
 
 				
@@ -139,6 +166,9 @@ ul
 				color texts-color
 				font-weight 300
 				font-size 29px
+				
+				@media (max-width 575.99px)
+					text-align center
 				
 				span
 					font-weight 700
