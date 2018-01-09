@@ -1,0 +1,6 @@
+{% autoescape off %}
+Hola {{ user.username }},
+Por favor haz click en el enlace para confirmar tu registro en ConviveTIC:
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}

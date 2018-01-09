@@ -1,5 +1,7 @@
 from django import forms
 
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.contrib.auth import forms as auth_forms
 
@@ -18,23 +20,28 @@ class LoginForm(auth_forms.AuthenticationForm):
 class UserForm(auth_forms.UserCreationForm):	
 	class Meta:
 		model = User
-		fields = ['username', 'password', 'first_name', 'last_name', 'email']
+		fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email']
 		labels = {
 			'username' : 'Nombre de usuario',
-			'password' : 'Contraseña',
+			'password1' : 'Contraseña',
+			'password2' : 'Confirmar contraseña',
 			'first_name' : 'Nombres',
 			'last_name' : 'Apellidos',
 			'email' : 'Correo electrónico'
 		}
 		widgets = {
-			'password' : forms.PasswordInput,
+			'password1' : forms.PasswordInput,
+			'password2' : forms.PasswordInput,
 			'email' : forms.EmailInput
 		}
 
 	def __init__(self, *args, **kwargs):
 		super(UserForm, self).__init__(*args, **kwargs)
 		self.fields['email'].required = True
-		self.fields['password'].min_length = 8
+		self.fields['password1'].min_length = 8
+		self.fields['password1'].label = 'Contraseña'
+		self.fields['password2'].min_length = 8
+		self.fields['password2'].label = 'Confirmar contraseña'
 
 class ProfileForm(forms.ModelForm):
 	class Meta:
@@ -46,7 +53,7 @@ class ProfileForm(forms.ModelForm):
 			'gender' : 'Género',
 			'nationality' : 'Nacionalidad',
 			'country_of_residence' : 'País de residencia',
-			'phone_number' : 'Número de teléfono',
+			'phone_number' : 'Teléfono',
 			'bio' : 'Más información sobre usted',
 			'is_conflict_participant' : '¿Es usted participe del conflicto armado?',
 			'is_conflict_victim' : '¿Es usted víctima del conflicto armado?',
@@ -55,5 +62,6 @@ class ProfileForm(forms.ModelForm):
 		widgets = {
 			'is_conflict_participant' : forms.RadioSelect,
 			'is_conflict_victim' : forms.RadioSelect,
-			'is_living_in_conflict_zone' : 	forms.RadioSelect
+			'is_living_in_conflict_zone' : 	forms.RadioSelect,
+			'birth_date' : forms.DateInput(attrs={'type':'date','max':datetime.now().date()}, format='%Y-%m-%d')
 		}
