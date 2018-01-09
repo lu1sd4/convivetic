@@ -69,7 +69,7 @@ def register_user(request):
 			message = render_to_string('app/acc_activation_email.html', {
 				'user' : user,
 				'domain' : current_site.domain,
-				'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
+				'uid' : force_text(urlsafe_base64_encode(force_bytes(user.pk))),
 				'token': account_activation_token.make_token(user)
 			})
 			to_email = user_form.cleaned_data.get('email')
