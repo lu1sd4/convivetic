@@ -9,8 +9,6 @@ from .views import Login
 from .views import UsernameCheck
 from .views import Forums
 
-
-
 urlpatterns = [
 	path('', Index.as_view(), name='index'),
 	path('signup', views.register_user, name='signup'),
