@@ -15,6 +15,7 @@
 		that.pageOne = 1;
 		that.pageOneSubmitted = false; 
 		that.pageTwo = 2;
+		that.pageTwoSubmitted = false; 
 		that.pageThree = 3;
 
 		that.state = that.pageOne;
@@ -26,12 +27,24 @@
 		that.previousPart = previousPart;
 		that.changeState = changeState;
 
+		$scope.is_conflict_participant = 'False';
+		$scope.is_conflict_victim = 'False';
+		$scope.is_living_in_conflict_zone = 'False';
+
 		function nextPart(){
 			if(that.state == that.pageOne){
 				that.pageOneSubmitted = true;
 				if($scope.partOneForm.$valid)
 					that.changeState(1);				
-			}			
+			} else if(that.state == that.pageTwo){
+				that.pageTwoSubmitted = true;
+				if($scope.partTwoForm.$valid)
+					that.changeState(1);
+			} else if(that.state == that.pageThree){
+				that.pageThreeSubmitted = true;
+				if($scope.partThreeForm.$valid)
+					document.getElementById('userRegistrationForm').submit()
+			}
 		}
 		
 		function previousPart(){

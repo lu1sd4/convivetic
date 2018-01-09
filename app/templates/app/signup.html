@@ -20,7 +20,20 @@
 				<div class="text-center">
 					<img class="register-logo" src="{% static 'app/img/ConviveTIC-logo.png' %}">
 				</div>
-				<p class="text-center">Llena los campos para registrarte en ConviveTIC {[{ signupCtrl.x }]} </p>				
+				<p class="text-center">Llena los campos para registrarte en ConviveTIC {[{ signupCtrl.x }]} </p>
+				{% if user_form.errors %}
+					{% for field in user_form %}
+						{% if field.errors %} 
+							{{ field }}
+							<ol>
+							{% for error in field.errors %}
+						        <li><strong>{{ error|escape }}</strong></li>
+							{% endfor %}
+							</ol>
+						{% endif %}
+					{% endfor %}
+				{% endif %}			
+
 				<div class="register-state-container">
 					<div class="register-state-circle rounded-circle" ng-class="{'active' : signupCtrl.state == signupCtrl.pageOne}"></div>
 					<div class="register-state-circle rounded-circle" ng-class="{'active' : signupCtrl.state == signupCtrl.pageTwo}"></div>
@@ -29,24 +42,42 @@
 				<hr>
 			</div>
 			<div class="register-form">
-				<form action="signup" method="post">
+				<form novalidate action="signup" method="post" id="userRegistrationForm">
 					{% csrf_token %}
 					<div class="register-section-container">
 					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageOne">
 						<ng-form name="partOneForm" ng-class="signupCtrl.pageOneSubmitted ? 'was-validated' : '' ">
 							<div class="row">
+								<div class="col">
+									{% render_field user_form.email class+="form-control" placeholder=user_form.email.label ng-model="email" %}
+									<div class="register-error-messages" ng-messages='partOneForm["user-email"].$error' ng-show='signupCtrl.pageOneSubmitted'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+									</div>
+								</div>
 								<div class="col" ng-class="{'is-invalid' : partOneForm['user-username'].$invalid && signupCtrl.pageOneSubmitted}">
-									{% render_field user_form.username class+="form-control" placeholder=user_form.username.label ng-model="username" ng-minlength="6" %}
+									{% render_field user_form.username class+="form-control" placeholder=user_form.username.label ng-model="username" ng-minlength="6" unique="true" %}	
 									<div class="register-error-messages" ng-messages='partOneForm["user-username"].$error' ng-show='signupCtrl.pageOneSubmitted'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+										<p ng-show="partOneForm['user-username'].$pending.unique">Revisando nombre de usuario...</p>
+									</div>
+								</div>
+								
+							</div>
+							<br>
+							<div class="row">
+								<div class="col">
+									{% render_field user_form.password1 class+="form-control" placeholder=user_form.password1.label ng-model="password1" ng-minlength="8" %}
+									<div class="register-error-messages" ng-messages='partOneForm["user-password1"].$error' ng-show='signupCtrl.pageOneSubmitted'>
 										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
 									</div>
 								</div>
 								<div class="col">
-									{% render_field user_form.password class+="form-control" placeholder=user_form.password.label ng-model="password" ng-minlength="8" %}
-									<div class="register-error-messages" ng-messages='partOneForm["user-password"].$error' ng-show='signupCtrl.pageOneSubmitted'>
+									{% render_field user_form.password2 class+="form-control" placeholder=user_form.password2.label ng-model="password2" ng-pattern="password1" ng-minlength="8" %}
+									<div class="register-error-messages" ng-messages='partOneForm["user-password2"].$error' ng-show='signupCtrl.pageOneSubmitted'>
 										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
 									</div>
-								</div>
+								</div>							
 							</div>
 							<br>
 							<div class="row">
@@ -65,75 +96,94 @@
 										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
 									</div>
 								</div>
+							</div>							
+						</ng-form>
+					</div>
+					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageTwo">
+						<ng-form name="partTwoForm" ng-class="signupCtrl.pageTwoSubmitted ? 'was-validated' : '' ">
+							<div class="row">
+								<div class="col" style="display:flex; justify-content: center; align-items: center">
+									{{ profile_form.gender.label_tag }}
+									&nbsp;&nbsp;
+									{% render_field profile_form.gender %}
+								</div>
+								<div class="col" style="display:flex; justify-content: center; align-items: center">
+									{{ profile_form.title.label_tag }}
+									&nbsp;&nbsp;
+									{% render_field profile_form.title %}
+								</div>
 							</div>
 							<br>
 							<div class="row">
 								<div class="col">
-									{% render_field user_form.email class+="form-control" placeholder=user_form.email.label ng-model="email" %}
-									<div class="register-error-messages" ng-messages='partOneForm["user-email"].$error' ng-show='signupCtrl.pageOneSubmitted'>
+									{% render_field profile_form.birth_date class+="form-control" placeholder=profile_form.birth_date.label ng-model="birth_date" %}
+									<div class="register-error-messages" ng-messages='partTwoForm["profile-birth_date"].$error' ng-show='signupCtrl.pageTwoSubmitted'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+									</div>
+								</div>
+								<div class="col">
+									{% render_field profile_form.phone_number class+="form-control" placeholder=profile_form.phone_number.label ng-model="phone_number" %}
+									<div class="register-error-messages" ng-messages='partTwoForm["profile-phone_number"].$error' ng-show='signupCtrl.pageTwoSubmitted'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+									</div>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col">
+									{% render_field profile_form.nationality class+="form-control" placeholder=profile_form.nationality.label ng-model="nationality" %}
+									<div class="register-error-messages" ng-messages='partTwoForm["profile-nationality"].$error' ng-show='signupCtrl.pageTwoSubmitted'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+									</div>
+								</div>
+								<div class="col">
+									{% render_field profile_form.country_of_residence class+="form-control" placeholder=profile_form.country_of_residence.label ng-model="country_of_residence" %}
+									<div class="register-error-messages" ng-messages='partTwoForm["profile-country_of_residence"].$error' ng-show='signupCtrl.pageTwoSubmitted'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+									</div>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col">
+									{% render_field profile_form.bio class+="form-control" placeholder=profile_form.bio.label rows="2" ng-model="bio" %}
+									<div class="register-error-messages" ng-messages='partTwoForm["profile-bio"].$error' ng-show='signupCtrl.pageTwoSubmitted'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+									</div>
+								</div>
+							</div>		
+						</ng-form>	
+					</div>
+					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageThree">
+						<ng-form name="partThreeForm" ng-class="signupCtrl.pageThreeSubmitted ? 'was-validated' : '' ">
+							<div class="row">
+								<div class="col">
+									{{ profile_form.is_conflict_participant.label_tag }}
+									{% render_field profile_form.is_conflict_participant class+="register-yesno" ng-model="is_conflict_participant" %}
+									<div class="register-error-messages" ng-messages='partThreeForm["profile-is_conflict_participant"].$error' ng-show='signupCtrl.pageThreeSubmitted'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+									</div>
+								</div>
+							</div>	
+							<div class="row">
+								<div class="col">
+									{{ profile_form.is_conflict_victim.label_tag }}
+									{% render_field profile_form.is_conflict_victim class+="register-yesno" ng-model="is_conflict_victim"%}
+									<div class="register-error-messages" ng-messages='partThreeForm["profile-is_conflict_victim"].$error' ng-show='signupCtrl.pageThreeSubmitted'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									{{ profile_form.is_living_in_conflict_zone.label_tag }}
+									{% render_field profile_form.is_living_in_conflict_zone class+="register-yesno" ng-model="is_living_in_conflict_zone" %}
+									<div class="register-error-messages" ng-messages='partThreeForm["profile-is_living_in_conflict_zone"].$error' ng-show='signupCtrl.pageThreeSubmitted'>
 										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
 									</div>
 								</div>
 							</div>
 						</ng-form>
-					</div>
-					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageTwo">
-						<div class="row">
-							<div class="col" style="display:flex; justify-content: center; align-items: center">
-								{{ profile_form.gender.label_tag }}
-								&nbsp;&nbsp;
-								{% render_field profile_form.gender %}
-							</div>
-							<div class="col" style="display:flex; justify-content: center; align-items: center">
-								{{ profile_form.title.label_tag }}
-								&nbsp;&nbsp;
-								{% render_field profile_form.title %}
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col">
-								{% render_field profile_form.birth_date class+="form-control" placeholder=profile_form.birth_date.label %}
-							</div>
-							<div class="col">
-								{% render_field profile_form.phone_number class+="form-control" placeholder=profile_form.phone_number.label %}
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col">
-								{% render_field profile_form.nationality class+="form-control" placeholder=profile_form.nationality.label %}
-							</div>
-							<div class="col">
-								{% render_field profile_form.country_of_residence class+="form-control" placeholder=profile_form.country_of_residence.label %}
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col">
-								{% render_field profile_form.bio class+="form-control" placeholder=profile_form.bio.label rows="2" %}
-							</div>
-						</div>			
-					</div>
-					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageThree">
-						<div class="row">
-							<div class="col">
-								{{ profile_form.is_conflict_participant.label_tag }}
-								{% render_field profile_form.is_conflict_participant class+="register-yesno" %}
-							</div>
-						</div>	
-						<div class="row">
-							<div class="col">
-								{{ profile_form.is_conflict_victim.label_tag }}
-								{% render_field profile_form.is_conflict_victim class+="register-yesno" %}
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								{{ profile_form.is_living_in_conflict_zone.label_tag }}
-								{% render_field profile_form.is_living_in_conflict_zone class+="register-yesno" %}
-							</div>
-						</div>
 					</div>
 					</div>
 				</form>
@@ -161,7 +211,8 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 	<script type="text/javascript" src="{% static 'app/logic/app.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/logic/controllers/signupCtrl.js' %}"></script>
-
+	<script type="text/javascript" src="{% static 'app/logic/factories/usernameservice.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/directives/unique.js' %}"></script>
 </body>
 </html>
 

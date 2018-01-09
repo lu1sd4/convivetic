@@ -816,3 +816,6 @@ ul {
 .was-validated .ng-invalid {
   border-color: #dc3545;
 }
+.was-validated .ng-valid:not(.ng-empty) {
+  border-color: #28a745;
+}
