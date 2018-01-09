@@ -6,11 +6,8 @@ from . import views
 
 from .views import Index
 from .views import Login
-<<<<<<< HEAD
 from .views import UsernameCheck
-=======
 from .views import Forums
->>>>>>> f59eda76ab49b2723942faef6f2a4fbe6ba1afaa
 
 
 urlpatterns = [
