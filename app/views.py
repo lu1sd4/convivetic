@@ -22,6 +22,9 @@ class Login(LoginView):
 	authentication_form = LoginForm
 	redirect_authenticated_user = True
 
+class Forums(TemplateView):
+	template_name = 'app/forums.html'
+
 @transaction.atomic
 def register_user(request):
 	if request.method == "POST":
