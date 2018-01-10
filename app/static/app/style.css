@@ -289,6 +289,9 @@ ul {
   left: 0%;
   right: 0%;
 }
+.login-container .login-box .login-form .login-error {
+  color: #f00;
+}
 .p-container {
   margin-top: 3em;
   padding-left: 80px;

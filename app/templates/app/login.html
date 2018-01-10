@@ -11,6 +11,7 @@
 {% block right %}
 
 	<p class="text-center"><small>¿No tienes cuenta? <a href="{% url 'signup' %}">Regístrate</a></small></p>
+
 	<form method="post" action="{% url 'login' %}">
 	{% csrf_token %}
 		<div class="form-group">
@@ -21,6 +22,9 @@
 		    {{ form.password.label_tag }}
 		    {{ form.password }}
 	    </div>
+	    {% if form.errors %}
+	    	<p class="text-center login-error"><small>Nombre de usuario o contraseña inválidos</small></p>
+    	{% endif %}
 	    <div class="form-group">
 			<input type="submit" value="Iniciar sesión" class="btn btn-primary"/>
 			<input type="hidden" name="next" value="{{ next }}" />
