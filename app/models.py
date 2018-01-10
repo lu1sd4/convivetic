@@ -77,6 +77,7 @@ class UserProfile(models.Model):
 		default=False,
 		choices=YES_NO_CHOICES
 	)
+
 class ThreadTag(models.Model):
 	name = models.CharField(max_length=20)
 

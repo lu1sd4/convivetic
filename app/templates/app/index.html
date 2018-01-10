@@ -196,234 +196,85 @@
 		</section>
 		
 		<section class="forum-section">
-			<h3 class="border for-section-title">Foros</h3>	
+			<h3 class="border for-section-title">Foros</h3>
+
+
 
 			<div class="forum-c">
 				<div class="forum rounded">
 
-					<div class="forum-item">
+					{% for thread in thread_list %}
+						<div class="forum-item">
 
-						<div class="f-image">
-							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-						</div>
-						
+							<div class="f-image">
+								<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+							</div>
+							
 
-						<div class="forum-inline">
+							<div class="forum-inline">
 
-							<div class="for-data">
-								<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
+								<div class="for-data">
+									<a href="#">{{thread.title}}</a>
 
-								<div class="comment-c">
-									<i class="far fa-comment"></i>
-									<div class="comment-counter">10</div>
+									<div class="comment-c">
+										<i class="far fa-comment"></i>
+										<div class="comment-counter">
+											{{thread.comment_set.count}}
+
+										</div>
+									</div>
+
+								</div>
+							
+
+								<div class="forum-publisher">
+									<p class="f-date">{{ thread.pub_date }}</p>
+									<p class="f-name">{{ thread.author.get_full_name }}</p>
 								</div>
 
 							</div>
-						
-
-							<div class="forum-publisher">
-								<p class="f-date">04/12/12</p>
-								<p class="f-name">Luis Medina</p>
-							</div>
-
 						</div>
-					</div>
 
-					<div class="forum-item">
-
-						<div class="f-image">
-							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-						</div>
-						
-
-						<div class="forum-inline">
-
-							<div class="for-data">
-								<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de pazaasdasdas asdasdasdasdas?</a>
-
-								<div class="comment-c">
-									<i class="far fa-comment"></i>
-									<div class="comment-counter">10</div>
-								</div>
-
-							</div>
-						
-
-							<div class="forum-publisher">
-								<p class="f-date">04/12/12</p>
-								<p class="f-name">Luis Medina</p>
-							</div>
-
-						</div>
-					</div>
-					<div class="forum-item">
-
-						<div class="f-image">
-							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-						</div>
-						
-
-						<div class="forum-inline">
-
-							<div class="for-data">
-								<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
-
-								<div class="comment-c">
-									<i class="far fa-comment"></i>
-									<div class="comment-counter">10</div>
-								</div>
-
-							</div>
-						
-
-							<div class="forum-publisher">
-								<p class="f-date">04/12/12</p>
-								<p class="f-name">Luis Medina</p>
-							</div>
-
-						</div>
-					</div>
-					<div class="forum-item">
-
-						<div class="f-image">
-							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-						</div>
-						
-
-						<div class="forum-inline">
-
-							<div class="for-data">
-								<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
-
-								<div class="comment-c">
-									<i class="far fa-comment"></i>
-									<div class="comment-counter">10</div>
-								</div>
-
-							</div>
-						
-
-							<div class="forum-publisher">
-								<p class="f-date">04/12/12</p>
-								<p class="f-name">Luis Medina</p>
-							</div>
-
-						</div>
-					</div>
+					{% endfor %}
 					
 				</div>
 
 				<div class="forum rounded">
+					{% for thread in secondary_threads %}
+						<div class="forum-item">
 
-					<div class="forum-item">
+							<div class="f-image">
+								<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+							</div>
+							
 
-						<div class="f-image">
-							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-						</div>
-						
+							<div class="forum-inline">
 
-						<div class="forum-inline">
+								<div class="for-data">
+									<a href="#">{{thread.title}}</a>
 
-							<div class="for-data">
-								<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
+									<div class="comment-c">
+										<i class="far fa-comment"></i>
+										<div class="comment-counter">
+											
+											{{thread.comment_set.count}}
 
-								<div class="comment-c">
-									<i class="far fa-comment"></i>
-									<div class="comment-counter">10</div>
+										</div>
+									</div>
+
+								</div>
+							
+
+								<div class="forum-publisher">
+									<p class="f-date">{{ thread.pub_date }}</p>
+									<p class="f-name">{{ thread.author.get_full_name }}</p>
 								</div>
 
 							</div>
-						
-
-							<div class="forum-publisher">
-								<p class="f-date">04/12/12</p>
-								<p class="f-name">Luis Medina</p>
-							</div>
-
 						</div>
-					</div>
 
-					<div class="forum-item">
 
-						<div class="f-image">
-							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-						</div>
-						
-
-						<div class="forum-inline">
-
-							<div class="for-data">
-								<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de pazaasdasdas asdasdasdasdas?</a>
-
-								<div class="comment-c">
-									<i class="far fa-comment"></i>
-									<div class="comment-counter">10</div>
-								</div>
-
-							</div>
-						
-
-							<div class="forum-publisher">
-								<p class="f-date">04/12/12</p>
-								<p class="f-name">Luis Medina</p>
-							</div>
-
-						</div>
-					</div>
-					<div class="forum-item">
-
-						<div class="f-image">
-							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-						</div>
-						
-
-						<div class="forum-inline">
-
-							<div class="for-data">
-								<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
-
-								<div class="comment-c">
-									<i class="far fa-comment"></i>
-									<div class="comment-counter">10</div>
-								</div>
-
-							</div>
-						
-
-							<div class="forum-publisher">
-								<p class="f-date">04/12/12</p>
-								<p class="f-name">Luis Medina</p>
-							</div>
-
-						</div>
-					</div>
-					<div class="forum-item">
-
-						<div class="f-image">
-							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-						</div>
-						
-
-						<div class="forum-inline">
-
-							<div class="for-data">
-								<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
-
-								<div class="comment-c">
-									<i class="far fa-comment"></i>
-									<div class="comment-counter">10</div>
-								</div>
-
-							</div>
-						
-
-							<div class="forum-publisher">
-								<p class="f-date">04/12/12</p>
-								<p class="f-name">Luis Medina</p>
-							</div>
-
-						</div>
-					</div>
+					{% endfor %}
 					
 				</div>
 
@@ -445,7 +296,7 @@
 		</section>
 
 		<div class="more-forum">
-			<a href="#" >Mostrar todo (15+) <i>></i></a>	
+			<a href="#" >Mostrar todo ({{th_quantity}}+) <i>></i></a>	
 		</div>	
 	</div>
 
