@@ -18,7 +18,7 @@
 		that.pageTwoSubmitted = false; 
 		that.pageThree = 3;
 
-		that.state = 2;
+		that.state = that.pageOne;
 		that.isPrevious = false;
 		that.isLast = false;
 		that.nextText = 'Siguiente';
@@ -64,7 +64,7 @@
 			}
 		}
 
-		$("select").extendSelect();
+
 
 	}
 	
