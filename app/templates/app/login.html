@@ -19,7 +19,7 @@
 			</div>
 			<div class="login-form">
 				<img class="login-logo" src="{% static 'app/img/ConviveTIC-logo.png' %}">
-				<p class="text-center"><small>¿No tienes cuenta? <a href="#">Regístrate</a></small></p>
+				<p class="text-center"><small>¿No tienes cuenta? <a href="{% url 'signup' %}">Regístrate</a></small></p>
 				<form method="post" action="{% url 'login' %}">
 				{% csrf_token %}
 					<div class="form-group">
@@ -36,7 +36,7 @@
 					</div>
 				</form>
 				<div class="forgot-password text-center">
-					<a href="#"><p><small>¿Olvidaste tu contraseña?</small></p></a>
+					<a href="{% url 'password_reset_request' %}"><p><small>¿Olvidaste tu contraseña?</small></p></a>
 				</div>
 			</div>
 		</div>
