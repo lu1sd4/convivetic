@@ -53,6 +53,9 @@ def username_present(username):
 class Forums(TemplateView):
 	template_name = 'app/forums.html'
 
+class ForumDetail(TemplateView):
+	template_name = 'app/forum_detail.html'
+
 @transaction.atomic
 def register_user(request):
 	if request.method == "POST":

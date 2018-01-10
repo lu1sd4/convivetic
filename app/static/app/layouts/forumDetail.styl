@@ -1,0 +1,127 @@
+f-m-width = 900px
+
+.gral-df-container
+	background-color blocks-background
+	display flex
+	justify-content center
+	margin-top 0.5em
+	padding-bottom 4em
+	padding-left 25px
+	padding-right 25px
+
+	.f-detail-container
+		background-color #fff
+		box-shadow 0 2px 5px 0 shadow-color
+		padding 30px 45px
+		display flex
+		flex-direction column
+		justify-content center
+		padding-top 2em
+		padding-bottom 2em
+		max-width f-m-width 
+		margin-top 3em
+		width 100%
+		
+		@media (max-width 768px)
+			padding 30px 20px !important
+			
+
+		.detail-comments
+			margin-top 4em
+			
+			p
+				font-weight 400
+				font-size 20px
+				
+
+			.d-comments
+				display flex
+				flex-direction column
+				
+				.d-comment
+					background-color #ebebeb
+					color texts-color
+					padding 20px
+					margin-bottom 0.5em
+					width 100%
+					
+			
+		.detail-c
+			display flex
+			
+			.prof-image
+				margin-right 3%
+				width 10%
+			
+			.detail-right
+				display flex
+				flex-direction column
+				width 87%
+				
+				h4
+					font-weight 400
+					color texts-color
+						
+				p
+					color texts-color
+					font-weight 300
+				
+
+				.d-new-comment
+					display flex
+					flex-direction column
+					
+					.form-control::-webkit-input-placeholder  
+						color #ebebeb   /* WebKit, Blink, Edge */
+					.form-control:-moz-placeholder  
+						color #ebebeb   /* Mozilla Firefox 4 to 18 */
+					.form-control::-moz-placeholder  
+						color #ebebeb   /* Mozilla Firefox 19+ */
+					.form-control:-ms-input-placeholder  
+						color #ebebeb   /* Internet Explorer 10-11 */
+					.form-control::-ms-input-placeholder  
+						color #ebebeb   /* Microsoft Edge */
+					
+					button
+						background-color links-color
+						margin-top 0.7em
+						min-width 125px
+						width 30%
+						
+
+				.detail-social-c
+					display flex
+					margin 1em 0
+					
+					.social-left
+						margin-right auto
+						display flex
+						
+						.detail-n
+							color texts-color
+							font-weight 300
+							font-size 18px
+						
+						.social-btns
+							display flex
+							margin-left	8px
+							
+							a
+								margin-right 3px
+								
+								svg
+									color shadow-color
+									height 20px
+									width 20px
+
+					
+					.social-right
+						margin-left auto
+						
+						p
+							color texts-color
+							font-weight 300
+							font-size 14px
+				
+
+				
