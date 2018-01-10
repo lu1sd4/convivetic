@@ -12,6 +12,18 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/bootstrap-select/dist/css/bootstrap-select.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/select/select.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
+	<script type="text/javascript" src="{% static 'app/libs/jquery/dist/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/angular/angular.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/angular-animate/angular-animate.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/angular-messages/angular-messages.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/bootstrap-select/dist/js/bootstrap-select.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/libs/select/select.js' %}"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+	<script type="text/javascript" src="{% static 'app/logic/app.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/controllers/signupCtrl.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/factories/usernameservice.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/directives/unique.js' %}"></script>
+
 </head>
 <body ng-app='conviveticApp' ng-cloak>
 	<div class="register-container">
@@ -20,7 +32,7 @@
 				<div class="text-center">
 					<img class="register-logo" src="{% static 'app/img/ConviveTIC-logo.png' %}">
 				</div>
-				<p class="text-center">Llena los campos para registrarte en ConviveTIC {[{ signupCtrl.x }]} </p>
+				<p class="text-center" >Llena los campos para registrarte en ConviveTIC {[{ signupCtrl.x }]} </p>
 				{% if user_form.errors %}
 					{% for field in user_form %}
 						{% if field.errors %} 
@@ -44,8 +56,8 @@
 			<div class="register-form">
 				<form novalidate action="signup" method="post" id="userRegistrationForm">
 					{% csrf_token %}
-					<div class="register-section-container">
-					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageOne">
+					<div class="register-section-container" >
+					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageOne" >
 						<ng-form name="partOneForm" ng-class="signupCtrl.pageOneSubmitted ? 'was-validated' : '' ">
 							<div class="row">
 								<div class="col">
@@ -99,7 +111,7 @@
 							</div>							
 						</ng-form>
 					</div>
-					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageTwo">
+					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageTwo" >
 						<ng-form name="partTwoForm" ng-class="signupCtrl.pageTwoSubmitted ? 'was-validated' : '' ">
 							<div class="row">
 								<div class="col" style="display:flex; justify-content: center; align-items: center">
@@ -154,7 +166,7 @@
 							</div>		
 						</ng-form>	
 					</div>
-					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageThree">
+					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageThree" >
 						<ng-form name="partThreeForm" ng-class="signupCtrl.pageThreeSubmitted ? 'was-validated' : '' ">
 							<div class="row">
 								<div class="col">
@@ -199,20 +211,11 @@
 		</div>
 	</div>
 
-	<script type="text/javascript" src="{% static 'app/libs/jquery/dist/jquery.min.js' %}"></script>
+
 	<script type="text/javascript" src="{% static 'app/libs/tether/dist/js/tether.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/popper.js/dist/umd/popper.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'app/libs/angular/angular.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'app/libs/angular-animate/angular-animate.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'app/libs/angular-messages/angular-messages.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'app/libs/bootstrap-select/dist/js/bootstrap-select.js' %}"></script>
-	<script type="text/javascript" src="{% static 'app/libs/select/select.js' %}"></script>
-	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
-	<script type="text/javascript" src="{% static 'app/logic/app.js' %}"></script>
-	<script type="text/javascript" src="{% static 'app/logic/controllers/signupCtrl.js' %}"></script>
-	<script type="text/javascript" src="{% static 'app/logic/factories/usernameservice.js' %}"></script>
-	<script type="text/javascript" src="{% static 'app/logic/directives/unique.js' %}"></script>
+	
 </body>
 </html>
 

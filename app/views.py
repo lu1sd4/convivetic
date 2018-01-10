@@ -8,6 +8,10 @@ from django.views.generic import FormView
 from django.views.generic import View
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.views import PasswordResetDoneView
+from django.contrib.auth.views import PasswordResetConfirmView
+from django.contrib.auth.views import PasswordResetCompleteView
 from django.contrib.auth.models import User
 
 # Email verification
@@ -101,3 +105,18 @@ def activate(request, uidb64, token):
         return HttpResponse('Gracias por confirmar tu correo. Ahora puedes iniciar sesión.')
     else:
         return HttpResponse('Tu enlace de activación no es válido.')
+
+class PasswordReset(PasswordResetView):
+	template_name = 'app/password_reset_request.html'
+	email_template_name = 'app/password_reset_email.html'
+	subject_template_name = 'app/password_reset_subject.txt'
+
+class PasswordResetDone(PasswordResetDoneView):
+	template_name = 'app/password_reset_request_done.html'	
+
+class PasswordResetConfirm(PasswordResetConfirmView):
+	template_name = 'app/password_reset_confirm.html'
+
+class PasswordResetComplete(PasswordResetCompleteView):
+	template_name = 'app/password_reset_complete.html'
+
