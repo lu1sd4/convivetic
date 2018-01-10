@@ -273,7 +273,8 @@ ul {
 .login-container .login-box .login-form input[type=text],
 .login-container .login-box .login-form input[type=password],
 .login-container .login-box .login-form input[type=submit],
-.login-container .login-box .login-form input[type=email] {
+.login-container .login-box .login-form input[type=email],
+.login-container .login-box .login-form input[type=button] {
   width: 100%;
 }
 .login-container .login-box .login-form .login-logo {
@@ -288,6 +289,13 @@ ul {
   bottom: 0;
   left: 0%;
   right: 0%;
+}
+.login-container .login-box .login-form .login-error-messages {
+  padding-left: 5px;
+}
+.login-container .login-box .login-form .login-error-messages p {
+  font-size: 12px;
+  color: #f00;
 }
 .login-container .login-box .login-form .login-error {
   color: #f00;
