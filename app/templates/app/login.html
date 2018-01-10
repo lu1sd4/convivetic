@@ -1,5 +1,6 @@
 {% extends 'app/login_base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block left %}
 
@@ -11,23 +12,42 @@
 {% block right %}
 
 	<p class="text-center"><small>¿No tienes cuenta? <a href="{% url 'signup' %}">Regístrate</a></small></p>
-	<form method="post" action="{% url 'login' %}">
-	{% csrf_token %}
-		<div class="form-group">
-		    {{ form.username.label_tag }}
-		    {{ form.username }}
-		</div>
-		<div class="form-group">
-		    {{ form.password.label_tag }}
-		    {{ form.password }}
-	    </div>
-	    <div class="form-group">
-			<input type="submit" value="Iniciar sesión" class="btn btn-primary"/>
-			<input type="hidden" name="next" value="{{ next }}" />
-		</div>
-	</form>
+
+	<div ng-controller="loginController as loginCtrl">
+		<form novalidate method="post" action="{% url 'login' %}" ng-class="loginCtrl.formSubmitted ? 'was-validated' : ''" id="form" name="form">
+			{% csrf_token %}
+			<div class="form-group">
+			    {{ form.username.label_tag }}
+			    {% render_field form.username ng-model="username" class+="form-control" %}
+			    <div class="login-error-messages" ng-messages='form.username.$error' ng-show="loginCtrl.formSubmitted">
+					<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+				</div>
+			</div>
+			<div class="form-group">
+			    {{ form.password.label_tag }}
+			    {% render_field form.password ng-model="password" class+="form-control" %}
+			    <div class="login-error-messages" ng-messages='form.password.$error' ng-show="loginCtrl.formSubmitted">
+					<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+				</div>
+		    </div>
+		    {% if form.errors %}
+		    	<p class="text-center login-error"><small>Nombre de usuario o contraseña inválidos</small></p>
+	    	{% endif %}
+		    <div class="form-group text-center">
+				<input type="button" ng-click="loginCtrl.sendForm()" value="Iniciar sesión" class="btn btn-primary"/>
+				<input type="hidden" name="next" value="{{ next }}" />
+			</div>
+		</form>
+	</div>
+
 	<div class="forgot-password text-center">
 		<a href="{% url 'password_reset_request' %}"><p><small>¿Olvidaste tu contraseña?</small></p></a>
 	</div>
+
+{% endblock %}
+
+{% block scripts %}
+	
+	<script type="text/javascript" src="{% static 'app/logic/controllers/loginCtrl.js' %}"></script>
 
 {% endblock %}

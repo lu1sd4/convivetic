@@ -65,9 +65,6 @@
 		}
 
 
-		$('select').extendSelect({
-			notSelectedTitle : 'Seleccione'
-		});
 
 	}
 	
