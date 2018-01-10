@@ -272,7 +272,8 @@ ul {
 }
 .login-container .login-box .login-form input[type=text],
 .login-container .login-box .login-form input[type=password],
-.login-container .login-box .login-form input[type=submit] {
+.login-container .login-box .login-form input[type=submit],
+.login-container .login-box .login-form input[type=email] {
   width: 100%;
 }
 .login-container .login-box .login-form .login-logo {
