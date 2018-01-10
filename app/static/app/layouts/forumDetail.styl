@@ -38,16 +38,68 @@ f-m-width = 900px
 				display flex
 				flex-direction column
 				
+				hr
+					width 100%
+					margin-bottom 0.8em
+				
 				.d-comment
-					background-color #ebebeb
 					color texts-color
 					padding 20px
-					margin-bottom 0.5em
 					width 100%
 					
+					.comment-header
+						display flex
+						align-items center
+						
+						@media (max-width 575.99px)
+							flex-direction column
+							
+							p
+								margin-left inherit !important
+						
+						h6
+							margin-bottom 0	
+						
+						p
+							margin-left auto
+							color texts-color
+							font-weight 300
+							font-size 15px
+							margin-bottom 0
+							padding-bottom 0
+						
+					.comment-detail
+						margin-top 1em
+
+						p
+							color texts-color
+							font-weight 300
+							font-size 17px
+					
+					.comment-footer
+						p
+							color texts-color
+							font-weight 300
+							font-size 14px
+							margin-bottom 0
+							padding-bottom 0
+							
 			
 		.detail-c
 			display flex
+			
+			@media (max-width 767.99px)
+				flex-direction column
+				justify-content center
+				
+				.prof-image
+					margin-right 0 !important
+					width 100% !important
+				
+				.detail-right
+					margin-top 2em
+					width 100% !important
+					
 			
 			.prof-image
 				margin-right 3%
@@ -66,6 +118,11 @@ f-m-width = 900px
 					color texts-color
 					font-weight 300
 				
+				.forum-date
+					color texts-color
+					font-weight 300
+					font-size 14px
+					
 
 				.d-new-comment
 					display flex
@@ -118,10 +175,55 @@ f-m-width = 900px
 					.social-right
 						margin-left auto
 						
-						p
-							color texts-color
-							font-weight 300
-							font-size 14px
+						.forum-views
+							display flex
+							
+							h5
+								color texts-color
+								font-weight 300
+								font-size 18px
+
+							svg
+								color shadow-color
+								height 20px
+								width 20px
+								margin-right 8px
+								
+								
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							
 				
 
 				
