@@ -15,6 +15,8 @@ from .views import PasswordResetConfirm
 from .views import PasswordResetComplete
 
 
+
+
 urlpatterns = [
 	path('', Index.as_view(), name='index'),
 	path('signup', views.register_user, name='signup'),
@@ -26,6 +28,6 @@ urlpatterns = [
 	path('password_reset_request_done/', PasswordResetDone.as_view(), name='password_reset_done'),
 	path('password_reset_confirm/<uidb64>/<token>', PasswordResetConfirm.as_view(), name='password_reset_confirm'),
 	path('password_reset_complete/', PasswordResetComplete.as_view(), name='password_reset_complete'),
-	path('forums', Forums.as_view(), name='forums'),
-	path('forumDetail', ForumDetail.as_view(), name="forumDetail")
+	path('forums/', Forums.as_view(), name='forums'),
+	path('forums/<int:pk>/', ForumDetail.as_view(), name="thread-detail")
 ]

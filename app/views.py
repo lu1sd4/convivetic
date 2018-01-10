@@ -8,6 +8,7 @@ from django.views.generic import TemplateView
 from django.views.generic import FormView
 from django.views.generic import View
 from django.views.generic import ListView
+from django.views.generic import DetailView
 
 
 from django.contrib.auth.views import LoginView
@@ -65,11 +66,21 @@ def username_present(username):
 		return True
 	return False
 
-class Forums(TemplateView):
+class Forums(ListView):
 	template_name = 'app/forums.html'
+	context_object_name = 'thread_list'
+	queryset = Thread.objects.all()
 
-class ForumDetail(TemplateView):
-	template_name = 'app/forum_detail.html'
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+
+		return context
+
+
+class ForumDetail(DetailView):
+	model = Thread
+	template_name = 'app/thread_detail.html'
+
 
 @transaction.atomic
 def register_user(request):

@@ -214,7 +214,7 @@
 							<div class="forum-inline">
 
 								<div class="for-data">
-									<a href="#">{{thread.title}}</a>
+									<a href="{% url 'thread-detail' thread.id %}">{{thread.title}}</a>
 
 									<div class="comment-c">
 										<i class="far fa-comment"></i>
@@ -251,7 +251,7 @@
 							<div class="forum-inline">
 
 								<div class="for-data">
-									<a href="#">{{thread.title}}</a>
+									<a href="{% url 'thread-detail' thread.id %}">{{thread.title}}</a>
 
 									<div class="comment-c">
 										<i class="far fa-comment"></i>
