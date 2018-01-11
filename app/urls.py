@@ -22,5 +22,9 @@ urlpatterns = [
 	path('password_reset_complete/', PasswordResetComplete.as_view(), name='password_reset_complete'),
 	path('forums/', Forums.as_view(), name='forums'),
 	path('forums/<int:pk>/', ForumDetail.as_view(), name="thread-detail"),
-	path('forums/<int:pk>/getVotes', ForumGetVotes.as_view(), name="forum-vote")
+	path('forums/<int:pk>/vote', ForumVote.as_view(), name="forum-vote"),
+	path('forums/<int:pk>/unvote', ForumUnvote.as_view(), name="forum-unvote"),
+	path('forums/<int:pk>/view', ForumView.as_view(), name="forum-view"),
+	path('forums/<int:pk>/comment/<str:content>', ForumComment.as_view(), name="forum-comment")
+
 ]
