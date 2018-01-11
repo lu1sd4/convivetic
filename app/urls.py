@@ -6,9 +6,6 @@ from . import views
 
 from .views import *
 
-
-
-
 urlpatterns = [
 	path('', Index.as_view(), name='index'),
 	path('signup', views.register_user, name='signup'),
