@@ -4,15 +4,7 @@ from django.contrib.auth import views as auth_views
 
 from . import views
 
-from .views import Index
-from .views import Login
-from .views import UsernameCheck
-from .views import Forums
-from .views import ForumDetail
-from .views import PasswordReset
-from .views import PasswordResetDone
-from .views import PasswordResetConfirm
-from .views import PasswordResetComplete
+from .views import *
 
 
 
@@ -29,5 +21,6 @@ urlpatterns = [
 	path('password_reset_confirm/<uidb64>/<token>', PasswordResetConfirm.as_view(), name='password_reset_confirm'),
 	path('password_reset_complete/', PasswordResetComplete.as_view(), name='password_reset_complete'),
 	path('forums/', Forums.as_view(), name='forums'),
-	path('forums/<int:pk>/', ForumDetail.as_view(), name="thread-detail")
+	path('forums/<int:pk>/', ForumDetail.as_view(), name="thread-detail"),
+	path('forums/<int:pk>/getVotes', ForumGetVotes.as_view(), name="forum-vote")
 ]

@@ -81,6 +81,11 @@ class ForumDetail(DetailView):
 	model = Thread
 	template_name = 'app/thread_detail.html'
 
+class ForumGetVotes(View):
+	def get(self, request, *args, **kwargs):
+		print('Votaste!')
+		return HttpResponse
+
 
 @transaction.atomic
 def register_user(request):
@@ -145,4 +150,13 @@ class PasswordResetConfirm(PasswordResetConfirmView):
 
 class PasswordResetComplete(PasswordResetCompleteView):
 	template_name = 'app/password_reset_complete.html'
+
+
+
+
+
+
+
+
+
 
