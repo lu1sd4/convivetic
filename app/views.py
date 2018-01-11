@@ -35,6 +35,8 @@ from .forms import ProfileForm
 
 from .models import *
 
+from django.shortcuts import get_object_or_404
+
 
 class Index(ListView):
 	template_name = 'app/index.html'
@@ -81,10 +83,39 @@ class ForumDetail(DetailView):
 	model = Thread
 	template_name = 'app/thread_detail.html'
 
-class ForumGetVotes(View):
+class ForumVote(View):
 	def get(self, request, *args, **kwargs):
-		print('Votaste!')
-		return HttpResponse
+		forum_id = self.kwargs['pk']
+		forum = get_object_or_404(Thread, pk=forum_id)
+		forum.likes = forum.likes + 1
+
+		forum.save()
+
+		return HttpResponse(forum.likes)
+
+class ForumUnvote(View):
+	def get(self, request, *args, **kwargs):
+		forum_id = self.kwargs['pk']
+		forum = get_object_or_404(Thread, pk = forum_id)
+		forum.likes = forum.likes - 1
+
+		forum.save()
+
+		return HttpResponse(forum.likes)
+
+class ForumView(View):
+	def get(self, request, *args, **kwargs):
+		forum_id = self.kwargs['pk']
+		forum = get_object_or_404(Thread, pk = forum_id)
+		forum.views = forum.views + 1
+
+		forum.save()
+
+		return HttpResponse(forum.views)
+
+class ForumComment(View):
+	pass
+
 
 
 @transaction.atomic
