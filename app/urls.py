@@ -1,6 +1,7 @@
 from django.urls import path, re_path
 
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 
 from . import views
 
@@ -22,9 +23,9 @@ urlpatterns = [
 	path('password_reset_complete/', PasswordResetComplete.as_view(), name='password_reset_complete'),
 	path('forums/', Forums.as_view(), name='forums'),
 	path('forums/<int:pk>/', ForumDetail.as_view(), name="thread-detail"),
-	path('forums/<int:pk>/vote', ForumVote.as_view(), name="forum-vote"),
-	path('forums/<int:pk>/unvote', ForumUnvote.as_view(), name="forum-unvote"),
+	path('forums/<int:pk>/vote', login_required(ForumLike.as_view()), name="forum-like"),
+	path('forums/<int:pk>/unvote', ForumDislike.as_view(), name="forum-dislike"),
 	path('forums/<int:pk>/view', ForumView.as_view(), name="forum-view"),
-	path('forums/<int:pk>/comment/<str:content>', ForumComment.as_view(), name="forum-comment")
+	path('forums/<int:pk>/comment/<str:content>', login_required(ForumComment.as_view()), name="forum-comment")
 
 ]

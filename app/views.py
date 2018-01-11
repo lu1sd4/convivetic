@@ -36,6 +36,7 @@ from .forms import ProfileForm
 from .models import *
 
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 
 class Index(ListView):
@@ -72,6 +73,7 @@ class Forums(ListView):
 	template_name = 'app/forums.html'
 	context_object_name = 'thread_list'
 	queryset = Thread.objects.all()
+	paginate_by = 8
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -83,25 +85,49 @@ class ForumDetail(DetailView):
 	model = Thread
 	template_name = 'app/thread_detail.html'
 
-class ForumVote(View):
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		thread_pk = self.kwargs['pk']
+		author_id = self.request.user.id
+
+		likes_c = Like.objects.filter(thread = thread_pk, author = author_id).count()
+		dislike_c = Dislike.objects.filter(thread = thread_pk, author = author_id).count()
+
+		if(likes_c == 0 and dislike_c == 0):
+			context['user_can_vote'] = True 
+		else:
+			context['user_can_vote'] = False
+
+		return context
+
+class ForumLike(View):
 	def get(self, request, *args, **kwargs):
 		forum_id = self.kwargs['pk']
 		forum = get_object_or_404(Thread, pk=forum_id)
-		forum.likes = forum.likes + 1
+		author = request.user
 
-		forum.save()
+		like = Like(thread = forum, author = author)
+		like.save()
 
-		return HttpResponse(forum.likes)
+		likes_c = Like.objects.filter(thread = forum_id, author = author.id).count()
+		dislike_c = Dislike.objects.filter(thread = forum_id, author = author.id).count()
 
-class ForumUnvote(View):
+		return HttpResponse(likes_c - dislike_c)
+
+class ForumDislike(View):
 	def get(self, request, *args, **kwargs):
 		forum_id = self.kwargs['pk']
-		forum = get_object_or_404(Thread, pk = forum_id)
-		forum.likes = forum.likes - 1
+		forum = get_object_or_404(Thread, pk=forum_id)
+		author = request.user
 
-		forum.save()
+		dislike = Dislike(thread = forum, author = author)
+		dislike.save()
 
-		return HttpResponse(forum.likes)
+
+		likes_c = Like.objects.filter(thread = forum_id, author = author.id).count()
+		dislikes_c = Dislike.objects.filter(thread = forum_id, author = author.id).count()
+
+		return HttpResponse(likes_c - dislikes_c)
 
 class ForumView(View):
 	def get(self, request, *args, **kwargs):
@@ -114,9 +140,14 @@ class ForumView(View):
 		return HttpResponse(forum.views)
 
 class ForumComment(View):
-	pass
-
-
+	
+	def get(self,request, *args, **kwargs):
+		forum_id = self.kwargs['pk']
+		comment_content = self.kwargs['content']
+		forum = get_object_or_404(Thread, pk = forum_id)
+		author = request.user
+		#comment = Comment(thread=forum, author=author, content=comment_content, )
+		return HttpResponse()
 
 @transaction.atomic
 def register_user(request):
