@@ -2,7 +2,7 @@ from django import forms
 
 from datetime import datetime
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import forms as auth_forms
 
 from .models import UserProfile
@@ -17,10 +17,13 @@ class LoginForm(auth_forms.AuthenticationForm):
 		widget=forms.PasswordInput
 	)
 
-class UserForm(auth_forms.UserCreationForm):	
+class UserForm(auth_forms.UserCreationForm):
+	group = forms.ModelChoiceField(queryset=Group.objects.all(),
+								   required=True,
+								   empty_label='¿Qué tipo de usuario eres?')	
 	class Meta:
 		model = User
-		fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email']
+		fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'group']
 		labels = {
 			'username' : 'Nombre de usuario',
 			'password1' : 'Contraseña',
