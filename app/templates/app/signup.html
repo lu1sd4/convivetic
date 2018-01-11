@@ -46,6 +46,15 @@
 						<ng-form name="partOneForm" ng-class="signupCtrl.pageOneSubmitted ? 'was-validated' : '' ">
 							<div class="row">
 								<div class="col">
+									{% render_field user_form.group class+="form-control" ng-model="group" %}
+									<div class="register-error-messages" ng-messages='partOneForm["user-group"].$error' ng-show='signupCtrl.pageOneSubmitted'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+									</div>		
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col">
 									{% render_field user_form.email class+="form-control" placeholder=user_form.email.label ng-model="email" %}
 									<div class="register-error-messages" ng-messages='partOneForm["user-email"].$error' ng-show='signupCtrl.pageOneSubmitted'>
 										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
@@ -84,16 +93,15 @@
 										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
 									</div>
 								</div>
-							</div>
-							<br>
-							<div class="row">
-								<div class="col">
+								<div class="col">		
 									{% render_field user_form.last_name class+="form-control" placeholder=user_form.last_name.label ng-model="last_name" %}
 									<div class="register-error-messages" ng-messages='partOneForm["user-last_name"].$error' ng-show='signupCtrl.pageOneSubmitted'>
 										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
 									</div>
 								</div>
-							</div>							
+							</div>
+							<br>
+														
 						</ng-form>
 					</div>
 					<div class="register-section" ng-show="signupCtrl.state == signupCtrl.pageTwo" >
@@ -102,12 +110,12 @@
 								<div class="col" style="display:flex; justify-content: center; align-items: center">
 									{{ profile_form.gender.label_tag }}
 									&nbsp;&nbsp;
-									{% render_field profile_form.gender %}
+									{% render_field profile_form.gender class+="extendSelect" %}
 								</div>
 								<div class="col" style="display:flex; justify-content: center; align-items: center">
 									{{ profile_form.title.label_tag }}
 									&nbsp;&nbsp;
-									{% render_field profile_form.title %}
+									{% render_field profile_form.title class+="extendSelect" %}
 								</div>
 							</div>
 							<br>
@@ -161,7 +169,8 @@
 										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
 									</div>
 								</div>
-							</div>	
+							</div>
+								
 							<div class="row">
 								<div class="col">
 									{{ profile_form.is_conflict_victim.label_tag }}
@@ -180,6 +189,7 @@
 									</div>
 								</div>
 							</div>
+							
 						</ng-form>
 					</div>
 					</div>
@@ -201,7 +211,7 @@
 	<script type="text/javascript" src="{% static 'app/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>	
 	<script type="text/javascript" src="{% static 'app/libs/select/select.js' %}"></script>
 	<script type="text/javascript">
-		$("select").extendSelect();
+		$(".extendSelect").extendSelect();
 	</script>
 
 </body>
