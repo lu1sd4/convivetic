@@ -113,6 +113,9 @@ class ForumView(View):
 
 		return HttpResponse(forum.views)
 
+class ForumComment(View):
+	pass
+
 
 
 @transaction.atomic
