@@ -75,6 +75,9 @@ f-m-width = 900px
 							color texts-color
 							font-weight 300
 							font-size 17px
+							
+							@media (max-width 575.99px)
+								text-align center
 					
 					.comment-footer
 						p
@@ -83,6 +86,33 @@ f-m-width = 900px
 							font-size 14px
 							margin-bottom 0
 							padding-bottom 0
+		
+
+		.d-new-comment
+			display flex
+			flex-direction column
+			margin-top 1.5em
+			
+			.form-control::-webkit-input-placeholder  
+				color #ebebeb   /* WebKit, Blink, Edge */
+			.form-control:-moz-placeholder  
+				color #ebebeb   /* Mozilla Firefox 4 to 18 */
+			.form-control::-moz-placeholder  
+				color #ebebeb   /* Mozilla Firefox 19+ */
+			.form-control:-ms-input-placeholder  
+				color #ebebeb   /* Internet Explorer 10-11 */
+			.form-control::-ms-input-placeholder  
+				color #ebebeb   /* Microsoft Edge */
+			
+			button
+				background-color links-color
+				margin-top 0.7em
+				min-width 125px
+				width 30%
+		
+		hr
+			margin-top 0
+			width 100%
 							
 			
 		.detail-c
@@ -100,6 +130,7 @@ f-m-width = 900px
 					margin-top 2em
 					width 100% !important
 					
+					
 			
 			.prof-image
 				margin-right 3%
@@ -112,6 +143,7 @@ f-m-width = 900px
 				
 				h4
 					font-weight 400
+					font-size 21px !important
 					color texts-color
 						
 				p
@@ -122,28 +154,6 @@ f-m-width = 900px
 					color texts-color
 					font-weight 300
 					font-size 14px
-					
-
-				.d-new-comment
-					display flex
-					flex-direction column
-					
-					.form-control::-webkit-input-placeholder  
-						color #ebebeb   /* WebKit, Blink, Edge */
-					.form-control:-moz-placeholder  
-						color #ebebeb   /* Mozilla Firefox 4 to 18 */
-					.form-control::-moz-placeholder  
-						color #ebebeb   /* Mozilla Firefox 19+ */
-					.form-control:-ms-input-placeholder  
-						color #ebebeb   /* Internet Explorer 10-11 */
-					.form-control::-ms-input-placeholder  
-						color #ebebeb   /* Microsoft Edge */
-					
-					button
-						background-color links-color
-						margin-top 0.7em
-						min-width 125px
-						width 30%
 						
 
 				.detail-social-c

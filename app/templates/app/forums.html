@@ -21,7 +21,7 @@
 
 			 		<div class="options-c">
 			 			<button class="cancel-btn btn btn-secondary" ng-click="fCtrl.cancelNewDiscussion()">Cancelar</button>
-			 			<button class="publish-btn btn btn-primary">Publicar Discusión</button>	
+			 			<button class="publish-btn btn btn-primary">Publicar Discusión</button>
 			 		</div>
 			 	</div>
 	 		</div>
@@ -39,257 +39,35 @@
 	 	<div class="forum-s" ng-show="fCtrl.currentState == fCtrl.normalState ">
 	 		<div class="forum">
 
-				<div class="forum-item">
+	 			{% for thread in thread_list %}
+	 				<div class="forum-item">
 
-					<div class="f-image">
-						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-					</div>
-					
+						<div class="f-image">
+							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+						</div>
+						
 
-					<div class="forum-inline">
+						<div class="forum-inline">
 
-						<div class="for-data">
-							<a href="{% url 'forumDetail' %}">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ? espacios de paz ?</a>
+							<div class="for-data">
+								<a href="{% url 'thread-detail' thread.id %}">{{thread.title}}</a>
 
-							<div class="comment-c">
-								<i class="far fa-comment"></i>
-								<div class="comment-counter">10</div>
+								<div class="comment-c">
+									<i class="far fa-comment"></i>
+									<div class="comment-counter">{{thread.comment_set.count}}</div>
+								</div>
+
+							</div>
+						
+
+							<div class="forum-publisher">
+								<p class="f-date">{{thread.pub_date}}</p>
+								<p class="f-name">{{thread.author.get_full_name}}</p>
 							</div>
 
 						</div>
-					
-
-						<div class="forum-publisher">
-							<p class="f-date">04/12/12</p>
-							<p class="f-name">Daniel Rico</p>
-						</div>
-
 					</div>
-				</div>
-
-				<div class="forum-item">
-
-					<div class="f-image">
-						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-					</div>
-					
-
-					<div class="forum-inline">
-
-						<div class="for-data">
-							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de pazaasdasdas asdasdasdasdas?</a>
-
-							<div class="comment-c">
-								<i class="far fa-comment"></i>
-								<div class="comment-counter">10</div>
-							</div>
-
-						</div>
-					
-
-						<div class="forum-publisher">
-							<p class="f-date">04/12/12</p>
-							<p class="f-name">Daniel Rico</p>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="forum-item">
-
-					<div class="f-image">
-						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-					</div>
-					
-
-					<div class="forum-inline">
-
-						<div class="for-data">
-							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
-
-							<div class="comment-c">
-								<i class="far fa-comment"></i>
-								<div class="comment-counter">10</div>
-							</div>
-
-						</div>
-					
-
-						<div class="forum-publisher">
-							<p class="f-date">04/12/12</p>
-							<p class="f-name">Daniel Rico</p>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="forum-item">
-
-					<div class="f-image">
-						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-					</div>
-					
-
-					<div class="forum-inline">
-
-						<div class="for-data">
-							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
-
-							<div class="comment-c">
-								<i class="far fa-comment"></i>
-								<div class="comment-counter">10</div>
-							</div>
-
-						</div>
-					
-
-						<div class="forum-publisher">
-							<p class="f-date">04/12/12</p>
-							<p class="f-name">Daniel Rico</p>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="forum-item">
-
-					<div class="f-image">
-						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-					</div>
-					
-
-					<div class="forum-inline">
-
-						<div class="for-data">
-							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ? espacios de paz ?</a>
-
-							<div class="comment-c">
-								<i class="far fa-comment"></i>
-								<div class="comment-counter">10</div>
-							</div>
-
-						</div>
-					
-
-						<div class="forum-publisher">
-							<p class="f-date">04/12/12</p>
-							<p class="f-name">Daniel Rico</p>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="forum-item">
-
-					<div class="f-image">
-						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-					</div>
-					
-
-					<div class="forum-inline">
-
-						<div class="for-data">
-							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de pazaasdasdas asdasdasdasdas?</a>
-
-							<div class="comment-c">
-								<i class="far fa-comment"></i>
-								<div class="comment-counter">10</div>
-							</div>
-
-						</div>
-					
-
-						<div class="forum-publisher">
-							<p class="f-date">04/12/12</p>
-							<p class="f-name">Daniel Rico</p>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="forum-item">
-
-					<div class="f-image">
-						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-					</div>
-					
-
-					<div class="forum-inline">
-
-						<div class="for-data">
-							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
-
-							<div class="comment-c">
-								<i class="far fa-comment"></i>
-								<div class="comment-counter">10</div>
-							</div>
-
-						</div>
-					
-
-						<div class="forum-publisher">
-							<p class="f-date">04/12/12</p>
-							<p class="f-name">Daniel Rico</p>
-						</div>
-
-					</div>
-				</div>
-				
-				<div class="forum-item">
-
-					<div class="f-image">
-						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-					</div>
-					
-
-					<div class="forum-inline">
-
-						<div class="for-data">
-							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ?</a>
-
-							<div class="comment-c">
-								<i class="far fa-comment"></i>
-								<div class="comment-counter">10</div>
-							</div>
-
-						</div>
-					
-
-						<div class="forum-publisher">
-							<p class="f-date">04/12/12</p>
-							<p class="f-name">Daniel Rico</p>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="forum-item">
-
-					<div class="f-image">
-						<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
-					</div>
-					
-
-					<div class="forum-inline">
-
-						<div class="for-data">
-							<a href="#">¿Quieres contribuir a los espacios de paz ?¿Quieres contribuir a los espacios de paz ? espacios de paz ?</a>
-
-							<div class="comment-c">
-								<i class="far fa-comment"></i>
-								<div class="comment-counter">10</div>
-							</div>
-
-						</div>
-					
-
-						<div class="forum-publisher">
-							<p class="f-date">04/12/12</p>
-							<p class="f-name">Daniel Rico</p>
-						</div>
-
-					</div>
-				</div>
+	 			{% endfor %}
 
 			</div>
 

@@ -3,9 +3,14 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.template import loader
+
 from django.views.generic import TemplateView
 from django.views.generic import FormView
 from django.views.generic import View
+from django.views.generic import ListView
+from django.views.generic import DetailView
+
+
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.views import PasswordResetView
@@ -28,10 +33,21 @@ from .forms import LoginForm
 from .forms import UserForm
 from .forms import ProfileForm
 
-class Index(TemplateView):
-	#context = {}
-	#return render(request, 'app/index.html', context)
-	template_name = 'app/index.html' 
+from .models import *
+
+
+class Index(ListView):
+	template_name = 'app/index.html'
+	context_object_name = 'thread_list'
+	queryset = Thread.objects.order_by('pub_date')[:4]
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['secondary_threads'] = Thread.objects.order_by('pub_date')[4:8] 
+		context['experiences'] = Experience.objects.all()
+		context['th_quantity'] = Thread.objects.all().count()
+		return context
+
 
 class Login(LoginView):
 	template_name = 'app/login.html'
@@ -50,11 +66,26 @@ def username_present(username):
 		return True
 	return False
 
-class Forums(TemplateView):
+class Forums(ListView):
 	template_name = 'app/forums.html'
+	context_object_name = 'thread_list'
+	queryset = Thread.objects.all()
 
-class ForumDetail(TemplateView):
-	template_name = 'app/forum_detail.html'
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+
+		return context
+
+
+class ForumDetail(DetailView):
+	model = Thread
+	template_name = 'app/thread_detail.html'
+
+class ForumGetVotes(View):
+	def get(self, request, *args, **kwargs):
+		print('Votaste!')
+		return HttpResponse
+
 
 @transaction.atomic
 def register_user(request):
@@ -119,4 +150,13 @@ class PasswordResetConfirm(PasswordResetConfirmView):
 
 class PasswordResetComplete(PasswordResetCompleteView):
 	template_name = 'app/password_reset_complete.html'
+
+
+
+
+
+
+
+
+
 

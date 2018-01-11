@@ -1152,12 +1152,47 @@ ul {
   font-weight: 300;
   font-size: 17px;
 }
+@media (max-width: 575.99px) {
+  .gral-df-container .f-detail-container .detail-comments .d-comments .d-comment .comment-detail p {
+    text-align: center;
+  }
+}
 .gral-df-container .f-detail-container .detail-comments .d-comments .d-comment .comment-footer p {
   color: #484848;
   font-weight: 300;
   font-size: 14px;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+.gral-df-container .f-detail-container .d-new-comment {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5em;
+}
+.gral-df-container .f-detail-container .d-new-comment .form-control::-webkit-input-placeholder {
+  color: #ebebeb /* WebKit, Blink, Edge */;
+}
+.gral-df-container .f-detail-container .d-new-comment .form-control:-moz-placeholder {
+  color: #ebebeb /* Mozilla Firefox 4 to 18 */;
+}
+.gral-df-container .f-detail-container .d-new-comment .form-control::-moz-placeholder {
+  color: #ebebeb /* Mozilla Firefox 19+ */;
+}
+.gral-df-container .f-detail-container .d-new-comment .form-control:-ms-input-placeholder {
+  color: #ebebeb /* Internet Explorer 10-11 */;
+}
+.gral-df-container .f-detail-container .d-new-comment .form-control::-ms-input-placeholder {
+  color: #ebebeb /* Microsoft Edge */;
+}
+.gral-df-container .f-detail-container .d-new-comment button {
+  background-color: #008489;
+  margin-top: 0.7em;
+  min-width: 125px;
+  width: 30%;
+}
+.gral-df-container .f-detail-container hr {
+  margin-top: 0;
+  width: 100%;
 }
 .gral-df-container .f-detail-container .detail-c {
   display: flex;
@@ -1187,6 +1222,7 @@ ul {
 }
 .gral-df-container .f-detail-container .detail-c .detail-right h4 {
   font-weight: 400;
+  font-size: 21px !important;
   color: #484848;
 }
 .gral-df-container .f-detail-container .detail-c .detail-right p {
@@ -1197,31 +1233,6 @@ ul {
   color: #484848;
   font-weight: 300;
   font-size: 14px;
-}
-.gral-df-container .f-detail-container .detail-c .detail-right .d-new-comment {
-  display: flex;
-  flex-direction: column;
-}
-.gral-df-container .f-detail-container .detail-c .detail-right .d-new-comment .form-control::-webkit-input-placeholder {
-  color: #ebebeb /* WebKit, Blink, Edge */;
-}
-.gral-df-container .f-detail-container .detail-c .detail-right .d-new-comment .form-control:-moz-placeholder {
-  color: #ebebeb /* Mozilla Firefox 4 to 18 */;
-}
-.gral-df-container .f-detail-container .detail-c .detail-right .d-new-comment .form-control::-moz-placeholder {
-  color: #ebebeb /* Mozilla Firefox 19+ */;
-}
-.gral-df-container .f-detail-container .detail-c .detail-right .d-new-comment .form-control:-ms-input-placeholder {
-  color: #ebebeb /* Internet Explorer 10-11 */;
-}
-.gral-df-container .f-detail-container .detail-c .detail-right .d-new-comment .form-control::-ms-input-placeholder {
-  color: #ebebeb /* Microsoft Edge */;
-}
-.gral-df-container .f-detail-container .detail-c .detail-right .d-new-comment button {
-  background-color: #008489;
-  margin-top: 0.7em;
-  min-width: 125px;
-  width: 30%;
 }
 .gral-df-container .f-detail-container .detail-c .detail-right .detail-social-c {
   display: flex;
