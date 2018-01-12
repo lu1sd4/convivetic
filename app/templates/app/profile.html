@@ -3,23 +3,82 @@
 
 {% block content %}
 
-<div class="profile-c">
+<div class="profile-c" ng-controller="profileController as profCtrl">
 	<div class="profile-wrapper">
 		<div class="profile-nav">
 			<ul>
-				<li><a href="">Personal</a></li>
-				<li><a href="">Contacto</a></li>
-				<li><a href="">Conflicto</a></li>
+				<li><a href="" ng-click="profCtrl.changeState(1)"><i class="far fa-user"></i>Personal</a></li>
+				<li><a href="" ng-click="profCtrl.changeState(2)"><i class="fas fa-credit-card"></i>Contacto</a></li>
+				<li><a href="" ng-click="profCtrl.changeState(3)"><i class="fas fa-american-sign-language-interpreting"></i>Conflicto</a></li>
 			</ul>
 		</div>
 
-		<div class="profile-content">
-			<div class="prof-info-c">
-				<div class="prof-header">
-					<p>Personal</p>
+		<div class="profile-content rounded">
+			<div class="prof-info-c rounded">
+				<div class="prof-header rounded">
+					<p>{[{profCtrl.sectionName}]}</p>
 				</div>
-				<div class="prof-content">
-					
+				<div class="prof-content rounded">
+
+					<form>
+						<div class="prof-section prof-section-one" ng-show="profCtrl.currentSection == profCtrl.sectionOne">
+							<div class="form-group prof-group">
+							    <label for="username">Nombre de usuario</label>
+							    <input type="text" class="form-control" id="username">
+							  </div>
+
+							  <div class="form-group prof-group">
+							    <label for="names">Nombres</label>
+							    <input type="texr" class="form-control" id="names">
+							  </div>
+
+							  <div class="form-group prof-group">
+							    <label for="last_names">Apellidos</label>
+							    <input type="text" class="form-control" id="last_names">
+							  </div>
+
+							  <div class="form-group prof-group">
+							    <label for="genre">Género</label>
+							    <input type="text" class="form-control" id="genre">
+							  </div>
+
+							   <div class="form-group prof-group">
+							    <label for="nationality">Nacionalidad</label>
+							    <input type="text" class="form-control" id="nationality">
+							  </div>
+
+							  <div class="form-group prof-group">
+							    <label for="residence_country">País de residencia</label>
+							    <input type="text" class="form-control" id="residence_country">
+							  </div>
+
+							  <div class="form-group prof-group">
+							    <label for="about_me">Información sobre usted</label>
+							    <input type="text" class="form-control" id="about_me" >
+							  </div>
+
+						</div>
+
+						<div class="prof-section prof-section-two" ng-show="profCtrl.currentSection == profCtrl.sectionTwo">
+							<div class="form-group prof-group">
+							    <label for="email">Correo Electrónico</label>
+							    <input type="email" class="form-control" id="email">
+							  </div>
+
+							  <div class="form-group prof-group">
+							    <label for="tel">Teléfono</label>
+							    <input type="text" class="form-control" id="tel">
+							  </div>
+						</div>
+
+						<div class="prof-section prof-section-three" ng-show="profCtrl.currentSection == profCtrl.sectionThree">
+							<div class="form-group prof-group">
+							    Encuesta del conflicto
+							  </div>
+						</div>
+					  
+					  <button type="submit" class="btn btn-primary">Guardar</button>
+					</form>
 				</div>			
 			</div>
 		</div>	
@@ -27,7 +86,9 @@
 	</div>
 </div>
 
-
-
-
 {% endblock %}
+
+ {% block scripts %} 
+ 	<script type="text/javascript" src="{% static 'app/logic/controllers/profileCtrl.js' %}"></script>
+
+ {% endblock %}
