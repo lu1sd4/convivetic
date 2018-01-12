@@ -1478,3 +1478,103 @@ ul {
     width: 100% !important;
   }
 }
+.exp-section {
+  display: flex;
+  justify-content: center;
+  margin: 4em 0;
+}
+.exp-section .exp-gra-c {
+  max-width: 1760px;
+}
+.exp-section .exp-gra-c .exp-section-title {
+  color: #484848;
+  font-size: 26px;
+}
+.exp-section .exp-gra-c .experiences-c {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: -0.5em;
+  margin-left: 15px;
+}
+.exp-section .exp-gra-c .experiences-c .experience {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  margin-top: 1.7em;
+  height: auto;
+  margin-right: 1.66666666667%;
+  width: 15%;
+}
+@media (max-width: 575.99px) {
+  .exp-section .exp-gra-c .experiences-c .experience {
+    margin-right: 1.66666666667%;
+    width: 95%;
+  }
+}
+@media (min-width: 576px) {
+  .exp-section .exp-gra-c .experiences-c .experience {
+    margin-right: 1.66666666667%;
+    width: 95%;
+  }
+}
+@media (min-width: 768px) {
+  .exp-section .exp-gra-c .experiences-c .experience {
+    margin-right: 2% !important;
+    width: 48% !important;
+  }
+}
+@media (min-width: 992px) {
+  .exp-section .exp-gra-c .experiences-c .experience {
+    margin-right: 3.333% !important;
+    width: 30% !important;
+  }
+}
+@media (min-width: 1200px) {
+  .exp-section .exp-gra-c .experiences-c .experience {
+    margin-right: 2% !important;
+    width: 23% !important;
+  }
+}
+@media (min-width: 1800px) {
+  .exp-section .exp-gra-c .experiences-c .experience {
+    margin-right: 1.66666666667% !important;
+    width: 15% !important;
+  }
+}
+.exp-section .exp-gra-c .experiences-c .experience img {
+  width: 100%;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 10px;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .popular-data-c {
+  display: flex;
+  margin-bottom: 0.3em;
+  margin-top: 0.4em;
+  font-weight: 300;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .popular-data-c svg {
+  color: #008489;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .popular-data-c .views {
+  flex-basis: 30%;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .exp-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 0.3em;
+  color: #484848;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .content-c p {
+  font-weight: 300;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .publisher {
+  font-weight: 300;
+  color: #484848;
+}

@@ -221,6 +221,9 @@ class PasswordResetComplete(PasswordResetCompleteView):
 class ProfileView(TemplateView):
 	template_name = 'app/profile.html'
 
+class ExperiencesView(TemplateView):
+	template_name = 'app/experiences.html'
+
 
 
 
