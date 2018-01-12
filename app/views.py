@@ -37,6 +37,7 @@ from .models import *
 
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class Index(ListView):
@@ -100,7 +101,9 @@ class ForumDetail(DetailView):
 
 		return context
 
-class ForumLike(View):
+class ForumLike(LoginRequiredMixin, View):
+	login_url = '/login'
+
 	def get(self, request, *args, **kwargs):
 		forum_id = self.kwargs['pk']
 		forum = get_object_or_404(Thread, pk=forum_id)
