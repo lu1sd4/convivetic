@@ -136,6 +136,7 @@ ul {
   height: 60px;
 }
 .subheader {
+  background-image: url("img/header.jpg");
   height: 220px;
   display: flex;
   justify-content: center;
@@ -154,7 +155,7 @@ ul {
   flex-direction: column;
 }
 .subheader .subheader-c .sub-content h4 {
-  color: #484848;
+  color: rgba(255,255,255,0.902);
   font-weight: 300;
   font-size: 29px;
 }
@@ -167,18 +168,46 @@ ul {
   font-weight: 700;
 }
 .subheader .subheader-c .sub-content .search-box {
-  border: 1px solid rgba(0,0,0,0.26);
+  border: 1px solid rgba(255,255,255,0.8);
   margin-top: 1em;
   padding: 5px 10px;
   width: 100%;
 }
 .subheader .subheader-c .sub-content .search-box .input-box {
+  background: transparent;
   border: none;
-  color: #484848;
+  color: #fff;
   width: 90%;
 }
 .subheader .subheader-c .sub-content .search-box svg {
-  color: rgba(0,0,0,0.26);
+  color: rgba(255,255,255,0.8);
+}
+.secondary-nav {
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+}
+.secondary-nav .sec-nav-c {
+  max-width: 800px;
+  overflow-x: scroll;
+  width: 100%;
+}
+.secondary-nav .sec-nav-c ul {
+  min-width: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  margin: 0;
+}
+.secondary-nav .sec-nav-c ul li {
+  margin-right: 2.5%;
+}
+.secondary-nav .sec-nav-c ul li a {
+  color: #bbb;
+}
+.secondary-nav .sec-nav-c ul li.active a {
+  color: #fff !important;
 }
 @media (min-width: 576px) {
   .login-container {
@@ -321,7 +350,6 @@ ul {
 .exp-section .exp-gra-c .exp-section-title {
   color: #484848;
   font-size: 26px;
-  margin-top: 1em;
 }
 .exp-section .exp-gra-c .experiences-c {
   display: flex;
@@ -1314,4 +1342,51 @@ ul {
   height: 20px;
   width: 20px;
   margin-right: 8px;
+}
+.profile-c {
+  display: flex;
+  justify-content: center;
+  margin: 3em 0;
+}
+.profile-c .profile-wrapper {
+  display: flex;
+  max-width: 1000px;
+  width: 100%;
+}
+.profile-c .profile-wrapper .profile-nav {
+  margin-right: 2%;
+  width: 15%;
+}
+.profile-c .profile-wrapper .profile-nav ul {
+  display: flex;
+  flex-direction: column;
+}
+.profile-c .profile-wrapper .profile-nav ul li {
+  margin-top: 0.5em;
+}
+.profile-c .profile-wrapper .profile-nav ul li a {
+  font-weight: 300;
+  font-size: 15px;
+  color: #484848;
+}
+.profile-c .profile-wrapper .profile-content {
+  width: 83%;
+}
+.profile-c .profile-wrapper .profile-content .prof-info-c {
+  border: 1px solid rgba(0,0,0,0.26);
+  min-height: 400px;
+}
+.profile-c .profile-wrapper .profile-content .prof-info-c .prof-header {
+  width: 100%;
+  padding: 15px 20px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid rgba(0,0,0,0.26);
+}
+.profile-c .profile-wrapper .profile-content .prof-info-c .prof-header p {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.profile-c .profile-wrapper .profile-content .prof-info-c .prof-content {
+  padding: 30px 20px;
+  width: 100%;
 }

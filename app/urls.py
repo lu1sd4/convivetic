@@ -23,6 +23,7 @@ urlpatterns = [
 	path('forums/<int:pk>/vote', login_required(ForumLike.as_view()), name="forum-like"),
 	path('forums/<int:pk>/unvote', ForumDislike.as_view(), name="forum-dislike"),
 	path('forums/<int:pk>/view', ForumView.as_view(), name="forum-view"),
-	path('forums/<int:pk>/comment/<str:content>', login_required(ForumComment.as_view()), name="forum-comment")
+	path('forums/<int:pk>/comment/<str:content>', login_required(ForumComment.as_view()), name="forum-comment"),
+	path('profile', ProfileView.as_view(), name="profile")
 
 ]

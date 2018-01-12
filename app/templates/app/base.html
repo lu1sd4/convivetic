@@ -61,6 +61,24 @@
 				</div>
 			</div>
 		</div>
+
+		
+
+		<div class="secondary-nav">
+
+			<div class="sec-nav-c">
+				<ul>
+					<li class="active"><a href="{% url 'profile' %}">Perfil</a></li>
+					<li><a href="">Mis foros</a></li>
+					<li><a href="">Mis experiencias</a></li>
+					<li><a href="">Caja</a></li>
+				</ul>				
+			</div>
+		</div>
+		<!--{% if request.user.is_authenticated %} -->
+
+		<!--{% endif %} -->
+
 	</header>
 
 	{% block content %} {% endblock %}
