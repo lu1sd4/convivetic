@@ -311,21 +311,27 @@ ul {
     padding-right: 40px !important;
   }
 }
-.exp-section .exp-section-title {
+.exp-section {
+  display: flex;
+  justify-content: center;
+}
+.exp-section .exp-gra-c {
+  max-width: 1760px;
+}
+.exp-section .exp-gra-c .exp-section-title {
   color: #484848;
   font-size: 26px;
   margin-top: 1em;
 }
-.exp-section .experiences-c {
+.exp-section .exp-gra-c .experiences-c {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-top: -0.5em;
-  max-width: 1760px;
   margin-left: 15px;
 }
-.exp-section .experiences-c .experience {
+.exp-section .exp-gra-c .experiences-c .experience {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
   margin-top: 1.7em;
   height: auto;
@@ -333,93 +339,97 @@ ul {
   width: 15%;
 }
 @media (max-width: 575.99px) {
-  .exp-section .experiences-c .experience {
+  .exp-section .exp-gra-c .experiences-c .experience {
     margin-right: 1.66666666667%;
     width: 95%;
   }
 }
 @media (min-width: 576px) {
-  .exp-section .experiences-c .experience {
+  .exp-section .exp-gra-c .experiences-c .experience {
     margin-right: 1.66666666667%;
     width: 95%;
   }
 }
 @media (min-width: 768px) {
-  .exp-section .experiences-c .experience {
+  .exp-section .exp-gra-c .experiences-c .experience {
     margin-right: 2% !important;
     width: 48% !important;
   }
 }
 @media (min-width: 992px) {
-  .exp-section .experiences-c .experience {
+  .exp-section .exp-gra-c .experiences-c .experience {
     margin-right: 3.333% !important;
     width: 30% !important;
   }
 }
 @media (min-width: 1200px) {
-  .exp-section .experiences-c .experience {
+  .exp-section .exp-gra-c .experiences-c .experience {
     margin-right: 2% !important;
     width: 23% !important;
   }
 }
 @media (min-width: 1800px) {
-  .exp-section .experiences-c .experience {
+  .exp-section .exp-gra-c .experiences-c .experience {
     margin-right: 1.66666666667% !important;
     width: 15% !important;
   }
 }
-.exp-section .experiences-c .experience img {
+.exp-section .exp-gra-c .experiences-c .experience img {
   width: 100%;
 }
-.exp-section .experiences-c .experience .exp-data {
+.exp-section .exp-gra-c .experiences-c .experience .exp-data {
   padding-left: 8px;
   padding-right: 8px;
   padding-bottom: 10px;
 }
-.exp-section .experiences-c .experience .exp-data .detail-c {
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c {
   padding-left: 12px;
   padding-right: 12px;
 }
-.exp-section .experiences-c .experience .exp-data .detail-c .popular-data-c {
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .popular-data-c {
   display: flex;
   margin-bottom: 0.3em;
   margin-top: 0.4em;
   font-weight: 300;
 }
-.exp-section .experiences-c .experience .exp-data .detail-c .popular-data-c svg {
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .popular-data-c svg {
   color: #008489;
 }
-.exp-section .experiences-c .experience .exp-data .detail-c .popular-data-c .views {
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .popular-data-c .views {
   flex-basis: 30%;
 }
-.exp-section .experiences-c .experience .exp-data .detail-c .exp-title {
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .exp-title {
   font-size: 17px;
   font-weight: 700;
   margin-top: 0.3em;
   color: #484848;
 }
-.exp-section .experiences-c .experience .exp-data .detail-c .content-c p {
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .content-c p {
   font-weight: 300;
 }
-.exp-section .experiences-c .experience .exp-data .detail-c .publisher {
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .publisher {
   font-weight: 300;
   color: #484848;
 }
-.exp-section .more-exp {
+.exp-section .exp-gra-c .more-exp {
   display: flex;
   justify-content: flex-start;
   font-size: 18px;
   margin-top: 2.5em;
   margin-left: 15px;
 }
-.exp-section .more-exp a {
+.exp-section .exp-gra-c .more-exp a {
   color: #008489;
 }
-.exp-section .more-exp i {
+.exp-section .exp-gra-c .more-exp i {
   font-size: 17px;
 }
 .forum-section {
   margin-top: 3.2em;
+  display: flex;
+  justify-content: center;
+}
+.forum-section .for-gra-c {
   max-width: 1760px;
 }
 .forum-section .for-section-title {
