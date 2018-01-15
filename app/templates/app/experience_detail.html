@@ -1,0 +1,93 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="exp-d-c">
+	
+	<div class="exp-d-wrapper">
+		<div class="d-left-c">
+			
+			<div class="d-header">
+				<div class="p-info">
+					<h4>Titulo de la experiencia</h4>
+					<p><span>Daniel Rico</span> </p>	
+				</div>
+
+				<div class="d-graphical">
+					<img class="rounded-circle" src="http://via.placeholder.com/90x90" alt="">
+				</div>
+				
+			</div>
+
+			<div class="tags">
+				<ul>
+					<li class="rounded">#motivaciones</li>
+					<li class="rounded">#la_guerra_me_disgusta</li>
+					<li class="rounded">#posconflicto</li>
+				</ul>
+			</div>
+
+			<hr>
+
+			<div class="d-content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse amet reiciendis beatae repellendus eaque perferendis dolorum illum quisquam omnis autem tenetur nemo iure, veritatis dolor totam rerum cumque expedita officiis.</p>
+
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse amet reiciendis beatae repellendus eaque perferendis dolorum illum quisquam omnis autem tenetur nemo iure, veritatis dolor totam rerum cumque expedita officiis.</p>
+
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse amet reiciendis beatae repellendus eaque perferendis dolorum illum quisquam omnis autem tenetur nemo iure, veritatis dolor totam rerum cumque expedita officiis.</p>
+
+
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse amet reiciendis beatae repellendus eaque perferendis dolorum illum quisquam omnis autem tenetur nemo iure, veritatis dolor totam rerum cumque expedita officiis.</p>
+
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse amet reiciendis beatae repellendus eaque perferendis dolorum illum quisquam omnis autem tenetur nemo iure, veritatis dolor totam rerum cumque expedita officiis.</p>
+			</div>
+
+			<hr>
+		</div>
+
+		<div class="d-right-c">
+
+			<div class="d-right-content">
+				<img src="http://via.placeholder.com/365x452" alt=""></img>
+				
+				<div class="d-social-c">
+					<div class="d-social-left">
+
+						<div class="detail-n">
+							
+							<i class="fas fa-thumbs-up"></i>
+							<h5>35</h5>
+							
+						</div>
+
+						<div class="social-btns">
+
+							<a><i class="fas fa-chevron-up"></i></a>
+							<a><i class="fas fa-chevron-down"></i></a>	
+
+						</div>	
+					</div>
+
+					<div class="d-social-right">
+						<i class="fas fa-eye"></i>
+						<h5>200</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script type="text/javascript" src="{% static 'app/logic/experienceDetailCtrl.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,125 @@
+.profile-c
+	display flex
+	justify-content center
+	margin 5em 0
+	
+	.profile-wrapper
+		display flex
+		max-width 1000px
+		width 100%
+		
+		@media (max-width 992px)
+			flex-direction column
+			align-items center
+			  
+		
+		.profile-nav
+			margin-right 2%
+			width 15%
+			
+			@media (max-width 400px)
+				display flex
+				justify-content center	
+			
+			
+			@media (max-width 992px)
+				width 35% !important
+				min-width 350px
+			
+			ul
+				display flex
+				flex-direction column
+				
+				@media (max-width 992px)
+					flex-direction row !important
+					
+					li
+						margin-right 25px
+						
+						a
+							display flex
+							align-items center
+				
+				@media (max-width 400px)
+					flex-direction column !important
+					width inherit !important
+
+				li
+					margin-top 0.7em
+					
+					svg 
+						margin-right 5px
+					
+					a
+						font-weight 300
+						font-size 17px
+						color texts-color
+		
+		.profile-content
+			width 83%
+			
+			.prof-info-c
+				border 1px solid icon-gray-color
+				min-height 650px
+
+				.prof-header
+					width 100%
+					padding 15px 20px
+					background-color blocks-background
+					border-bottom 1px solid icon-gray-color
+					
+					p
+						padding-bottom 0
+						margin-bottom 0
+					
+				.prof-content
+					display flex
+					justify-content center
+					padding 30px 20px
+					width 100%
+					
+					form
+						display flex
+						flex-direction column
+						align-items center
+						width 100%
+						
+						.prof-section
+							width 100%
+					
+					button
+						background-color links-color
+						justify-self center
+						min-width 125px
+						margin-top 2em
+						width 30%
+					
+					.prof-group
+						display flex
+						width 100%
+						
+						@media (max-width 575.99px)
+							flex-direction column
+						
+						label
+							margin-right 5%
+							text-align right
+							align-self center
+							margin-bottom 0
+							width 30%
+							
+							@media (max-width 575.99px)
+								width 100% !important
+								margin-right 0 !important
+								text-align center !important
+						
+						input
+							width 55%
+							
+							@media (max-width 575.99px)
+								width 100% !important
+						
+					
+			
+
+		

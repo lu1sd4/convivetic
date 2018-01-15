@@ -43,6 +43,8 @@ from .forms import ThreadForm
 from .models import *
 
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -55,7 +57,7 @@ class Index(ListView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['secondary_threads'] = Thread.objects.order_by('pub_date')[4:8] 
-		context['experiences'] = Experience.objects.all()
+		context['experiences'] = Experience.objects.order_by('pub_date')[:9]
 		context['th_quantity'] = Thread.objects.all().count()
 		return context
 
@@ -102,21 +104,45 @@ class ForumDetail(DetailView):
 	model = Thread
 	template_name = 'app/thread_detail.html'
 
-class ForumVote(View):
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		thread_pk = self.kwargs['pk']
+		author_id = self.request.user.id
+
+		likes_c = Like.objects.filter(thread = thread_pk, author = author_id).count()
+		dislike_c = Dislike.objects.filter(thread = thread_pk, author = author_id).count()
+
+		if(likes_c == 0 and dislike_c == 0):
+			context['user_can_vote'] = True 
+		else:
+			context['user_can_vote'] = False
+
+		return context
+
+class ForumLike(LoginRequiredMixin, View):
+	login_url = '/login'
+
 	def get(self, request, *args, **kwargs):
 		forum_id = self.kwargs['pk']
 		forum = get_object_or_404(Thread, pk=forum_id)
-		forum.likes = forum.likes + 1
-		forum.save()
-		return HttpResponse(forum.likes)
+		author = request.user
+		like = Like(thread = forum, author = author)
+		like.save()
+		likes_c = Like.objects.filter(thread = forum_id, author = author.id).count()
+		dislike_c = Dislike.objects.filter(thread = forum_id, author = author.id).count()
 
-class ForumUnvote(View):
+		return HttpResponse(likes_c - dislike_c)
+
+class ForumDislike(View):
 	def get(self, request, *args, **kwargs):
 		forum_id = self.kwargs['pk']
-		forum = get_object_or_404(Thread, pk = forum_id)
-		forum.likes = forum.likes - 1
-		forum.save()
-		return HttpResponse(forum.likes)
+		forum = get_object_or_404(Thread, pk=forum_id)
+		author = request.user
+		dislike = Dislike(thread = forum, author = author)
+		dislike.save()
+		likes_c = Like.objects.filter(thread = forum_id, author = author.id).count()
+		dislikes_c = Dislike.objects.filter(thread = forum_id, author = author.id).count()
+		return HttpResponse(likes_c - dislikes_c)
 
 class ForumView(View):
 	def get(self, request, *args, **kwargs):
@@ -127,7 +153,14 @@ class ForumView(View):
 		return HttpResponse(forum.views)
 
 class ForumComment(View):
-	pass
+	
+	def get(self,request, *args, **kwargs):
+		forum_id = self.kwargs['pk']
+		comment_content = self.kwargs['content']
+		forum = get_object_or_404(Thread, pk = forum_id)
+		author = request.user
+		#comment = Comment(thread=forum, author=author, content=comment_content, )
+		return HttpResponse()
 
 @transaction.atomic
 def register_user(request):
@@ -206,3 +239,36 @@ class YoutubeUploadTest(TemplateView):
 
 class DriveUploadTest(TemplateView):
 	template_name = 'app/test_drive.html'
+
+class ProfileView(TemplateView):
+	template_name = 'app/profile.html'
+
+class ExperiencesView(ListView):
+	template_name = 'app/experiences.html'
+	context_object_name = 'experiences'
+	queryset = Experience.objects.order_by('pub_date')
+	paginate_by = 8
+
+class ExperienceDetailView(DetailView):
+	model = Experience
+	template_name = 'app/experience_detail.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		experience_pk = self.kwargs['pk']
+		user = self.request.user.id
+
+class MyForumsView(ListView):
+	template_name = 'app/my_forums.html'
+	context_object_name = 'user_threads'
+	paginate_by = 8
+
+	def get_queryset(self):
+		user_id = self.request.user.id
+		return Thread.objects.filter(author = user_id)
+
+class MyExperiencesView(TemplateView):
+	template_name = 'app/my_experiences.html'
+
+class MyCommentsView(TemplateView):
+	template_name = 'app/my_comments.html'

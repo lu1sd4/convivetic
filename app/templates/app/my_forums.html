@@ -1,0 +1,78 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="my-forums-c">
+	<div class="my-forums-wrapper">
+
+		<h3>Mis foros</h3>
+
+		<hr>
+
+		{% if user_threads.count == 0 %}
+
+			<div class="alert alert-info" role="alert">
+			  No tienes ningún foro, prueba <a href="{% url 'forums' %}" class="alert-link">creando uno</a>.
+			</div>
+
+		{% else %}
+			
+			{% for thread in user_threads %}
+
+
+			<div class="my-forum-item rounded">
+
+				<div class="mf-image">
+					<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+				</div>
+				
+
+				<div class="my-forum-inline">
+
+					<div class="for-data">
+						<a href="{% url 'thread-detail' thread.id %}">{{thread.title}}</a>
+
+						<div class="comment-c">
+							<i class="far fa-comment"></i>
+							<div class="comment-counter">{{thread.comment_set.count}}</div>
+						</div>
+
+					</div>
+				
+
+					<div class="my-forum-publisher">
+						<p class="mf-date">{{thread.pub_date}}</p>
+						<p class="mf-name">{{thread.author.get_full_name}}</p>
+					</div>
+
+				</div>
+			</div>
+
+
+			{% endfor %}
+
+			{% if is_paginated %}
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination">
+
+				    {% for obj in page_obj.paginator.page_range %}
+				    	<li class="page-item"><a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+
+				    {% endfor %}
+
+				  </ul>
+				</nav>
+
+			{% endif %}
+
+			
+		{% endif %}
+	</div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

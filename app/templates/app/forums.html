@@ -72,7 +72,19 @@
 			</div>
 
 			<div class="forum-footer">
-				<button class="btn btn-primary">Cargar Más</button>
+				{% if is_paginated %}
+					<nav aria-label="Page navigation example">
+					  <ul class="pagination">
+
+					    {% for obj in page_obj.paginator.page_range %}
+					    	<li class="page-item"><a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+
+					    {% endfor %}
+
+					  </ul>
+					</nav>
+
+				{% endif %}
 			</div>	
 	 	</div>
 

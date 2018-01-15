@@ -123,10 +123,31 @@ class Thread(models.Model):
 	views = models.PositiveIntegerField(
 		default = 0
 	)	
-	likes = models.PositiveIntegerField(
-		default = 0
-	)
 	tags = models.ManyToManyField(ThreadTag)
+
+
+class Like(models.Model):
+	thread = models.ForeignKey(
+		Thread,
+		on_delete=models.CASCADE
+	)
+	author = models.ForeignKey(
+		User,
+		on_delete=models.SET_NULL,
+		null=True
+	)
+
+class Dislike(models.Model):
+	thread = models.ForeignKey(
+		Thread,
+		on_delete=models.CASCADE
+	)
+	author = models.ForeignKey(
+		User,
+		on_delete=models.SET_NULL,
+		null=True
+	)
+
 
 class Comment(models.Model):
 	thread = models.ForeignKey(

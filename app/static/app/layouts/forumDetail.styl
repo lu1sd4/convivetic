@@ -87,6 +87,24 @@ f-m-width = 900px
 							margin-bottom 0
 							padding-bottom 0
 		
+		.login-info
+			display flex
+			
+			@media(max-width 575.99px)
+				flex-direction column
+
+				button
+					margin-top 1em
+					margin-left inherit !important
+					
+			p
+				align-self center
+				margin-bottom 0
+				padding-bottom 0
+
+			button
+				margin-left auto
+		
 
 		.d-new-comment
 			display flex
@@ -165,9 +183,20 @@ f-m-width = 900px
 						display flex
 						
 						.detail-n
-							color texts-color
-							font-weight 300
-							font-size 18px
+							
+							.forum-likes
+								display flex
+								
+								h5
+									color texts-color
+									font-weight 300
+									font-size 18px
+
+								svg
+									color shadow-color
+									height 20px
+									width 20px
+									margin-right 8px
 						
 						.social-btns
 							display flex

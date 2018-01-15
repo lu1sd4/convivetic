@@ -5,7 +5,7 @@
 
  <div class="container-fluid gral-df-container">
 
- 	<div class="f-detail-container" ng-controller="forumDetailController as fdCtrl" ng-init="fdCtrl.init({{object.id}}, {{object.likes}}, {{object.views}})">
+ 	<div class="f-detail-container" ng-controller="forumDetailController as fdCtrl" ng-init="fdCtrl.init({{object.id}}, {{object.like_set.count}},{{object.dislike_set.count}},{{object.views}})">
 	 	
 		<div class="detail-c">
 			<div class="prof-image">
@@ -22,12 +22,25 @@
 
 				<div class="detail-social-c">
 					<div class="social-left">
+
 						<div class="detail-n">
-							{[{fdCtrl.likes}]}
+							<div class="forum-likes">
+								<i class="fas fa-thumbs-up"></i>
+								<h5>{[{fdCtrl.likes}]}</h5>
+							</div>
 						</div>
+
 						<div class="social-btns">
-							<a ng-click="fdCtrl.vote()"><i class="fas fa-chevron-up"></i></a>
-							<a ng-click="fdCtrl.unvote()"><i class="fas fa-chevron-down"></i></a>	
+							{% if request.user.is_authenticated %}
+
+								{% if user_can_vote %}
+
+									<a ng-click="fdCtrl.vote()"><i class="fas fa-chevron-up"></i></a>
+									<a ng-click="fdCtrl.unvote()"><i class="fas fa-chevron-down"></i></a>	
+
+								{% endif %}
+
+							{% endif %}
 						</div>	
 					</div>
 
@@ -46,11 +59,21 @@
 
 		<hr>
 
-		<div class="d-new-comment">
-			<textarea class="form-control" rows="5" placeholder="Escribe un nuevo comentario"></textarea>
+		{% if request.user.is_authenticated %}
 
-			<button class="btn btn-primary">Comentar</button>
-		</div>
+			<div class="d-new-comment">
+				<textarea ng-model="fdCtrl.commentContent" class="form-control" rows="5" placeholder="Escribe un nuevo comentario"></textarea>
+
+				<button class="btn btn-primary" ng-click="fdCtrl.comment()">Comentar</button>
+			</div>
+
+		{% else %}
+			<div class="alert alert-info login-info">
+				<p>Para votar y comentar debe estar autenticado</p>
+				<button class="btn btn-primary" onclick="location.href='/login'">Iniciar Sesión</button>
+			</div>
+
+		{% endif %}
 
 		<div class="detail-comments">
 			<p>{{object.comment_set.count}} comentarios</p>
