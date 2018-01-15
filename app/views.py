@@ -237,8 +237,11 @@ class ExperienceDetailView(DetailView):
 		experience_pk = self.kwargs['pk']
 		user = self.request.user.id
 
+class MyForumsView(TemplateView):
+	template_name = 'app/my_forums.html'
 
-
+class MyExperiencesView(TemplateView):
+	template_name = 'app/my_experiences.html'
 
 
 
