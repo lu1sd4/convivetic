@@ -28,6 +28,7 @@ urlpatterns = [
 	path('experiences', ExperiencesView.as_view(), name="experiences"),
 	path('experiences/<int:pk>/', ExperienceDetailView.as_view(), name="experience-detail"),
 	path('myforums/', MyForumsView.as_view(), name="my-forums"),
-	path('myexperiences/', MyExperiencesView.as_view(), name="my-experiences")
+	path('myexperiences/', MyExperiencesView.as_view(), name="my-experiences"),
+	path('mycomments/', MyCommentsView.as_view(), name="my-comments")
 
 ]

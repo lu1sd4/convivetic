@@ -243,6 +243,9 @@ class MyForumsView(TemplateView):
 class MyExperiencesView(TemplateView):
 	template_name = 'app/my_experiences.html'
 
+class MyCommentsView(TemplateView):
+	template_name = 'app/my_comments.html'
+
 
 
 

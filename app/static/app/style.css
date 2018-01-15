@@ -1774,6 +1774,9 @@ ul {
   display: flex;
   margin-right: 5px;
 }
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n h5 {
+  font-weight: 300;
+}
 .exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n svg {
   color: #008489;
   margin-right: 5px;
@@ -1792,6 +1795,9 @@ ul {
 .exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-right {
   display: flex;
   margin-left: auto;
+}
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-right h5 {
+  font-weight: 300;
 }
 .exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-right svg {
   color: #008489;
@@ -1813,7 +1819,7 @@ ul {
 }
 .my-forums-c .my-forums-wrapper h3 {
   font-weight: 300;
-  font-size: 28px;
+  font-size: 25px;
 }
 .my-forums-c .my-forums-wrapper hr {
   margin-top: 0.2em;
@@ -1913,7 +1919,7 @@ ul {
 }
 .my-exp-c .my-exp-wrapper h3 {
   font-weight: 300;
-  font-size: 28px;
+  font-size: 25px;
   color: #484848;
 }
 .my-exp-c .my-exp-wrapper hr {
@@ -1991,4 +1997,52 @@ ul {
 .my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-data .detail-c .e-more a {
   text-align: center;
   width: 100%;
+}
+.my-comments-c {
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  padding: 3em 40px;
+}
+.my-comments-c .my-com-wrapper {
+  max-width: 800px;
+  width: 100%;
+}
+.my-comments-c .my-com-wrapper h3 {
+  font-weight: 300;
+  font-size: 25px;
+}
+.my-comments-c .my-com-wrapper hr {
+  width: 100%;
+  margin-top: 0.2em;
+  margin-bottom: 1.5em;
+}
+.my-comments-c .my-com-wrapper .mcomment {
+  background-color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  padding: 20px 25px;
+  margin-top: 1em;
+}
+.my-comments-c .my-com-wrapper .mcomment .content {
+  font-weight: 300;
+  color: #484848;
+}
+.my-comments-c .my-com-wrapper .mcomment h5 {
+  font-size: 16px;
+  color: #484848;
+  font-weight: 500;
+  margin-top: 1em;
+}
+.my-comments-c .my-com-wrapper .mcomment .com-forum {
+  color: #484848;
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+}
+.my-comments-c .my-com-wrapper .mcomment .com-forum span {
+  background-color: #008489;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  padding: 8px;
 }
