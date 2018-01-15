@@ -5,7 +5,7 @@ from datetime import datetime
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import forms as auth_forms
 
-from .models import UserProfile
+from .models import *
 
 class LoginForm(auth_forms.AuthenticationForm):
 	username = forms.CharField(
@@ -20,7 +20,7 @@ class LoginForm(auth_forms.AuthenticationForm):
 class UserForm(auth_forms.UserCreationForm):
 	group = forms.ModelChoiceField(queryset=Group.objects.all(),
 								   required=True,
-								   empty_label='¿Qué tipo de usuario eres?')	
+								   empty_label='¿Qué tipo de usuario eres?')
 	class Meta:
 		model = User
 		fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'group']
@@ -67,4 +67,19 @@ class ProfileForm(forms.ModelForm):
 			'is_conflict_victim' : forms.RadioSelect,
 			'is_living_in_conflict_zone' : 	forms.RadioSelect,
 			'birth_date' : forms.DateInput(attrs={'type':'date','max':datetime.now().date()}, format='%Y-%m-%d')
+		}
+
+class ThreadForm(forms.ModelForm):
+	class Meta:
+		model = Thread
+		fields = ['title', 'description', 'video_url', 'audio_url', 'img']
+		labels = {
+			'title' : 'Título de la discusión',
+			'description' : 'Cuerpo de texto de la discusión'			
+		}
+		widgets = {
+			'title' : forms.Textarea,
+			'description' : forms.Textarea,
+			'video_url' : forms.HiddenInput,
+			'audio_url' : forms.HiddenInput
 		}

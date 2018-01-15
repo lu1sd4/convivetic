@@ -23,6 +23,9 @@ urlpatterns = [
 	path('forums/<int:pk>/vote', login_required(ForumLike.as_view()), name="forum-like"),
 	path('forums/<int:pk>/unvote', ForumDislike.as_view(), name="forum-dislike"),
 	path('forums/<int:pk>/view', ForumView.as_view(), name="forum-view"),
+	path('youtube_token', views.youtube_token_v, name='get_youtube_token'),
+	path('youtube_test', YoutubeUploadTest.as_view(), name='test'),
+	path('drive_test', DriveUploadTest.as_view(), name='drive_test'),
 	path('forums/<int:pk>/comment/<str:content>', login_required(ForumComment.as_view()), name="forum-comment"),
 	path('profile', login_required(ProfileView.as_view()), name="profile"),
 	path('experiences', ExperiencesView.as_view(), name="experiences"),
@@ -30,5 +33,4 @@ urlpatterns = [
 	path('myforums/', login_required(MyForumsView.as_view()), name="my-forums"),
 	path('myexperiences/', login_required(MyExperiencesView.as_view()), name="my-experiences"),
 	path('mycomments/', login_required(MyCommentsView.as_view()), name="my-comments")
-
 ]
