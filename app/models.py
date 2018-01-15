@@ -89,10 +89,13 @@ class Thread(models.Model):
 	)
 	title = models.CharField(
 		max_length=100,
-		default=''
+		blank=False,
+		null=False
 	)
 	description = models.TextField(
-		default="Thread description"
+		default='',
+		blank=False,
+		null=False
 	)
 	pub_date = models.DateField(
 		default=date.today

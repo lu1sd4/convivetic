@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
+from django.http import JsonResponse
 from django.template import loader
 
 from django.views.generic import TemplateView
@@ -10,6 +11,7 @@ from django.views.generic import View
 from django.views.generic import ListView
 from django.views.generic import DetailView
 
+from django.views.generic.detail import SingleObjectMixin
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
@@ -28,15 +30,22 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 
+# Youtube Token Retrieval
+
+from .tokens import youtube_token
+
 from django.db import transaction
 from .forms import LoginForm
 from .forms import UserForm
 from .forms import ProfileForm
+from .forms import ThreadForm
 
 from .models import *
 
 from django.shortcuts import get_object_or_404
 
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 class Index(ListView):
 	template_name = 'app/index.html'
@@ -68,16 +77,26 @@ def username_present(username):
 		return True
 	return False
 
-class Forums(ListView):
+class Forums(FormView):
 	template_name = 'app/forums.html'
-	context_object_name = 'thread_list'
-	queryset = Thread.objects.all()
+	model = Thread
+	form_class = ThreadForm
+	success_url = '/forums'
 
-	def get_context_data(self, **kwargs):
+	def get_context_data(request, **kwargs):
 		context = super().get_context_data(**kwargs)
-
+		context['thread_list'] = Thread.objects.all()
 		return context
 
+	def post(self, request, *args, **kwargs):		
+		form = self.get_form()
+		if form.is_valid():
+			thread = form.save(commit=False)
+			thread.author = request.user
+			thread.save()
+			return redirect('thread-detail', pk=thread.id)
+		else:
+			return self.form_invalid(form)
 
 class ForumDetail(DetailView):
 	model = Thread
@@ -88,9 +107,7 @@ class ForumVote(View):
 		forum_id = self.kwargs['pk']
 		forum = get_object_or_404(Thread, pk=forum_id)
 		forum.likes = forum.likes + 1
-
 		forum.save()
-
 		return HttpResponse(forum.likes)
 
 class ForumUnvote(View):
@@ -98,9 +115,7 @@ class ForumUnvote(View):
 		forum_id = self.kwargs['pk']
 		forum = get_object_or_404(Thread, pk = forum_id)
 		forum.likes = forum.likes - 1
-
 		forum.save()
-
 		return HttpResponse(forum.likes)
 
 class ForumView(View):
@@ -108,15 +123,11 @@ class ForumView(View):
 		forum_id = self.kwargs['pk']
 		forum = get_object_or_404(Thread, pk = forum_id)
 		forum.views = forum.views + 1
-
 		forum.save()
-
 		return HttpResponse(forum.views)
 
 class ForumComment(View):
 	pass
-
-
 
 @transaction.atomic
 def register_user(request):
@@ -182,12 +193,16 @@ class PasswordResetConfirm(PasswordResetConfirmView):
 class PasswordResetComplete(PasswordResetCompleteView):
 	template_name = 'app/password_reset_complete.html'
 
+@csrf_exempt
+def youtube_token_v(request):
+	data = { 
+		'token' : youtube_token.get_youtube_token(),
+		'apiKey' : settings.API_KEY
+	}
+	return(JsonResponse(data))
 
+class YoutubeUploadTest(TemplateView):
+	template_name = 'app/test_youtube.html'
 
-
-
-
-
-
-
-
+class DriveUploadTest(TemplateView):
+	template_name = 'app/test_drive.html'

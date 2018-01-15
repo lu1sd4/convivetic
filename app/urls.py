@@ -22,6 +22,8 @@ urlpatterns = [
 	path('forums/<int:pk>/vote', ForumVote.as_view(), name="forum-vote"),
 	path('forums/<int:pk>/unvote', ForumUnvote.as_view(), name="forum-unvote"),
 	path('forums/<int:pk>/view', ForumView.as_view(), name="forum-view"),
-	path('forums/<int:pk>/comment/<str:content>', ForumComment.as_view(), name="forum-comment")
-
+	path('forums/<int:pk>/comment/<str:content>', ForumComment.as_view(), name="forum-comment"),
+	path('youtube_token', views.youtube_token_v, name='get_youtube_token'),
+	path('youtube_test', YoutubeUploadTest.as_view(), name='test'),
+	path('drive_test', DriveUploadTest.as_view(), name='drive_test')
 ]

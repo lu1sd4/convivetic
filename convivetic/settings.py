@@ -117,3 +117,17 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'luisdaniel.ld24@gmail.com'
 EMAIL_HOST_PASSWORD = 'luisda!!!987'
 EMAIL_PORT = 587
+
+# For YouTube uploads
+
+# YouTube app
+
+CLIENT_ID = '367931440425-7d9ukeoek3s1pacp66f4ou9vvgds0lk9.apps.googleusercontent.com'
+CLIENT_SECRET = 'pUC0H5AH9S7oIjCpPOXUBmcf'
+SCOPE = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.scripts https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.upload'
+API_KEY = 'AIzaSyA6hCsmPkcjbcWNHqrXAR-7KHHwN92ONLk'
+
+# User creds
+
+REFRESH_TOKEN = '1/fOJ7MVeJzeYNbym_6Qwsrkh5Fim2LtXIdtVBLwyKjy4'
+ACCESS_TOKEN = 'ya29.GlxABaTlnqWLvABrhPqNv6UtAMcAoKd2lp0IZeUxTcGup29kRA59WUxlmSXOew4L6nxkUD90-10wd1Xunvdn79pnk8jrwtSkLeHX1VBsIDheXoRFVeUulbfXL4HAmQ'

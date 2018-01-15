@@ -1,5 +1,6 @@
  {% extends 'app/base.html' %}
  {% load static %}
+ {% load widget_tweaks %}
 
  {% block content %}
 
@@ -20,8 +21,8 @@
 			 		<h3 class="head-title">Nuevo Foro</h3>
 
 			 		<div class="options-c">
-			 			<button class="cancel-btn btn btn-secondary" ng-click="fCtrl.cancelNewDiscussion()">Cancelar</button>
-			 			<button class="publish-btn btn btn-primary">Publicar Discusión</button>
+			 			<button class="cancel-btn btn btn-secondary" ng-disabled="fCtrl.isUploading" ng-click="fCtrl.cancelNewDiscussion()">Cancelar</button>
+			 			<button ng-click="fCtrl.publish()" class="publish-btn btn btn-primary" ng-disabled="fCtrl.isUploading">Publicar Discusión</button>
 			 		</div>
 			 	</div>
 	 		</div>
@@ -59,7 +60,6 @@
 
 							</div>
 						
-
 							<div class="forum-publisher">
 								<p class="f-date">{{thread.pub_date}}</p>
 								<p class="f-name">{{thread.author.get_full_name}}</p>
@@ -78,62 +78,55 @@
 
 
 	 	<div class="new-forum" ng-show="fCtrl.currentState == fCtrl.newState ">
-	 		
-	 		<form>
-			  <div class="form-group">
-			    
-			   <input type="text" class="form-control title-input" aria-describedby="titleHelp" placeholder="Escribe el Título del foro">
-
-			    <small id="titleHelp" class="form-text text-muted">Debe ser un titulo que describa claramante la temática</small>
-			  </div>
-			  <div class="form-group">
-			    
-			   <textarea class="form-control" rows="15" placeholder="Escribe una explicación"></textarea>
-			  </div>
-
-			  <div class="forum-type">
-
-			  	<div class="form-check">
-				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-				  <label class="form-check-label" for="exampleRadios1">
-				    Sólo texto
-				  </label>
-				</div>
-
-			  	<div class="form-check">
-				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-				  <label class="form-check-label" for="exampleRadios1">
-				    Video
-				  </label>
-				</div>
-
-				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-				  <label class="form-check-label" for="exampleRadios2">
-				    Audio
-				  </label>
-				</div>
-
-				
-				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option2">
-				  <label class="form-check-label" for="exampleRadios3">
-				    Imagen
-				  </label>
-				</div>
-
-			  </div>
-			  	
-
-			  <div class="form-group f-type-data">
-    			<label for="exampleFormControlFile">Adjunte el recurso</label>
-				    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-				</div>
+	 		<form novalidate ng-class="{ 'was-validated' : fCtrl.publishClicked }" id="form" name="form" method="POST" enctype='multipart/form-data'>
+	 			{% csrf_token %}
+	 			<div class="form-group">
+	 				{% render_field form.title class+='form-control title-input' placeholder=form.title.label ng-model='title' %}
+	 				<small id="titleHelp" class="form-text text-muted">Debe ser un titulo que describa claramante la temática</small>
+	 				<div class="login-error-messages" ng-messages='form.title.$error' ng-show="fCtrl.publishClicked">
+						<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+					</div>
+	 			</div>
+	 			<div class="form-group">
+	 				{% render_field form.description class+='form-control' placeholder=form.description.label rows='15' ng-model='description' %}
+	 				<small id="titleHelp" class="form-text text-muted">Texto que dará la idea alrededor de la cual se discutirá</small>
+	 				<div class="login-error-messages" ng-messages='form.description.$error' ng-show="fCtrl.publishClicked">
+						<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+					</div>
+	 			</div>
+	 			{% render_field form.video_url %}
+	 			{% render_field form.audio_url %}
+	 			{% render_field form.img class+='img-hidden-field' %}	 			
 			</form>
-
+			<br>
+			<div class="media-type-container text-center">
+				<p class="text-muted">Tipo de contenido de la discusión</p> 
+	 			<div class="btn-group" data-toggle="buttons">	 				
+	      			<a href="javascript:void(0)" ng-click="fCtrl.setMediaOption(fCtrl.option_text)" ng-class="{ 'active' : fCtrl.mediaOption == fCtrl.option_text  }" class='btn btn-outline-primary'>Sólo texto</a>
+			    	<a href="javascript:void(0)" ng-click="fCtrl.setMediaOption(fCtrl.option_video)" ng-class="{ 'active' : fCtrl.mediaOption == fCtrl.option_video  }" class='btn btn-outline-primary'>Video</a>
+		    		<a href="javascript:void(0)" ng-click="fCtrl.setMediaOption(fCtrl.option_audio)" ng-class="{ 'active' : fCtrl.mediaOption == fCtrl.option_audio  }" class='btn btn-outline-primary'>Audio</a>
+			    	<a href="javascript:void(0)" ng-click="fCtrl.setMediaOption(fCtrl.option_img)" ng-class="{ 'active' : fCtrl.mediaOption == fCtrl.option_img  }" class='btn btn-outline-primary'>Imagen</a>
+				</div>
+			</div>
+			<div class="form-group f-type-data" ng-class="{ 'was-validated' : fCtrl.publishClicked }" ng-hide="fCtrl.mediaOption == fCtrl.option_text">
+				  <div class="form-group">
+				    <input id="mediaFile" type="file" class="filestyle" data-dragdrop="false" data-text="Seleccionar archivo">
+				  </div>
+				  <div ng-show="fCtrl.fileMissingError" class="login-error-messages">
+				  	<p>Debes subir un archivo del tipo que seleccionaste</p>
+				  </div>
+			</div>
+			<br>
+			<div class="text-center" ng-show="fCtrl.isUploading">				
+				<p>Subiendo: <span id="percent-transferred"></span></p>
+				<progress id="upload-progress"></progress>
+			</div>
+			<br>
+			<div class="text-center" ng-show="fCtrl.uploadComplete">
+				<p id="upload-status">Procesando, espera un momento por favor</p>
+				<div id="player"></div>
+			</div>
 	 	</div>
-	 
-		
 
  	</div>
  	
@@ -141,7 +134,8 @@
 
  {% endblock%}
 
- {% block scripts %} 
+ {% block scripts %}
+ 	<script src="https://apis.google.com/js/api.js"></script>
+    <script src="{% static 'app/util/youtube/cors_upload.js' %}"></script>
  	<script type="text/javascript" src="{% static 'app/logic/controllers/forumsCtrl.js' %}"></script>
-
  {% endblock %}
