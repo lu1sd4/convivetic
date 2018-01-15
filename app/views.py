@@ -216,8 +216,6 @@ class PasswordResetConfirm(PasswordResetConfirmView):
 class PasswordResetComplete(PasswordResetCompleteView):
 	template_name = 'app/password_reset_complete.html'
 
-
-
 class ProfileView(TemplateView):
 	template_name = 'app/profile.html'
 
@@ -237,8 +235,14 @@ class ExperienceDetailView(DetailView):
 		experience_pk = self.kwargs['pk']
 		user = self.request.user.id
 
-class MyForumsView(TemplateView):
+class MyForumsView(ListView):
 	template_name = 'app/my_forums.html'
+	context_object_name = 'user_threads'
+	paginate_by = 8
+
+	def get_queryset(self):
+		user_id = self.request.user.id
+		return Thread.objects.filter(author = user_id)
 
 class MyExperiencesView(TemplateView):
 	template_name = 'app/my_experiences.html'

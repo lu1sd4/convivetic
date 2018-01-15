@@ -24,11 +24,11 @@ urlpatterns = [
 	path('forums/<int:pk>/unvote', ForumDislike.as_view(), name="forum-dislike"),
 	path('forums/<int:pk>/view', ForumView.as_view(), name="forum-view"),
 	path('forums/<int:pk>/comment/<str:content>', login_required(ForumComment.as_view()), name="forum-comment"),
-	path('profile', ProfileView.as_view(), name="profile"),
+	path('profile', login_required(ProfileView.as_view()), name="profile"),
 	path('experiences', ExperiencesView.as_view(), name="experiences"),
 	path('experiences/<int:pk>/', ExperienceDetailView.as_view(), name="experience-detail"),
-	path('myforums/', MyForumsView.as_view(), name="my-forums"),
-	path('myexperiences/', MyExperiencesView.as_view(), name="my-experiences"),
-	path('mycomments/', MyCommentsView.as_view(), name="my-comments")
+	path('myforums/', login_required(MyForumsView.as_view()), name="my-forums"),
+	path('myexperiences/', login_required(MyExperiencesView.as_view()), name="my-experiences"),
+	path('mycomments/', login_required(MyCommentsView.as_view()), name="my-comments")
 
 ]
