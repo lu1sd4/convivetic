@@ -244,8 +244,14 @@ class MyForumsView(ListView):
 		user_id = self.request.user.id
 		return Thread.objects.filter(author = user_id)
 
-class MyExperiencesView(TemplateView):
+class MyExperiencesView(ListView):
 	template_name = 'app/my_experiences.html'
+	context_object_name = 'user_experiences'
+	paginate_by = 4
+
+	def get_queryset(self):
+		user_id = self.request.user.id
+		return Experience.objects.filter(author = user_id)
 
 class MyCommentsView(TemplateView):
 	template_name = 'app/my_comments.html'

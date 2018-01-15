@@ -10,88 +10,55 @@
 		<hr>
 
 		<div class="my-exp-content">
-			<div class="mexperience">
-				<img class="rounded" src="http://via.placeholder.com/320x186">
-				<div class="exp-data">
-					<div class="detail-c">
-						<div class="popular-data-c">
-							<div class="views"><i class="fas fa-eye"></i> 10</div>
-							<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-								
-						</div>
 
-						<div class="exp-title"><a href="">Titulo de la experiencia</a></div>
-						<div class="content-c">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</div>
-						<div class="publisher"><i class="fas fa-user"></i>Daniel Rico</div>
-
-					</div>
+			{% if user_experiences.count == 0 %}
+				<div class="alert alert-info">
+					No tienes ninguna experiencia, prueba <a href="{% url 'experiences' %}">creando una</a>
 				</div>
-			</div>
 
-			<div class="mexperience">
-				<img class="rounded" src="http://via.placeholder.com/320x186">
-				<div class="exp-data">
-					<div class="detail-c">
-						<div class="popular-data-c">
-							<div class="views"><i class="fas fa-eye"></i> 10</div>
-							<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-								
+			{% else %}
+
+				{% for exp in user_experiences %}
+
+					<div class="mexperience">
+						<img class="rounded" src="http://via.placeholder.com/320x186">
+						<div class="exp-data">
+							<div class="detail-c">
+								<div class="popular-data-c">
+									<div class="views"><i class="fas fa-eye"></i> 10</div>
+									<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
+								</div>
+
+								<div class="exp-title"><a href="">{{exp.title}}</a></div>
+								<div class="content-c">
+									<p>{{exp.content}}</p>
+								</div>
+
+							</div>
 						</div>
-
-						<div class="exp-title"><a href="">Titulo de la experiencia</a></div>
-						<div class="content-c">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</div>
-						<div class="publisher"><i class="fas fa-user"></i>Daniel Rico</div>
-
 					</div>
-				</div>
-			</div>
 
-			<div class="mexperience">
-				<img class="rounded" src="http://via.placeholder.com/320x186">
-				<div class="exp-data">
-					<div class="detail-c">
-						<div class="popular-data-c">
-							<div class="views"><i class="fas fa-eye"></i> 10</div>
-							<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-								
-						</div>
+				{% endfor %}
 
-						<div class="exp-title"><a href="">Titulo de la experiencia</a></div>
-						<div class="content-c">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</div>
-						<div class="publisher"><i class="fas fa-user"></i>Daniel Rico</div>
+			{% endif %}
 
-					</div>
-				</div>
-			</div>
 
-			<div class="mexperience">
-				<img class="rounded" src="http://via.placeholder.com/320x186">
-				<div class="exp-data">
-					<div class="detail-c">
-						<div class="popular-data-c">
-							<div class="views"><i class="fas fa-eye"></i> 10</div>
-							<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-								
-						</div>
-
-						<div class="exp-title"><a href="">Titulo de la experiencia</a></div>
-						<div class="content-c">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						</div>
-						<div class="publisher"><i class="fas fa-user"></i>Daniel Rico</div>
-
-					</div>
-				</div>
-			</div>
-
-			
 		</div>
+		
+		<br>
+		{% if is_paginated %}
+			<nav aria-label="Page navigation example">
+			  <ul class="pagination">
+
+			    {% for obj in page_obj.paginator.page_range %}
+			    	<li class="page-item"><a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+
+			    {% endfor %}
+
+			  </ul>
+			</nav>
+
+		{% endif %}
 
 		
 

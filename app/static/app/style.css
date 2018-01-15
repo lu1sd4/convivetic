@@ -1984,6 +1984,8 @@ ul {
   color: #484848;
 }
 .my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-data .detail-c .content-c p {
+  height: 70px;
+  overflow: hidden;
   font-weight: 300;
 }
 .my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-data .detail-c .publisher {
