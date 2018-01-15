@@ -48,7 +48,7 @@ class Index(ListView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['secondary_threads'] = Thread.objects.order_by('pub_date')[4:8] 
-		context['experiences'] = Experience.objects.all()
+		context['experiences'] = Experience.objects.order_by('pub_date')[:9]
 		context['th_quantity'] = Thread.objects.all().count()
 		return context
 
@@ -221,8 +221,23 @@ class PasswordResetComplete(PasswordResetCompleteView):
 class ProfileView(TemplateView):
 	template_name = 'app/profile.html'
 
-class ExperiencesView(TemplateView):
+class ExperiencesView(ListView):
 	template_name = 'app/experiences.html'
+	context_object_name = 'experiences'
+	queryset = Experience.objects.order_by('pub_date')
+	paginate_by = 8
+
+
+class ExperienceDetailView(DetailView):
+	model = Experience
+	template_name = 'app/experience_detail.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		experience_pk = self.kwargs['pk']
+		user = self.request.user.id
+
+
 
 
 

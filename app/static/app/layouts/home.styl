@@ -13,6 +13,7 @@
 	
 	.exp-gra-c
 		max-width 1760px
+		width 100%
 	
 		.exp-section-title
 			color texts-color
@@ -87,18 +88,30 @@
 								flex-basis 30%
 							
 						.exp-title
-							font-size 17px
-							font-weight 700
 							margin-top 0.3em
-							color texts-color
+							
+							a
+								font-size 17px
+								font-weight 700
+								max-height 26px
+								text-overflow ellipsis
+								color texts-color
+								
 						
 						.content-c 
 							p
 								font-weight 300
+								max-height 70px
+								text-overflow ellipsis
+								overflow hidden
 						
 						.publisher
 							font-weight 300
+							font-size 15px
 							color texts-color
+							
+							svg
+								margin-right 5px
 
 		.more-exp
 			display flex

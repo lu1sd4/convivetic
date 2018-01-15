@@ -346,6 +346,7 @@ ul {
 }
 .exp-section .exp-gra-c {
   max-width: 1760px;
+  width: 100%;
 }
 .exp-section .exp-gra-c .exp-section-title {
   color: #484848;
@@ -427,17 +428,28 @@ ul {
   flex-basis: 30%;
 }
 .exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .exp-title {
+  margin-top: 0.3em;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .exp-title a {
   font-size: 17px;
   font-weight: 700;
-  margin-top: 0.3em;
+  max-height: 26px;
+  text-overflow: ellipsis;
   color: #484848;
 }
 .exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .content-c p {
   font-weight: 300;
+  max-height: 70px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .publisher {
   font-weight: 300;
+  font-size: 15px;
   color: #484848;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .publisher svg {
+  margin-right: 5px;
 }
 .exp-section .exp-gra-c .more-exp {
   display: flex;
@@ -1478,6 +1490,17 @@ ul {
     width: 100% !important;
   }
 }
+.exp-gral-section {
+  margin-top: 3em;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+@media (max-width: 991.99px) {
+  .exp-gral-section {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+}
 .exp-section {
   display: flex;
   justify-content: center;
@@ -1489,6 +1512,31 @@ ul {
 .exp-section .exp-gra-c .exp-section-title {
   color: #484848;
   font-size: 26px;
+}
+.exp-section .exp-gra-c .exp-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 4em;
+}
+.exp-section .exp-gra-c .filter-section {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+.exp-section .exp-gra-c .filter-section ul {
+  border-bottom: 1px solid rgba(0,0,0,0.26);
+  display: flex;
+}
+.exp-section .exp-gra-c .filter-section ul li {
+  margin-right: 10px;
+  padding: 7px 0px;
+}
+.exp-section .exp-gra-c .filter-section ul li a {
+  color: rgba(0,0,0,0.26);
+  text-decoration: none;
+  width: 100%;
+}
+.exp-section .exp-gra-c .filter-section ul li.active a {
+  color: #008489;
 }
 .exp-section .exp-gra-c .experiences-c {
   display: flex;
@@ -1568,7 +1616,7 @@ ul {
 .exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .exp-title {
   font-size: 17px;
   font-weight: 700;
-  margin-top: 0.3em;
+  margin-top: 0.5em;
   color: #484848;
 }
 .exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .content-c p {
@@ -1577,4 +1625,12 @@ ul {
 .exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .publisher {
   font-weight: 300;
   color: #484848;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .e-more {
+  margin-top: 1em;
+  display: flex;
+}
+.exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .e-more a {
+  text-align: center;
+  width: 100%;
 }

@@ -8,25 +8,7 @@
 
 				<div class="experiences-c">
 
-					<div class="experience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
-						<div class="exp-data">
-							<div class="detail-c">
-								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-									<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-										
-								</div>
-								<div class="exp-title">Secuestro en Manizales</div>
-								<div class="content-c">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-								</div>
-
-								<div class="publisher"><i class="fas fa-user"></i> Daniel Rico</div>	
-
-							</div>
-						</div>
-					</div>
+					{% for exp in experiences %}
 
 					<div class="experience">
 						<img class="rounded" src="http://via.placeholder.com/320x186">
@@ -37,162 +19,23 @@
 									<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
 										
 								</div>
-								<div class="exp-title">Secuestro en Manizales</div>
-								<div class="content-c">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-								</div>
 
-								<div class="publisher"><i class="fas fa-user"></i> Daniel Rico</div>	
+								<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
+								<div class="content-c">
+									<p>{{exp.content}}</p>
+								</div>
+								<div class="publisher"><i class="fas fa-user"></i>{{exp.author.get_full_name}}</div>
 
 							</div>
 						</div>
 					</div>
 
-					<div class="experience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
-						<div class="exp-data">
-							<div class="detail-c">
-								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-									<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-										
-								</div>
-								<div class="exp-title">Secuestro en Manizales</div>
-								<div class="content-c">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-								</div>
-
-								<div class="publisher"><i class="fas fa-user"></i> Daniel Rico</div>	
-
-							</div>
-						</div>
-					</div>
-
-					<div class="experience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
-						<div class="exp-data">
-							<div class="detail-c">
-								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-									<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-										
-								</div>
-								<div class="exp-title">Secuestro en Manizales</div>
-								<div class="content-c">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-								</div>
-
-								<div class="publisher"><i class="fas fa-user"></i> Daniel Rico</div>	
-
-							</div>
-						</div>
-					</div>
-
-					<div class="experience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
-						<div class="exp-data">
-							<div class="detail-c">
-								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-									<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-										
-								</div>
-								<div class="exp-title">Secuestro en Manizales</div>
-								<div class="content-c">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-								</div>
-
-								<div class="publisher"><i class="fas fa-user"></i> Daniel Rico</div>	
-
-							</div>
-						</div>
-					</div>
-
-					<div class="experience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
-						<div class="exp-data">
-							<div class="detail-c">
-								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-									<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-										
-								</div>
-								<div class="exp-title">Secuestro en Manizales</div>
-								<div class="content-c">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-								</div>
-
-								<div class="publisher"><i class="fas fa-user"></i> Daniel Rico</div>	
-
-							</div>
-						</div>
-					</div>
-
-					<div class="experience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
-						<div class="exp-data">
-							<div class="detail-c">
-								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-									<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-										
-								</div>
-								<div class="exp-title">Secuestro en Manizales</div>
-								<div class="content-c">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-								</div>
-
-								<div class="publisher"><i class="fas fa-user"></i> Daniel Rico</div>	
-
-							</div>
-						</div>
-					</div>
-
-					<div class="experience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
-						<div class="exp-data">
-							<div class="detail-c">
-								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-									<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-										
-								</div>
-								<div class="exp-title">Secuestro en Manizales</div>
-								<div class="content-c">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-								</div>
-
-								<div class="publisher"><i class="fas fa-user"></i> Daniel Rico</div>	
-
-							</div>
-						</div>
-					</div>
-
-					<div class="experience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
-						<div class="exp-data">
-							<div class="detail-c">
-								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-									<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-										
-								</div>
-								<div class="exp-title">Secuestro en Manizales</div>
-								<div class="content-c">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-								</div>
-
-								<div class="publisher"><i class="fas fa-user"></i> Daniel Rico</div>	
-
-							</div>
-						</div>
-					</div>
-					
+					{% endfor %}
 
 				</div>
 
 				<div class="more-exp">
-					<a href="{% url 'forums' %}" >Mostrar todo (10+) <i>></i></a>	
+					<a href="{% url 'experiences' %}" >Mostrar todo ({{experiences.count}}+) <i>></i></a>	
 				</div>	
 
 			</div>

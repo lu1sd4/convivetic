@@ -25,6 +25,7 @@ urlpatterns = [
 	path('forums/<int:pk>/view', ForumView.as_view(), name="forum-view"),
 	path('forums/<int:pk>/comment/<str:content>', login_required(ForumComment.as_view()), name="forum-comment"),
 	path('profile', ProfileView.as_view(), name="profile"),
-	path('experiences', ExperiencesView.as_view(), name="experiences")
+	path('experiences', ExperiencesView.as_view(), name="experiences"),
+	path('experiences/<int:pk>/', ExperienceDetailView.as_view(), name="experience-detail")
 
 ]
