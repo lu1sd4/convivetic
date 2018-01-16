@@ -43,6 +43,7 @@ from .forms import ThreadForm
 from .models import *
 
 from django.shortcuts import get_object_or_404
+from django.shortcuts import get_list_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -56,7 +57,7 @@ class Index(ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['secondary_threads'] = Thread.objects.order_by('pub_date')[4:8] 
+		context['secondary_threads'] = Thread.objects.order_by('pub_date')[4:8]
 		context['experiences'] = Experience.objects.order_by('pub_date')[:9]
 		context['th_quantity'] = Thread.objects.all().count()
 		return context
@@ -257,6 +258,25 @@ class ExperienceDetailView(DetailView):
 		context = super().get_context_data(**kwargs)
 		experience_pk = self.kwargs['pk']
 		user = self.request.user.id
+
+class ExperiencesOrdered(ListView):
+	template_name = 'app/experiences.html'
+	context_object_name = 'experiences'
+	paginate_by = 8
+
+	def get_queryset(self):
+		criterium = self.kwargs['order']
+		if(criterium == 'popular' or criterium == 'new'):
+			return self.get_query_criterium(criterium)
+		else:
+			return Experience.objects.none()
+
+	def get_query_criterium(self, criterium):
+		return {
+			'popular': Experience.objects.order_by('-title'),
+			'new': Experience.objects.order_by('-pub_date'),
+		}[criterium]
+
 
 class MyForumsView(ListView):
 	template_name = 'app/my_forums.html'
