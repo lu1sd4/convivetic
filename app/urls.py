@@ -2,6 +2,7 @@ from django.urls import path, re_path
 
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
+from django.conf.urls.static import static
 
 from . import views
 
@@ -33,4 +34,4 @@ urlpatterns = [
 	path('myforums/', login_required(MyForumsView.as_view()), name="my-forums"),
 	path('myexperiences/', login_required(MyExperiencesView.as_view()), name="my-experiences"),
 	path('mycomments/', login_required(MyCommentsView.as_view()), name="my-comments")
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

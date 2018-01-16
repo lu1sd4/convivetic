@@ -21,7 +21,8 @@
 			that.isUploading = false;
 			that.fileMissingError = false;
 			that.videoTypes = ['video/x-msvideo', 'video/mpeg', 'video/ogg', 'video/webm', 'video/3gpp', 'video/3gpp2', 'video/H264', 'video/mp4', 'video/quicktime']
-			that.audioTypes = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/flac', 'audio/ogg']
+			that.audioTypes = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/flac', 'audio/ogg', 'audio/webm']
+			that.imgTypes = ['image/png', 'image/gif', 'image/png', 'image/jpeg', 'image/bmp', 'image/webp']
 			that.uploadStartTime = 0;
 			that.videoId = '';
 			that.audioUrl
@@ -43,7 +44,8 @@
 			that.setMediaOption = setMediaOption;
 			that.showFileError = showFileError;
 			that.postVideo = postVideo;
-			that.postAudio = postAudio;			
+			that.postAudio = postAudio;
+			that.postImg = postImg;
 			that.uploadVideo = uploadVideo;
 			that.uploadAudio = uploadAudio;
 			that.pollForVideoStatus = pollForVideoStatus;
@@ -102,6 +104,25 @@
 							that.fileMissingError = true;
 							that.showFileError();
 						}
+						break;
+					case that.option_img:
+						file = $("#id_img").get(0);
+						if(file.files[0]){
+							file = file.files[0];
+							var fileType = file['type'];
+							if(that.imgTypes.indexOf(fileType) < 0){
+								that.fileMissingError = true;
+								that.showFileError();
+							} else {
+								that.fileMissingError = false;
+								if($scope.form.$valid)
+								    that.postImg(file);						
+							}
+						} else {
+							that.fileMissingError = true;
+							that.showFileError();
+						}
+						break;
 					default:
 						console.log('otro');
 						break;
@@ -166,6 +187,12 @@
 			    	}
 			    });
 			    //*/
+			}
+
+			// Imagen
+			function postImg(file){
+				$("#mediaFile").val('');				
+				$("#form").submit();
 			}
 
 			function uploadAudio(file){
@@ -333,11 +360,13 @@
 			}
 
 			function saveVideoPost(){
+				$("#id_img_url").val('');
 				$("#id_video_url").val(that.videoId);
 				$("#form").submit();
 			}
 
 			function saveAudioPost(){
+				$("#id_img_url").val('');
 				$("#id_audio_url").val(that.audioUrl);
 				$("#form").submit();
 			}
