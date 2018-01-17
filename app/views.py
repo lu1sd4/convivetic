@@ -13,6 +13,8 @@ from django.views.generic import DetailView
 
 from django.views.generic.detail import SingleObjectMixin
 
+from django.views.generic.edit import CreateView
+
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.views import PasswordResetView
@@ -243,6 +245,11 @@ class DriveUploadTest(TemplateView):
 
 class ProfileView(TemplateView):
 	template_name = 'app/profile.html'
+
+class CreateExperience(CreateView):
+	template_name = 'app/create_experience.html'
+	model = Experience
+	fields = ['title', 'content', 'video_url', 'audio_url', 'img']
 
 class ExperiencesView(ListView):
 	template_name = 'app/experiences.html'

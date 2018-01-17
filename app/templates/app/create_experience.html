@@ -1,0 +1,74 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="exp-gral-section">
+	<section class="exp-section">
+		<div class="exp-gra-c">
+			<h3 class="border exp-section-title">Experiencias</h3>
+
+			<div class="filter-section">
+	 			<ul>
+	 				<li class="active"><a href="{% url 'experiences-ordered' 'popular' %}">Popular</a></li>
+	 				<li><a href="{% url 'experiences-ordered' 'new' %}">Nuevo</a></li>
+	 			</ul>
+	 		</div>
+
+			<div class="experiences-c">
+
+				{% for exp in experiences %}
+
+				<div class="experience">
+					<img class="rounded" src="http://via.placeholder.com/320x186">
+					<div class="exp-data">
+						<div class="detail-c">
+							<div class="popular-data-c">
+								<div class="views"><i class="fas fa-eye"></i> 10</div>
+								<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
+									
+							</div>
+
+							<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
+							<div class="content-c">
+								<p>{{exp.content}}</p>
+							</div>
+							<div class="publisher"><i class="fas fa-user"></i>{{exp.author.get_full_name}}</div>
+
+						</div>
+					</div>
+				</div>
+
+				{% endfor %}
+
+			</div>
+
+
+			<div class="exp-footer">
+			{% if is_paginated %}
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination">
+
+				    {% for obj in page_obj.paginator.page_range %}
+				    	<li class="page-item"><a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+
+				    {% endfor %}
+
+				  </ul>
+				</nav>
+
+			{% endif %}
+			</div>
+		</div>
+
+		
+	</section>
+</div>
+	
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'app/logic/controllers/experiencesCtrl.js' %}"></script>
+
+{% endblock %} 

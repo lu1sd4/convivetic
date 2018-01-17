@@ -30,6 +30,7 @@ urlpatterns = [
 	path('forums/<int:pk>/comment/<str:content>', login_required(ForumComment.as_view()), name="forum-comment"),
 	path('profile', login_required(ProfileView.as_view()), name="profile"),
 	path('experiences', ExperiencesView.as_view(), name="experiences"),
+	path('experiences/create', CreateExperience.as_view(), name="experiences_create"),
 	path('experiences/<int:pk>/', ExperienceDetailView.as_view(), name="experience-detail"),
 	path('experiences/<str:order>', ExperiencesOrdered.as_view(), name="experiences-ordered"),
 	path('myforums/', login_required(MyForumsView.as_view()), name="my-forums"),
