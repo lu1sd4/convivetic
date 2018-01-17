@@ -101,6 +101,22 @@ class Forums(FormView):
 		else:
 			return self.form_invalid(form)
 
+class ForumsOrdered(ListView):
+	template_name = 'app/forums.html'
+	paginate_by = 8
+
+	def get_queryset(self):
+		criterium = self.kwargs['order']
+		
+
+
+	def get_query_criterium(self, criterium):
+		return {
+			'popular': Thread.objects.order_by('-title'),
+			'new': Thread.objects.order_by('-pub_date'),
+		}[criterium]
+
+
 class ForumDetail(DetailView):
 	model = Thread
 	template_name = 'app/thread_detail.html'

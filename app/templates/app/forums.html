@@ -31,8 +31,8 @@
 
 	 		<div class="filter-section" ng-show="fCtrl.currentState == fCtrl.normalState ">
 	 			<ul>
-	 				<li class="active"><a href="#">Popular</a></li>
-	 				<li><a href="#">Nuevo</a></li>
+	 				<li class="active"><a href="{% url 'forums-ordered' 'popular' %}">Popular</a></li>
+	 				<li><a href="{% url 'forums-ordered' 'new' %}">Nuevo</a></li>
 	 			</ul>
 	 		</div>
 	 	</div>
