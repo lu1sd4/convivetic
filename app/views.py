@@ -107,10 +107,15 @@ class ForumsOrdered(ListView):
 
 	def get_queryset(self):
 		criterium = self.kwargs['order']
-		
+		if(criterium == 'popular' or criterium == 'new'):
+			return self.get_query_criterium(criterium)
+		else:
+			return Experience.objects.none()
 
 
 	def get_query_criterium(self, criterium):
+
+		
 		return {
 			'popular': Thread.objects.order_by('-title'),
 			'new': Thread.objects.order_by('-pub_date'),
