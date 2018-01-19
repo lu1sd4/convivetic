@@ -160,7 +160,9 @@ class Comment(models.Model):
 		null=True
 	)
 	content = models.TextField(
-		default="Comment content"
+		default='',
+		blank=False,
+		null=False
 	)
 	pub_date = models.DateField(
 		default=date.today

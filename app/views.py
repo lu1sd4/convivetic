@@ -5,6 +5,8 @@ from django.http import HttpResponseBadRequest
 from django.http import JsonResponse
 from django.template import loader
 
+from django.urls import reverse
+
 from django.views.generic import TemplateView
 from django.views.generic import FormView
 from django.views.generic import View
@@ -14,6 +16,7 @@ from django.views.generic import DetailView
 from django.views.generic.detail import SingleObjectMixin
 
 from django.views.generic.edit import CreateView
+from django.views.generic.edit import FormMixin
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
@@ -22,6 +25,7 @@ from django.contrib.auth.views import PasswordResetDoneView
 from django.contrib.auth.views import PasswordResetConfirmView
 from django.contrib.auth.views import PasswordResetCompleteView
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Email verification
 
@@ -37,10 +41,7 @@ from django.core.mail import EmailMessage
 from .tokens import youtube_token
 
 from django.db import transaction
-from .forms import LoginForm
-from .forms import UserForm
-from .forms import ProfileForm
-from .forms import ThreadForm
+from .forms import *
 
 from .models import *
 
@@ -103,9 +104,13 @@ class Forums(FormView):
 		else:
 			return self.form_invalid(form)
 
-class ForumDetail(DetailView):
+class ForumDetail(FormMixin, DetailView):
 	model = Thread
 	template_name = 'app/thread_detail.html'
+	form_class = ThreadCommentForm
+
+	def get_success_url(self):
+		return reverse('thread-detail', kwargs={'pk':self.object.id})
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
@@ -120,7 +125,30 @@ class ForumDetail(DetailView):
 		else:
 			context['user_can_vote'] = False
 
+		context['thread_pk'] = thread_pk
+		context['form'] = ThreadCommentForm(instance=Comment(
+				thread=self.object
+			)
+		)
+
 		return context
+
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		form = self.get_form()
+		if form.is_valid():
+			messages.success(request, 'Comentario publicado con éxito')
+			return self.form_valid(form)
+		else:
+			return self.form_invalid(form)
+
+	def form_valid(self, form):
+		comment = form.save(commit=False)
+		comment.author = self.request.user
+		comment.save()
+		return super(ForumDetail, self).form_valid(form)
+
+
 
 class ForumLike(LoginRequiredMixin, View):
 	login_url = '/login'
