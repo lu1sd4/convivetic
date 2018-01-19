@@ -104,7 +104,28 @@ class Forums(FormView):
 		else:
 			return self.form_invalid(form)
 
-class ForumDetail(FormMixin, DetailView):
+class ForumsOrdered(ListView):
+	template_name = 'app/forums.html'
+	paginate_by = 8
+
+	def get_queryset(self):
+		criterium = self.kwargs['order']
+		if(criterium == 'popular' or criterium == 'new'):
+			return self.get_query_criterium(criterium)
+		else:
+			return Experience.objects.none()
+
+
+	def get_query_criterium(self, criterium):
+
+		
+		return {
+			'popular': Thread.objects.order_by('-title'),
+			'new': Thread.objects.order_by('-pub_date'),
+		}[criterium]
+
+
+class ForumDetail(DetailView):
 	model = Thread
 	template_name = 'app/thread_detail.html'
 	form_class = ThreadCommentForm

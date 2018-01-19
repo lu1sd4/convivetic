@@ -36,7 +36,7 @@
 			that.option_img = 4
 
 			that.mediaOption = that.option_text;
-			that.currentState = that.newState;
+			that.currentState = that.normalState;
 
 			that.newDiscussion = newDiscussion;
 			that.cancelNewDiscussion = cancelNewDiscussion;
