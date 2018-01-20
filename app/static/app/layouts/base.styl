@@ -25,6 +25,11 @@ ul
 	list-style-type none
 	padding-left 0
 
+.btn-secondary.active, .btn-secondary:active, .show > .btn-secondary.dropdown-toggle
+	background-color #fff !important
+
+.btn-secondary.focus, .btn-secondary:focus
+	box-shadow none !important
 
 .nav-c
 	display flex
@@ -32,6 +37,31 @@ ul
 	
 	nav
 		max-width 1760px
+		
+		.dropdown
+			margin-top 1.2px
+			
+			.dropdown-toggle::after
+				content none !important
+			
+
+			button
+				display flex
+				border 0 !important
+				
+				.profile-usr-c
+					display flex
+					align-items center	
+					
+					svg 
+						margin-right 5px				
+			
+			button:hover
+				background none !important
+			
+			button:click
+				background none !important
+				border none !important
 		
 		@media (max-width 767.99px)
 			display none
@@ -51,7 +81,7 @@ ul
 			-o-transition max-height 1s 
 			transition max-height 1s*/
 		
-		button
+		.nav-mob-btn
 			height 43px
 			width 43px
 
@@ -196,8 +226,11 @@ ul
 	
 	.sec-nav-c
 		max-width 800px
-		overflow-x scroll
+		overflow-x hidden
 		width 100%
+		
+		@media (max-width 575.99px)
+			overflow-x scroll !important
 	
 		ul
 			min-width 340px
