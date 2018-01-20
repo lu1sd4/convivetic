@@ -249,6 +249,26 @@ def register_user(request):
 	}
 	return render(request, 'app/signup.html', context)
 
+@transaction.atomic
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.userprofile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return redirect('settings:profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.userprofile)
+    return render(request, 'app/profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })
+
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -291,9 +311,6 @@ class YoutubeUploadTest(TemplateView):
 
 class DriveUploadTest(TemplateView):
 	template_name = 'app/test_drive.html'
-
-class ProfileView(TemplateView):
-	template_name = 'app/profile.html'
 
 class CreateExperience(CreateView):
 	template_name = 'app/create_experience.html'
