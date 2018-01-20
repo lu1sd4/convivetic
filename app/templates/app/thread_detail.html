@@ -1,5 +1,6 @@
  {% extends 'app/base.html' %}
  {% load static %}
+ {% load widget_tweaks %}
 
  {% block content %}
 
@@ -61,10 +62,67 @@
 
 		{% if request.user.is_authenticated %}
 
-			<div class="d-new-comment">
-				<textarea ng-model="fdCtrl.commentContent" class="form-control" rows="5" placeholder="Escribe un nuevo comentario"></textarea>
+			{% if messages %}
+			    {% for message in messages %}
+			    <p style="display:none" ng-init="fdCtrl.successToast('{{ message }}')">{{ message }}</p>
+			    {% endfor %}
+			{% endif %}
 
-				<button class="btn btn-primary" ng-click="fdCtrl.comment()">Comentar</button>
+			<div class="d-new-comment">
+				<form novalidate ng-class="{ 'was-validated' : fdCtrl.commentClicked }" id="form" name="form" method="POST" enctype='multipart/form-data' >
+					{% csrf_token %}
+					
+					{% render_field form.video_url %}
+	 				{% render_field form.audio_url %}
+	 				{% render_field form.thread %}
+
+					<div class="form-group">
+						{% render_field form.content class+='form-control title-input' placeholder=form.content.label ng-model='content' rows="5" %}
+						<div class="login-error-messages" ng-messages='form.content.$error' ng-show="fdCtrl.commentClicked">
+							<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+						</div>	
+					</div>
+					<br>
+					<div class="media-type-container text-center">
+						<p class="text-muted">Tipo de contenido del comentario</p> 
+			 			<div class="btn-group" data-toggle="buttons">	 				
+			      			<a href="javascript:void(0)" ng-click="fdCtrl.setMediaOption(fdCtrl.option_text)" ng-class="{ 'active' : fdCtrl.mediaOption == fdCtrl.option_text  }" class='btn btn-outline-primary'>Sólo texto</a>
+					    	<a href="javascript:void(0)" ng-click="fdCtrl.setMediaOption(fdCtrl.option_video)" ng-class="{ 'active' : fdCtrl.mediaOption == fdCtrl.option_video  }" class='btn btn-outline-primary'>Video</a>
+				    		<a href="javascript:void(0)" ng-click="fdCtrl.setMediaOption(fdCtrl.option_audio)" ng-class="{ 'active' : fdCtrl.mediaOption == fdCtrl.option_audio  }" class='btn btn-outline-primary'>Audio</a>
+					    	<a href="javascript:void(0)" ng-click="fdCtrl.setMediaOption(fdCtrl.option_img)" ng-class="{ 'active' : fdCtrl.mediaOption == fdCtrl.option_img  }" class='btn btn-outline-primary'>Imagen</a>
+						</div>
+					</div>
+					<br>
+					<div class="form-group f-type-data" ng-show='fdCtrl.mediaOption == fdCtrl.option_img' >
+						{% render_field form.img class+="filestyle" data-dragdrop="false" data-text="Seleccionar archivo" %}
+						<div ng-show="fdCtrl.fileMissingError" class="login-error-messages">
+						  	<p>Debes subir un archivo del tipo que seleccionaste</p>
+					    </div>
+					</div>
+					<div class="form-group f-type-data" ng-class="{ 'was-validated' : fdCtrl.publishClicked }" ng-hide="fdCtrl.mediaOption == fdCtrl.option_text || fdCtrl.mediaOption == fdCtrl.option_img">		  
+						  <div class="form-group">
+						    <input id="mediaFile" type="file" class="filestyle" data-dragdrop="false" data-text="Seleccionar archivo">
+						  </div>
+						  <div ng-show="fdCtrl.fileMissingError" class="login-error-messages">
+						  	<p>Debes subir un archivo del tipo que seleccionaste</p>
+						  </div>
+					</div>					
+					<div class="text-center" ng-show="fdCtrl.isUploading">
+						<br>		
+						<p>Subiendo: <span id="percent-transferred"></span></p>
+						<progress id="upload-progress"></progress>
+					</div>					
+					<div class="text-center" ng-show="fdCtrl.uploadComplete">	
+						<br>		
+						<p id="upload-status">Procesando, espera un momento por favor</p>
+						<div id="player"></div>
+					</div>
+
+	 				<div class="form-group text-center">
+						<button class="btn btn-primary" ng-click="fdCtrl.comment()">Comentar</button>
+					</div>
+
+				</form>
 			</div>
 
 		{% else %}
@@ -114,6 +172,9 @@
  {% endblock%}
 
  {% block scripts %} 
+
+	<script src="https://apis.google.com/js/api.js"></script>
+    <script src="{% static 'app/util/youtube/cors_upload.js' %}"></script>
  	<script type="text/javascript" src="{% static 'app/logic/controllers/forumDetailCtrl.js' %}"></script>
 
  {% endblock %}

@@ -52,6 +52,7 @@
 			that.saveVideoPost = saveVideoPost;
 			that.saveAudioPost = saveAudioPost;
 			that.disableInputs = disableInputs;
+			that.hideFileError = hideFileError;
 
 			function newDiscussion(){
 				that.currentState = that.newState;
@@ -63,11 +64,12 @@
 
 			// Tipo de archivo
 			function setMediaOption(newOption){
+				that.hideFileError();
 				that.mediaOption = newOption;
 			}
 
 			// Click en publicar discusión
-			function publish(){
+			function publish(){''
 				that.publishClicked = true;
 				var file = $("#mediaFile").get(0);
 				switch(that.mediaOption){
@@ -76,7 +78,6 @@
 							file = file.files[0];
 							var fileType = file['type'];
 							if(that.videoTypes.indexOf(fileType) < 0){
-								that.fileMissingError = true;
 								that.showFileError();
 							} else {
 								that.fileMissingError = false;			
@@ -84,7 +85,6 @@
 								    that.postVideo(file);
 							}
 						} else {
-							that.fileMissingError = true;
 							that.showFileError();
 						}
 						break;
@@ -93,7 +93,6 @@
 							file = file.files[0];
 							var fileType = file['type'];
 							if(that.audioTypes.indexOf(fileType) < 0){
-								that.fileMissingError = true;
 								that.showFileError();
 							} else {
 								that.fileMissingError = false;
@@ -101,7 +100,6 @@
 								    that.postAudio(file);								
 							}
 						} else {
-							that.fileMissingError = true;
 							that.showFileError();
 						}
 						break;
@@ -111,7 +109,6 @@
 							file = file.files[0];
 							var fileType = file['type'];
 							if(that.imgTypes.indexOf(fileType) < 0){
-								that.fileMissingError = true;
 								that.showFileError();
 							} else {
 								that.fileMissingError = false;
@@ -119,19 +116,27 @@
 								    that.postImg(file);						
 							}
 						} else {
-							that.fileMissingError = true;
 							that.showFileError();
 						}
 						break;
 					default:
-						console.log('otro');
+						if($scope.form.$valid)
+							$("#form").submit();
 						break;
 					}
 			}
 
 			function showFileError(){
+				that.fileMissingError = true;
 				$(".bootstrap-filestyle .form-control").addClass("ng-invalid");
 				$(".bootstrap-filestyle .btn").addClass("ng-invalid");
+			}
+
+			function hideFileError(){
+				that.publishClicked = false;
+				that.fileMissingError = false;
+				$(".bootstrap-filestyle .form-control").removeClass("ng-invalid");
+				$(".bootstrap-filestyle .btn").removeClass("ng-invalid");	
 			}
 
 			function disableInputs(){
@@ -153,9 +158,7 @@
 			    	success : function(data){
 			    		console.log("success")		    		
 			    		that.accessToken = data.token;			    		
-			    		that.uploadAudio(file);
-			    		// var uploadVideo = new UploadVideo();
-			    		// uploadVideo.ready(data.token, data.apiKey);  								    		
+			    		that.uploadAudio(file);								    		
 			    	},
 			    	error : function(data){
 			    		console.log('error');
@@ -177,9 +180,7 @@
 			    		console.log("success")								    		
 			    		that.accessToken = data.token;
 			    		that.apiKey = data.apiKey;
-			    		that.uploadVideo(file);
-			    		// var uploadVideo = new UploadVideo();
-			    		// uploadVideo.ready(data.token, data.apiKey);  								    		
+			    		that.uploadVideo(file);							    		
 			    	},
 			    	error : function(data){
 			    		console.log('error');

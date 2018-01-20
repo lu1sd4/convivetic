@@ -83,3 +83,17 @@ class ThreadForm(forms.ModelForm):
 			'video_url' : forms.HiddenInput,
 			'audio_url' : forms.HiddenInput
 		}
+
+class ThreadCommentForm(forms.ModelForm):
+	class Meta:
+		model = Comment
+		fields = ['content', 'video_url', 'audio_url', 'img', 'thread']
+		labels = {
+			'content' : 'Escribe un nuevo comentario'
+		}
+		widgets = {
+			'content' : forms.Textarea,
+			'video_url' : forms.HiddenInput,
+			'audio_url' : forms.HiddenInput,
+			'thread' : forms.HiddenInput
+		}
