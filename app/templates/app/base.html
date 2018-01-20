@@ -23,29 +23,56 @@
 			  <a class="nav-link" href="#">Quiénes Somos</a>
 			  <a class="nav-link" href="#">Contacto</a>
 		  		{% if request.user.is_authenticated %}
-		  			<a class="nav-link" href="{% url 'logout' %}">
-						<ul class="auth-menu">
-							<li><a href="{% url 'profile' %}">Ver Perfil</a></li>
-							<li><a href="">Salir</a></li>
-						</ul>
 
-		  				{{ request.user.username }}
-		  			</a>
+				<div class="dropdown">
+				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+				  	<div class="profile-usr-c">
+				    	<i class="fa fa-user" aria-hidden="true"></i>
+						{{ request.user.username }}	
+				  	</div>
+
+				  	
+				  </button>
+				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				    <a class="dropdown-item" href="{% url 'profile' %}">Mi Perfil</a>
+				    <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
+				  </div>
+				</div>						
+		  				
 			  	{% else %}
-			  		<a class="nav-link" href="{% url 'login' %}">
-			  			Iniciar sesión
-			  		</a>
+		  			Iniciar sesión
 			  	{% endif %}
-			  </a>
 			</nav>
 			<div class="nav-mobile" ng-class="{'active' : hCtrl.mMenuIsActive == true}">
-				<button ng-click="hCtrl.getMobileMenu()"><i class="fa fa-bars"></i></button>
+				<button class="nav-mob-btn" ng-click="hCtrl.getMobileMenu()"><i class="fa fa-bars"></i></button>
 				<ul class="menu-list">
 					<li>Quiénes Somos</li>
 					<li>Foros</li>
 					<li>Experiencias</li>
 					<li>Ingreso</li>
 					<li>Contacto</li>
+					{% if request.user.is_authenticated %}
+
+					<div class="dropdown">
+					  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+					  	<div class="profile-usr-c">
+					    	<i class="fa fa-user" aria-hidden="true"></i>
+							{{ request.user.username }}	
+					  	</div>
+
+					  	
+					  </button>
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					    <a class="dropdown-item" href="{% url 'profile' %}">Mi Perfil</a>
+					    <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
+					  </div>
+					</div>						
+			  				
+				  	{% else %}
+			  			Iniciar sesión
+				  	{% endif %}
 				</ul>
 			</div>
 		</div>
@@ -73,7 +100,6 @@
 
 			<div class="sec-nav-c">
 				<ul>
-					<li class="active"><a href="{% url 'profile' %}">Perfil</a></li>
 					<li class="medium-li"><a href="{% url 'my-forums' %}">Mis foros</a></li>
 					<li class="large-li"><a href="{% url 'my-experiences' %}">Mis experiencias</a></li>
 					<li class="large-li"><a href="{% url 'my-comments' %}">Mis comentarios</a></li>

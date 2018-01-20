@@ -9,59 +9,40 @@
 		<h3>Mis comentarios</h3>
 		<hr>
 
+		{% for mcomment in my_comments %}
+
 		<div class="mcomment rounded">
-			<p class="com-forum"><span class="rounded exp-tag">FORO</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+			<p class="com-forum">
 
-			<h5>Feb 2017</h5>
+				{% if mcomment.video_url %}
 
-			<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem velit perferendis odio vel dicta, magni impedit odit nihil numquam, minima distinctio asperiores repellat accusamus cum accusantium minus modi ab officiis.</p>
+					<span class="rounded exp-tag">VIDEO</span>
+
+				{% elif mcomment.audio_url %}
+
+					<span class="rounded exp-tag">AUDIO</span>
+
+				{% elif mcomment.img  %}
+
+					<span class="rounded exp-tag">IMAGEN</span>
+
+				{% else %}
+					<span class="rounded exp-tag">TEXTO</span>
+
+				{% endif %}
+
+				{{ mcomment.author.get_full_name }}
+			</p>
+
+			<h5>{{mcomment.pub_date}}</h5>
+
+			<p class="content">
+				{{mcomment.content}}
+			</p>
 
 		</div>
 
-		<div class="mcomment rounded">
-			<p class="com-forum"><span class="rounded exp-tag">EXPERIENCIA</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-			<h5>Feb 2017</h5>
-
-			<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem velit perferendis odio vel dicta, magni impedit odit nihil numquam, minima distinctio asperiores repellat accusamus cum accusantium minus modi ab officiis.</p>
-
-		</div>
-
-		<div class="mcomment rounded">
-			<p class="com-forum"><span class="rounded exp-tag">EXPERIENCIA</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-			<h5>Feb 2017</h5>
-
-			<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem velit perferendis odio vel dicta, magni impedit odit nihil numquam, minima distinctio asperiores repellat accusamus cum accusantium minus modi ab officiis.</p>
-
-		</div>
-
-		<div class="mcomment rounded">
-			<p class="com-forum"><span class="rounded exp-tag">FORO</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-			<h5>Feb 2017</h5>
-
-			<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem velit perferendis odio vel dicta, magni impedit odit nihil numquam, minima distinctio asperiores repellat accusamus cum accusantium minus modi ab officiis.</p>
-
-		</div>
-
-		<div class="mcomment rounded">
-			<p class="com-forum"><span class="rounded exp-tag">FORO</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-			<h5>Feb 2017</h5>
-
-			<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem velit perferendis odio vel dicta, magni impedit odit nihil numquam, minima distinctio asperiores repellat accusamus cum accusantium minus modi ab officiis.</p>
-
-		</div>
-
-		<div class="mcomment rounded">
-			<p class="com-forum"><span class="rounded exp-tag">FORO</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-			<h5>Feb 2017</h5>
-
-			<p class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem velit perferendis odio vel dicta, magni impedit odit nihil numquam, minima distinctio asperiores repellat accusamus cum accusantium minus modi ab officiis.</p>
-
-		</div>
+		{% endfor %}
 
 	</div>
 </div>

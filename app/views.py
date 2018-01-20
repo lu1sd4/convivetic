@@ -317,5 +317,13 @@ class MyExperiencesView(ListView):
 		user_id = self.request.user.id
 		return Experience.objects.filter(author = user_id)
 
-class MyCommentsView(TemplateView):
+class MyCommentsView(ListView):
 	template_name = 'app/my_comments.html'
+	paginate_by = 8
+	context_object_name = 'my_comments'
+
+	def get_queryset(self):
+		user_id = self.request.user.id
+		return Comment.objects.filter(author = user_id)
+
+	
