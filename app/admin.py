@@ -2,12 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 
-from app.models import Thread
-from app.models import Comment
-from app.models import UserProfile
-from app.models import Experience
-from app.models import ThreadTag
-from app.models import ExperienceTag
+from app.models import *
 
 # Register your models here.
 
@@ -27,3 +22,5 @@ admin.site.register(Experience)
 admin.site.register(ThreadTag)
 admin.site.register(ExperienceTag)
 admin.site.register(UserProfile)
+admin.site.register(ExperiencesLike)
+admin.site.register(ExperiencesDislike)

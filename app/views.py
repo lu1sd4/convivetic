@@ -332,6 +332,18 @@ class ExperienceDetailView(DetailView):
 		experience_pk = self.kwargs['pk']
 		user = self.request.user.id
 
+		#likes_c = ExperiencesLike.objects.count()
+		#dislike_c = Dislikes.objects.count()
+
+		# if(likes_c == 0 and dislike_c == 0):
+		# 	context['user_can_vote'] = True 
+		# else:
+		# 	context['user_can_vote'] = True
+
+		context['experience_pk'] = experience_pk
+		context['user_can_vote'] = True
+		return context
+
 class ExperiencesOrdered(ListView):
 	template_name = 'app/experiences.html'
 	context_object_name = 'experiences'
@@ -349,6 +361,39 @@ class ExperiencesOrdered(ListView):
 			'popular': Experience.objects.order_by('-title'),
 			'new': Experience.objects.order_by('-pub_date'),
 		}[criterium]
+
+class ExperienceView(View):
+	def get(self, request, *args, **kwargs):
+		experience_id = self.kwargs['pk']
+		experience = get_object_or_404(Experience, pk = experience_id)
+		experience.views = experience.views + 1
+		experience.save()
+		return HttpResponse(experience.views)
+
+class ExperiencesLike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+		experience_id = self.kwargs['pk']
+		experience = get_object_or_404(Experience, pk=experience_id)
+		author = request.user
+		like = ExperiencesLike(experience = experience, author = author)
+		like.save()
+		likes_c = ExperiencesLike.objects.filter(experience = experience_id, author = author.id).count()
+		dislike_c = ExperiencesDislike.objects.filter(experience = experience_id, author = author.id).count()
+
+		return HttpResponse(likes_c - dislike_c)
+
+class ExperiencesDislike(View):
+	def get(self, request, *args, **kwargs):
+		experience_id = self.kwargs['pk']
+		experience = get_object_or_404(Experience, pk=experience_id)
+		author = request.user
+		dislike = ExperienceDislike(experience = Experience, author = author)
+		dislike.save()
+		likes_c = ExperiencesLike.objects.filter(experience = experience_id, author = author.id).count()
+		dislikes_c = ExperiencesDislike.objects.filter(experience = experience_id, author = author.id).count()
+		return HttpResponse(likes_c - dislikes_c)
 
 
 class MyForumsView(ListView):

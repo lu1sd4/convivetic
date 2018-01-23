@@ -186,6 +186,7 @@ class Comment(models.Model):
 class ExperienceTag(models.Model):
 	name = models.CharField(max_length=20)
 
+
 class Experience(models.Model):	
 	author = models.ForeignKey(
 		User,
@@ -229,3 +230,28 @@ class Experience(models.Model):
 		default = 0
 	)
 	tags = models.ManyToManyField(ExperienceTag)
+
+
+class ExperiencesLike(models.Model):
+	experience = models.ForeignKey(
+		Experience,
+		on_delete=models.CASCADE
+	)
+	author = models.ForeignKey(
+		User,
+		on_delete=models.SET_NULL,
+		null=True
+	)
+
+class ExperiencesDislike(models.Model):
+	experience = models.ForeignKey(
+		Experience,
+		on_delete=models.CASCADE
+	)
+	author = models.ForeignKey(
+		User,
+		on_delete=models.SET_NULL,
+		null=True
+	)
+
+

@@ -42,7 +42,7 @@
 				</div>						
 		  				
 			  	{% else %}
-		  			Iniciar sesión
+		  			<a class="login-link" href="{% url 'login' %}">Iniciar Sesión</a>
 			  	{% endif %}
 			</nav>
 			<div class="nav-mobile" ng-class="{'active' : hCtrl.mMenuIsActive == true}">
