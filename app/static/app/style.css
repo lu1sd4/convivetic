@@ -30,6 +30,12 @@ ul {
   display: flex;
   justify-content: center;
 }
+.nav-c .login-link {
+  margin-top: 0.5em;
+}
+.nav-c .login-link:hover {
+  text-decoration: none;
+}
 .nav-c nav {
   max-width: 1760px;
 }
@@ -1795,6 +1801,7 @@ ul {
 .exp-d-c .exp-d-wrapper .d-left-c .tags {
   display: flex;
   justify-content: flex-start;
+  margin-top: 1em;
 }
 .exp-d-c .exp-d-wrapper .d-left-c .tags ul {
   display: flex;
