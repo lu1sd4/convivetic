@@ -1,9 +1,15 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
 
 <div class="profile-c" ng-controller="profileController as profCtrl">
+	{% if messages %}
+	    {% for message in messages %}
+	    <p style="display:none" ng-init="profCtrl.successToast('{{ message }}')">{{ message }}</p>
+	    {% endfor %}
+	{% endif %}
 	<div class="profile-wrapper">
 		<div class="profile-nav">
 			<ul>
@@ -20,66 +26,149 @@
 				</div>
 				<div class="prof-content rounded">
 
-					<form>
-						<div class="prof-section prof-section-one" ng-show="profCtrl.currentSection == profCtrl.sectionOne">
-							{{ user_form.as_p }}
-							{{ profile_form.as_p }}
-							<div class="form-group prof-group">
-							    <label for="username">Nombre de usuario</label>
-							    <input type="text" class="form-control" id="username">
+					<form method="POST" action="{% url 'profile' %}" id="form" name="form" novalidate ng-class="{ 'was-validated' : profCtrl.submitClicked }">
+						{% csrf_token %}
+						<ng-form class="prof-section prof-section-one" ng-show="profCtrl.currentSection == profCtrl.sectionOne" name="formOne">
+							
+							  <div class="form-group prof-group">
+							    {{ user_form.first_name.label_tag }}
+							    <div class="input_c">
+							    	{% render_field user_form.first_name class+='form-control' ng-model="first_name" %}
+									<div class="profile-error-messages" ng-messages='formOne.first_name.$error' ng-show='profCtrl.submitClicked'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+									</div>
+							    </div>
 							  </div>
 
 							  <div class="form-group prof-group">
-							    <label for="names">Nombres</label>
-							    <input type="texr" class="form-control" id="names">
+							    {{ user_form.last_name.label_tag }}
+							    <div class="input_c">
+									{% render_field user_form.last_name class+='form-control' ng-model="last_name" %}
+									<div class="profile-error-messages" ng-messages='formOne.last_name.$error' ng-show='profCtrl.submitClicked'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+									</div>
+								</div>
 							  </div>
 
 							  <div class="form-group prof-group">
-							    <label for="last_names">Apellidos</label>
-							    <input type="text" class="form-control" id="last_names">
+							  	{{ profile_form.gender.label_tag }}
+							    <div class="input_c">
+							    	{% with "gender='"|add:profile_form.gender.value|add:"'" as val %}
+										{% render_field profile_form.gender class+='form-control' ng-model="gender" ng-init=val %}
+									{% endwith %}
+									<div class="profile-error-messages" ng-messages='formOne.gender.$error' ng-show='profCtrl.submitClicked'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+									</div>
+								</div>
 							  </div>
 
 							  <div class="form-group prof-group">
-							    <label for="genre">Género</label>
-							    <input type="text" class="form-control" id="genre">
+							    {{ profile_form.title.label_tag }}
+							    <div class="input_c">
+							    	{% with "title='"|add:profile_form.title.value|add:"'" as val %}
+										{% render_field profile_form.title class+='form-control' ng-model="title" ng-init=val %}
+									{% endwith %}
+									<div class="profile-error-messages" ng-messages='formOne.title.$error' ng-show='profCtrl.submitClicked'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+									</div>
+								</div>
+							  </div>
+
+							  <div class="form-group prof-group">
+							    {{ user_form.group.label_tag }}
+							    <div class="input_c">
+							    	{% with n=user_form.group.value|stringformat:"s" %}
+									{% with "group='"|add:n|add:"'" as val %}									
+										{% render_field user_form.group class+='form-control' ng-model="group" ng-init=val %}									
+									{% endwith %}
+									{% endwith %}
+									<div class="profile-error-messages" ng-messages='formOne.group.$error' ng-show='profCtrl.submitClicked'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+									</div>
+								</div>
 							  </div>
 
 							   <div class="form-group prof-group">
-							    <label for="nationality">Nacionalidad</label>
-							    <input type="text" class="form-control" id="nationality">
+							    {{ profile_form.nationality.label_tag }}
+							    <div class="input_c">
+									{% render_field profile_form.nationality class+='form-control' ng-model="nationality" %}
+									<div class="profile-error-messages" ng-messages='formOne.nationality.$error' ng-show='profCtrl.submitClicked'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+									</div>
+								</div>
 							  </div>
 
 							  <div class="form-group prof-group">
-							    <label for="residence_country">País de residencia</label>
-							    <input type="text" class="form-control" id="residence_country">
+							    {{ profile_form.country_of_residence.label_tag }}
+							    <div class="input_c">
+									{% render_field profile_form.country_of_residence class+='form-control' ng-model="country_of_residence" %}
+									<div class="profile-error-messages" ng-messages='formOne.country_of_residence.$error' ng-show='profCtrl.submitClicked'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+									</div>
+								</div>
 							  </div>
 
 							  <div class="form-group prof-group">
-							    <label for="about_me">Información sobre usted</label>
-							    <input type="text" class="form-control" id="about_me" >
+							    {{ profile_form.bio.label_tag }}
+							    <div class="input_c">
+							    	{% with "bio='"|add:profile_form.bio.value|add:"'" as val %}
+										{% render_field profile_form.bio class+='form-control' ng-model="bio" ng-init=val %}
+									{% endwith %}
+									<div class="profile-error-messages" ng-messages='formOne.bio.$error' ng-show='profCtrl.submitClicked'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+									</div>
+								</div>
 							  </div>
 
-						</div>
+						</ng-form>
 
-						<div class="prof-section prof-section-two" ng-show="profCtrl.currentSection == profCtrl.sectionTwo">
+						<ng-form class="prof-section prof-section-two" ng-show="profCtrl.currentSection == profCtrl.sectionTwo" name="formTwo">
 							<div class="form-group prof-group">
-							    <label for="email">Correo Electrónico</label>
-							    <input type="email" class="form-control" id="email">
+							    {{ user_form.email.label_tag }}
+							    <div class="input_c">
+									{% render_field user_form.email class+='form-control' ng-model="email" %}
+									<div class="profile-error-messages" ng-messages='formTwo.email.$error' ng-show='profCtrl.submitClicked'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+									</div>
+								</div>
 							  </div>
 
 							  <div class="form-group prof-group">
-							    <label for="tel">Teléfono</label>
-							    <input type="text" class="form-control" id="tel">
+							    {{ profile_form.phone_number.label_tag }}
+							    <div class="input_c">
+									{% render_field profile_form.phone_number class+='form-control' ng-model="phone_number" %}
+									<div class="profile-error-messages" ng-messages='formTwo.phone_number.$error' ng-show='profCtrl.submitClicked'>
+										<div ng-messages-include="{% static 'app/util/error_messages.html' %}">
+										</div>
+									</div>
+								</div>
 							  </div>
-						</div>
+						</ng-form>
 
-						<div class="prof-section prof-section-three" ng-show="profCtrl.currentSection == profCtrl.sectionThree">
-							<div class="form-group prof-group">
-							    Encuesta del conflicto
-							  </div>
-						</div>
-					  
-					  <button type="submit" class="btn btn-primary">Guardar</button>
+						<ng-form class="prof-section prof-section-three" ng-show="profCtrl.currentSection == profCtrl.sectionThree" name="formThree">
+							<div class="form-group">
+								{{ profile_form.is_conflict_participant.label_tag }}
+								{% render_field profile_form.is_conflict_participant class+="register-yesno" %}    
+							</div>
+							<div class="form-group">
+								{{ profile_form.is_conflict_victim.label_tag }}
+								{% render_field profile_form.is_conflict_victim class+="register-yesno" %}    
+							</div>
+							<div class="form-group">
+								{{ profile_form.is_living_in_conflict_zone.label_tag }}
+								{% render_field profile_form.is_living_in_conflict_zone class+="register-yesno" %}    
+							</div>
+						</ng-form>
+						<input type="button" ng-click="profCtrl.submitClick()" class="btn btn-primary" value="Guardar"></input>
 					</form>
 				</div>			
 			</div>
@@ -91,6 +180,8 @@
 {% endblock %}
 
  {% block scripts %} 
+
  	<script type="text/javascript" src="{% static 'app/logic/controllers/profileCtrl.js' %}"></script>
+
 
  {% endblock %}

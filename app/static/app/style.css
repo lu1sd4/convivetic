@@ -1416,6 +1416,13 @@ ul {
   width: 20px;
   margin-right: 8px;
 }
+.profile-error-messages {
+  position: absolute;
+}
+.profile-error-messages p {
+  font-size: 12px;
+  color: #f00;
+}
 .profile-c {
   display: flex;
   justify-content: center;
@@ -1484,6 +1491,23 @@ ul {
 .profile-c .profile-wrapper .profile-content {
   width: 83%;
 }
+.profile-c .profile-wrapper .profile-content .prof-section-three {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-c .profile-wrapper .profile-content .prof-section-three ul {
+  display: flex;
+  justify-content: center;
+}
+.profile-c .profile-wrapper .profile-content .prof-section-three ul label {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+.profile-c .profile-wrapper .profile-content .prof-section-three ul label input {
+  margin-right: 5px;
+}
 .profile-c .profile-wrapper .profile-content .prof-info-c {
   border: 1px solid rgba(0,0,0,0.26);
   min-height: 650px;
@@ -1523,6 +1547,7 @@ ul {
 .profile-c .profile-wrapper .profile-content .prof-info-c .prof-content .prof-group {
   display: flex;
   width: 100%;
+  margin-bottom: 2rem;
 }
 @media (max-width: 575.99px) {
   .profile-c .profile-wrapper .profile-content .prof-info-c .prof-content .prof-group {
@@ -1543,13 +1568,18 @@ ul {
     text-align: center !important;
   }
 }
-.profile-c .profile-wrapper .profile-content .prof-info-c .prof-content .prof-group input {
+.profile-c .profile-wrapper .profile-content .prof-info-c .prof-content .prof-group .input_c {
   width: 55%;
 }
 @media (max-width: 575.99px) {
-  .profile-c .profile-wrapper .profile-content .prof-info-c .prof-content .prof-group input {
+  .profile-c .profile-wrapper .profile-content .prof-info-c .prof-content .prof-group .input_c {
     width: 100% !important;
   }
+}
+.profile-c .profile-wrapper .profile-content .prof-info-c .prof-content .prof-group .input_c input,
+.profile-c .profile-wrapper .profile-content .prof-info-c .prof-content .prof-group .input_c textarea,
+.profile-c .profile-wrapper .profile-content .prof-info-c .prof-content .prof-group .input_c select {
+  width: 100%;
 }
 .exp-gral-section {
   margin-top: 3em;
