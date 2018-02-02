@@ -18,12 +18,12 @@ class LoginForm(auth_forms.AuthenticationForm):
 	)
 
 class UserForm(auth_forms.UserCreationForm):
-	group = forms.ModelChoiceField(queryset=Group.objects.all(),
+	groups = forms.ModelChoiceField(queryset=Group.objects.all(),
 								   required=True,
 								   empty_label='¿Qué tipo de usuario eres?')
 	class Meta:
 		model = User
-		fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'group']
+		fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'groups']
 		labels = {
 			'username' : 'Nombre de usuario',
 			'password1' : 'Contraseña',
@@ -45,6 +45,25 @@ class UserForm(auth_forms.UserCreationForm):
 		self.fields['password1'].label = 'Contraseña'
 		self.fields['password2'].min_length = 8
 		self.fields['password2'].label = 'Confirmar contraseña'
+
+class UserUpdateForm(forms.ModelForm):
+	group = forms.ModelChoiceField(queryset=Group.objects.all(),
+								   required=True)
+	class Meta:
+		model = User
+		fields = ['first_name', 'last_name', 'email', 'group']
+		labels = {
+			'first_name' : 'Nombres',
+			'last_name' : 'Apellidos',
+			'email' : 'Correo electrónico'
+		}
+		widgets = {
+			'email' : forms.EmailInput,
+		}
+
+	def __init__(self, *args, **kwargs):
+		super(UserUpdateForm, self).__init__(*args, **kwargs)
+		self.fields['email'].required = True
 
 class ProfileForm(forms.ModelForm):
 	class Meta:

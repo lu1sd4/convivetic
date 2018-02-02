@@ -125,7 +125,7 @@ class ForumsOrdered(ListView):
 		}[criterium]
 
 
-class ForumDetail(DetailView):
+class ForumDetail(FormMixin, DetailView):
 	model = Thread
 	template_name = 'app/thread_detail.html'
 	form_class = ThreadCommentForm
@@ -252,17 +252,23 @@ def register_user(request):
 @transaction.atomic
 def update_profile(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
+        user_form = UserUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.userprofile)
         if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
+            user = user_form.save(commit=False)
+            user.groups.clear()
+            user.groups.add(user_form.cleaned_data['group'])
+            user.save()
             profile_form.save()
-            messages.success(request, 'Your profile was successfully updated!')
-            return redirect('settings:profile')
+            messages.success(request, 'Perfil actualizado!')
+            return render(request, 'app/profile.html', { 
+            	'user_form': user_form,
+        		'profile_form': profile_form
+            })
         else:
             messages.error(request, 'Please correct the error below.')
     else:
-        user_form = UserForm(instance=request.user)
+        user_form = UserUpdateForm(instance=request.user, initial={'group' : request.user.groups.get().pk})
         profile_form = ProfileForm(instance=request.user.userprofile)
     return render(request, 'app/profile.html', {
         'user_form': user_form,

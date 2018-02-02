@@ -17,7 +17,11 @@
 		that.currentSection = that.sectionOne;
 		that.sectionName = that.sectionNames[that.currentSection-1]
 
+		that.submitClicked = false;
+
 		that.changeState = changeState;
+		that.submitClick = submitClick;
+		that.successToast = successToast;
 
 		function changeState(p){
 			switch(p){
@@ -35,10 +39,28 @@
 					break
 			}
 
+			
 			that.sectionName = that.sectionNames[that.currentSection-1]
 
 		}
 
+		function submitClick(){
+			that.submitClicked = true;
+			if(!$scope.formOne.$valid)
+				that.changeState(1);
+			else if(!$scope.formTwo.$valid)
+				that.changeState(2);			
+			if($scope.form.$valid)
+				$("#form").submit();
+		}
+
+		toastr.options = {
+			'positionClass' : 'toast-bottom-right'
+		};
+
+		function successToast(message){
+			toastr.success(message);
+		}
 
 	}
 
