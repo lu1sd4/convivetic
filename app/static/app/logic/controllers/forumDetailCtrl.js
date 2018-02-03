@@ -56,8 +56,10 @@
 		that.saveAudioPost = saveAudioPost;
 		that.disableInputs = disableInputs;
 		that.successToast = successToast;
+		that.extractId = extractId;
 
 		that.commentClicked = false;
+		that.audio_id = "";
 
 
 		function init(id, likes, dislikes, views){
@@ -427,6 +429,15 @@
 
 		function successToast(message){
 			toastr.success(message);
+		}
+
+		function extractId(audio_url){
+
+			let a_id = audio_url.split("d/")[1];
+			a_id = a_id.split("/p")[0];
+			that.audio_id = a_id;
+			$("audio").load();
+			
 		}
 
 	}
