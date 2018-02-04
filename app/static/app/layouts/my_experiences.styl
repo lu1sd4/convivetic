@@ -23,6 +23,7 @@
 			flex-wrap wrap
 		
 			.mexperience
+				position relative
 				display flex
 				flex-direction column
 				justify-content space-between
@@ -94,7 +95,8 @@
 					border-bottom-left-radius 5px
 					border-bottom-right-radius 5px
 					padding 10px
-					width 100%					
+					width 100%
+					text-align center			
 					h1,
 					h2,
 					h3,
@@ -102,3 +104,12 @@
 					h5
 						font-weight 300
 						color white
+						margin-bottom 0
+
+				.exp-delete
+					top 5px
+					right 5px
+					position absolute
+					cursor pointer
+					.fa-trash-alt:hover
+						color #d9534f

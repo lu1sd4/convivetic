@@ -39,6 +39,9 @@
 						<div class="exp-footer" ng-class="'{{exp.status}}' == 'P' ? 'bg-warning' : '{{exp.status}}' == 'A' ? 'bg-success' : 'bg-danger' ">
 							<h5>{{ exp.get_status_display }}</h5>
 						</div>
+						<div class="exp-delete" data-toggle="tooltip" data-placement="left" title="Borrar experiencia">
+							<i class="fas fa-trash-alt"></i>
+						</div>
 					</div>
 
 				{% endfor %}

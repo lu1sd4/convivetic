@@ -2051,6 +2051,7 @@ ul {
   flex-wrap: wrap;
 }
 .my-exp-c .my-exp-wrapper .my-exp-content .mexperience {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -2127,6 +2128,7 @@ ul {
   border-bottom-right-radius: 5px;
   padding: 10px;
   width: 100%;
+  text-align: center;
 }
 .my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-footer h1,
 .my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-footer h2,
@@ -2135,6 +2137,16 @@ ul {
 .my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-footer h5 {
   font-weight: 300;
   color: #fff;
+  margin-bottom: 0;
+}
+.my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-delete {
+  top: 5px;
+  right: 5px;
+  position: absolute;
+  cursor: pointer;
+}
+.my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-delete .fa-trash-alt:hover {
+  color: #d9534f;
 }
 .my-comments-c {
   background-color: #f7f7f7;
@@ -2243,9 +2255,6 @@ ul {
 }
 .guides-container .guides-wrapper .last-g {
   margin-right: 0 !important;
-}
-body {
-  background-color: #f0f0f0;
 }
 .footer-guide {
   box-shadow: 0 0 10px rgba(0,0,0,0.15);
