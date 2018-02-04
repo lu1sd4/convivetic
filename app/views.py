@@ -429,4 +429,14 @@ class MyCommentsView(ListView):
 		user_id = self.request.user.id
 		return Comment.objects.filter(author = user_id)
 
+class BoxView(ListView):
+	template_name='app/box.html'
+	context_object_name = 'guides'
+	model = Guide
+
+class GuideView(TemplateView):
+	template_name = 'app/guide_general.html'
+	
+
+
 	
