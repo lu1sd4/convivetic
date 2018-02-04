@@ -528,6 +528,7 @@ ul {
 }
 .forum-section .for-gra-c {
   max-width: 1760px;
+  width: 100%;
 }
 .forum-section .for-section-title {
   font-size: 26px;
@@ -664,6 +665,9 @@ ul {
 .forum-section .forum-c .forum .f-image {
   margin-right: 20px;
 }
+.forum-section .forum-c .forum .forum-inline {
+  width: 100%;
+}
 .forum-section .forum-c .forum .forum-item {
   display: flex;
   flex-grow: 2;
@@ -679,6 +683,12 @@ ul {
 }
 .forum-section .forum-c .forum .forum-item .for-data .comment-c {
   position: relative;
+  margin-left: auto;
+}
+@media (max-width: 767.99px) {
+  .forum-section .forum-c .forum .forum-item .for-data .comment-c {
+    margin-left: inherit !important;
+  }
 }
 .forum-section .forum-c .forum .forum-item .for-data .comment-c svg {
   color: #9e9e9e;
@@ -1357,6 +1367,9 @@ ul {
   flex-direction: column;
   width: 87%;
 }
+.gral-df-container .f-detail-container .detail-c .detail-right .detail-c-din {
+  margin-top: 2em;
+}
 .gral-df-container .f-detail-container .detail-c .detail-right h4 {
   font-weight: 400;
   font-size: 21px !important;
@@ -1370,6 +1383,9 @@ ul {
   color: #484848;
   font-weight: 300;
   font-size: 14px;
+}
+.gral-df-container .f-detail-container .detail-c .detail-right .thread-det-img {
+  max-width: 400px;
 }
 .gral-df-container .f-detail-container .detail-c .detail-right .detail-social-c {
   display: flex;
@@ -2167,4 +2183,131 @@ ul {
   font-weight: 500;
   color: #fff;
   padding: 8px;
+}
+.guides-container {
+  display: flex;
+  padding: 80px;
+  justify-content: center;
+  min-height: 600px;
+}
+@media (max-width: 567.99px) {
+  .guides-container {
+    padding: 40px !important;
+  }
+}
+.guides-container .guides-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+}
+.guides-container .guides-wrapper .guide {
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  margin-right: 3%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 31.333%;
+  max-height: 300px;
+}
+.guides-container .guides-wrapper .guide h5 {
+  font-weight: 500;
+  text-align: center;
+}
+.guides-container .guides-wrapper .guide p {
+  text-align: center;
+  font-weight: 300;
+}
+.guides-container .guides-wrapper .guide button {
+  background: #008489;
+  width: 200px;
+}
+@media (max-width: 991.99px) {
+  .guides-container .guides-wrapper .guide {
+    margin-top: 1em;
+    width: 47% !important;
+  }
+  .guides-container .guides-wrapper .guide .second-g {
+    margin-right: 0 !important;
+  }
+}
+@media (max-width: 768.77px) {
+  .guides-container .guides-wrapper .guide {
+    margin-right: 0 !important;
+    margin-top: 1.5em !important;
+    width: 100% !important;
+  }
+}
+.guides-container .guides-wrapper .last-g {
+  margin-right: 0 !important;
+}
+body {
+  background-color: #f0f0f0;
+}
+.footer-guide {
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  background-color: #e7e7e7;
+  display: flex;
+  justify-content: center;
+  height: 150px;
+  margin-top: auto;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}
+.footer-guide .footer-w {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  max-width: 1000px;
+}
+.footer-guide .footer-w .back-btn {
+  margin-right: auto;
+}
+.footer-guide .footer-w .next-btn {
+  margin-left: auto;
+}
+.top-menu {
+  position: relative;
+  margin-top: 3em;
+  display: flex;
+  justify-content: center;
+}
+.top-menu .top-menu-w {
+  align-items: center;
+  display: flex;
+  max-width: 1000px;
+  width: 100%;
+}
+.top-menu .top-menu-w svg {
+  color: #484848;
+  height: 25px;
+  width: 25px;
+  margin-right: 5px;
+}
+.top-menu .top-menu-w hr {
+  background-color: #cecece;
+  height: 1px;
+  width: 97%;
+}
+.top-menu .top-menu-w .decor {
+  background: #484848;
+  height: 7px;
+  width: 7px;
+}
+.content-t {
+  font-weight: 300;
+  color: #484848;
+  position: absolute;
+  max-width: 800px;
+  left: 0;
+  right: 0;
+  margin-top: 8em;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -254,4 +254,17 @@ class ExperiencesDislike(models.Model):
 		null=True
 	)
 
+class Guide(models.Model):
+	name = models.CharField(
+		max_length = 100
+	)
+
+class Question(models.Model):
+	pass
+
+class Answer(models.Model):
+	pass
+
+class AnswerUsr(models.Model):
+	pass
 
