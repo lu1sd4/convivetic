@@ -1,0 +1,75 @@
+.contact-form-container
+
+	.contact-form > div
+		display flex
+		flex-direction row
+		flex-wrap wrap	
+		justify-content space-between
+		width 55%
+		margin auto
+		
+		.contact-input, .contact-text-area
+			border 1px solid #008489
+			border-radius 5px
+			padding 15px
+			height 45px
+			margin 20px 0px
+			color: #008489
+			
+		.contact-input::placeholder, .contact-text-area::placeholder
+			color #008489
+			opacity .6
+			
+		.contact-input
+			min-width 45%
+			@media (max-width: 845px)
+				min-width 100%
+			
+		.contact-text-area
+			width 100%
+			min-height 150px
+	
+	.contact-form
+		text-align center
+		
+		.contact-submit
+			border 1px solid #008489
+			background none
+			padding 10px 60px
+			color #008489
+			margin 20px 0px
+			border-radius 5px
+			
+		.contact-submit:hover
+			background #008489
+			color rgba(255,255,255,0.902)
+
+
+.contact-map
+	min-width: 400px
+	#map
+		height 400px
+		background-color: grey
+.contact-info
+	margin 100px 0px
+	height 300px
+	flex-grow 1
+	background-color #008489
+	min-width: 400px
+	display flex
+	flex-direction column
+	justify-content center
+	align-items center
+	.contact-social 
+		margin-top 20px
+		a
+			margin 0px 20px
+			color white
+			opacity .6
+.title-container
+	width 55%
+	margin 50px auto 30px auto
+	margin-top 100px
+	h3
+		color #484848
+		font-weight 300 !important

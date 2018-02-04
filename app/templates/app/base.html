@@ -22,7 +22,8 @@
 			  <a class="nav-link" href="{% url 'forums' %}">Foros</a>
 			  <a class="nav-link" href="{% url 'experiences' %}">Experiencias</a>
 			  <a class="nav-link" href="#">Quiénes Somos</a>
-			  <a class="nav-link" href="#">Contacto</a>
+			  <a class="nav-link" href="{% url 'contact-us' %}">Contacto</a>
+			  <a class="nav-link" href="{% url 'document' %}">Documentos</a>
 		  		{% if request.user.is_authenticated %}
 
 				<div class="dropdown">
@@ -178,6 +179,7 @@
 	<script type="text/javascript" src="{% static 'app/libs/angular-messages/angular-messages.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/bootstrap-filestyle-2.1.0/src/bootstrap-filestyle.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/toastr/toastr.min.js' %}"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	<script type="text/javascript" src="{% static 'app/logic/app.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/logic/controllers/signupCtrl.js' %}"></script>

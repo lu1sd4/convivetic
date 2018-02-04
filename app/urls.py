@@ -30,6 +30,10 @@ urlpatterns = [
 	path('drive_test', DriveUploadTest.as_view(), name='drive_test'),
 	path('profile', login_required(views.update_profile), name="profile"),
 	path('experiences', ExperiencesView.as_view(), name="experiences"),
+	path('contact-us', ContactUsView.as_view(), name="contact-us"),
+	path('send_email', views.ContactUsSendEmail, name="contact_us_send_email"),
+	path('document', DocumentView.as_view(), name="document"),
+
 	path('experiences/create', CreateExperience.as_view(), name="experiences_create"),
 	path('experiences/<int:pk>/', ExperienceDetailView.as_view(), name="experience-detail"),
 	path('experiences/<str:order>', ExperiencesOrdered.as_view(), name="experiences-ordered"),
