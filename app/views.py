@@ -434,7 +434,6 @@ class MyCommentsView(ListView):
 		user_id = self.request.user.id
 		return Comment.objects.filter(author = user_id)
 
-<<<<<<< HEAD
 class UserIsAdminMixin(UserPassesTestMixin):
 	raise_exception = True
 	def test_func(self):
@@ -477,9 +476,6 @@ class ModifyExperienceStatus(UserIsAdminMixin, View):
 		except Experience.DoesNotExist:
 			return HttpResponseBadRequest()
 		
-
-
-=======
 class BoxView(ListView):
 	template_name='app/box.html'
 	context_object_name = 'guides'
@@ -488,7 +484,3 @@ class BoxView(ListView):
 class GuideView(TemplateView):
 	template_name = 'app/guide_general.html'
 	
-
-
-	
->>>>>>> 14e0afa774273c32195401ff210e844b61841202
