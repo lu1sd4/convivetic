@@ -12,17 +12,20 @@
 		that.likes = -1;
 		that.views = -1;
 		that.id = -1;
+		that.admurl = '/experiences/modify';
 
 		that.vote = vote;
 		that.unvote = unvote;
 		that.init = init;
 		that.updateViews = updateViews;
+		that.modify = modify;
+		that.successToast = successToast;
+		that.warningToast = warningToast;
 
 		function init(id, likes, dislikes, views){
 			that.id = id;
 			that.likes = likes - dislikes;
 			that.views = views;
-
 			updateViews();
 		}
 
@@ -30,7 +33,6 @@
 
 			$http.get("/experiences/"+that.id+"/view").then(function successCallback(response){
 				that.views = response.data;
-
 			}, function errorCallback(response){
 				console.log("Error en Views");
 			});
@@ -69,6 +71,26 @@
 
 		}
 
+		function modify(type){
+			console.log("here");
+			var csrf = Cookies.get('csrftoken');			
+			var data = { 'action' : type, 'pk' : that.id };
+			$http.post(that.admurl, data, { "X-CSRFToken" : csrf }).then(function(){
+				location.reload();
+			});
+		}
+
+		toastr.options = {
+			'positionClass' : 'toast-bottom-right'
+		};
+
+		function successToast(message){
+			toastr.success(message);
+		}
+
+		function warningToast(message){
+			toastr.warning(message);
+		}
 
 	}
 

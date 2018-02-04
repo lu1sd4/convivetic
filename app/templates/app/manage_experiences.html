@@ -1,0 +1,165 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="my-exp-c">
+	<div class="my-exp-wrapper" ng-controller="manageExperiencesController as emCtrl">
+
+		<h3>Administrar experiencias</h3>
+		<hr>
+
+		<ul class="nav nav-pills">
+		  <li class="nav-item">
+		    <a class="nav-link" ng-class="{ 'active' : emCtrl.current_tab == emCtrl.pending_tab }" href="javascript:void(0)" ng-click="emCtrl.switchTab(emCtrl.pending_tab)" >Pendientes</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" ng-class="{ 'active' : emCtrl.current_tab == emCtrl.approved_tab }" ng-click="emCtrl.switchTab(emCtrl.approved_tab)" href="javascript:void(0)">Aprobadas</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" ng-class="{ 'active' : emCtrl.current_tab == emCtrl.rejected_tab }" ng-click="emCtrl.switchTab(emCtrl.rejected_tab)" href="javascript:void(0)">Rechazadas</a>
+		  </li>
+		 </ul>
+
+
+		<!-- tab 1 -->
+
+		
+			{% if pending_experiences %}
+
+				<div class="my-exp-content" ng-show="emCtrl.current_tab == emCtrl.pending_tab">
+
+				{% for exp in pending_experiences %}
+
+					<div class="mexperience">
+						<img class="rounded" src="http://via.placeholder.com/320x186">
+						<div class="exp-data">
+							<div class="detail-c">
+								<div class="popular-data-c">
+									<div class="views"><i class="fas fa-eye"></i> 10</div>
+										<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
+								</div>
+
+								<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
+								<div class="content-c">
+									<p>{{exp.content}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				{% endfor %}
+
+				</div>
+
+			{% else %}
+
+			<div class="text-center">
+			<br>
+			<h3>No hay experiencias pendientes de aprobación</h3>
+			</div>
+
+			{% endif %}
+
+		<!-- end tab 1 -->
+
+		
+
+		<!-- tab 2 -->
+		{% if approved_experiences %}
+			<div class="my-exp-content" ng-show="emCtrl.current_tab == emCtrl.approved_tab">
+			{% for exp in approved_experiences %}
+				
+					<div class="mexperience">
+						<img class="rounded" src="http://via.placeholder.com/320x186">
+						<div class="exp-data">
+							<div class="detail-c">
+								<div class="popular-data-c">
+									<div class="views"><i class="fas fa-eye"></i> 10</div>
+										<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
+									</div>
+
+									<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
+									<div class="content-c">
+										<p>{{exp.content}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+			{% endfor %}
+			</div>
+		{% else %}
+			<div class="text-center" ng-show="emCtrl.current_tab == emCtrl.approved_tab">
+			<br>
+			<h3>No hay experiencias aprobadas</h3>
+			</div>
+		{% endif %}
+		
+		<!-- end tab 2 -->
+
+		<!-- tab 3 -->
+
+		{% if rejected_experiences %}
+
+			<div class="my-exp-content" ng-show="emCtrl.current_tab == emCtrl.rejected_tab">
+
+			{% for exp in rejected_experiences %}
+				
+					<div class="mexperience">
+						<img class="rounded" src="http://via.placeholder.com/320x186">
+						<div class="exp-data">
+							<div class="detail-c">
+								<div class="popular-data-c">
+									<div class="views"><i class="fas fa-eye"></i> 10</div>
+										<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
+									</div>
+
+									<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
+									<div class="content-c">
+										<p>{{exp.content}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+			{% endfor %}
+			</div>
+		{% else %}
+			<div class="text-center" ng-show="emCtrl.current_tab == emCtrl.rejected_tab">
+			<br>
+			<h3>No hay experiencias rechazadas</h3>
+			</div>
+		{% endif %}
+
+		<!-- end tab 3 -->
+
+		<br>
+
+		{% if is_paginated %}
+			<nav aria-label="Page navigation example">
+			  <ul class="pagination">
+
+			    {% for obj in page_obj.paginator.page_range %}
+			    	<li class="page-item"><a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
+
+			    {% endfor %}
+
+			  </ul>
+			</nav>
+
+		{% endif %}
+
+		
+
+	</div>
+</div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script type="text/javascript" src="{% static 'app/logic/controllers/manageExperiencesController.js' %}"></script>
+
+{% endblock %}

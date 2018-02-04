@@ -53,6 +53,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
+from django.contrib.auth.mixins import UserPassesTestMixin
+
+from django.http import JsonResponse
+
+import json
+
 class Index(ListView):
 	template_name = 'app/index.html'
 	context_object_name = 'thread_list'
@@ -414,7 +420,6 @@ class ExperiencesLike(LoginRequiredMixin, View):
 		like.save()
 		likes_c = ExperiencesLike.objects.filter(experience = experience_id, author = author.id).count()
 		dislike_c = ExperiencesDislike.objects.filter(experience = experience_id, author = author.id).count()
-
 		return HttpResponse(likes_c - dislike_c)
 
 class ExperiencesDislike(View):
@@ -456,4 +461,53 @@ class MyCommentsView(ListView):
 		user_id = self.request.user.id
 		return Comment.objects.filter(author = user_id)
 
+class UserIsAdminMixin(UserPassesTestMixin):
+	raise_exception = True
+	def test_func(self):
+		group =  Group.objects.get(name="Administrador")
+		return group in self.request.user.groups.all()
+
+
+class PendingExperiences(UserIsAdminMixin, View):
+	def get(self, request, *args, **kwargs):
+		data = {
+			'count': Experience.objects.filter(status='P').count()
+		}
+		return JsonResponse(data)
+
+class ManageExperiencesView(UserIsAdminMixin, TemplateView):
+	template_name = "app/manage_experiences.html"
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		pending_experiences = Experience.objects.filter(status='P')
+		context['pending_experiences'] = pending_experiences 
+		approved_experiences = Experience.objects.filter(status='A')
+		context['approved_experiences'] = approved_experiences
+		rejected_experiences = Experience.objects.filter(status='R')
+		context['rejected_experiences'] = rejected_experiences
+		return context
+
+class ModifyExperienceStatus(UserIsAdminMixin, View):
+	def post(self, request, *args, **kwargs):
+		try:
+			data = json.loads(request.body)
+			exp = Experience.objects.get(pk=data['pk'])
+			if data['action'] == 'A':
+				messages.success(request, 'Experiencia aprobada')
+				exp.status = 'A'
+			elif data['action'] == 'R':
+				messages.error(request, 'Experiencia rechazada')
+				exp.status = 'R'
+			exp.save()
+			return HttpResponse()
+		except Experience.DoesNotExist:
+			return HttpResponseBadRequest()
+		
+class BoxView(ListView):
+	template_name='app/box.html'
+	context_object_name = 'guides'
+	model = Guide
+
+class GuideView(TemplateView):
+	template_name = 'app/guide_general.html'
 	

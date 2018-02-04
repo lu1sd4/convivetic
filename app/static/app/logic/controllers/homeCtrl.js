@@ -6,13 +6,19 @@
 		.module('app.controllers')
 		.controller('homeController', homeController);
 
-	homeController.$inject = ["$scope"];
+	homeController.$inject = ["$scope", "$http"];
 
-	function homeController($scope){
+	function homeController($scope, $http){
 		var that = this;
 
 		that.mMenuIsActive = false;
 		that.getMobileMenu = getMobileMenu;
+		
+		that.pendingExperiences = '';
+
+		$http.get("/experiences/api/pendingexperiences").then(function(response) {
+	        that.pendingExperiences = response.data.count;
+	    });
 
 		function getMobileMenu(){
 			that.mMenuIsActive = !that.mMenuIsActive;

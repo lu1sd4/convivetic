@@ -46,8 +46,8 @@
 						<ng-form name="partOneForm" ng-class="signupCtrl.pageOneSubmitted ? 'was-validated' : '' ">
 							<div class="row">
 								<div class="col">
-									{% render_field user_form.group class+="form-control" ng-model="group" %}
-									<div class="register-error-messages" ng-messages='partOneForm["user-group"].$error' ng-show='signupCtrl.pageOneSubmitted'>
+									{% render_field user_form.groups class+="form-control" ng-model="groups" %}
+									<div class="register-error-messages" ng-messages='partOneForm["user-groups"].$error' ng-show='signupCtrl.pageOneSubmitted'>
 										<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
 									</div>		
 								</div>

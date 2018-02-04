@@ -1,10 +1,24 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load auth_extras %}
 
 {% block content %}
 
+
+
 <div class="exp-d-c" ng-controller="experienceDetailCtrl as expCtrl"  ng-init="expCtrl.init({{object.id}}, {{object.experienceslike_set.count}},{{object.experiencesdislike_set.count}},{{object.views}})">
 	
+	{% if messages %}
+	    {% for message in messages %}
+	    	{% if message.tags == 'success' %}
+	    <p style="display:none" ng-init="expCtrl.successToast('{{ message }}')">{{ message }}</p>
+	    	{% endif %}
+	    	{% if message.tags == 'error' %}
+	    <p style="display:none" ng-init="expCtrl.warningToast('{{ message }}')">{{ message }}</p>
+	    	{% endif %}
+	    {% endfor %}
+	{% endif %}
+
 	<div class="exp-d-wrapper">
 		<div class="d-left-c">
 			
@@ -23,8 +37,35 @@
 					<li class="rounded">{{tag.name}}</li>
 					
 					{% endfor %}
+					
+
 				</ul>
 			</div>
+
+			{% if request.user|has_group:"Administrador" %}			
+				<hr>
+				<div class="ex-status">
+
+					<h4>{{ object.get_status_display }}</h4>
+				<!--<li class="rounded" ng-class="'{{object.status}}' == 'P' ? 'bg-warning' : '{{object.status}}' == 'A' ? 'bg-success' : 'bg-danger' ">{{object.get_status_display}}</li>
+				<li class="filler"></li>
+				-->
+
+					<div class="filler"></div>
+			
+				{% if object.status == 'A' or object.status == 'P' %}
+					<input type="button" ng-click="expCtrl.modify('R')" class="btn btn-danger rounded" value="Rechazar">
+				{% endif %}
+				{% if object.status == 'P' %}
+					&nbsp;&nbsp;&nbsp;
+				{% endif %}
+				{% if object.status == 'R' or object.status == 'P' %}
+					<input type="button" ng-click="expCtrl.modify('A')" class="btn btn-success rounded" value="Aprobar">
+				{% endif %}
+
+				</div>
+
+			{% endif %}
 
 			<hr>
 
@@ -86,6 +127,7 @@
 
 {% block scripts %}
 
+<script type="text/javascript" src="{% static 'app/libs/js-cookie/src/js.cookie.js' %}"></script>
 <script type="text/javascript" src="{% static 'app/logic/controllers/experienceDetailCtrl.js' %}"></script>
 
 {% endblock %}

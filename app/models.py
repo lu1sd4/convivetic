@@ -221,7 +221,7 @@ class Experience(models.Model):
 	status = models.CharField(
 		max_length = 20,
 		choices = STATUS_CHOICES,
-		default = 'R'
+		default = 'P'
 	)
 	views = models.PositiveIntegerField(
 		default = 0
@@ -254,4 +254,17 @@ class ExperiencesDislike(models.Model):
 		null=True
 	)
 
+class Guide(models.Model):
+	name = models.CharField(
+		max_length = 100
+	)
+
+class Question(models.Model):
+	pass
+
+class Answer(models.Model):
+	pass
+
+class AnswerUsr(models.Model):
+	pass
 
