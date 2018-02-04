@@ -2196,6 +2196,149 @@ ul {
   color: #fff;
   padding: 8px;
 }
+.contact-form-container .contact-form > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 55%;
+  margin: auto;
+}
+.contact-form-container .contact-form > div .contact-input,
+.contact-form-container .contact-form > div .contact-text-area {
+  border: 1px solid #008489;
+  border-radius: 5px;
+  padding: 15px;
+  height: 45px;
+  margin: 20px 0px;
+  color: #008489;
+}
+.contact-form-container .contact-form > div .contact-input::placeholder,
+.contact-form-container .contact-form > div .contact-text-area::placeholder {
+  color: #008489;
+  opacity: 0.6;
+}
+.contact-form-container .contact-form > div .contact-input {
+  min-width: 45%;
+}
+@media (max-width: 845px) {
+  .contact-form-container .contact-form > div .contact-input {
+    min-width: 100%;
+  }
+}
+.contact-form-container .contact-form > div .contact-text-area {
+  width: 100%;
+  min-height: 150px;
+}
+.contact-form-container .contact-form {
+  text-align: center;
+}
+.contact-form-container .contact-form .contact-submit {
+  border: 1px solid #008489;
+  background: none;
+  padding: 10px 60px;
+  color: #008489;
+  margin: 20px 0px;
+  border-radius: 5px;
+}
+.contact-form-container .contact-form .contact-submit:hover {
+  background: #008489;
+  color: rgba(255,255,255,0.902);
+}
+.contact-map {
+  min-width: 400px;
+}
+.contact-map #map {
+  height: 400px;
+  background-color: #808080;
+}
+.contact-info {
+  margin: 100px 0px;
+  height: 300px;
+  flex-grow: 1;
+  background-color: #008489;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.contact-info .contact-social {
+  margin-top: 20px;
+}
+.contact-info .contact-social a {
+  margin: 0px 20px;
+  color: #fff;
+  opacity: 0.6;
+}
+.title-container {
+  width: 55%;
+  margin: 50px auto 30px auto;
+  margin-top: 100px;
+}
+.title-container h3 {
+  color: #484848;
+  font-weight: 300 !important;
+}
+.gral-d-container {
+  background-color: #f7f7f7;
+}
+.gral-d-container .document-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5em;
+  padding-bottom: 5em;
+  max-width: 900px;
+  margin: auto;
+}
+.gral-d-container .document-container .document-item {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  padding: 30px 45px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  width: 100%;
+  margin: 10px 0px;
+}
+.gral-d-container .document-container .document-item div {
+  display: flex;
+}
+.gral-d-container .document-container .document-item div:nth-child(1) {
+  flex-direction: column;
+  justify-content: center;
+}
+.gral-d-container .document-container .document-item div:nth-child(1) h4 {
+  color: #008489;
+  font-weight: 400;
+}
+.gral-d-container .document-container .document-item div:nth-child(1) p {
+  margin: 0px;
+}
+.gral-d-container .document-container .document-item div:nth-child(2) {
+  margin-left: 20px;
+  align-items: center;
+}
+.gral-d-container .document-container .document-item div:nth-child(2) a {
+  color: #fc0f1a;
+}
+.gral-d-container .document-container .document-item div:nth-child(2) a:hover {
+  color: #c30b15;
+}
+@media (max-width: 767.99px) {
+  .gral-d-container .document-container {
+    margin: 0px 30px;
+  }
+  .gral-d-container .document-container .document-item {
+    flex-direction: column;
+  }
+  .gral-d-container .document-container .document-item div:nth-child(2) {
+    margin: auto;
+    margin-top: 25px;
+  }
+}
 .guides-container {
   display: flex;
   padding: 80px;
@@ -2309,14 +2452,104 @@ ul {
   height: 7px;
   width: 7px;
 }
-.content-t {
-  font-weight: 300;
-  color: #484848;
+.gmain-content {
   position: absolute;
-  max-width: 800px;
+  margin: auto;
+  top: -10%;
   left: 0;
   right: 0;
-  margin-top: 8em;
-  margin-left: auto;
+  bottom: 0;
+  height: 500px;
+  width: 700px;
+}
+.gmain-content .gmain-wrapper {
+  align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.gmain-content .gmain-wrapper .guide-title {
+  text-align: center;
+}
+.gmain-content .gmain-wrapper .guide-title h1 {
+  color: #484848;
+  font-size: 35px;
+  font-weight: 700;
+}
+.gmain-content .gmain-wrapper .guide-title h2 {
+  color: #484848;
+  font-size: 28px;
+  font-weight: 400;
+}
+.gmain-content .gmain-wrapper .guide-title button {
+  font-size: 19px;
+  height: 50px;
+  width: 200px;
+  margin-top: 3em;
+}
+.gmain-content .gmain-wrapper .guide-test {
+  width: 100%;
+}
+.gmain-content .gmain-wrapper .guide-test textarea {
+  margin-top: 2em;
+  width: 100%;
+}
+.gmain-content .gmain-wrapper .guide-test-img {
+  width: 100%;
+}
+.gmain-content .gmain-wrapper .guide-test-img img {
+  margin-bottom: 1em;
+}
+.gmain-content .gmain-wrapper .guide-test-img textarea {
+  margin-top: 2em;
+  width: 100%;
+}
+.gmain-content .gmain-wrapper .guide-text {
+  width: 100%;
+}
+.gmain-content .gmain-wrapper .guide-text p {
+  font-size: 19px;
+  font-weight: 300;
+  margin-top: 1.5em;
+}
+.gmain-content .gmain-wrapper .guide-text p span {
+  font-weight: 500;
+  font-size: 22px;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple h2 {
+  color: #484848;
+  font-size: 26px;
+  text-align: center;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w {
+  display: flex;
+  flex-direction: column;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w .answers {
+  background: #fff;
+  border: 2px solid #e9e9e9;
+  padding: 10px;
+  width: 250px;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w .top-answers {
+  display: flex;
+  margin-top: 3em;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w .top-answers .ans-1 {
   margin-right: auto;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w .top-answers .ans-2 {
+  margin-left: auto;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w .bottom-answers {
+  display: flex;
+  margin-top: 1em;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w .bottom-answers .ans-3 {
+  margin-right: auto;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w .bottom-answers .ans-4 {
+  margin-left: auto;
 }

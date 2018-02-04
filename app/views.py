@@ -34,7 +34,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, BadHeaderError
 
 # Youtube Token Retrieval
 
@@ -335,6 +335,33 @@ class ExperiencesView(ListView):
 	queryset = Experience.objects.order_by('pub_date').filter(status='A')
 	paginate_by = 8
 
+
+class ContactUsView(TemplateView):
+	template_name = "app/contact_us.html"
+
+class DocumentView(TemplateView):
+	template_name = "app/document.html"
+
+@csrf_exempt
+def ContactUsSendEmail(request):
+	if request.method =="POST":
+		name = request.POST.get('name', '')
+		lastname = request.POST.get('lastname', '')
+		email = request.POST.get('email', '')
+		comment = request.POST.get('comment', '')
+		phone = request.POST.get('phone', '')
+		data={}
+		try:
+			message = EmailMessage('luisdaniel.ld24@gmail.com', comment, to=[email])
+			message.send()
+			data["type"] = "Success",
+			data["message"] = "¡ Envio exitoso !"
+		except BadHeaderError:
+			data["type"] = "error"
+			data["message"] = "Datos invalidos, por favor verifica la información."
+	return (JsonResponse(data))
+
+
 class ExperienceDetailView(DetailView):
 	model = Experience
 	template_name = 'app/experience_detail.html'
@@ -483,4 +510,3 @@ class BoxView(ListView):
 
 class GuideView(TemplateView):
 	template_name = 'app/guide_general.html'
-	
