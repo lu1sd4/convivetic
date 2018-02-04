@@ -221,7 +221,7 @@ class Experience(models.Model):
 	status = models.CharField(
 		max_length = 20,
 		choices = STATUS_CHOICES,
-		default = 'R'
+		default = 'P'
 	)
 	views = models.PositiveIntegerField(
 		default = 0

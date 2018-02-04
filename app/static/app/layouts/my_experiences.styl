@@ -23,12 +23,15 @@
 			flex-wrap wrap
 		
 			.mexperience
+				display flex
+				flex-direction column
+				justify-content space-between
 				box-shadow 0 2px 5px 0 shadow-color
 				margin-top 1.7em
 				height auto
 				margin-right 3.33%
 				width 30%
-				
+
 				@media (max-width 768px)
 					margin-right 3% !important
 					width 47% !important
@@ -86,5 +89,16 @@
 														
 							a
 								text-align center
-								width 100%
-	
+								width 100%	
+				.exp-footer
+					border-bottom-left-radius 5px
+					border-bottom-right-radius 5px
+					padding 10px
+					width 100%					
+					h1,
+					h2,
+					h3,
+					h4,
+					h5
+						font-weight 300
+						color white

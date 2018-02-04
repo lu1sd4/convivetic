@@ -18,7 +18,7 @@ class LoginForm(auth_forms.AuthenticationForm):
 	)
 
 class UserForm(auth_forms.UserCreationForm):
-	groups = forms.ModelChoiceField(queryset=Group.objects.all(),
+	groups = forms.ModelChoiceField(queryset=Group.objects.exclude(name='Administrador'),
 								   required=True,
 								   empty_label='¿Qué tipo de usuario eres?')
 	class Meta:
@@ -35,7 +35,7 @@ class UserForm(auth_forms.UserCreationForm):
 		widgets = {
 			'password1' : forms.PasswordInput,
 			'password2' : forms.PasswordInput,
-			'email' : forms.EmailInput
+			'email' : forms.EmailInput			
 		}
 
 	def __init__(self, *args, **kwargs):

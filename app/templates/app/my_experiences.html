@@ -20,7 +20,7 @@
 
 				{% for exp in user_experiences %}
 
-					<div class="mexperience">
+					<div class="mexperience rounded">
 						<img class="rounded" src="http://via.placeholder.com/320x186">
 						<div class="exp-data">
 							<div class="detail-c">
@@ -32,9 +32,12 @@
 								<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
 								<div class="content-c">
 									<p>{{exp.content}}</p>
-								</div>
+								</div>								
 
-							</div>
+							</div>							
+						</div>
+						<div class="exp-footer" ng-class="'{{exp.status}}' == 'P' ? 'bg-warning' : '{{exp.status}}' == 'A' ? 'bg-success' : 'bg-danger' ">
+							<h5>{{ exp.get_status_display }}</h5>
 						</div>
 					</div>
 

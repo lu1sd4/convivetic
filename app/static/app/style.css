@@ -1798,6 +1798,16 @@ ul {
     width: 100% !important;
   }
 }
+.exp-d-c .exp-d-wrapper .d-left-c .ex-status {
+  display: flex;
+  align-items: center;
+}
+.exp-d-c .exp-d-wrapper .d-left-c .ex-status h4 {
+  font-weight: 300;
+}
+.exp-d-c .exp-d-wrapper .d-left-c .ex-status .filler {
+  flex-grow: 1;
+}
 .exp-d-c .exp-d-wrapper .d-left-c .tags {
   display: flex;
   justify-content: flex-start;
@@ -1805,6 +1815,7 @@ ul {
 }
 .exp-d-c .exp-d-wrapper .d-left-c .tags ul {
   display: flex;
+  width: 100%;
 }
 @media (max-width: 575.99px) {
   .exp-d-c .exp-d-wrapper .d-left-c .tags ul {
@@ -1814,11 +1825,18 @@ ul {
     margin-top: 0.5em;
   }
 }
+.exp-d-c .exp-d-wrapper .d-left-c .tags ul a {
+  text-decoration: none;
+}
 .exp-d-c .exp-d-wrapper .d-left-c .tags ul li {
   padding: 8px;
   background: rgba(0,0,0,0.26);
   color: #fff;
   margin-right: 5px;
+}
+.exp-d-c .exp-d-wrapper .d-left-c .tags ul li.filler {
+  flex-grow: 1;
+  background: transparent;
 }
 .exp-d-c .exp-d-wrapper .d-left-c hr {
   width: 100%;
@@ -2017,6 +2035,9 @@ ul {
   flex-wrap: wrap;
 }
 .my-exp-c .my-exp-wrapper .my-exp-content .mexperience {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
   margin-top: 1.7em;
   height: auto;
@@ -2084,6 +2105,20 @@ ul {
 .my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-data .detail-c .e-more a {
   text-align: center;
   width: 100%;
+}
+.my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-footer {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 10px;
+  width: 100%;
+}
+.my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-footer h1,
+.my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-footer h2,
+.my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-footer h3,
+.my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-footer h4,
+.my-exp-c .my-exp-wrapper .my-exp-content .mexperience .exp-footer h5 {
+  font-weight: 300;
+  color: #fff;
 }
 .my-comments-c {
   background-color: #f7f7f7;

@@ -57,13 +57,22 @@
 						margin 1.3em 0
 						width 100% !important
 			
+			.ex-status
+				display flex
+				align-items center
+				h4
+					font-weight 300
+				.filler
+					flex-grow 1
+
 			.tags
 				display flex
-				justify-content flex-start
-				margin-top 1em
+				justify-content flex-start				
+				margin-top 1em		
 					
 				ul
 					display flex
+					width 100%
 					
 					@media (max-width 575.99px)
 						flex-direction column
@@ -71,11 +80,17 @@
 						li
 							margin-top 0.5em
 					
+					a
+						text-decoration none
+
 					li
 						padding 8px
 						background icon-gray-color
 						color #fff
 						margin-right 5px
+						&.filler
+							flex-grow 1
+							background transparent
 			
 			hr
 				width 100%
