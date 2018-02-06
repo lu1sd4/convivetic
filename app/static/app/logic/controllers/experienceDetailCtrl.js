@@ -80,16 +80,16 @@
 			});
 		}
 
-		toastr.options = {
-			'positionClass' : 'toast-bottom-right'
-		};
-
 		function successToast(message){
-			toastr.success(message);
+			swal(message, {
+				icon: "success"
+			})
 		}
 
 		function warningToast(message){
-			toastr.warning(message);
+			swal(message, {
+				icon: "warning"
+			})
 		}
 
 	}

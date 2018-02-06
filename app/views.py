@@ -493,16 +493,30 @@ class ModifyExperienceStatus(UserIsAdminMixin, View):
 			data = json.loads(request.body)
 			exp = Experience.objects.get(pk=data['pk'])
 			if data['action'] == 'A':
-				messages.success(request, 'Experiencia aprobada')
+				messages.success(request, 'Experiencia aprobada para publicación')
 				exp.status = 'A'
 			elif data['action'] == 'R':
-				messages.error(request, 'Experiencia rechazada')
+				messages.error(request, 'Experiencia no aprobada para publicación')
 				exp.status = 'R'
 			exp.save()
 			return HttpResponse()
 		except Experience.DoesNotExist:
 			return HttpResponseBadRequest()
-		
+
+class DeleteExperienceView(LoginRequiredMixin, View):
+	raise_exception = True
+	def post(self, request, *args, **kwargs):
+		data = json.loads(request.body)		
+		try:
+			exp = Experience.objects.get(pk=data['pk'])
+			if exp.author == request.user:
+				exp.delete()
+				return HttpResponse()
+			else:
+				return JsonResponse(status=403, data={'error':True, 'message':'No eres el autor de la experiencia'})	
+		except Experience.DoesNotExist:
+			return JsonResponse(status=403, data={'error':True, 'message':'La experiencia no existe'})
+
 class BoxView(ListView):
 	template_name='app/box.html'
 	context_object_name = 'guides'

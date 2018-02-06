@@ -36,6 +36,7 @@ urlpatterns = [
 	path('experiences/manage', ManageExperiencesView.as_view(), name="experiences_manage"),
 	path('experiences/modify', ModifyExperienceStatus.as_view(), name="experiences_modify"),
 	path('experiences/api/pendingexperiences', PendingExperiences.as_view(), name="experiences_pending"),
+	path('experiences/api/delete_experience', DeleteExperienceView.as_view(), name="delete_experience"),
 	path('experiences/create', CreateExperience.as_view(), name="experiences_create"),
 	path('experiences/<int:pk>/', ExperienceDetailView.as_view(), name="experience-detail"),
 	path('experiences/<str:order>', ExperiencesOrdered.as_view(), name="experiences-ordered"),
