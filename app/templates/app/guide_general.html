@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="es" >
+<html lang="es">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,11 +12,15 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/imagehover.css/1.0/css/imagehover.min.css">
 </head>
-<body ng-app='conviveticApp' ng-cloak class="guides-body">
+<body ng-app='conviveticApp' ng-cloak class="guides-body" ng-controller="guidesController as gc">
 
 	<div class="top-menu">
 		<div class="top-menu-w">
-			<a href=""><i class="fas fa-times"></i></a>
+			<a href="/"><i class="fas fa-times"></i></a>
+			<div class="loader-c">
+				<hr class="total">
+				<hr class="current">
+			</div>
 			<hr>
 			<div class="rounded-circle decor"></div>
 		</div>
@@ -24,57 +28,59 @@
 
 	<div class="gmain-content">
 		<div class="gmain-wrapper">
-			<div class="guide-title" style="display:none;">
+			<div class="guide-intro" ng-show="gc.currentTemplate == gc.TEMP_INTRO">
 				<h2>Guía</h2>
-				<h1>CON TOLERANCIA CONSTRUIMOS PAZ</h1>
-				<button class="btn btn-primary">Iniciar</button>
+				<h1>{[{gc.currentStateObj.content}]}</h1>
 			</div>
 
-			<div class="guide-test" style="display:none;">
-				<h2>¿Qué crees que es la tolerancia?</h2>
+			<div class="guide-test" ng-show="gc.currentTemplate == gc.TEMP_TEST">
+				<h2>{[{gc.currentStateObj.content}]}</h2>
 				<textarea class="form-control" id="" cols="30" rows="8"></textarea>
 
 			</div>
 
-			<div class="guide-text" style="display:none;">
-				<h3>La tolerancia</h3>
-
-				<p><span class="text-success">Tolerancia</span> se refiere a la acción y efecto de tolerar. Como tal, la tolerancia se basa en el respeto hacia lo otro o lo que es diferente de lo propio, y puede manifestarse como un acto de indulgencia ante algo que no se quiere o no se puede impedir, o como el hecho de soportar o aguantar a alguien o algo.</p>
-
-				<p>La palabra proviene del latín tolerantĭa, que significa <span class="text-warning">cualidad de quien puede aguantar, soportar o aceptar.</span></p>
-
-				<p>La tolerancia es un valor moral que implica el <span class="text-info">respeto íntegro hacia el otro</span>, hacia sus ideas, prácticas o creencias, independientemente de que choquen o sean diferentes de las nuestras.</p>
-
-				<p>En este sentido, la tolerancia es también el <span class="text-secondary">reconocimiento de las diferencias</span> inherentes a la naturaleza humana, a la diversidad de las culturas, las religiones o las maneras de ser o de actuar.</p>
+			<div class="guide-text" ng-show="gc.currentTemplate == gc.TEMP_TEXT">
+				<h3>{{gc.currrentStateObj.title}}</h3>
+				<p>{[{gc.currentStateObj.content}]}</p>
 			</div>
 
-			<div class="guide-test-img" style="display:none;">
+			<div class="guide-text" ng-show="gc.currentTemplate == gc.TEMP_ACTIVITY">
+				<h3>{{gc.currrentStateObj.title}}</h3>
+				<p>{[{gc.currentStateObj.content}]}</p>
+			</div>
+
+			<div class="guide-test-img" ng-show="gc.currentTemplate == gc.TEMP_TEST_IMAGE">
 
 				<div class="guide-image">
-					<img class="rounded" src="http://via.placeholder.com/200x200" alt="">
+					<img class="rounded" src="{[{gc.currentStateObj.img_url}]}" alt="">
 				</div>
 				
 
-				<h2>¿Qué crees que es la tolerancia?</h2>
+				<h2>{[{gc.currentStateObj.content}]}</h2>
 				<textarea class="form-control" id="" cols="30" rows="8"></textarea>
 
 			</div>
 
-			<div class="guide-question-multiple" style="display:none;">
-				<h2>Se dice que la tolerancia es la acción que las personas imparten en un grupo determinado o en una comunidad a través de:</h2>
+			<div class="guide-question-multiple" ng-show="gc.currentTemplate == gc.TEMP_TEST_MULTIPLE">
+				<h2>{[{gc.currentStateObj.content}]}</h2>
 
 				<div class="answers-w">
 					<div class="top-answers">
-						<div class="answers ans-1 rounded">A. La paciencia</div>
-						<div class="answers ans-2 rounded">B. El respeto</div>
+						<div class="answers ans-1 rounded">{[{gc.currentStateObj.answers[0]}]}</div>
+						<div class="answers ans-2 rounded">{[{gc.currentStateObj.answers[1]}]}</div>
 					</div>
 					
 					<div class="bottom-answers">
-						<div class="answers ans-3 rounded">C. El odio</div>
-						<div class="answers ans-4 rounded">D. La sencillez</div>
+						<div class="answers ans-3 rounded">{[{gc.currentStateObj.answers[2]}]}</div>
+						<div class="answers ans-4 rounded">{[{gc.currentStateObj.answers[3]}]}</div>
 					</div>
 
 				</div>
+			</div>
+
+			<div class="guide-text" ng-show="gc.currentTemplate == gc.TEMP_CROSSWORD">
+				<h3>{{gc.currrentStateObj.title}}</h3>
+				{[{gc.currentStateObj.content}]}
 			</div>
 
 		</div>
@@ -82,12 +88,10 @@
 	
 	<footer class="footer-guide">
 		<div class="footer-w">
-			<button class="btn btn-primary back-btn">Anterior</button>
-			<button class="btn btn-primary next-btn">Siguiente</button>
+			<button class="btn btn-primary back-btn" ng-click="gc.previousState()" ng-disabled="gc.currentGuideIndex == 0">Anterior</button>
+			<button class="btn btn-primary next-btn" ng-click="gc.nextState()" ng-click="gc.previousState()" ng-disabled="gc.currentGuideIndex+1 == gc.statesQuantity">Siguiente</button>
 		</div>
 	</footer>
-
-	
 
 	<script type="text/javascript" src="{% static 'app/libs/jquery/dist/jquery.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/tether/dist/js/tether.min.js' %}"></script>
@@ -103,6 +107,7 @@
 	<script type="text/javascript" src="{% static 'app/logic/controllers/signupCtrl.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/logic/controllers/homeCtrl.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/logic/directives/input.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/controllers/generalGCtrl.js' %}"></script>
 
 	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 	

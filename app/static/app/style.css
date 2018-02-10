@@ -2446,12 +2446,6 @@ ul {
 .guides-container .guides-wrapper .last-g {
   margin-right: 0 !important;
 }
-<<<<<<< HEAD
-.guides-body {
-  background-color: #f0f0f0;
-}
-=======
->>>>>>> 48f1ecef31ca81eaa947b9f2bbbd5a41d9d84f09
 .footer-guide {
   box-shadow: 0 0 10px rgba(0,0,0,0.15);
   background-color: #e7e7e7;
@@ -2483,6 +2477,16 @@ ul {
   display: flex;
   justify-content: center;
 }
+.top-menu .h-guide-state {
+  position: absolute;
+  top: 16px;
+  height: 2px;
+  background-color: #f00;
+  width: 50%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
 .top-menu .top-menu-w {
   align-items: center;
   display: flex;
@@ -2495,10 +2499,26 @@ ul {
   width: 25px;
   margin-right: 5px;
 }
-.top-menu .top-menu-w hr {
-  background-color: #cecece;
-  height: 1px;
+.top-menu .top-menu-w .loader-c {
+  position: relative;
   width: 97%;
+  height: 1px;
+}
+.top-menu .top-menu-w .loader-c hr {
+  position: absolute;
+  width: 100%;
+}
+.top-menu .top-menu-w .loader-c .total {
+  background-color: #cecece;
+  top: -16px;
+  height: 100%;
+}
+.top-menu .top-menu-w .loader-c .current {
+  background-color: #37ba00;
+  background-image: linear-gradient(90deg, #82dd00, #37ba00);
+  height: 300%;
+  width: 30% !important;
+  top: -17px;
 }
 .top-menu .top-menu-w .decor {
   background: #484848;
@@ -2542,8 +2562,18 @@ ul {
   width: 200px;
   margin-top: 3em;
 }
+.gmain-content .gmain-wrapper .guide-intro h2 {
+  font-weight: 700;
+}
+.gmain-content .gmain-wrapper .guide-intro h1 {
+  font-weight: 300;
+  font-size: 42px;
+}
 .gmain-content .gmain-wrapper .guide-test {
   width: 100%;
+}
+.gmain-content .gmain-wrapper .guide-test h2 {
+  font-weight: 300;
 }
 .gmain-content .gmain-wrapper .guide-test textarea {
   margin-top: 2em;
@@ -2551,6 +2581,9 @@ ul {
 }
 .gmain-content .gmain-wrapper .guide-test-img {
   width: 100%;
+}
+.gmain-content .gmain-wrapper .guide-test-img h2 {
+  font-weight: 300;
 }
 .gmain-content .gmain-wrapper .guide-test-img .guide-image {
   display: flex;
