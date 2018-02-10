@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/imagehover.css/1.0/css/imagehover.min.css">
 </head>
-<body ng-app='conviveticApp' ng-cloak>
+<body ng-app='conviveticApp' ng-cloak class="guides-body">
 
 	<div class="top-menu">
 		<div class="top-menu-w">
@@ -49,13 +49,18 @@
 			</div>
 
 			<div class="guide-test-img" style="display:none;">
-				<img class="rounded" src="http://via.placeholder.com/200x200" alt="">
+
+				<div class="guide-image">
+					<img class="rounded" src="http://via.placeholder.com/200x200" alt="">
+				</div>
+				
+
 				<h2>¿Qué crees que es la tolerancia?</h2>
 				<textarea class="form-control" id="" cols="30" rows="8"></textarea>
 
 			</div>
 
-			<div class="guide-question-multiple">
+			<div class="guide-question-multiple" style="display:none;">
 				<h2>Se dice que la tolerancia es la acción que las personas imparten en un grupo determinado o en una comunidad a través de:</h2>
 
 				<div class="answers-w">

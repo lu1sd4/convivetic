@@ -2244,7 +2244,7 @@ ul {
 .guides-container .guides-wrapper .last-g {
   margin-right: 0 !important;
 }
-body {
+.guides-body {
   background-color: #f0f0f0;
 }
 .footer-guide {
@@ -2347,7 +2347,9 @@ body {
 .gmain-content .gmain-wrapper .guide-test-img {
   width: 100%;
 }
-.gmain-content .gmain-wrapper .guide-test-img img {
+.gmain-content .gmain-wrapper .guide-test-img .guide-image {
+  display: flex;
+  justify-content: center;
   margin-bottom: 1em;
 }
 .gmain-content .gmain-wrapper .guide-test-img textarea {
