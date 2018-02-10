@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="my-exp-c">
+<div class="my-exp-c" ng-controller="myExperiencesController as mexpCtrl">
 	<div class="my-exp-wrapper">
 
 		<h3>Mis Experiencias</h3>
@@ -39,6 +39,9 @@
 						<div class="exp-footer" ng-class="'{{exp.status}}' == 'P' ? 'bg-warning' : '{{exp.status}}' == 'A' ? 'bg-success' : 'bg-danger' ">
 							<h5>{{ exp.get_status_display }}</h5>
 						</div>
+						<div class="exp-delete" data-toggle="tooltip" data-placement="left" title="Borrar experiencia" ng-click="mexpCtrl.deleteExperience({{exp.id}})">
+							<i class="fas fa-trash-alt"></i>
+						</div>
 					</div>
 
 				{% endfor %}
@@ -73,4 +76,7 @@
 {% endblock %}
 
 {% block scripts %}
+
+<script type="text/javascript" src="{% static 'app/logic/controllers/myExperiencesController.js' %}"></script>
+
 {% endblock %}

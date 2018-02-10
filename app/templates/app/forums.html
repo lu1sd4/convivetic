@@ -62,7 +62,12 @@
 						
 							<div class="forum-publisher">
 								<p class="f-date">{{thread.pub_date}}</p>
-								<p class="f-name">{{thread.author.get_full_name}}</p>
+								<p class="f-name">
+									{{thread.author.get_full_name}} 
+									{% if request.user == thread.author %}
+										<span class="text-primary">(Tú)</span>
+									{% endif %}
+								</p>
 							</div>
 
 						</div>

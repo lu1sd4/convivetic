@@ -53,13 +53,17 @@
 			if($scope.form.$valid)
 				$("#form").submit();
 		}
-
-		toastr.options = {
-			'positionClass' : 'toast-bottom-right'
-		};
-
+		
 		function successToast(message){
-			toastr.success(message);
+			swal(message, {
+				icon: "success"
+			})
+		}
+
+		function warningToast(message){
+			swal(message, {
+				icon: "warning"
+			})
 		}
 
 	}

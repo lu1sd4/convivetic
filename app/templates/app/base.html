@@ -23,7 +23,8 @@
 			  <a class="nav-link" href="{% url 'forums' %}">Foros</a>
 			  <a class="nav-link" href="{% url 'experiences' %}">Experiencias</a>
 			  <a class="nav-link" href="#">Quiénes Somos</a>
-			  <a class="nav-link" href="#">Contacto</a>
+			  <a class="nav-link" href="{% url 'contact-us' %}">Contacto</a>
+			  <a class="nav-link" href="{% url 'document' %}">Documentos</a>
 		  		{% if request.user.is_authenticated %}
 
 				<div class="dropdown">
@@ -98,7 +99,9 @@
 
 		
 
-		<div class="secondary-nav">
+		
+		{% if request.user.is_authenticated %}
+			<div class="secondary-nav">
 
 			<div class="sec-nav-c">
 				<ul>
@@ -114,9 +117,7 @@
 				</ul>				
 			</div>
 		</div>
-		<!--{% if request.user.is_authenticated %} -->
-
-		<!--{% endif %} -->
+		{% endif %}
 
 	</header>
 
@@ -178,12 +179,18 @@
 	<script type="text/javascript" src="{% static 'app/libs/jquery/dist/jquery.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/tether/dist/js/tether.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/popper.js/dist/umd/popper.min.js' %}"></script>
+	<script type="text/javascript">
+		$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
 	<script type="text/javascript" src="{% static 'app/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/angular/angular.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/angular-animate/angular-animate.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/angular-messages/angular-messages.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/bootstrap-filestyle-2.1.0/src/bootstrap-filestyle.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/toastr/toastr.min.js' %}"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	<script type="text/javascript" src="{% static 'app/logic/app.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/logic/controllers/signupCtrl.js' %}"></script>

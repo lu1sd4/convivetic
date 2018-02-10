@@ -25,15 +25,19 @@
 						<div class="detail-c">
 							<div class="popular-data-c">
 								<div class="views"><i class="fas fa-eye"></i> 10</div>
-								<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
-									
+								<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>									
 							</div>
 
 							<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
 							<div class="content-c">
 								<p>{{exp.content}}</p>
 							</div>
-							<div class="publisher"><i class="fas fa-user"></i>{{exp.author.get_full_name}}</div>
+							<div class="publisher"><i class="fas fa-user"></i>{% if request.user.is_authenticated and request.user == exp.author %}
+								Tú
+							{% else %}
+								{{ exp.author.get_full_name }}
+							{% endif %}
+							</div>
 
 						</div>
 					</div>

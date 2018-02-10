@@ -34,7 +34,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, BadHeaderError
 
 # Youtube Token Retrieval
 
@@ -67,7 +67,7 @@ class Index(ListView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['secondary_threads'] = Thread.objects.order_by('pub_date')[4:8]
-		context['experiences'] = Experience.objects.order_by('pub_date')[:9]
+		context['experiences'] = Experience.objects.filter(status='A').order_by('pub_date')[:9]
 		context['th_quantity'] = Thread.objects.all().count()
 		return context
 
@@ -332,8 +332,35 @@ class CreateExperience(CreateView):
 class ExperiencesView(ListView):
 	template_name = 'app/experiences.html'
 	context_object_name = 'experiences'
-	queryset = Experience.objects.order_by('pub_date')
+	queryset = Experience.objects.order_by('pub_date').filter(status='A')
 	paginate_by = 8
+
+
+class ContactUsView(TemplateView):
+	template_name = "app/contact_us.html"
+
+class DocumentView(TemplateView):
+	template_name = "app/document.html"
+
+@csrf_exempt
+def ContactUsSendEmail(request):
+	if request.method =="POST":
+		name = request.POST.get('name', '')
+		lastname = request.POST.get('lastname', '')
+		email = request.POST.get('email', '')
+		comment = request.POST.get('comment', '')
+		phone = request.POST.get('phone', '')
+		data={}
+		try:
+			message = EmailMessage('luisdaniel.ld24@gmail.com', comment, to=[email])
+			message.send()
+			data["type"] = "Success",
+			data["message"] = "¡ Envio exitoso !"
+		except BadHeaderError:
+			data["type"] = "error"
+			data["message"] = "Datos invalidos, por favor verifica la información."
+	return (JsonResponse(data))
+
 
 class ExperienceDetailView(DetailView):
 	model = Experience
@@ -364,7 +391,7 @@ class ExperiencesOrdered(ListView):
 	def get_queryset(self):
 		criterium = self.kwargs['order']
 		if(criterium == 'popular' or criterium == 'new'):
-			return self.get_query_criterium(criterium)
+			return self.get_query_criterium(criterium).filter(status='A')
 		else:
 			return Experience.objects.none()
 
@@ -419,7 +446,7 @@ class MyForumsView(ListView):
 class MyExperiencesView(ListView):
 	template_name = 'app/my_experiences.html'
 	context_object_name = 'user_experiences'
-	paginate_by = 4
+	paginate_by = 6
 
 	def get_queryset(self):
 		user_id = self.request.user.id
@@ -466,16 +493,30 @@ class ModifyExperienceStatus(UserIsAdminMixin, View):
 			data = json.loads(request.body)
 			exp = Experience.objects.get(pk=data['pk'])
 			if data['action'] == 'A':
-				messages.success(request, 'Experiencia aprobada')
+				messages.success(request, 'Experiencia aprobada para publicación')
 				exp.status = 'A'
 			elif data['action'] == 'R':
-				messages.error(request, 'Experiencia rechazada')
+				messages.error(request, 'Experiencia no aprobada para publicación')
 				exp.status = 'R'
 			exp.save()
 			return HttpResponse()
 		except Experience.DoesNotExist:
 			return HttpResponseBadRequest()
-		
+
+class DeleteExperienceView(LoginRequiredMixin, View):
+	raise_exception = True
+	def post(self, request, *args, **kwargs):
+		data = json.loads(request.body)		
+		try:
+			exp = Experience.objects.get(pk=data['pk'])
+			if exp.author == request.user:
+				exp.delete()
+				return HttpResponse()
+			else:
+				return JsonResponse(status=403, data={'error':True, 'message':'No eres el autor de la experiencia'})	
+		except Experience.DoesNotExist:
+			return JsonResponse(status=403, data={'error':True, 'message':'La experiencia no existe'})
+
 class BoxView(ListView):
 	template_name='app/box.html'
 	context_object_name = 'guides'
@@ -483,4 +524,3 @@ class BoxView(ListView):
 
 class GuideView(TemplateView):
 	template_name = 'app/guide_general.html'
-	

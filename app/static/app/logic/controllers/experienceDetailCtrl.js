@@ -21,6 +21,7 @@
 		that.modify = modify;
 		that.successToast = successToast;
 		that.warningToast = warningToast;
+		that.deleteExperience = deleteExperience;
 
 		function init(id, likes, dislikes, views){
 			that.id = id;
@@ -80,16 +81,47 @@
 			});
 		}
 
-		toastr.options = {
-			'positionClass' : 'toast-bottom-right'
-		};
-
 		function successToast(message){
-			toastr.success(message);
+			swal(message, {
+				icon: "success"
+			})
 		}
 
 		function warningToast(message){
-			toastr.warning(message);
+			swal(message, {
+				icon: "warning"
+			})
+		}		
+
+		function deleteExperience(){
+			swal({
+				title: "Estás seguro?",
+				text: "Si borras tu experiencia, desaparecerá de ConviveTIC",
+				icon: "warning",
+				buttons: ['Cancelar', 'Borrar'],
+				dangerMode: true,
+			})
+			.then((willDelete) => {
+				if (willDelete) {
+					var data = {'pk' : that.id};
+					$http.post("/experiences/api/delete_experience", data).then(function(response) {
+							swal("Se ha borrado la experiencia", {
+								icon: "success"
+							}).then(function(){
+								location.reload();
+							});	
+						},function(response){
+							if(response.data.error){
+								swal({
+									title: "Error al borrar la experiencia",
+									text: response.data.message,
+									icon : "error"
+								});
+							}
+						}
+				    );
+				}
+			});
 		}
 
 	}

@@ -1,0 +1,64 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="contact-us" ng-controller="contactController as cntCtrl">
+	<div class="contact-map">
+		<div id="map"></div>
+	</div>
+	<div class="title-container">
+		<h3 class="border exp-section-title">Contáctanos</h3>
+	</div>
+	<div class="contact-form-container">
+		<form class="contact-form" id="contact-form" ng-submit="cntCtrl.contactUsMessage()" method="post" name = form>
+			{% csrf_token %}
+			<div>
+				<input class="contact-input" ng-model="cntCtrl.name" type="text" name="name" placeholder="Nombre" required>
+				<input class="contact-input" ng-model="cntCtrl.lastname" type="text" name="lastname" placeholder="Apellidos" required>
+			</div>
+			<div>
+				<input class="contact-input" ng-model="cntCtrl.email" type="email" name="email" placeholder="Correo Electrónico" required>
+				<input class="contact-input" ng-model="cntCtrl.phone" type="tel" name="phone" placeholder="Teléfono" >
+			</div>
+			<div>
+				<textarea class="contact-text-area" ng-model="cntCtrl.comment" name="comments" placeholder="Agrega un comentario" required></textarea>
+			</div>
+			<button class ="contact-submit" type="submit"  >Enviar</button>
+		</form>
+	</div>
+	<div class="contact-info">
+		<div class="contact-address">
+            <span class="street-address">CR 19 # 13 - 63.</span> 
+            <span class="pipe">/</span> 
+            <span class="locality">Manizales</span>, <span class="region">Caldas</span>
+            <br>
+            <span class="tel">3101029307</span> <span class="pipe">/</span> <a class="email" href="mailto:info@coreo.com">info@correo.com</a>
+            <br>
+        </div>
+		<div class="contact-social">
+			<a href="#" ><i class="fab fa-facebook-square fa-3x"></i></a>
+			<a href="#" ><i class="fab fa-twitter-square fa-3x"></i></a>
+			<a href="#" ><i class="fab fa-linkedin fa-3x"></i></a>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 4.570868, lng: -74.29733299999998},
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVAAOROSI91FgO1B2HjuqO8IqhZ2qre20&callback=initMap"
+    async defer></script>
+    <script type="text/javascript" src="{% static 'app/logic/controllers/contactUsCtrl.js' %}"></script>
+{% endblock %} 
+
