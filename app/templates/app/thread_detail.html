@@ -22,7 +22,9 @@
 				<p>{{object.description}}</p>
 
 				<div class="detail-c-din">
+
 					{% if object.img %}
+						<h6><small>Imagen:</small></h6>
 						<img src="/media/{{object.img}}" alt="" class="rounded thread-det-img">
 					{% endif %}
 
@@ -34,11 +36,23 @@
 					
 					{% if object.audio_url %}
 						<audio controls>
-						  <source ng-init="fdCtrl.extractId('{{object.audio_url}}')" src="http://docs.google.com/uc?export=open&id={[{fdCtrl.audio_id}]}" type="audio/mp3">
+						  <source ng-init="fdCtrl.extractId('{{object.audio_url}}')" src="http://docs.google.com/uc?export=open&id={[{fdCtrl.audio_id}]}">
 							Your browser does not support the audio element.
 						</audio> 
 					{% endif %}
 				</div>
+
+				{% if request.user == object.author %}
+
+					<hr>
+					<div class="forum-status">
+						<h4>Eres el creador de este foro</h4>
+						<div class="filler"></div>
+						<input type="button" class="btn btn-danger rounded" value="Eliminar">
+					</div>
+					<hr>
+
+				{% endif %}
 
 				<div class="detail-social-c">
 					<div class="social-left">

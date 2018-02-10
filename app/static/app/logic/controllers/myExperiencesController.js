@@ -24,7 +24,7 @@
 			})
 			.then((willDelete) => {
 				if (willDelete) {
-					data = {'pk' : id};
+					var data = {'pk' : id};
 					$http.post("/experiences/api/delete_experience", data).then(function(response) {
 							swal("Se ha borrado la experiencia", {
 								icon: "success"
@@ -37,9 +37,7 @@
 									title: "Error al borrar la experiencia",
 									text: response.data.message,
 									icon : "error"
-								}).then(function(){
-									location.reload();
-								})
+								});
 							}
 						}
 				    );

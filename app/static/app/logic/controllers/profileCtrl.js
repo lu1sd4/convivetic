@@ -60,6 +60,12 @@
 			})
 		}
 
+		function warningToast(message){
+			swal(message, {
+				icon: "warning"
+			})
+		}
+
 	}
 
 })();
