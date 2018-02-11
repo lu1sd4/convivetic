@@ -172,6 +172,7 @@
 			that.currentGuideIndex++; 
 			that.currentStateObj = that.currentGuide.states[that.currentGuideIndex];
 			that.currentTemplate = that.currentStateObj.type;
+			that.updateLoader();
 		}
 
 
@@ -182,6 +183,15 @@
 			that.currentGuideIndex--;
 			that.currentStateObj = that.currentGuide.states[that.currentGuideIndex];
 			that.currentTemplate = that.currentStateObj.type;
+			that.updateLoader();
+		}
+
+		/*
+		* Actualiza la barra de progreso de la parte superior
+		*/
+		that.updateLoader = () => {
+			let loader_per = (that.currentGuideIndex/(that.statesQuantity-1))*100;
+			angular.element(".current").width(loader_per+'%');
 		}
 	}
 

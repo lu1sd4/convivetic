@@ -2446,6 +2446,9 @@ ul {
 .guides-container .guides-wrapper .last-g {
   margin-right: 0 !important;
 }
+.guides-body {
+  background-color: #f0f0f0;
+}
 .footer-guide {
   box-shadow: 0 0 10px rgba(0,0,0,0.15);
   background-color: #e7e7e7;
@@ -2464,6 +2467,10 @@ ul {
   height: 100%;
   width: 100%;
   max-width: 1000px;
+}
+.footer-guide .footer-w button {
+  padding: 12px 30px;
+  border-radius: 25px;
 }
 .footer-guide .footer-w .back-btn {
   margin-right: auto;
@@ -2506,19 +2513,20 @@ ul {
 }
 .top-menu .top-menu-w .loader-c hr {
   position: absolute;
-  width: 100%;
 }
 .top-menu .top-menu-w .loader-c .total {
   background-color: #cecece;
   top: -16px;
   height: 100%;
+  width: 100%;
 }
 .top-menu .top-menu-w .loader-c .current {
   background-color: #37ba00;
   background-image: linear-gradient(90deg, #82dd00, #37ba00);
   height: 300%;
-  width: 30% !important;
   top: -17px;
+  width: 0;
+  transition: 0.6s all;
 }
 .top-menu .top-menu-w .decor {
   background: #484848;
@@ -2562,12 +2570,30 @@ ul {
   width: 200px;
   margin-top: 3em;
 }
+.gmain-content .gmain-wrapper .guide-intro {
+  background-color: #fff;
+  padding: 40px 10px;
+  border-radius: 60px;
+}
 .gmain-content .gmain-wrapper .guide-intro h2 {
   font-weight: 700;
+  text-align: center;
 }
 .gmain-content .gmain-wrapper .guide-intro h1 {
   font-weight: 300;
   font-size: 42px;
+  text-align: center;
+  color: #7b7b7b;
+}
+.gmain-content .gmain-wrapper .guide.ng-enter {
+  transition: all ease-in 0.5s;
+  opacity: 0;
+}
+.gmain-content .gmain-wrapper .guide.ng-enter-active {
+  opacity: 1;
+}
+.gmain-content .gmain-wrapper .guide.ng-leave.ng-leave-active {
+  opacity: 0;
 }
 .gmain-content .gmain-wrapper .guide-test {
   width: 100%;
