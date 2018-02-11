@@ -47,5 +47,6 @@ urlpatterns = [
 	path('experiences/<int:pk>/view', ExperienceView.as_view(), name="experience-view"),
 	path('mycomments/', login_required(MyCommentsView.as_view()), name="my-comments"),
 	path('box', login_required(BoxView.as_view()), name="box"),
-	path('guide_general', login_required(GuideView.as_view()), name="guides")
+	path('guide_general', login_required(GuideView.as_view()), name="guides"),
+	path('crossword', CrossWordView.as_view(), name="crossword")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

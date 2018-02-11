@@ -2458,6 +2458,7 @@ ul {
   margin-top: auto;
   bottom: 0;
   position: absolute;
+  transition: 0.5s all;
   width: 100%;
 }
 .footer-guide .footer-w {
@@ -2468,6 +2469,12 @@ ul {
   width: 100%;
   max-width: 1000px;
 }
+.footer-guide .footer-w p {
+  color: #fff;
+  align-self: center;
+  font-size: 24px;
+  margin-left: auto;
+}
 .footer-guide .footer-w button {
   padding: 12px 30px;
   border-radius: 25px;
@@ -2477,6 +2484,16 @@ ul {
 }
 .footer-guide .footer-w .next-btn {
   margin-left: auto;
+}
+.footer-guide .footer-w .next-btn-feedback {
+  background: #fff !important;
+  color: #484848;
+}
+.footer-guide.good-answer {
+  background-image: linear-gradient(90deg, #82dd00, #37ba00);
+}
+.footer-guide.bad-answer {
+  background-image: linear-gradient(90deg, #f68c8c, #f00);
 }
 .top-menu {
   position: relative;
@@ -2572,7 +2589,7 @@ ul {
 }
 .gmain-content .gmain-wrapper .guide-intro {
   background-color: #fff;
-  padding: 40px 10px;
+  padding: 40px 40px;
   border-radius: 60px;
 }
 .gmain-content .gmain-wrapper .guide-intro h2 {
@@ -2581,7 +2598,7 @@ ul {
 }
 .gmain-content .gmain-wrapper .guide-intro h1 {
   font-weight: 300;
-  font-size: 42px;
+  font-size: 36px;
   text-align: center;
   color: #7b7b7b;
 }
@@ -2610,6 +2627,7 @@ ul {
 }
 .gmain-content .gmain-wrapper .guide-test-img h2 {
   font-weight: 300;
+  font-size: 21px;
 }
 .gmain-content .gmain-wrapper .guide-test-img .guide-image {
   display: flex;
@@ -2632,6 +2650,15 @@ ul {
   font-weight: 500;
   font-size: 22px;
 }
+.gmain-content .gmain-wrapper .guide-text p .final-text {
+  font-size: 26px;
+}
+.gmain-content .gmain-wrapper .guide-text p .final-desc {
+  font-weight: 300;
+}
+.gmain-content .gmain-wrapper .guide-text p.final-p {
+  text-align: center;
+}
 .gmain-content .gmain-wrapper .guide-question-multiple h2 {
   color: #484848;
   font-size: 26px;
@@ -2646,6 +2673,19 @@ ul {
   border: 2px solid #e9e9e9;
   padding: 10px;
   width: 250px;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w a {
+  text-decoration: none;
+  color: #484848;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w a:hover {
+  background: #e9e9e9;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w a.good-answer {
+  background: #a8d2a8 !important;
+}
+.gmain-content .gmain-wrapper .guide-question-multiple .answers-w a.bad-answer {
+  background: #f68c8c !important;
 }
 .gmain-content .gmain-wrapper .guide-question-multiple .answers-w .top-answers {
   display: flex;
