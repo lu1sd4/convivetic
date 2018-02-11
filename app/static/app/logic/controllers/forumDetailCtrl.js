@@ -57,16 +57,21 @@
 		that.disableInputs = disableInputs;
 		that.successToast = successToast;
 		that.extractId = extractId;
+		that.extractCId = extractCId;
+		that.deleteThread = deleteThread;
+		that.deleteComment = deleteComment;
+		that.loadAudios = loadAudios;
+		that.parentUrl = '';
 
 		that.commentClicked = false;
 		that.audio_id = "";
 
 
-		function init(id, likes, dislikes, views){
+		function init(id, likes, dislikes, views, parentUrl){
 			that.id = id;
 			that.likes = likes - dislikes;
 			that.views = views;
-
+			that.parentUrl = parentUrl;
 			updateViews();
 		}
 
@@ -436,6 +441,80 @@
 			that.audio_id = a_id;
 			$("audio").load();
 			
+		}
+
+		function extractCId(audio_url){
+
+			let a_id = audio_url.split("d/")[1];
+			a_id = a_id.split("/p")[0];		
+			return a_id;			
+			
+		}
+
+		function loadAudios(){
+			$("audio").load();
+		}
+
+		function deleteThread(){
+			swal({
+				title: "Estás seguro?",
+				text: "Si borras la discusión, desaparecerá de ConviveTIC y los comentarios también.",
+				icon: "warning",
+				buttons: ['Cancelar', 'Borrar'],
+				dangerMode: true,
+			})
+			.then((willDelete) => {
+				if (willDelete) {
+					var data = {'pk' : that.id};
+					$http.post("/threads/api/delete_thread", data).then(function(response) {
+							swal("Se ha borrado la discusión", {
+								icon: "success"
+							}).then(function(){
+								window.location.replace(that.parentUrl);
+							});	
+						},function(response){
+							if(response.data.error){
+								swal({
+									title: "Error al borrar la discusión",
+									text: response.data.message,
+									icon : "error"
+								});
+							}
+						}
+				    );
+				}
+			});
+		}
+
+		function deleteComment(id){
+			swal({
+				title: "Estás seguro?",
+				text: "Si borras tu comentario, desaparecerá de ConviveTIC",
+				icon: "warning",
+				buttons: ['Cancelar', 'Borrar'],
+				dangerMode: true,
+			})
+			.then((willDelete) => {
+				if (willDelete) {
+					var data = {'pk' : id};
+					$http.post("/threads/api/delete_comment", data).then(function(response) {
+							swal("Se ha borrado el comentario", {
+								icon: "success"
+							}).then(function(){
+								location.reload();
+							});	
+						},function(response){
+							if(response.data.error){
+								swal({
+									title: "Error al borrar el comentario",
+									text: response.data.message,
+									icon : "error"
+								});
+							}
+						}
+				    );
+				}
+			});
 		}
 
 	}

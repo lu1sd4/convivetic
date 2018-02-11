@@ -6,12 +6,12 @@
 
  <div class="container-fluid gral-df-container">
 
- 	<div class="f-detail-container" ng-controller="forumDetailController as fdCtrl" ng-init="fdCtrl.init({{object.id}}, {{object.like_set.count}},{{object.dislike_set.count}},{{object.views}})">
+ 	<div class="f-detail-container" ng-controller="forumDetailController as fdCtrl" ng-init="fdCtrl.init({{object.id}}, {{object.like_set.count}},{{object.dislike_set.count}},{{object.views}},'{% url 'forums' %}')">
 	 	
 		<div class="detail-c">
 			<div class="prof-image">
 				<img class="rounded-circle" src="http://via.placeholder.com/75x75">
-			</div>
+			</div>			
 
 			<div class="detail-right">
 				<h4>{{object.title}}</h4>
@@ -48,7 +48,7 @@
 					<div class="forum-status">
 						<h4>Eres el creador de este foro</h4>
 						<div class="filler"></div>
-						<input type="button" class="btn btn-danger rounded" value="Eliminar">
+						<input type="button" class="btn btn-danger rounded" ng-click="fdCtrl.deleteThread()" value="Eliminar">
 					</div>
 					<hr>
 
@@ -108,6 +108,8 @@
 					{% render_field form.video_url %}
 	 				{% render_field form.audio_url %}
 	 				{% render_field form.thread %}
+
+	 				<h5>Dejar un comentario</h5>
 
 					<div class="form-group">
 						{% render_field form.content class+='form-control title-input' placeholder=form.content.label ng-model='content' rows="5" %}
@@ -175,7 +177,7 @@
 
 				{% for c in object.comment_set.all %}
 
-					<div class="rounded d-comment">
+					<div class="rounded d-comment" id="comm{{ c.id }}">
 						<div class="comment-header">
 							<h6>{{c.author.get_full_name}}</h6>
 							<p>{{c.author.nationality}}</p>
@@ -185,10 +187,43 @@
 							<p>{{c.content}}</p>
 						</div>
 
-						<div class="comment-footer">
+						{% if c.img or c.video_url or c.audio_url %}
+
+						<div class="comment-c-din">
+
+							{% if c.img %}
+								<h6><small>Imagen:</small></h6>
+								<img src="/media/{{c.img}}" alt="" class="rounded thread-det-img">
+							{% endif %}
+
+							{% if c.video_url %}
+								<iframe width="420" height="315"
+									src="https://www.youtube.com/embed/{{c.video_url}}" class="rounded">
+								</iframe>
+							{% endif %}
+							
+							{% if c.audio_url %}
+								<audio controls>
+								  <source src="http://docs.google.com/uc?export=open&id={[{fdCtrl.extractCId('{{ c.audio_url }}')}]}">
+									Your browser does not support the audio element.
+								</audio> 
+							{% endif %}
+						</div>
+
+						{% endif %}
+
+						<div class="comment-footer" ng-init="fdCtrl.loadAudios()">
 							<p>{{c.pub_date}}</p>
 						</div>
-					</div>
+
+						<br>
+						{% if c.author == request.user %}
+							<div class="comment-status">														
+								<input type="button" class="btn btn-danger btn-sm rounded" ng-click="fdCtrl.deleteComment({{c.id}})" value="Eliminar">&nbsp;
+								<h6 class="text-muted">Eres el autor de este comentario</h6>
+							</div>
+						{% endif %}
+					</div>					
 					<hr>
 
 				{% endfor %}

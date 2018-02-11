@@ -517,6 +517,34 @@ class DeleteExperienceView(LoginRequiredMixin, View):
 		except Experience.DoesNotExist:
 			return JsonResponse(status=403, data={'error':True, 'message':'La experiencia no existe'})
 
+class ThreadDeleteView(LoginRequiredMixin, View):
+	raise_exception = True
+	def post(self, request, *args, **kwargs):
+		data = json.loads(request.body)		
+		try:
+			thr = Thread.objects.get(pk=data['pk'])
+			if thr.author == request.user:
+				thr.delete()
+				return HttpResponse()
+			else:
+				return JsonResponse(status=403, data={'error':True, 'message':'No eres el autor de la discusión'})	
+		except Experience.DoesNotExist:
+			return JsonResponse(status=403, data={'error':True, 'message':'La discusión no existe'})
+
+class ThreadCommentDeleteView(LoginRequiredMixin, View):
+	raise_exception = True
+	def post(self, request, *args, **kwargs):
+		data = json.loads(request.body)		
+		try:
+			comm = Comment.objects.get(pk=data['pk'])
+			if comm.author == request.user:
+				comm.delete()
+				return HttpResponse()
+			else:
+				return JsonResponse(status=403, data={'error':True, 'message':'No eres el autor del comentario'})	
+		except Experience.DoesNotExist:
+			return JsonResponse(status=403, data={'error':True, 'message':'El comentario no existe'})
+
 class BoxView(ListView):
 	template_name='app/box.html'
 	context_object_name = 'guides'

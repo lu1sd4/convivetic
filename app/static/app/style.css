@@ -389,6 +389,10 @@ ul {
   font-size: 12px;
   color: #f00;
 }
+progress {
+  height: 2em;
+  width: 25em;
+}
 .p-container {
   margin-top: 3em;
   padding-left: 80px;
@@ -1056,10 +1060,6 @@ ul {
 .forums-container .new-forum .media-type-container {
   width: 100%;
 }
-.forums-container .new-forum progress {
-  height: 2em;
-  width: 25em;
-}
 .forums-container .forum-header {
   display: flex;
   flex-direction: column;
@@ -1260,6 +1260,21 @@ ul {
   padding: 20px;
   width: 100%;
 }
+.gral-df-container .f-detail-container .detail-comments .d-comments .d-comment .comment-status {
+  flex-direction: row-reverse;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.gral-df-container .f-detail-container .detail-comments .d-comments .d-comment .comment-status h4,
+.gral-df-container .f-detail-container .detail-comments .d-comments .d-comment .comment-status h5,
+.gral-df-container .f-detail-container .detail-comments .d-comments .d-comment .comment-status h6 {
+  font-weight: 300;
+  margin-bottom: 0;
+}
+.gral-df-container .f-detail-container .detail-comments .d-comments .d-comment .comment-status .filler {
+  flex-grow: 1;
+}
 .gral-df-container .f-detail-container .detail-comments .d-comments .d-comment .comment-header {
   display: flex;
   align-items: center;
@@ -1302,6 +1317,17 @@ ul {
   font-size: 14px;
   margin-bottom: 0;
   padding-bottom: 0;
+}
+.gral-df-container .f-detail-container .detail-comments .d-comments .d-comment .comment-c-din {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2em;
+}
+.gral-df-container .f-detail-container .detail-comments .d-comments .d-comment .comment-c-din small {
+  font-weight: 300;
 }
 .gral-df-container .f-detail-container .login-info {
   display: flex;
@@ -1414,6 +1440,7 @@ ul {
 }
 .gral-df-container .f-detail-container .detail-c .detail-right .forum-status h4 {
   font-weight: 300;
+  margin-bottom: 0;
 }
 .gral-df-container .f-detail-container .detail-c .detail-right .forum-status .filler {
   flex-grow: 1;
@@ -2219,6 +2246,9 @@ ul {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
   padding: 20px 25px;
   margin-top: 1em;
+}
+.my-comments-c .my-com-wrapper .mcomment .title {
+  font-weight: 300;
 }
 .my-comments-c .my-com-wrapper .mcomment .content {
   font-weight: 300;

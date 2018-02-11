@@ -22,11 +22,13 @@
 		that.successToast = successToast;
 		that.warningToast = warningToast;
 		that.deleteExperience = deleteExperience;
+		that.parentUrl = '';
 
-		function init(id, likes, dislikes, views){
+		function init(id, likes, dislikes, views, parentUrl){
 			that.id = id;
 			that.likes = likes - dislikes;
 			that.views = views;
+			that.parentUrl = parentUrl;
 			updateViews();
 		}
 
@@ -108,7 +110,7 @@
 							swal("Se ha borrado la experiencia", {
 								icon: "success"
 							}).then(function(){
-								location.reload();
+								window.location.replace(that.parentUrl);
 							});	
 						},function(response){
 							if(response.data.error){
