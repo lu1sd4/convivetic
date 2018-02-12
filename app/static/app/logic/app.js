@@ -1,7 +1,7 @@
 var conviveticApp = angular.module
 (
     'conviveticApp', 
-    ['ngMessages', 'ngAnimate','app.controllers', 'app.factories', 'app.directives']
+    ['ngMessages', 'ngAnimate','app.controllers', 'app.factories', 'app.directives',]
 ).config(function($interpolateProvider, $httpProvider){
     $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
     

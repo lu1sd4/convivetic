@@ -1,4 +1,7 @@
 
+.guides-body
+	background-color #f0f0f0
+
 .footer-guide
 	box-shadow 0 0 10px rgba(0,0,0,.15)
 	background-color #e7e7e7
@@ -8,6 +11,7 @@
 	margin-top auto
 	bottom 0
 	position absolute
+	transition 0.5s all
 	width 100%
 	
 	.footer-w
@@ -18,11 +22,32 @@
 		width 100%
 		max-width 1000px
 		
+		p
+			color #fff
+			align-self center
+			font-size 24px
+			margin-left auto
+		
+		button
+			padding 12px 30px
+			border-radius 25px
+		
 		.back-btn
 			margin-right auto
 		
 		.next-btn
 			margin-left auto
+		
+		.next-btn-feedback
+			background #fff !important
+			color texts-color
+			
+	
+.footer-guide.good-answer
+	background-image linear-gradient(90deg, #82dd00, #37ba00)
+
+.footer-guide.bad-answer
+	background-image linear-gradient(90deg, #f68c8c, red)
 	
 .top-menu
 	position relative
@@ -59,19 +84,20 @@
 			
 			hr
 				position absolute
-				width 100%
 			
 			.total
 				background-color #cecece
 				top -16px
 				height 100%
+				width 100%
 			
 			.current
 				background-color #37ba00
 				background-image linear-gradient(90deg,#82dd00,#37ba00)
 				height 300%
-				width 30% !important
 				top -17px
+				width 0
+				transition 0.6s all
 		
 		.decor
 			background texts-color
@@ -95,7 +121,7 @@
 		justify-content center
 		height 100%
 		width 100%
-		
+
 		.guide-title
 			text-align center
 			
@@ -114,18 +140,35 @@
 				height 50px
 				width 200px
 				margin-top 3em
+			
 				
 		.guide-intro
+			background-color #fff
+			padding 40px 40px
+			border-radius 60px
+
 			h2
 				font-weight 700
+				text-align center
 			
 			h1
 				font-weight 300
-				font-size 42px
-				
-			
+				font-size 36px
+				text-align center
+				color #7b7b7b
+		
+		.guide.ng-enter
+			transition all ease-in 0.5s
+			opacity  0
+		
+		.guide.ng-enter-active
+			opacity 1
+		
+		.guide.ng-leave.ng-leave-active
+			opacity 0
+
 		.guide-test
-			width 100% 
+			width 100%
 			
 			h2
 				font-weight 300
@@ -133,14 +176,14 @@
 			textarea
 				margin-top 2em
 				width 100%
+		
 			
 		.guide-test-img
 			width 100%
 			
 			h2
 				font-weight 300
-			
-
+				font-size 21px
 			
 			.guide-image
 				display flex
@@ -164,6 +207,15 @@
 				span
 					font-weight 500
 					font-size 22px
+				
+				.final-text
+					font-size 26px
+				
+				.final-desc
+					font-weight 300
+			
+			p.final-p
+					text-align center
 		
 		.guide-question-multiple
 			
@@ -181,6 +233,19 @@
 					border 2px solid #e9e9e9
 					padding 10px
 					width 250px
+					
+				a
+					text-decoration none
+					color texts-color
+				
+				a:hover
+					background #e9e9e9
+					
+				a.good-answer
+					background #a8d2a8 !important
+				
+				a.bad-answer 
+					background #f68c8c !important
 				
 				.top-answers
 					display flex
@@ -201,6 +266,7 @@
 					
 					.ans-4
 						margin-left auto
+
 					
 					
 				

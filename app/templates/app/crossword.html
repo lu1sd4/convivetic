@@ -1,0 +1,29 @@
+{% load static %}
+
+<html>
+<head>
+<title>JavaScript Crossword</title>
+<link rel="stylesheet" type="text/css" href="{% static 'app/logic/crossword/style.css' %}" />
+
+<meta charset="UTF-8">
+</head>
+<body>
+<div id="container1"></div>
+<br/>
+<div id="container2"></div>
+
+
+<script type="text/javascript" src="{% static 'app/logic/crossword/lib/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/logic/crossword/lib/jquery.hotkeys.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/logic/crossword/lib/jquery.cookie.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/logic/crossword/crossword.js' %}"></script>
+<script type="text/javascript">
+  var crossw1rd1;
+  //var crossw1rd2;
+  $(document).ready(function() {
+    crossw1rd1 = new Crossw1rd('container1');
+    crossw1rd1.init('puzzle');
+  });
+</script>
+</body>
+</html>

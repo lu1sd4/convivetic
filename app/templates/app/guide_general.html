@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'app/libs/toastr/toastr.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/imagehover.css/1.0/css/imagehover.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'app/logic/crossword/style.css' %}" />
 </head>
 <body ng-app='conviveticApp' ng-cloak class="guides-body" ng-controller="guidesController as gc">
 
@@ -27,29 +28,31 @@
 	</div>
 
 	<div class="gmain-content">
+		
+
 		<div class="gmain-wrapper">
-			<div class="guide-intro" ng-show="gc.currentTemplate == gc.TEMP_INTRO">
+			<div class="guide guide-intro" ng-if="gc.currentTemplate == gc.TEMP_INTRO">
 				<h2>Guía</h2>
 				<h1>{[{gc.currentStateObj.content}]}</h1>
 			</div>
 
-			<div class="guide-test" ng-show="gc.currentTemplate == gc.TEMP_TEST">
+			<div class="guide guide-test" ng-if="gc.currentTemplate == gc.TEMP_TEST">
 				<h2>{[{gc.currentStateObj.content}]}</h2>
-				<textarea class="form-control" id="" cols="30" rows="8"></textarea>
+				<textarea class="form-control test_input" cols="30" rows="8" placeholder="Escribe tu opinión"></textarea>
 
 			</div>
 
-			<div class="guide-text" ng-show="gc.currentTemplate == gc.TEMP_TEXT">
-				<h3>{{gc.currrentStateObj.title}}</h3>
+			<div class="guide guide-text" ng-if="gc.currentTemplate == gc.TEMP_TEXT">
+				<h3>{[{gc.currentStateObj.title}]}</h3>
+				<p ng-repeat="cc in gc.currentStateObj.content" ng-bind-html="cc"></p>
+			</div>
+
+			<div class="guide guide-text" ng-if="gc.currentTemplate == gc.TEMP_ACTIVITY">
+				<h3>{[{gc.currrentStateObj.title}]}</h3>
 				<p>{[{gc.currentStateObj.content}]}</p>
 			</div>
 
-			<div class="guide-text" ng-show="gc.currentTemplate == gc.TEMP_ACTIVITY">
-				<h3>{{gc.currrentStateObj.title}}</h3>
-				<p>{[{gc.currentStateObj.content}]}</p>
-			</div>
-
-			<div class="guide-test-img" ng-show="gc.currentTemplate == gc.TEMP_TEST_IMAGE">
+			<div class="guide guide-test-img" ng-if="gc.currentTemplate == gc.TEMP_TEST_IMAGE">
 
 				<div class="guide-image">
 					<img class="rounded" src="{[{gc.currentStateObj.img_url}]}" alt="">
@@ -57,30 +60,38 @@
 				
 
 				<h2>{[{gc.currentStateObj.content}]}</h2>
-				<textarea class="form-control" id="" cols="30" rows="8"></textarea>
+				<textarea class="form-control test_image_input" id="a2" cols="30" rows="5"></textarea>
 
 			</div>
 
-			<div class="guide-question-multiple" ng-show="gc.currentTemplate == gc.TEMP_TEST_MULTIPLE">
+			<div class="guide guide-question-multiple" ng-if="gc.currentTemplate == gc.TEMP_TEST_MULTIPLE">
 				<h2>{[{gc.currentStateObj.content}]}</h2>
 
 				<div class="answers-w">
 					<div class="top-answers">
-						<div class="answers ans-1 rounded">{[{gc.currentStateObj.answers[0]}]}</div>
-						<div class="answers ans-2 rounded">{[{gc.currentStateObj.answers[1]}]}</div>
+						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[0])" class="answers ans-1 rounded" 
+						ng-class="gc.validateAnswer(gc.currentStateObj.answers[0])">{[{gc.currentStateObj.answers[0]}]}</a>
+						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[1])" class="answers ans-2 rounded" 
+						ng-class="gc.validateAnswer(gc.currentStateObj.answers[1])">{[{gc.currentStateObj.answers[1]}]}</a>
 					</div>
 					
 					<div class="bottom-answers">
-						<div class="answers ans-3 rounded">{[{gc.currentStateObj.answers[2]}]}</div>
-						<div class="answers ans-4 rounded">{[{gc.currentStateObj.answers[3]}]}</div>
+						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[2])" class="answers ans-3 rounded"
+						ng-class="gc.validateAnswer(gc.currentStateObj.answers[2])">{[{gc.currentStateObj.answers[2]}]}</a>
+						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[3])" class="answers ans-4 rounded"
+						ng-class="gc.validateAnswer(gc.currentStateObj.answers[3])">{[{gc.currentStateObj.answers[3]}]}</a>
 					</div>
 
 				</div>
 			</div>
 
-			<div class="guide-text" ng-show="gc.currentTemplate == gc.TEMP_CROSSWORD">
-				<h3>{{gc.currrentStateObj.title}}</h3>
-				{[{gc.currentStateObj.content}]}
+			<div class="guide" ng-show="gc.currentTemplate == gc.TEMP_CROSSWORD">
+
+				<h3>Crossword</h3>
+				<div id="container1"></div>
+				<br/>
+				<div id="container2"></div>
+
 			</div>
 
 		</div>
@@ -88,12 +99,26 @@
 	
 	<footer class="footer-guide">
 		<div class="footer-w">
-			<button class="btn btn-primary back-btn" ng-click="gc.previousState()" ng-disabled="gc.currentGuideIndex == 0">Anterior</button>
+			<p ng-if="gc.answersVisibles">{[{ gc.currentFeedback }]}</p>
 			<button class="btn btn-primary next-btn" ng-click="gc.nextState()" ng-click="gc.previousState()" ng-disabled="gc.currentGuideIndex+1 == gc.statesQuantity">Siguiente</button>
 		</div>
 	</footer>
 
 	<script type="text/javascript" src="{% static 'app/libs/jquery/dist/jquery.min.js' %}"></script>
+	
+	<script type="text/javascript" src="{% static 'app/logic/crossword/lib/jquery.hotkeys.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/crossword/lib/jquery.cookie.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/crossword/crossword.js' %}"></script>
+	<script type="text/javascript">
+	  var crossw1rd1;
+	  //var crossw1rd2;
+	  $(document).ready(function() {
+	    crossw1rd1 = new Crossw1rd('container1');
+	    crossw1rd1.init('puzzle');
+	  });
+	</script>
+
+
 	<script type="text/javascript" src="{% static 'app/libs/tether/dist/js/tether.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/popper.js/dist/umd/popper.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
@@ -103,6 +128,7 @@
 	<script type="text/javascript" src="{% static 'app/libs/bootstrap-filestyle-2.1.0/src/bootstrap-filestyle.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/libs/toastr/toastr.min.js' %}"></script>
 
+
 	<script type="text/javascript" src="{% static 'app/logic/app.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/logic/controllers/signupCtrl.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/logic/controllers/homeCtrl.js' %}"></script>
@@ -110,6 +136,7 @@
 	<script type="text/javascript" src="{% static 'app/logic/controllers/generalGCtrl.js' %}"></script>
 
 	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 
 </body>

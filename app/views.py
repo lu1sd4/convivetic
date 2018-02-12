@@ -635,3 +635,6 @@ class BoxView(ListView):
 
 class GuideView(TemplateView):
 	template_name = 'app/guide_general.html'
+
+class CrossWordView(TemplateView):
+	template_name = 'app/crossword.html'
