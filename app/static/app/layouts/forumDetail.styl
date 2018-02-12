@@ -226,10 +226,19 @@ f-m-width = 900px
 						display flex
 						
 						.detail-n
+
+							display flex
+							flex-direction row
+
+							.filler
+								width 15px
 							
-							.forum-likes
+							.forum-likes,
+							.forum-dislikes
+
 								display flex
-								
+								flex-direction row
+
 								h5
 									color texts-color
 									font-weight 300
@@ -240,19 +249,23 @@ f-m-width = 900px
 									height 20px
 									width 20px
 									margin-right 8px
-						
-						.social-btns
-							display flex
-							margin-left	8px
-							
-							a
-								margin-right 3px
-								
-								svg
-									color shadow-color
-									height 20px
-									width 20px
 
+								.thread-like,
+								.thread-dislike
+									margin-right 3px
+									cursor pointer
+									height 20px
+									width 20px								
+									.fa-thumbs-up:hover
+										color green									
+									.fa-thumbs-down:hover
+										color red
+								.thread-like.active
+									.fa-thumbs-up
+										color green
+								.thread-dislike.active
+									.fa-thumbs-down
+										color red
 					
 					.social-right
 						margin-left auto

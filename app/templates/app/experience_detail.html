@@ -31,7 +31,8 @@
 						{% else %}
 							<span>{{object.author.get_full_name}}</span> 
 						{% endif %}
-					</p>	
+					</p>
+					<p>Publicado el {{ object.pub_date }}</p>
 				</div>
 				
 			</div>
@@ -97,9 +98,20 @@
 
 			<div class="d-right-content">
 				{% if object.img %}
-				<img src="/{{object.img.url}}" alt=""></img>
+					<img src="/{{object.img.url}}" alt=""></img>
 				{% endif %}
-				<div class="d-social-c">
+				{% if object.video_url %}
+					<iframe height="315"
+						src="https://www.youtube.com/embed/{{object.video_url}}" class="rounded">
+					</iframe>
+				{% endif %}
+				{% if object.audio_url %}
+					<audio controls>
+					  <source src="http://docs.google.com/uc?export=open&id={[{expCtrl.extractCId('{{ object.audio_url }}')}]}">
+						Your browser does not support the audio element.
+					</audio> 
+				{% endif %}
+				<div class="d-social-c" ng-init="expCtrl.loadAudios()">
 					<div class="d-social-left">
 
 						<div class="detail-n">

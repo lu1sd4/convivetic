@@ -116,3 +116,17 @@ class ThreadCommentForm(forms.ModelForm):
 			'audio_url' : forms.HiddenInput,
 			'thread' : forms.HiddenInput
 		}
+
+class ExperienceForm(forms.ModelForm):
+	class Meta:
+		model = Experience
+		fields = ['title', 'content', 'video_url', 'audio_url', 'img']
+		labels = {
+			'title' : 'Título de la experiencia',
+			'content' : 'Cuerpo de texto de la experiencia'			
+		}
+		widgets = {
+			'content' : forms.Textarea,
+			'video_url' : forms.HiddenInput,
+			'audio_url' : forms.HiddenInput
+		}

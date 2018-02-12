@@ -24,6 +24,12 @@
 		that.audioUrl
 		that.uploadComplete = false;
 		that.status_polling_interval = 10 * 1000;
+
+		that.like_no_like = 'no_like';
+		that.like_like = 'like';
+		that.like_dislike = 'dislike';
+		that.likeStatus = '';
+
 		that.folderId = "1PXtw_L0urVh8VdToKUthWT-FiR4ZsKZl";
 
 		that.id = -1;
@@ -62,50 +68,107 @@
 		that.deleteComment = deleteComment;
 		that.loadAudios = loadAudios;
 		that.parentUrl = '';
+		that.addLike = addLike;
+		that.addDislike = addDislike;
+		that.removeLike = removeLike;
+		that.removeDislike = removeDislike;
+		that.updateLikes = updateLikes;
 
 		that.commentClicked = false;
 		that.audio_id = "";
 
 
-		function init(id, likes, dislikes, views, parentUrl){
+		function init(id, likes, dislikes, views, parentUrl, likeStatus){
 			that.id = id;
-			that.likes = likes - dislikes;
+			that.likes = likes;
+			that.dislikes = dislikes;
 			that.views = views;
 			that.parentUrl = parentUrl;
+			that.likeStatus = likeStatus;
 			updateViews();
 		}
 
 		function vote(){
 
-			$(".social-btns").remove()
-
-			$http.get("/forums/"+that.id+"/vote").then(function successCallback(response){
-				if(parseInt(response.data) != NaN){
-					that.likes = response.data;
-				}
-				
-			}, function errorCallback(response){
-
-				console.log("Error en likes");
-			
-			});
+			if(that.likeStatus == that.like_no_like){
+				that.addLike();
+				that.likeStatus = that.like_like;
+			}
+			else if(that.likeStatus == that.like_like){
+				that.removeLike();
+				that.likeStatus = that.like_no_like;			
+			}
+			else if(that.likeStatus == that.like_dislike){				
+				that.removeDislike(that.addLike);
+				that.likeStatus = that.like_like;		
+			}
 
 		}
 
 		function unvote(){
 
-			$(".social-btns").remove()
+			if(that.likeStatus == that.like_no_like){
+				that.addDislike();
+				that.likeStatus = that.like_dislike;
+			}
+			else if(that.likeStatus == that.like_dislike){
+				that.removeDislike();
+				that.likeStatus = that.like_no_like;				
+			}
+			else if(that.likeStatus == that.like_like){				
+				that.removeLike(that.addDislike);
+				that.likeStatus = that.like_dislike;	
+			}
 
-			$http.get("/forums/"+that.id+"/unvote").then(function successCallback(response){
+		}
 
-				if(parseInt(response.data) != NaN){
-					that.likes = response.data;
-				}
-
+		function addLike(f){
+			$http.get("/forums/"+that.id+"/like").then(function successCallback(response){
+				if(f)
+					f();
+				else
+					that.updateLikes(response.data);
 			}, function errorCallback(response){
-				console.log("Error en dislikes");
+				console.log("Error en likes");			
 			});
+		}
 
+		function removeLike(f){
+			$http.get("/forums/"+that.id+"/removeLike").then(function successCallback(response){
+				if(f)
+					f();
+				else
+					that.updateLikes(response.data);
+			}, function errorCallback(response){
+				console.log("Error en likes");			
+			});
+		}
+
+		function addDislike(f){
+			$http.get("/forums/"+that.id+"/dislike").then(function successCallback(response){
+				if(f)
+					f();
+				else
+					that.updateLikes(response.data);
+			}, function errorCallback(response){
+				console.log("Error en likes");			
+			});
+		}
+
+		function removeDislike(f){
+			$http.get("/forums/"+that.id+"/removeDislike").then(function successCallback(response){
+				if(f)
+					f();
+				else
+					that.updateLikes(response.data);
+			}, function errorCallback(response){
+				console.log("Error en likes");			
+			});
+		}
+
+		function updateLikes(data){
+			that.likes = data.likes;
+			that.dislikes = data.dislikes;
 		}
 
 		function updateViews(){

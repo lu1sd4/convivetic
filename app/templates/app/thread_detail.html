@@ -6,7 +6,7 @@
 
  <div class="container-fluid gral-df-container">
 
- 	<div class="f-detail-container" ng-controller="forumDetailController as fdCtrl" ng-init="fdCtrl.init({{object.id}}, {{object.like_set.count}},{{object.dislike_set.count}},{{object.views}},'{% url 'forums' %}')">
+ 	<div class="f-detail-container" ng-controller="forumDetailController as fdCtrl" ng-init="fdCtrl.init({{object.id}}, {{object.like_set.count}},{{object.dislike_set.count}},{{object.views}},'{% url 'forums' %}', '{{like_status}}')">
 	 	
 		<div class="detail-c">
 			<div class="prof-image">
@@ -59,23 +59,15 @@
 
 						<div class="detail-n">
 							<div class="forum-likes">
-								<i class="fas fa-thumbs-up"></i>
-								<h5>{[{fdCtrl.likes}]}</h5>
+								<div ng-click="fdCtrl.vote()" class="thread-like" ng-class="{'active' : fdCtrl.likeStatus == fdCtrl.like_like }"><i class="fas fa-thumbs-up"></i></div>
+								<h5 id="likes">{[{fdCtrl.likes}]}</h5>
 							</div>
-						</div>
-
-						<div class="social-btns">
-							{% if request.user.is_authenticated %}
-
-								{% if user_can_vote %}
-
-									<a ng-click="fdCtrl.vote()"><i class="fas fa-chevron-up"></i></a>
-									<a ng-click="fdCtrl.unvote()"><i class="fas fa-chevron-down"></i></a>	
-
-								{% endif %}
-
-							{% endif %}
-						</div>	
+							<div class="filler"></div>			
+							<div class="forum-dislikes">
+								<div ng-click="fdCtrl.unvote()" class="thread-dislike" ng-class="{'active' : fdCtrl.likeStatus == fdCtrl.like_dislike }"><i class="fas fa-thumbs-down"></i></div>
+								<h5 id="dislikes">{[{fdCtrl.dislikes}]}</h5>
+							</div>
+						</div>						
 					</div>
 
 					<div class="social-right">
@@ -162,7 +154,7 @@
 
 		{% else %}
 			<div class="alert alert-info login-info">
-				<p>Para votar y comentar debe estar autenticado</p>
+				<p>Para votar y comentar debes estar autenticado</p>
 				<button class="btn btn-primary" onclick="location.href='/login'">Iniciar Sesión</button>
 			</div>
 

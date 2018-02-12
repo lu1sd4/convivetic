@@ -69,7 +69,7 @@
 			}
 
 			// Click en publicar discusión
-			function publish(){''
+			function publish(){
 				that.publishClicked = true;
 				var file = $("#mediaFile").get(0);
 				switch(that.mediaOption){

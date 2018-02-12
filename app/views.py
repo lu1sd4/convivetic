@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.http import JsonResponse
 from django.template import loader
+from django.db.models import Count
 
 from django.urls import reverse
 
@@ -66,7 +67,7 @@ class Index(ListView):
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['secondary_threads'] = Thread.objects.order_by('pub_date')[4:8]
+		context['secondary_threads'] = Thread.objects.annotate(likes=Count('like')).order_by('pub_date')[4:8]
 		context['experiences'] = Experience.objects.filter(status='A').order_by('pub_date')[:9]
 		context['th_quantity'] = Thread.objects.all().count()
 		return context
@@ -95,9 +96,10 @@ class Forums(FormView):
 	form_class = ThreadForm
 	success_url = '/forums'
 
-	def get_context_data(request, **kwargs):
+	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		context['thread_list'] = Thread.objects.all()
+		context['order'] = 'new'
 		return context
 
 	def post(self, request, *args, **kwargs):		
@@ -106,6 +108,7 @@ class Forums(FormView):
 			thread = form.save(commit=False)
 			thread.author = request.user
 			thread.save()
+			messages.success(request, 'Tu discusión se ha publicado con éxito.')
 			return redirect('thread-detail', pk=thread.id)
 		else:
 			return self.form_invalid(form)
@@ -113,6 +116,11 @@ class Forums(FormView):
 class ForumsOrdered(ListView):
 	template_name = 'app/forums.html'
 	paginate_by = 8
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['order'] = self.kwargs['order']
+		return context
 
 	def get_queryset(self):
 		criterium = self.kwargs['order']
@@ -142,17 +150,19 @@ class ForumDetail(FormMixin, DetailView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		thread_pk = self.kwargs['pk']
-		author_id = self.request.user.id
-
-		likes_c = Like.objects.filter(thread = thread_pk, author = author_id).count()
-		dislike_c = Dislike.objects.filter(thread = thread_pk, author = author_id).count()
-
-		if(likes_c == 0 and dislike_c == 0):
-			context['user_can_vote'] = True 
-		else:
-			context['user_can_vote'] = False
-
 		context['thread_pk'] = thread_pk
+
+		like = Like.objects.filter(thread = thread_pk, author = self.request.user.id).count()
+		dislike = Dislike.objects.filter(thread = thread_pk, author = self.request.user.id).count()
+
+		status = 'no_like'
+		if like > 0:
+			status = 'like'
+		elif dislike > 0:
+			status = 'dislike'
+
+		context['like_status'] = status
+
 		context['form'] = ThreadCommentForm(instance=Comment(
 				thread=self.object
 			)
@@ -181,26 +191,77 @@ class ForumLike(LoginRequiredMixin, View):
 	login_url = '/login'
 
 	def get(self, request, *args, **kwargs):
+
 		forum_id = self.kwargs['pk']
 		forum = get_object_or_404(Thread, pk=forum_id)
 		author = request.user
 		like = Like(thread = forum, author = author)
 		like.save()
-		likes_c = Like.objects.filter(thread = forum_id, author = author.id).count()
-		dislike_c = Dislike.objects.filter(thread = forum_id, author = author.id).count()
+		likes_c = Like.objects.filter(thread = forum_id).count()
+		dislikes_c = Dislike.objects.filter(thread = forum_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
 
-		return HttpResponse(likes_c - dislike_c)
+		return JsonResponse(data)
 
-class ForumDislike(View):
+class ForumRemoveLike(LoginRequiredMixin, View):
+	login_url = '/login'
+
 	def get(self, request, *args, **kwargs):
+
+		forum_id = self.kwargs['pk']
+		forum = get_object_or_404(Thread, pk=forum_id)
+		author = request.user
+		like = Like.objects.filter(thread = forum_id, author = author.id)
+		like.delete()
+		likes_c = Like.objects.filter(thread = forum_id).count()
+		dislikes_c = Dislike.objects.filter(thread = forum_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
+
+class ForumDislike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+
 		forum_id = self.kwargs['pk']
 		forum = get_object_or_404(Thread, pk=forum_id)
 		author = request.user
 		dislike = Dislike(thread = forum, author = author)
 		dislike.save()
-		likes_c = Like.objects.filter(thread = forum_id, author = author.id).count()
-		dislikes_c = Dislike.objects.filter(thread = forum_id, author = author.id).count()
-		return HttpResponse(likes_c - dislikes_c)
+		likes_c = Like.objects.filter(thread = forum_id).count()
+		dislikes_c = Dislike.objects.filter(thread = forum_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
+
+class ForumRemoveDislike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+
+		forum_id = self.kwargs['pk']
+		forum = get_object_or_404(Thread, pk=forum_id)
+		author = request.user
+		dislike = Dislike.objects.filter(thread = forum_id, author = author.id)
+		dislike.delete()
+		likes_c = Like.objects.filter(thread = forum_id).count()
+		dislikes_c = Dislike.objects.filter(thread = forum_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
 
 class ForumView(View):
 	def get(self, request, *args, **kwargs):
@@ -324,16 +385,33 @@ class YoutubeUploadTest(TemplateView):
 class DriveUploadTest(TemplateView):
 	template_name = 'app/test_drive.html'
 
-class CreateExperience(CreateView):
+class CreateExperience(LoginRequiredMixin, FormView):
 	template_name = 'app/create_experience.html'
 	model = Experience
-	fields = ['title', 'content', 'video_url', 'audio_url', 'img']
+	form_class = ExperienceForm
+	success_url = '/myexperiences'
+
+	def post(self, request, *args, **kwargs):		
+		form = self.get_form()
+		if form.is_valid():
+			exp = form.save(commit=False)
+			exp.author = request.user
+			exp.save()
+			messages.success(request, 'Tu experiencia se ha enviado con éxito. Está pendiente de aprobación para ser publicada.')
+			return redirect('experience-detail', pk=exp.id)
+		else:
+			return self.form_invalid(form)
 
 class ExperiencesView(ListView):
 	template_name = 'app/experiences.html'
 	context_object_name = 'experiences'
 	queryset = Experience.objects.order_by('pub_date').filter(status='A')
 	paginate_by = 8
+
+	def get_context_data(self, **kwargs):
+		context = super(ExperiencesView, self).get_context_data(**kwargs)
+		context['order'] = 'new'
+		return context;
 
 
 class ContactUsView(TemplateView):
@@ -387,6 +465,11 @@ class ExperiencesOrdered(ListView):
 	template_name = 'app/experiences.html'
 	context_object_name = 'experiences'
 	paginate_by = 8
+
+	def get_context_data(self, **kwargs):
+		context = super(ExperiencesOrdered, self).get_context_data(**kwargs)
+		context['order'] = self.kwargs['order']
+		return context;
 
 	def get_queryset(self):
 		criterium = self.kwargs['order']

@@ -22,6 +22,9 @@
 		that.successToast = successToast;
 		that.warningToast = warningToast;
 		that.deleteExperience = deleteExperience;
+		that.extractCId = extractCId;
+		that.loadAudios = loadAudios;
+
 		that.parentUrl = '';
 
 		function init(id, likes, dislikes, views, parentUrl){
@@ -93,7 +96,19 @@
 			swal(message, {
 				icon: "warning"
 			})
-		}		
+		}	
+
+		function extractCId(audio_url){
+
+			let a_id = audio_url.split("d/")[1];
+			a_id = a_id.split("/p")[0];		
+			return a_id;			
+			
+		}	
+
+		function loadAudios(){
+			$("audio").load();
+		}
 
 		function deleteExperience(){
 			swal({
