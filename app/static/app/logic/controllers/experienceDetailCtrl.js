@@ -23,6 +23,8 @@
 		that.successToast = successToast;
 		that.warningToast = warningToast;
 		that.deleteExperience = deleteExperience;
+		that.extractCId = extractCId;
+		that.loadAudios = loadAudios;
 
 		(function(d, s, id) {
 		  	var js, fjs = d.getElementsByTagName(s)[0];
@@ -33,9 +35,13 @@
 		}(document, 'script', 'facebook-jssdk'));
 
 		function init(id, likes, dislikes, views){
+		that.parentUrl = '';
+
+		function init(id, likes, dislikes, views, parentUrl){
 			that.id = id;
 			that.likes = likes - dislikes;
 			that.views = views;
+			that.parentUrl = parentUrl;
 			updateViews();
 		}
 
@@ -100,7 +106,19 @@
 			swal(message, {
 				icon: "warning"
 			})
-		}		
+		}	
+
+		function extractCId(audio_url){
+
+			let a_id = audio_url.split("d/")[1];
+			a_id = a_id.split("/p")[0];		
+			return a_id;			
+			
+		}	
+
+		function loadAudios(){
+			$("audio").load();
+		}
 
 		function deleteExperience(){
 			swal({
@@ -117,7 +135,7 @@
 							swal("Se ha borrado la experiencia", {
 								icon: "success"
 							}).then(function(){
-								location.reload();
+								window.location.replace(that.parentUrl);
 							});	
 						},function(response){
 							if(response.data.error){
@@ -132,9 +150,5 @@
 				}
 			});
 		}
-
 	}
-
-	
-
 })();

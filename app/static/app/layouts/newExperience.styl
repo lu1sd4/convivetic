@@ -1,0 +1,43 @@
+.nexp-container
+	display flex
+	flex-direction column
+	align-items center
+	margin-bottom 2rem
+
+	.nexp-content
+		width 90%
+
+		.new-experience
+			margin-top 1.5em
+
+			.form-control::-webkit-input-placeholder  
+				color #ebebeb   /* WebKit, Blink, Edge */
+			.form-control:-moz-placeholder  
+				color #ebebeb   /* Mozilla Firefox 4 to 18 */
+			.form-control::-moz-placeholder  
+				color #ebebeb   /* Mozilla Firefox 19+ */
+			.form-control:-ms-input-placeholder  
+				color #ebebeb   /* Internet Explorer 10-11 */
+			.form-control::-ms-input-placeholder  
+				color #ebebeb   /* Microsoft Edge */
+				
+			.title-input
+				font-size 20px
+				
+			.forum-type
+				display flex
+				justify-content space-around
+			
+			.f-type-data
+				margin-top 2em
+				
+				@media (max-width 575.99px)
+					input
+						overflow hidden
+						width 100%
+			
+			.img-hidden-field
+				display none
+
+			.media-type-container
+				width 100%

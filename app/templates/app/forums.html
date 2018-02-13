@@ -12,27 +12,27 @@
 	 		<div class="top-section">
 	 			<div class="forum-header-normal" ng-show="fCtrl.currentState == fCtrl.normalState ">
 	 				<h3 class="head-title">Foros</h3>
-
-	 				<button class="btn btn-primary" ng-click="fCtrl.newDiscussion()">Nueva Discusión</button>
-
+	 				{% if user.is_authenticated %}
+	 					<button class="btn btn-primary" ng-click="fCtrl.newDiscussion()">Nueva Discusión</button>
+	 				{% endif %}
 			 	</div>
 
 			 	<div class="forum-header-new" ng-show="fCtrl.currentState == fCtrl.newState">
 			 		<h3 class="head-title">Nuevo Foro</h3>
-
 			 		<div class="options-c">
 			 			<button class="cancel-btn btn btn-secondary" ng-disabled="fCtrl.isUploading" ng-click="fCtrl.cancelNewDiscussion()">Cancelar</button>
 			 			<button ng-click="fCtrl.publish()" class="publish-btn btn btn-primary" ng-disabled="fCtrl.isUploading">Publicar Discusión</button>
 			 		</div>
 			 	</div>
+
 	 		</div>
 
 
 
 	 		<div class="filter-section" ng-show="fCtrl.currentState == fCtrl.normalState ">
 	 			<ul>
-	 				<li class="active"><a href="{% url 'forums-ordered' 'popular' %}">Popular</a></li>
-	 				<li><a href="{% url 'forums-ordered' 'new' %}">Nuevo</a></li>
+	 				<li {% if order == 'popular' %} class="active" {% endif %}><a href="{% url 'forums-ordered' 'popular' %}">Popular</a></li>
+	 				<li {% if order == 'new' %} class="active" {% endif %}><a href="{% url 'forums-ordered' 'new' %}">Nuevo</a></li>
 	 			</ul>
 	 		</div>
 	 	</div>
@@ -93,6 +93,7 @@
 			</div>	
 	 	</div>
 
+	 	{% if user.is_authenticated %}
 
 	 	<div class="new-forum" ng-show="fCtrl.currentState == fCtrl.newState ">
 	 		<form novalidate ng-class="{ 'was-validated' : fCtrl.publishClicked }" id="form" name="form" method="POST" enctype='multipart/form-data'>
@@ -149,6 +150,8 @@
 				</div>		
 			</form>
 	 	</div>
+
+	 	{% endif %}
 
  	</div>
  	

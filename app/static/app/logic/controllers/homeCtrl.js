@@ -16,9 +16,9 @@
 		
 		that.pendingExperiences = '';
 
-		$http.get("/experiences/api/pendingexperiences").then(function(response) {
+		$http.get("/experiences/api/pendingexperiences").then(function(response) {			
 	        that.pendingExperiences = response.data.count;
-	    });
+	    },function(){ });
 
 		function getMobileMenu(){
 			that.mMenuIsActive = !that.mMenuIsActive;
@@ -58,6 +58,12 @@
 		    }
 
 		});
+
+		var ihash = window.location.href.indexOf('#');
+		if(ihash >= 0){
+			var compSelector = window.location.href.substring(ihash, window.location.href.length);
+			$('html, body').scrollTop($(compSelector).offset().top-550);
+		}
 
 
 

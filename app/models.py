@@ -123,7 +123,7 @@ class Thread(models.Model):
 	views = models.PositiveIntegerField(
 		default = 0
 	)	
-	tags = models.ManyToManyField(ThreadTag)
+	tags = models.ManyToManyField(ThreadTag, blank=True)
 
 
 class Like(models.Model):
@@ -198,7 +198,9 @@ class Experience(models.Model):
 		default = ''
 	)
 	content = models.TextField(
-		default="Experience content"
+		default="",
+		blank=False,
+		null=False
 	)
 	pub_date = models.DateField(
 		default=date.today
@@ -229,7 +231,7 @@ class Experience(models.Model):
 	likes = models.PositiveIntegerField(
 		default = 0
 	)
-	tags = models.ManyToManyField(ExperienceTag)
+	tags = models.ManyToManyField(ExperienceTag, blank=True)
 
 
 class ExperiencesLike(models.Model):

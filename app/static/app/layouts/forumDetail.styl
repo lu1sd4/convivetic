@@ -47,6 +47,17 @@ f-m-width = 900px
 					padding 20px
 					width 100%
 					
+					.comment-status
+						flex-direction row-reverse
+						display flex
+						align-items center
+						margin-bottom 1rem
+						h4,h5,h6
+							font-weight 300
+							margin-bottom 0
+						.filler
+							flex-grow 1
+
 					.comment-header
 						display flex
 						align-items center
@@ -86,6 +97,16 @@ f-m-width = 900px
 							font-size 14px
 							margin-bottom 0
 							padding-bottom 0
+
+					.comment-c-din
+						margin-top 2em
+						display flex
+						flex-direction column
+						justify-content center
+						align-items center
+						margin-bottom 2em
+						small
+							font-weight 300
 		
 		.login-info
 			display flex
@@ -191,6 +212,7 @@ f-m-width = 900px
 					margin-bottom 1rem
 					h4
 						font-weight 300
+						margin-bottom 0
 					.filler
 						flex-grow 1
 						
@@ -204,10 +226,19 @@ f-m-width = 900px
 						display flex
 						
 						.detail-n
+
+							display flex
+							flex-direction row
+
+							.filler
+								width 15px
 							
-							.forum-likes
+							.forum-likes,
+							.forum-dislikes
+
 								display flex
-								
+								flex-direction row
+
 								h5
 									color texts-color
 									font-weight 300
@@ -218,19 +249,23 @@ f-m-width = 900px
 									height 20px
 									width 20px
 									margin-right 8px
-						
-						.social-btns
-							display flex
-							margin-left	8px
-							
-							a
-								margin-right 3px
-								
-								svg
-									color shadow-color
-									height 20px
-									width 20px
 
+								.thread-like,
+								.thread-dislike
+									margin-right 3px
+									cursor pointer
+									height 20px
+									width 20px								
+									.fa-thumbs-up:hover
+										color green									
+									.fa-thumbs-down:hover
+										color red
+								.thread-like.active
+									.fa-thumbs-up
+										color green
+								.thread-dislike.active
+									.fa-thumbs-down
+										color red
 					
 					.social-right
 						margin-left auto
