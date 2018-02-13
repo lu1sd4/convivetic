@@ -1782,6 +1782,7 @@ ul {
   display: flex;
   justify-content: center;
   margin: 4em 0;
+  margin-bottom: 2em;
   padding: 0 80px;
 }
 @media (max-width: 767.99px) {
@@ -1954,6 +1955,19 @@ ul {
   margin-right: 5px;
   height: 20px;
   width: 20px;
+}
+.facebook-comments-container {
+  width: 60%;
+  margin: 0 80px;
+  margin-bottom: 4em;
+}
+@media (max-width: 767.99px) {
+  .facebook-comments-container {
+    width: 100%;
+    margin: 0px;
+    margin-bottom: 2em;
+    padding: 0 40px;
+  }
 }
 .my-forums-c {
   background-color: #f7f7f7;

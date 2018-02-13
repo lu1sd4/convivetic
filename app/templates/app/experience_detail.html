@@ -4,139 +4,143 @@
 
 {% block content %}
 
+<div ng-controller="experienceDetailCtrl as expCtrl"  ng-init="expCtrl.init({{object.id}}, {{object.experienceslike_set.count}},{{object.experiencesdislike_set.count}},{{object.views}})">
 
+	<div class="exp-d-c">
+		<div id="fb-root"></div>
+		
+		{% if messages %}
+		    {% for message in messages %}
+		    	{% if message.tags == 'success' %}
+		    <p style="display:none" ng-init="expCtrl.successToast('{{ message }}')">{{ message }}</p>
+		    	{% endif %}
+		    	{% if message.tags == 'error' %}
+		    <p style="display:none" ng-init="expCtrl.warningToast('{{ message }}')">{{ message }}</p>
+		    	{% endif %}
+		    {% endfor %}
+		{% endif %}
 
-<div class="exp-d-c" ng-controller="experienceDetailCtrl as expCtrl"  ng-init="expCtrl.init({{object.id}}, {{object.experienceslike_set.count}},{{object.experiencesdislike_set.count}},{{object.views}})">
-	
-	{% if messages %}
-	    {% for message in messages %}
-	    	{% if message.tags == 'success' %}
-	    <p style="display:none" ng-init="expCtrl.successToast('{{ message }}')">{{ message }}</p>
-	    	{% endif %}
-	    	{% if message.tags == 'error' %}
-	    <p style="display:none" ng-init="expCtrl.warningToast('{{ message }}')">{{ message }}</p>
-	    	{% endif %}
-	    {% endfor %}
-	{% endif %}
-
-	<div class="exp-d-wrapper">
-		<div class="d-left-c">
-			
-			<div class="d-header">
-				<div class="p-info">
-					<h4>{{object.title}}</h4>					
-					<p>
-						{% if request.user.is_authenticated and request.user == object.author %}
-							<span>{{object.author.get_full_name}} (Tú)</span> 
-						{% else %}
-							<span>{{object.author.get_full_name}}</span> 
-						{% endif %}
-					</p>	
-				</div>
+		<div class="exp-d-wrapper">
+			<div class="d-left-c">
 				
-			</div>
-
-			<div class="tags">
-				<ul>
-					{% for tag in object.tags.all %}
-
-					<li class="rounded">{{tag.name}}</li>
+				<div class="d-header">
+					<div class="p-info">
+						<h4>{{object.title}}</h4>					
+						<p>
+							{% if request.user.is_authenticated and request.user == object.author %}
+								<span>{{object.author.get_full_name}} (Tú)</span> 
+							{% else %}
+								<span>{{object.author.get_full_name}}</span> 
+							{% endif %}
+						</p>	
+					</div>
 					
-					{% endfor %}
-					
-
-				</ul>
-			</div>
-
-			{% if request.user|has_group:"Administrador" %}			
-				<hr>
-				<div class="ex-status">
-
-					<h4>{{ object.get_status_display }}</h4>
-				<!--<li class="rounded" ng-class="'{{object.status}}' == 'P' ? 'bg-warning' : '{{object.status}}' == 'A' ? 'bg-success' : 'bg-danger' ">{{object.get_status_display}}</li>
-				<li class="filler"></li>
-				-->
-
-					<div class="filler"></div>
-			
-				{% if object.status == 'A' or object.status == 'P' %}
-					<input type="button" ng-click="expCtrl.modify('R')" class="btn btn-danger rounded" value="Rechazar">
-				{% endif %}
-				{% if object.status == 'P' %}
-					&nbsp;&nbsp;&nbsp;
-				{% endif %}
-				{% if object.status == 'R' or object.status == 'P' %}
-					<input type="button" ng-click="expCtrl.modify('A')" class="btn btn-success rounded" value="Aprobar">
-				{% endif %}
-
 				</div>
 
-			{% endif %}
+				<div class="tags">
+					<ul>
+						{% for tag in object.tags.all %}
 
-			<hr>
+						<li class="rounded">{{tag.name}}</li>
+						
+						{% endfor %}
+						
 
-			<div class="d-content">
-				{{object.content}}	
-			</div>
-
-			{% if request.user == object.author %}
-
-				<hr>
-				<div class="ex-status">
-					<h4>Eres el autor de esta experiencia</h4>
-					<div class="filler"></div>
-					<input type="button" class="btn btn-danger rounded" ng-click="expCtrl.deleteExperience()" value="Eliminar">
+					</ul>
 				</div>
 
-			{% endif %}
+				{% if request.user|has_group:"Administrador" %}			
+					<hr>
+					<div class="ex-status">
 
-			<hr>
-		</div>
+						<h4>{{ object.get_status_display }}</h4>
+					<!--<li class="rounded" ng-class="'{{object.status}}' == 'P' ? 'bg-warning' : '{{object.status}}' == 'A' ? 'bg-success' : 'bg-danger' ">{{object.get_status_display}}</li>
+					<li class="filler"></li>
+					-->
 
-		<div class="d-right-c">
+						<div class="filler"></div>
+				
+					{% if object.status == 'A' or object.status == 'P' %}
+						<input type="button" ng-click="expCtrl.modify('R')" class="btn btn-danger rounded" value="Rechazar">
+					{% endif %}
+					{% if object.status == 'P' %}
+						&nbsp;&nbsp;&nbsp;
+					{% endif %}
+					{% if object.status == 'R' or object.status == 'P' %}
+						<input type="button" ng-click="expCtrl.modify('A')" class="btn btn-success rounded" value="Aprobar">
+					{% endif %}
 
-			<div class="d-right-content">
-				{% if object.img %}
-				<img src="/{{object.img.url}}" alt=""></img>
+					</div>
+
 				{% endif %}
-				<div class="d-social-c">
-					<div class="d-social-left">
 
-						<div class="detail-n">
-							
-							<i class="fas fa-thumbs-up"></i>
-							<h5>{[{expCtrl.likes}]}</h5>
-							
-						</div>
+				<hr>
 
-						<div class="social-btns">
+				<div class="d-content">
+					{{object.content}}	
+				</div>
 
-							{% if request.user.is_authenticated %}
+				{% if request.user == object.author %}
 
-								{% if user_can_vote %}
+					<hr>
+					<div class="ex-status">
+						<h4>Eres el autor de esta experiencia</h4>
+						<div class="filler"></div>
+						<input type="button" class="btn btn-danger rounded" ng-click="expCtrl.deleteExperience()" value="Eliminar">
+					</div>
 
-									<a ng-click="expCtrl.vote()"><i class="fas fa-chevron-up"></i></a>
-									<a ng-click="expCtrl.unvote()"><i class="fas fa-chevron-down"></i></a>	
+				{% endif %}
+
+				<hr>
+			</div>
+
+			<div class="d-right-c">
+
+				<div class="d-right-content">
+					{% if object.img %}
+					<img src="/{{object.img.url}}" alt=""></img>
+					{% endif %}
+					<div class="d-social-c">
+						<div class="d-social-left">
+
+							<div class="detail-n">
+								
+								<i class="fas fa-thumbs-up"></i>
+								<h5>{[{expCtrl.likes}]}</h5>
+								
+							</div>
+
+							<div class="social-btns">
+
+								{% if request.user.is_authenticated %}
+
+									{% if user_can_vote %}
+
+										<a ng-click="expCtrl.vote()"><i class="fas fa-chevron-up"></i></a>
+										<a ng-click="expCtrl.unvote()"><i class="fas fa-chevron-down"></i></a>	
+
+									{% endif %}
 
 								{% endif %}
 
-							{% endif %}
+							</div>	
+						</div>
 
-						</div>	
-					</div>
-
-					<div class="d-social-right">
-						<i class="fas fa-eye"></i>
-						<h5>{[{expCtrl.views}]}</h5>
+						<div class="d-social-right">
+							<i class="fas fa-eye"></i>
+							<h5>{[{expCtrl.views}]}</h5>
+						</div>
 					</div>
 				</div>
 			</div>
+
 		</div>
 
 	</div>
-
+	<div class="facebook-comments-container">
+		<div class="fb-comments" data-href="{[{expCtrl.url}]}" data-mobile="true" data-width="50%" data-numposts="5"></div>
+	</div>
 </div>
-
 
 
 {% endblock %}
