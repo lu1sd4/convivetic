@@ -47,33 +47,6 @@
 						
 
 					</ul>
-<div class="exp-d-c" ng-controller="experienceDetailCtrl as expCtrl"  ng-init="expCtrl.init({{object.id}}, {{object.experienceslike_set.count}},{{object.experiencesdislike_set.count}},{{object.views}},'{% url 'experiences' %}')">
-	
-	{% if messages %}
-	    {% for message in messages %}
-	    	{% if message.tags == 'success' %}
-	    <p style="display:none" ng-init="expCtrl.successToast('{{ message }}')">{{ message }}</p>
-	    	{% endif %}
-	    	{% if message.tags == 'error' %}
-	    <p style="display:none" ng-init="expCtrl.warningToast('{{ message }}')">{{ message }}</p>
-	    	{% endif %}
-	    {% endfor %}
-	{% endif %}
-
-	<div class="exp-d-wrapper">
-		<div class="d-left-c">
-			
-			<div class="d-header">
-				<div class="p-info">
-					<h4>{{object.title}}</h4>					
-					<p>
-						{% if request.user.is_authenticated and request.user == object.author %}
-							<span>{{object.author.get_full_name}} (Tú)</span> 
-						{% else %}
-							<span>{{object.author.get_full_name}}</span> 
-						{% endif %}
-					</p>
-					<p>Publicado el {{ object.pub_date }}</p>
 				</div>
 
 				{% if request.user|has_group:"Administrador" %}			
@@ -138,30 +111,6 @@
 							</div>
 
 							<div class="social-btns">
-			<div class="d-right-content">
-				{% if object.img %}
-					<img src="/{{object.img.url}}" alt=""></img>
-				{% endif %}
-				{% if object.video_url %}
-					<iframe height="315"
-						src="https://www.youtube.com/embed/{{object.video_url}}" class="rounded">
-					</iframe>
-				{% endif %}
-				{% if object.audio_url %}
-					<audio controls>
-					  <source src="http://docs.google.com/uc?export=open&id={[{expCtrl.extractCId('{{ object.audio_url }}')}]}">
-						Your browser does not support the audio element.
-					</audio> 
-				{% endif %}
-				<div class="d-social-c" ng-init="expCtrl.loadAudios()">
-					<div class="d-social-left">
-
-						<div class="detail-n">
-							
-							<i class="fas fa-thumbs-up"></i>
-							<h5>{[{expCtrl.likes}]}</h5>
-							
-						</div>
 
 								{% if request.user.is_authenticated %}
 

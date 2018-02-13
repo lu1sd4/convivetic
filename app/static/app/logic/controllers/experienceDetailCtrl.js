@@ -34,9 +34,6 @@
 		  	fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
 
-		function init(id, likes, dislikes, views){
-		that.parentUrl = '';
-
 		function init(id, likes, dislikes, views, parentUrl){
 			that.id = id;
 			that.likes = likes - dislikes;
