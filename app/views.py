@@ -407,10 +407,20 @@ class CreateExperience(LoginRequiredMixin, FormView):
 			exp = form.save(commit=False)
 			exp.author = request.user
 			exp.save()
+			tags_raw = form.cleaned_data['tags']
+			tags_array = [x.strip() for x in tags_raw.split(',')]
+			for tag_name in tags_array:
+				tag = ExperienceTag.objects.filter(name = tag_name)
+				if not tag:
+					tag = ExperienceTag.objects.create(name = tag_name)
+				else:
+					tag = tag[0]
+				exp.tags.add(tag)
+			exp.save()
 			messages.success(request, 'Tu experiencia se ha enviado con éxito. Está pendiente de aprobación para ser publicada.')
 			return redirect('experience-detail', pk=exp.id)
 		else:
-			return self.form_invalid(form)
+			return self.form_invalid(form)			
 
 class ExperiencesView(ListView):
 	template_name = 'app/experiences.html'

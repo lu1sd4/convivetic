@@ -128,6 +128,9 @@ class ThreadCommentForm(forms.ModelForm):
 		}
 
 class ExperienceForm(forms.ModelForm):
+	tags = forms.CharField(required=True, 
+						   label='Etiquetas para la experiencia separadas por comas', 
+						   validators=[comma_separated_validator])
 	class Meta:
 		model = Experience
 		fields = ['title', 'content', 'video_url', 'audio_url', 'img']
