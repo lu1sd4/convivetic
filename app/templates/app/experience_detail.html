@@ -4,8 +4,6 @@
 
 {% block content %}
 
-
-
 <div class="exp-d-c" ng-controller="experienceDetailCtrl as expCtrl"  ng-init="expCtrl.init({{object.id}}, {{object.experienceslike_set.count}},{{object.experiencesdislike_set.count}},{{object.views}},'{% url 'experiences' %}','{{ like_status }}')">
 	
 	{% if messages %}
