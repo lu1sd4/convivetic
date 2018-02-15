@@ -112,6 +112,14 @@
 						<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
 					</div>
 	 			</div>
+	 			<div class="form-group">
+	 				{% render_field form.tags placeholder=form.tags.label class+='form-control' ng-model='tags' ng-pattern='/^[-\w\s]+(?:,[-\w\s]+)*$/' %}
+	 				<small id="titleHelp" class="form-text text-muted">Etiquetas para que encuentren fácilmente tu discusión</small>
+	 				<div class="login-error-messages" ng-messages='form.tags.$error' ng-show="fCtrl.publishClicked">
+						<p ng-message="required">Campo requerido</p>
+						<p ng-message="pattern">Deben ser valores separados por comas</p>
+					</div>
+	 			</div>
 	 			{% render_field form.video_url %}
 	 			{% render_field form.audio_url %}	 			
 	 			<br>

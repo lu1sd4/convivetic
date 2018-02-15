@@ -1416,6 +1416,36 @@ progress {
 .gral-df-container .f-detail-container .detail-c .detail-right .detail-c-din small {
   font-weight: 300;
 }
+.gral-df-container .f-detail-container .detail-c .detail-right .tags {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1em;
+}
+.gral-df-container .f-detail-container .detail-c .detail-right .tags ul {
+  display: flex;
+  width: 100%;
+}
+@media (max-width: 575.99px) {
+  .gral-df-container .f-detail-container .detail-c .detail-right .tags ul {
+    flex-direction: column;
+  }
+  .gral-df-container .f-detail-container .detail-c .detail-right .tags ul li {
+    margin-top: 0.5em;
+  }
+}
+.gral-df-container .f-detail-container .detail-c .detail-right .tags ul a {
+  text-decoration: none;
+}
+.gral-df-container .f-detail-container .detail-c .detail-right .tags ul li {
+  padding: 8px;
+  background: rgba(0,0,0,0.26);
+  color: #fff;
+  margin-right: 5px;
+}
+.gral-df-container .f-detail-container .detail-c .detail-right .tags ul li.filler {
+  flex-grow: 1;
+  background: transparent;
+}
 .gral-df-container .f-detail-container .detail-c .detail-right h4 {
   font-weight: 400;
   font-size: 21px !important;
@@ -1429,6 +1459,7 @@ progress {
   color: #484848;
   font-weight: 300;
   font-size: 14px;
+  margin-bottom: 0.5em;
 }
 .gral-df-container .f-detail-container .detail-c .detail-right .thread-det-img {
   max-width: 400px;
@@ -1981,25 +2012,57 @@ progress {
 }
 .exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n {
   display: flex;
-  margin-right: 5px;
+  flex-direction: row;
 }
-.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n h5 {
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .filler {
+  width: 15px;
+}
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes {
+  display: flex;
+  flex-direction: row;
+}
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes h5,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes h5 {
+  color: #484848;
   font-weight: 300;
+  font-size: 18px;
 }
-.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n svg {
-  color: #008489;
-  margin-right: 5px;
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes svg,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes svg {
+  color: rgba(0,0,0,0.26);
+  height: 20px;
+  width: 20px;
+  margin-right: 8px;
+}
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes .thread-like,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes .thread-like,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes .thread-dislike,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes .thread-dislike {
+  margin-right: 3px;
+  cursor: pointer;
   height: 20px;
   width: 20px;
 }
-.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .social-btns {
-  display: flex;
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes .thread-like .fa-thumbs-up:hover,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes .thread-like .fa-thumbs-up:hover,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes .thread-dislike .fa-thumbs-up:hover,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes .thread-dislike .fa-thumbs-up:hover {
+  color: #008000;
 }
-.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .social-btns svg {
-  color: #484848;
-  height: 18px;
-  width: 18px;
-  margin-right: 5px;
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes .thread-like .fa-thumbs-down:hover,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes .thread-like .fa-thumbs-down:hover,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes .thread-dislike .fa-thumbs-down:hover,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes .thread-dislike .fa-thumbs-down:hover {
+  color: #f00;
+}
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes .thread-like.active .fa-thumbs-up,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes .thread-like.active .fa-thumbs-up {
+  color: #008000;
+}
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-likes .thread-dislike.active .fa-thumbs-down,
+.exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-left .detail-n .forum-dislikes .thread-dislike.active .fa-thumbs-down {
+  color: #f00;
 }
 .exp-d-c .exp-d-wrapper .d-right-c .d-right-content .d-social-c .d-social-right {
   display: flex;
