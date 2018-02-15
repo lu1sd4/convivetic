@@ -36,8 +36,8 @@
 						<div class="exp-data">
 							<div class="detail-c">
 								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-										<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
+									<div class="views"><i class="fas fa-eye"></i> {{ exp.views }} </div>
+									<div class="likes"><i class="fas fa-thumbs-up"></i> {{ exp.experienceslike_set.count }} </div>
 								</div>
 
 								<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
@@ -75,8 +75,8 @@
 						<div class="exp-data">
 							<div class="detail-c">
 								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-										<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
+									<div class="views"><i class="fas fa-eye"></i> {{ exp.views }} </div>
+									<div class="likes"><i class="fas fa-thumbs-up"></i> {{ exp.experienceslike_set.count }} </div>
 									</div>
 
 									<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
@@ -110,8 +110,8 @@
 						<div class="exp-data">
 							<div class="detail-c">
 								<div class="popular-data-c">
-									<div class="views"><i class="fas fa-eye"></i> 10</div>
-										<div class="likes"><i class="fas fa-thumbs-up"></i> 300</div>
+									<div class="views"><i class="fas fa-eye"></i> {{ exp.views }} </div>
+									<div class="likes"><i class="fas fa-thumbs-up"></i> {{ exp.experienceslike_set.count }} </div>
 									</div>
 
 									<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>

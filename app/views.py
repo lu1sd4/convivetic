@@ -108,6 +108,16 @@ class Forums(FormView):
 			thread = form.save(commit=False)
 			thread.author = request.user
 			thread.save()
+			tags_raw = form.cleaned_data['tags']
+			tags_array = [x.strip() for x in tags_raw.split(',')]
+			for tag_name in tags_array:
+				tag = ThreadTag.objects.filter(name = tag_name)
+				if not tag:
+					tag = ThreadTag.objects.create(name = tag_name)
+				else:
+					tag = tag[0]
+				thread.tags.add(tag)
+			thread.save()
 			messages.success(request, 'Tu discusión se ha publicado con éxito.')
 			return redirect('thread-detail', pk=thread.id)
 		else:
@@ -445,21 +455,100 @@ class ExperienceDetailView(DetailView):
 	template_name = 'app/experience_detail.html'
 
 	def get_context_data(self, **kwargs):
+
 		context = super().get_context_data(**kwargs)
 		experience_pk = self.kwargs['pk']
-		user = self.request.user.id
-
-		#likes_c = ExperiencesLike.objects.count()
-		#dislike_c = Dislikes.objects.count()
-
-		# if(likes_c == 0 and dislike_c == 0):
-		# 	context['user_can_vote'] = True 
-		# else:
-		# 	context['user_can_vote'] = True
-
 		context['experience_pk'] = experience_pk
-		context['user_can_vote'] = True
+
+		like = ExperiencesLike.objects.filter(experience = experience_pk, author = self.request.user.id).count()
+		dislike = ExperiencesDislike.objects.filter(experience = experience_pk, author = self.request.user.id).count()
+
+		status = 'no_like'
+		if like > 0:
+			status = 'like'
+		elif dislike > 0:
+			status = 'dislike'
+
+		context['like_status'] = status
+
 		return context
+
+
+class ExperienceLike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+
+		exp_id = self.kwargs['pk']
+		exp = get_object_or_404(Experience, pk=exp_id)
+		author = request.user
+		like = ExperiencesLike(experience = exp, author = author)
+		like.save()
+		likes_c = ExperiencesLike.objects.filter(experience = exp_id).count()
+		dislikes_c = ExperiencesDislike.objects.filter(experience = exp_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
+
+class ExperienceRemoveLike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+
+		exp_id = self.kwargs['pk']
+		exp = get_object_or_404(Experience, pk=exp_id)
+		author = request.user
+		like = ExperiencesLike.objects.filter(experience = exp_id, author = author.id)
+		like.delete()
+		likes_c = ExperiencesLike.objects.filter(experience = exp_id).count()
+		dislikes_c = ExperiencesDislike.objects.filter(experience = exp_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
+
+class ExperienceDislike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+
+		exp_id = self.kwargs['pk']
+		exp = get_object_or_404(Experience, pk=exp_id)
+		author = request.user
+		dislike = ExperiencesDislike(experience = exp, author = author)
+		dislike.save()
+		likes_c = ExperiencesLike.objects.filter(experience = exp_id).count()
+		dislikes_c = ExperiencesDislike.objects.filter(experience = exp_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
+
+class ExperienceRemoveDislike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+
+		exp_id = self.kwargs['pk']
+		exp = get_object_or_404(Experience, pk=exp_id)
+		author = request.user
+		dislike = ExperiencesDislike.objects.filter(experience = exp_id, author = author.id)
+		dislike.delete()
+		likes_c = ExperiencesLike.objects.filter(experience = exp_id).count()
+		dislikes_c = ExperiencesDislike.objects.filter(experience = exp_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
 
 class ExperiencesOrdered(ListView):
 	template_name = 'app/experiences.html'
@@ -491,31 +580,6 @@ class ExperienceView(View):
 		experience.views = experience.views + 1
 		experience.save()
 		return HttpResponse(experience.views)
-
-class ExperiencesLike(LoginRequiredMixin, View):
-	login_url = '/login'
-
-	def get(self, request, *args, **kwargs):
-		experience_id = self.kwargs['pk']
-		experience = get_object_or_404(Experience, pk=experience_id)
-		author = request.user
-		like = ExperiencesLike(experience = experience, author = author)
-		like.save()
-		likes_c = ExperiencesLike.objects.filter(experience = experience_id, author = author.id).count()
-		dislike_c = ExperiencesDislike.objects.filter(experience = experience_id, author = author.id).count()
-		return HttpResponse(likes_c - dislike_c)
-
-class ExperiencesDislike(View):
-	def get(self, request, *args, **kwargs):
-		experience_id = self.kwargs['pk']
-		experience = get_object_or_404(Experience, pk=experience_id)
-		author = request.user
-		dislike = ExperienceDislike(experience = Experience, author = author)
-		dislike.save()
-		likes_c = ExperiencesLike.objects.filter(experience = experience_id, author = author.id).count()
-		dislikes_c = ExperiencesDislike.objects.filter(experience = experience_id, author = author.id).count()
-		return HttpResponse(likes_c - dislikes_c)
-
 
 class MyForumsView(ListView):
 	template_name = 'app/my_forums.html'

@@ -19,6 +19,17 @@
 					{{object.pub_date}}
 				</p>
 
+				<div class="tags">
+					<ul>
+						{% for tag in object.tags.all %}
+
+						<li class="rounded">{{tag.name}}</li>
+					
+						{% endfor %}
+					
+					</ul>
+				</div>
+
 				<p>{{object.description}}</p>
 
 				<div class="detail-c-din">
@@ -40,7 +51,7 @@
 							Your browser does not support the audio element.
 						</audio> 
 					{% endif %}
-				</div>
+				</div>				
 
 				{% if request.user == object.author %}
 

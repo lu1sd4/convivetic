@@ -6,7 +6,7 @@
 
 
 
-<div class="exp-d-c" ng-controller="experienceDetailCtrl as expCtrl"  ng-init="expCtrl.init({{object.id}}, {{object.experienceslike_set.count}},{{object.experiencesdislike_set.count}},{{object.views}},'{% url 'experiences' %}')">
+<div class="exp-d-c" ng-controller="experienceDetailCtrl as expCtrl"  ng-init="expCtrl.init({{object.id}}, {{object.experienceslike_set.count}},{{object.experiencesdislike_set.count}},{{object.views}},'{% url 'experiences' %}','{{ like_status }}')">
 	
 	{% if messages %}
 	    {% for message in messages %}
@@ -115,26 +115,17 @@
 					<div class="d-social-left">
 
 						<div class="detail-n">
-							
-							<i class="fas fa-thumbs-up"></i>
-							<h5>{[{expCtrl.likes}]}</h5>
-							
+							<div class="forum-likes">
+								<div ng-click="expCtrl.vote()" class="thread-like" ng-class="{'active' : expCtrl.likeStatus == expCtrl.like_like }"><i class="fas fa-thumbs-up"></i></div>
+								<h5 id="likes">{[{expCtrl.likes}]}</h5>
+							</div>
+							<div class="filler"></div>			
+							<div class="forum-dislikes">
+								<div ng-click="expCtrl.unvote()" class="thread-dislike" ng-class="{'active' : expCtrl.likeStatus == expCtrl.like_dislike }"><i class="fas fa-thumbs-down"></i></div>
+								<h5 id="dislikes">{[{expCtrl.dislikes}]}</h5>
+							</div>
 						</div>
 
-						<div class="social-btns">
-
-							{% if request.user.is_authenticated %}
-
-								{% if user_can_vote %}
-
-									<a ng-click="expCtrl.vote()"><i class="fas fa-chevron-up"></i></a>
-									<a ng-click="expCtrl.unvote()"><i class="fas fa-chevron-down"></i></a>	
-
-								{% endif %}
-
-							{% endif %}
-
-						</div>	
 					</div>
 
 					<div class="d-social-right">

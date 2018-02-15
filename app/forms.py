@@ -7,6 +7,8 @@ from django.contrib.auth import forms as auth_forms
 
 from .models import *
 
+from django.core.validators import RegexValidator
+
 class LoginForm(auth_forms.AuthenticationForm):
 	username = forms.CharField(
 		max_length=20,
@@ -21,6 +23,7 @@ class UserForm(auth_forms.UserCreationForm):
 	groups = forms.ModelChoiceField(queryset=Group.objects.exclude(name='Administrador'),
 								   required=True,
 								   empty_label='¿Qué tipo de usuario eres?')
+
 	class Meta:
 		model = User
 		fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'groups']
@@ -88,20 +91,27 @@ class ProfileForm(forms.ModelForm):
 			'birth_date' : forms.DateInput(attrs={'type':'date','max':datetime.now().date()}, format='%Y-%m-%d')
 		}
 
+comma_separated_validator = RegexValidator(r"^[-\w\s]+(?:,[-\w\s]+)*$", "Tu cadena debe ser separada por comas.")
+
 class ThreadForm(forms.ModelForm):
+	tags = forms.CharField(required=True, 
+						   label='Etiquetas para la discusión separadas por comas', 
+						   validators=[comma_separated_validator])
 	class Meta:
 		model = Thread
 		fields = ['title', 'description', 'video_url', 'audio_url', 'img']
 		labels = {
 			'title' : 'Título de la discusión',
-			'description' : 'Cuerpo de texto de la discusión'			
+			'description' : 'Cuerpo de texto de la discusión'
 		}
 		widgets = {
 			'title' : forms.Textarea,
 			'description' : forms.Textarea,
 			'video_url' : forms.HiddenInput,
-			'audio_url' : forms.HiddenInput
+			'audio_url' : forms.HiddenInput,			
 		}
+
+	
 
 class ThreadCommentForm(forms.ModelForm):
 	class Meta:
