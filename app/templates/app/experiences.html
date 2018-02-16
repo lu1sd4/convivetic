@@ -7,7 +7,8 @@
 	<section class="exp-section">
 		<div class="exp-gra-c">
 			<h3 class="border exp-section-title">Experiencias</h3>
-
+			<h5 class="exp-section-subtitle">Te mostramos las vivencias, relatos y testimonios que otras personas relacionadas con el conflicto han querido compartir en ConviveTIC. Si <a href="{% url 'experiences_create' %}">creas la tuya</a> será revisada por un administrador para ser publicada en la página.</h5>
+			<h5 class="exp-section-subtitle">Puedes compartir una vivencia con imágen, audio o video.</h5>			
 			<div class="filter-section">
 	 			<ul>
 	 				<li {% if order == 'popular' %} class="active" {% endif %}><a href="{% url 'experiences-ordered' 'popular' %}">Popular</a></li>
@@ -45,6 +46,10 @@
 				</div>
 
 				{% endfor %}
+
+				<a class="experience exp-invitation btn btn-success" href="{% url 'experiences_create' %}">
+					<h5 class="inv-text">¡Participa y comparte la tuya!</h5>
+				</a>
 
 			</div>
 

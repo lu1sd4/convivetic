@@ -416,6 +416,9 @@ progress {
   color: #484848;
   font-size: 26px;
 }
+.exp-section .exp-gra-c .exp-section-description {
+  font-weight: 300;
+}
 .exp-section .exp-gra-c .experiences-c {
   display: flex;
   flex-direction: row;
@@ -540,6 +543,9 @@ progress {
 .forum-section .for-section-title {
   font-size: 26px;
   color: #484848;
+}
+.forum-section .for-section-description {
+  font-weight: 300;
 }
 .forum-section .forum-c {
   display: flex;
@@ -1121,6 +1127,9 @@ progress {
 }
 .forums-container .forum-header .top-section .forum-header-new .options-c .publish-btn:hover {
   background-color: #007478;
+}
+.forums-container .forum-header .top-section .top-description {
+  font-weight: 300;
 }
 .forums-container .forum {
   margin-top: 2.5em;
@@ -1743,6 +1752,9 @@ progress {
   color: #484848;
   font-size: 26px;
 }
+.exp-section .exp-gra-c .exp-section-subtitle {
+  font-weight: 300;
+}
 .exp-section .exp-gra-c .exp-footer {
   display: flex;
   justify-content: center;
@@ -1863,6 +1875,21 @@ progress {
 .exp-section .exp-gra-c .experiences-c .experience .exp-data .detail-c .e-more a {
   text-align: center;
   width: 100%;
+}
+.exp-section .exp-gra-c .experiences-c .experience.exp-invitation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding: 1rem;
+  white-space: normal;
+  color: #fff;
+}
+.exp-section .exp-gra-c .experiences-c .experience.exp-invitation:hover {
+  color: #fff;
+  background-color: rgba(59,171,59,0.6);
+  border-color: rgba(59,171,59,0.6);
+  border-width: 3px;
 }
 .exp-d-c {
   display: flex;
