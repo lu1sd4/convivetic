@@ -446,6 +446,8 @@ class CreateExperience(LoginRequiredMixin, FormView):
 
 
 
+class AboutUsView(TemplateView):
+	template_name= "app/about_us.html"
 
 class ContactUsView(TemplateView):
 	template_name = "app/contact_us.html"
