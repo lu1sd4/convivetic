@@ -28,6 +28,16 @@ STATUS_CHOICES = [
 	('R', 'Rechazado')
 ]
 
+TEMPLATE_CHOICES = [
+	('TEMP_INTRO', 'TEMP_INTRO'),
+	('TEMP_TEST', 'TEMP_TEST'),
+	('TEMP_TEST_IMAGE', 'TEMP_TEST_IMAGE'),
+	('TEMP_TEXT', 'TEMP_TEXT'),
+	('TEMP_ACTIVITY', 'TEMP_ACTIVITY'),
+	('TEMP_TEST_MULTIPLE', 'TEMP_TEST_MULTIPLE'),
+	('TEMP_CROSSWORD', 'TEMP_CROSSWORD'),	
+]
+
 class UserProfile(models.Model):
 	user = models.OneToOneField(
 		User,
@@ -256,17 +266,57 @@ class ExperiencesDislike(models.Model):
 		null=True
 	)
 
-class Guide(models.Model):
+class Toolbox(models.Model):
 	name = models.CharField(
-		max_length = 100
+		max_length = 100,
+		default = ''
+	)
+
+class ToolboxUser(models.Model):
+	toolbox = models.ForeignKey(
+		Toolbox,
+		on_delete = models.CASCADE
+	)
+	user = models.ForeignKey(
+		User,
+		on_delete=models.SET_NULL,
+		null=True
+	)
+	comment = models.CharField(
+		max_length = 500,
+		null=True,
+		blank=True
 	)
 
 class Question(models.Model):
-	pass
+	q_type = models.CharField(
+		max_length = 20,
+		choices = TEMPLATE_CHOICES,
+		default = 'TEMP_TEST'
+	)
+	content = models.CharField(
+		max_length = 100,
+		default = ''
+	)
+	correct_answer = models.CharField(
+		max_length = 100,
+		default = 'TEMP_TEST' 
+	)
 
 class Answer(models.Model):
+	question = models.ForeignKey(
+		Question,
+		on_delete=models.CASCADE,
+		default=None
+	)
+	user = models.ForeignKey(
+		User,
+		on_delete=models.SET_NULL,
+		null=True
+	)
+
+class Guide(models.Model):
 	pass
 
-class AnswerUsr(models.Model):
-	pass
+
 
