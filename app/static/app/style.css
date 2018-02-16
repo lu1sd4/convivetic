@@ -1755,6 +1755,11 @@ progress {
 .exp-section .exp-gra-c .exp-section-subtitle {
   font-weight: 300;
 }
+.exp-section .exp-gra-c .exp-login-inv {
+  margin-top: 1rem;
+  width: 90%;
+  max-width: 500px;
+}
 .exp-section .exp-gra-c .exp-footer {
   display: flex;
   justify-content: center;
@@ -1884,12 +1889,16 @@ progress {
   padding: 1rem;
   white-space: normal;
   color: #fff;
+  margin-bottom: 0;
 }
-.exp-section .exp-gra-c .experiences-c .experience.exp-invitation:hover {
+.exp-section .exp-gra-c .experiences-c .experience.exp-invitation.btn-success:hover {
   color: #fff;
   background-color: rgba(59,171,59,0.6);
   border-color: rgba(59,171,59,0.6);
   border-width: 3px;
+}
+.exp-section .exp-gra-c .experiences-c .experience.exp-invitation .inv-text {
+  font-weight: 300;
 }
 .exp-d-c {
   display: flex;

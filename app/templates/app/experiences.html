@@ -7,8 +7,9 @@
 	<section class="exp-section">
 		<div class="exp-gra-c">
 			<h3 class="border exp-section-title">Experiencias</h3>
-			<h5 class="exp-section-subtitle">Te mostramos las vivencias, relatos y testimonios que otras personas relacionadas con el conflicto han querido compartir en ConviveTIC. Si <a href="{% url 'experiences_create' %}">creas la tuya</a> será revisada por un administrador para ser publicada en la página.</h5>
-			<h5 class="exp-section-subtitle">Puedes compartir una vivencia con imágen, audio o video.</h5>			
+			<h5 class="exp-section-subtitle">Te mostramos las vivencias, relatos y testimonios que otras personas relacionadas con el conflicto han querido compartir en ConviveTIC. Si <a href="{% url 'experiences_create' %}">creas la tuya</a> será revisada por un administrador para ser publicada en la página.</h5>			
+			<h5 class="exp-section-subtitle">Puedes compartir una vivencia con imagen, audio, video o sólo texto.</h5>
+
 			<div class="filter-section">
 	 			<ul>
 	 				<li {% if order == 'popular' %} class="active" {% endif %}><a href="{% url 'experiences-ordered' 'popular' %}">Popular</a></li>
@@ -47,9 +48,18 @@
 
 				{% endfor %}
 
-				<a class="experience exp-invitation btn btn-success" href="{% url 'experiences_create' %}">
-					<h5 class="inv-text">¡Participa y comparte la tuya!</h5>
-				</a>
+				{% if request.user.is_authenticated %}
+					<a class="experience exp-invitation btn btn-success" href="{% url 'experiences_create' %}">
+						<h5 class="inv-text">¡Participa y comparte la tuya!</h5>
+					</a>
+				{% else %}
+					<div class="experience exp-invitation alert alert-info">
+						<div class="text-center">
+							<h5 class="inv-text text-info">Para participar debes estar autenticado.</h5>
+							<a class="btn btn-info" href="{% url 'login' %}?next=/experiences">Iniciar sesión</a>
+						</div>
+					</div>
+				{% endif %}
 
 			</div>
 
