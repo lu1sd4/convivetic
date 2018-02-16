@@ -295,13 +295,50 @@ class Question(models.Model):
 		default = 'TEMP_TEST'
 	)
 	content = models.CharField(
-		max_length = 100,
+		max_length = 700,
 		default = ''
+	)
+	img = models.CharField(
+		max_length = 100,
+		default = '',
+		null = True,
+		blank = True
+	)
+	title = models.CharField(
+		max_length = 100,
+		default = '',
+		null = True,
+		blank = True
+	)
+	is_html_content = models.BooleanField(
+		default = False,
+		choices = YES_NO_CHOICES
 	)
 	correct_answer = models.CharField(
 		max_length = 100,
-		default = 'TEMP_TEST' 
+		default = '' ,
+		null=True,
+		blank=True
 	)
+	required = models.BooleanField(
+		default=False,
+		choices=YES_NO_CHOICES
+	)
+	answers_av = models.CharField(
+		max_length = 100,
+		default = '' ,
+		null=True,
+		blank=True
+	)
+	order = models.PositiveIntegerField(
+		default = 0
+	)
+	toolbox = models.ForeignKey(
+		Toolbox,
+		on_delete=models.CASCADE,
+		default=1
+	)
+
 
 class Answer(models.Model):
 	question = models.ForeignKey(
