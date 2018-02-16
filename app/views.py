@@ -60,6 +60,8 @@ from django.http import JsonResponse
 
 import json
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 class Index(ListView):
 	template_name = 'app/index.html'
 	context_object_name = 'thread_list'
@@ -94,12 +96,32 @@ class Forums(FormView):
 	template_name = 'app/forums.html'
 	model = Thread
 	form_class = ThreadForm
-	success_url = '/forums'
+	success_url = '/forums'    
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['thread_list'] = Thread.objects.all()
-		context['order'] = 'new'
+		page = self.request.GET.get('page', 1)
+
+		try:
+			order = self.kwargs['order']
+		except KeyError:
+			order = 'new'
+		context['order'] = order		
+		if order == 'new':
+			thread_list = Thread.objects.all().order_by('-pub_date')
+		elif order == 'popular':
+			thread_list = Thread.objects.all().annotate(likes=Count('comment')).order_by('-likes')
+			
+		paginator = Paginator(thread_list, 8)
+			    
+		try:
+			threads = paginator.page(page)
+		except PageNotAnInteger:
+			threads = paginator.page(1)
+		except EmptyPage:
+			threads = paginator.page(paginator.num_pages)
+		context['thread_list'] = threads
+
 		return context
 
 	def post(self, request, *args, **kwargs):		
@@ -107,6 +129,16 @@ class Forums(FormView):
 		if form.is_valid():
 			thread = form.save(commit=False)
 			thread.author = request.user
+			thread.save()
+			tags_raw = form.cleaned_data['tags']
+			tags_array = [x.strip() for x in tags_raw.split(',')]
+			for tag_name in tags_array:
+				tag = ThreadTag.objects.filter(name = tag_name)
+				if not tag:
+					tag = ThreadTag.objects.create(name = tag_name)
+				else:
+					tag = tag[0]
+				thread.tags.add(tag)
 			thread.save()
 			messages.success(request, 'Tu discusión se ha publicado con éxito.')
 			return redirect('thread-detail', pk=thread.id)
@@ -397,21 +429,22 @@ class CreateExperience(LoginRequiredMixin, FormView):
 			exp = form.save(commit=False)
 			exp.author = request.user
 			exp.save()
+			tags_raw = form.cleaned_data['tags']
+			tags_array = [x.strip() for x in tags_raw.split(',')]
+			for tag_name in tags_array:
+				tag = ExperienceTag.objects.filter(name = tag_name)
+				if not tag:
+					tag = ExperienceTag.objects.create(name = tag_name)
+				else:
+					tag = tag[0]
+				exp.tags.add(tag)
+			exp.save()
 			messages.success(request, 'Tu experiencia se ha enviado con éxito. Está pendiente de aprobación para ser publicada.')
 			return redirect('experience-detail', pk=exp.id)
 		else:
-			return self.form_invalid(form)
+			return self.form_invalid(form)			
 
-class ExperiencesView(ListView):
-	template_name = 'app/experiences.html'
-	context_object_name = 'experiences'
-	queryset = Experience.objects.order_by('pub_date').filter(status='A')
-	paginate_by = 8
 
-	def get_context_data(self, **kwargs):
-		context = super(ExperiencesView, self).get_context_data(**kwargs)
-		context['order'] = 'new'
-		return context;
 
 class AboutUsView(TemplateView):
 	template_name= "app/about_us.html"
@@ -447,21 +480,111 @@ class ExperienceDetailView(DetailView):
 	template_name = 'app/experience_detail.html'
 
 	def get_context_data(self, **kwargs):
+
 		context = super().get_context_data(**kwargs)
 		experience_pk = self.kwargs['pk']
-		user = self.request.user.id
-
-		#likes_c = ExperiencesLike.objects.count()
-		#dislike_c = Dislikes.objects.count()
-
-		# if(likes_c == 0 and dislike_c == 0):
-		# 	context['user_can_vote'] = True 
-		# else:
-		# 	context['user_can_vote'] = True
-
 		context['experience_pk'] = experience_pk
-		context['user_can_vote'] = True
+
+		like = ExperiencesLike.objects.filter(experience = experience_pk, author = self.request.user.id).count()
+		dislike = ExperiencesDislike.objects.filter(experience = experience_pk, author = self.request.user.id).count()
+
+		status = 'no_like'
+		if like > 0:
+			status = 'like'
+		elif dislike > 0:
+			status = 'dislike'
+
+		context['like_status'] = status
+
 		return context
+
+
+class ExperienceLike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+
+		exp_id = self.kwargs['pk']
+		exp = get_object_or_404(Experience, pk=exp_id)
+		author = request.user
+		like = ExperiencesLike(experience = exp, author = author)
+		like.save()
+		likes_c = ExperiencesLike.objects.filter(experience = exp_id).count()
+		dislikes_c = ExperiencesDislike.objects.filter(experience = exp_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
+
+class ExperienceRemoveLike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+
+		exp_id = self.kwargs['pk']
+		exp = get_object_or_404(Experience, pk=exp_id)
+		author = request.user
+		like = ExperiencesLike.objects.filter(experience = exp_id, author = author.id)
+		like.delete()
+		likes_c = ExperiencesLike.objects.filter(experience = exp_id).count()
+		dislikes_c = ExperiencesDislike.objects.filter(experience = exp_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
+
+class ExperienceDislike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+
+		exp_id = self.kwargs['pk']
+		exp = get_object_or_404(Experience, pk=exp_id)
+		author = request.user
+		dislike = ExperiencesDislike(experience = exp, author = author)
+		dislike.save()
+		likes_c = ExperiencesLike.objects.filter(experience = exp_id).count()
+		dislikes_c = ExperiencesDislike.objects.filter(experience = exp_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
+
+class ExperienceRemoveDislike(LoginRequiredMixin, View):
+	login_url = '/login'
+
+	def get(self, request, *args, **kwargs):
+
+		exp_id = self.kwargs['pk']
+		exp = get_object_or_404(Experience, pk=exp_id)
+		author = request.user
+		dislike = ExperiencesDislike.objects.filter(experience = exp_id, author = author.id)
+		dislike.delete()
+		likes_c = ExperiencesLike.objects.filter(experience = exp_id).count()
+		dislikes_c = ExperiencesDislike.objects.filter(experience = exp_id).count()
+		data = {
+			'likes' : likes_c,
+			'dislikes' : dislikes_c
+		}
+
+		return JsonResponse(data)
+
+class ExperiencesView(ListView):
+	template_name = 'app/experiences.html'
+	context_object_name = 'experiences'
+	queryset = Experience.objects.order_by('pub_date').filter(status='A')
+	paginate_by = 8
+
+	def get_context_data(self, **kwargs):
+		context = super(ExperiencesView, self).get_context_data(**kwargs)
+		context['order'] = 'new'
+		return context;
 
 class ExperiencesOrdered(ListView):
 	template_name = 'app/experiences.html'
@@ -493,31 +616,6 @@ class ExperienceView(View):
 		experience.views = experience.views + 1
 		experience.save()
 		return HttpResponse(experience.views)
-
-class ExperiencesLike(LoginRequiredMixin, View):
-	login_url = '/login'
-
-	def get(self, request, *args, **kwargs):
-		experience_id = self.kwargs['pk']
-		experience = get_object_or_404(Experience, pk=experience_id)
-		author = request.user
-		like = ExperiencesLike(experience = experience, author = author)
-		like.save()
-		likes_c = ExperiencesLike.objects.filter(experience = experience_id, author = author.id).count()
-		dislike_c = ExperiencesDislike.objects.filter(experience = experience_id, author = author.id).count()
-		return HttpResponse(likes_c - dislike_c)
-
-class ExperiencesDislike(View):
-	def get(self, request, *args, **kwargs):
-		experience_id = self.kwargs['pk']
-		experience = get_object_or_404(Experience, pk=experience_id)
-		author = request.user
-		dislike = ExperienceDislike(experience = Experience, author = author)
-		dislike.save()
-		likes_c = ExperiencesLike.objects.filter(experience = experience_id, author = author.id).count()
-		dislikes_c = ExperiencesDislike.objects.filter(experience = experience_id, author = author.id).count()
-		return HttpResponse(likes_c - dislikes_c)
-
 
 class MyForumsView(ListView):
 	template_name = 'app/my_forums.html'
@@ -551,7 +649,6 @@ class UserIsAdminMixin(UserPassesTestMixin):
 	def test_func(self):
 		group =  Group.objects.get(name="Administrador")
 		return group in self.request.user.groups.all()
-
 
 class PendingExperiences(UserIsAdminMixin, View):
 	def get(self, request, *args, **kwargs):

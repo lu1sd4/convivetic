@@ -14,7 +14,7 @@
 	 				<h3 class="head-title">Foros</h3>
 	 				{% if user.is_authenticated %}
 	 					<button class="btn btn-primary" ng-click="fCtrl.newDiscussion()">Nueva Discusión</button>
-	 				{% endif %}
+	 				{% endif %}	 				
 			 	</div>
 
 			 	<div class="forum-header-new" ng-show="fCtrl.currentState == fCtrl.newState">
@@ -24,11 +24,10 @@
 			 			<button ng-click="fCtrl.publish()" class="publish-btn btn btn-primary" ng-disabled="fCtrl.isUploading">Publicar Discusión</button>
 			 		</div>
 			 	</div>
-
+			 	<br>
+			 	<h5 class="top-description">Ponemos a tu disposición un espacio para discutir con los demás usuarios de ConviveTIC sobre temas del conflicto o plantear tu propio tema de discusión.</h5>
+			 	<h5 class="top-description">Puedes poner contenido multimedia en las discusiones. {% if not request.user.is_authenticated %}<a href="{% url 'login' %}?next=/forums">¡Comienza a dialogar!</a>{% endif %}</h5>
 	 		</div>
-
-
-
 	 		<div class="filter-section" ng-show="fCtrl.currentState == fCtrl.normalState ">
 	 			<ul>
 	 				<li {% if order == 'popular' %} class="active" {% endif %}><a href="{% url 'forums-ordered' 'popular' %}">Popular</a></li>
@@ -77,18 +76,26 @@
 			</div>
 
 			<div class="forum-footer">
-				{% if is_paginated %}
-					<nav aria-label="Page navigation example">
-					  <ul class="pagination">
-
-					    {% for obj in page_obj.paginator.page_range %}
-					    	<li class="page-item"><a class="page-link" href="?page={{forloop.counter}}">{{forloop.counter}}</a></li>
-
-					    {% endfor %}
-
-					  </ul>
-					</nav>
-
+				{% if thread_list.has_other_pages %}
+				  <ul class="pagination">
+				    {% if thread_list.has_previous %}
+				      <li class="page-item"><a class="page-link" href="?page={{ thread_list.previous_page_number }}">&laquo;</a></li>
+				    {% else %}
+				      <li class="page-item disabled"><a class="page-link" href="#">&laquo;</a></li>
+				    {% endif %}
+				    {% for i in thread_list.paginator.page_range %}
+				      {% if thread_list.number == i %}
+				        <li class="page-item disabled"><a class="page-link" href="#">{{ i }} <span class="sr-only">(current)</span></a></li>
+				      {% else %}
+				        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+				      {% endif %}
+				    {% endfor %}
+				    {% if thread_list.has_next %}
+				      <li class="page-item"><a class="page-link" href="?page={{ thread_list.next_page_number }}">&raquo;</a></li>
+				    {% else %}
+				      <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+				    {% endif %}
+				  </ul>
 				{% endif %}
 			</div>	
 	 	</div>
@@ -110,6 +117,14 @@
 	 				<small id="titleHelp" class="form-text text-muted">Texto que dará la idea alrededor de la cual se discutirá</small>
 	 				<div class="login-error-messages" ng-messages='form.description.$error' ng-show="fCtrl.publishClicked">
 						<div ng-messages-include="{% static 'app/util/error_messages.html' %}"></div>
+					</div>
+	 			</div>
+	 			<div class="form-group">
+	 				{% render_field form.tags placeholder=form.tags.label class+='form-control' ng-model='tags' ng-pattern='/^[-\w\s]+(?:,[-\w\s]+)*$/' %}
+	 				<small id="titleHelp" class="form-text text-muted">Etiquetas para que encuentren fácilmente tu discusión</small>
+	 				<div class="login-error-messages" ng-messages='form.tags.$error' ng-show="fCtrl.publishClicked">
+						<p ng-message="required">Campo requerido</p>
+						<p ng-message="pattern">Deben ser valores separados por comas</p>
 					</div>
 	 			</div>
 	 			{% render_field form.video_url %}

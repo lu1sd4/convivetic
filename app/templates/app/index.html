@@ -5,7 +5,9 @@
 		<section class="exp-section">
 			<div class="exp-gra-c">
 				<h3 class="border exp-section-title">Experiencias</h3>
-
+				<br>
+				<h5 class="exp-section-description">Descubre relatos, vivencias y testimonios que personas han querido compartir en ConviveTIC, y si estás listo, <a href="{% url 'experiences' %}">¡Comparte tu historia!</a></h5>
+				<br>
 				<div class="experiences-c">
 
 					{% for exp in experiences %}
@@ -48,6 +50,8 @@
 
 			<div class="for-gra-c">
 				<h3 class="border for-section-title">Foros</h3>
+				<br>
+				<h5 class="for-section-description">Diálogos entre usuarios de ConviveTIC acerca de temas del conflicto. <a href="{% url 'forums' %}">¡Participa!</a></h5>
 				<div class="forum-c">
 					<div class="forum rounded">
 
@@ -128,11 +132,11 @@
 
 					<div class="f-aside">
 						<div class="forum-invitation rounded">
-							<h5>¿Le interesa participar en los foros?</h5>
+							<h5>¿Te interesa participar en los foros?</h5>
 
 							<p>La discusión es fundamental para la generación de espacios de participación que constribuyan a la inclusión y en general al mejoramiento social.</p>
 
-							<button class="btn btn-primary">Registrarse</button>
+							<button class="btn btn-primary">Participar</button>
 
 						</div>
 

@@ -188,6 +188,32 @@ f-m-width = 900px
 					small
 						font-weight 300
 
+				.tags
+					display flex
+					justify-content flex-start				
+					margin-bottom 1em		
+						
+					ul
+						display flex
+						width 100%
+						
+						@media (max-width 575.99px)
+							flex-direction column
+							
+							li
+								margin-top 0.5em
+						
+						a
+							text-decoration none
+
+						li
+							padding 8px
+							background icon-gray-color
+							color #fff
+							margin-right 5px
+							&.filler
+								flex-grow 1
+								background transparent
 				
 				h4
 					font-weight 400
@@ -202,6 +228,7 @@ f-m-width = 900px
 					color texts-color
 					font-weight 300
 					font-size 14px
+					margin-bottom 0.5em
 					
 				.thread-det-img
 					max-width 400px
