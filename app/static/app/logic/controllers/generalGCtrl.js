@@ -85,19 +85,11 @@
 					'type':'TEMP_TEXT',
 					'content':
 						[
-							$sce.trustAsHtml(`Era el primer día de curso en Villanormal, un pueblo normal y corriente
-								en el que nada ni nadie destacaba sobre lo demás. Y es que en
-								Villanormal existía una ley de normalidad, en la que se decía cómo
-								tenían que ser las cosas para que fueran normales.`),
+							$sce.trustAsHtml(`Era el primer día de curso en Villanormal, un pueblo normal y corriente en el que nada ni nadie destacaba sobre lo demás. Y es que en Villanormal existía una ley de normalidad, en la que se decía cómo tenían que ser las cosas para que fueran normales.`),
 
-							$sce.trustAsHtml(`Un día llegó al pueblo una mujer extraña. Había heredado la casa de
-								una tía abuela lejana y había decidido irse a vivir allí. Pero como no
-								era como los demás, la gente no le dirigía la palabra, y se apartaba de
-								su camino al pasar.`),
+							$sce.trustAsHtml(`Un día llegó al pueblo una mujer extraña. Había heredado la casa de una tía abuela lejana y había decidido irse a vivir allí. Pero como no era como los demás, la gente no le dirigía la palabra, y se apartaba de su camino al pasar.`),
 
-							$sce.trustAsHtml(`Poco a poco, la gente empezó a ser más y más antipática con ella. La
-								mujer estaba muy enfadada, pues no entendía qué pasaba.
-								Solo un niño, Tito, el hijo del alcalde, era amable con ella.`)
+							$sce.trustAsHtml(`Poco a poco, la gente empezó a ser más y más antipática con ella. La mujer estaba muy enfadada, pues no entendía qué pasaba. Solo un niño, Tito, el hijo del alcalde, era amable con ella.`)
 						],
 					'title':'LA TOLERANCIA'
 				},
@@ -106,20 +98,9 @@
 					'type':'TEMP_TEXT',
 					'content':
 						[	
-							$sce.trustAsHtml(`- Te tratan así porque eres diferente -le dijo el niño-. Para ellos no eres
-								normal. Pero a mí… A mí me encantaría ser diferente.`),
+							$sce.trustAsHtml(`- Te tratan así porque eres diferente -le dijo el niño-. Para ellos no eres normal. Pero a mí… A mí me encantaría ser diferente.`),
 
-							$sce.trustAsHtml(`- ¿Cómo de diferente? -preguntó la mujer.<br>
-								- Me encantaría ser un niño verde -dijo Tito.<br>
-								- ¿Y que haría tu padre entonces? -preguntó la mujer.<br>
-								- Supongo que no le quedaría más remedio que cambiar la ley de
-								normalidad para que no me echaran del pueblo -dijo el niño, riendo
-								solo de pensarlo.<br>
-								- Yo puedo ayudarte si quieres -dijo la mujer-. Soy bruja. Estoy
-								jubilada, pero todavía puedo hacer hechizos interesantes.<br>
-								- ¡Claro!<br>
-								- De acuerdo. Mañana, antes de ir a clase, ven a verme a casa y haré
-								el hechizo.`)							
+							$sce.trustAsHtml(`- ¿Cómo de diferente? -preguntó la mujer.<br> - Me encantaría ser un niño verde -dijo Tito.<br> - ¿Y que haría tu padre entonces? -preguntó la mujer.<br> - Supongo que no le quedaría más remedio que cambiar la ley de normalidad para que no me echaran del pueblo -dijo el niño, riendo solo de pensarlo.<br> - Yo puedo ayudarte si quieres -dijo la mujer-. Soy bruja. Estoy jubilada, pero todavía puedo hacer hechizos interesantes.<br> - ¡Claro!<br> - De acuerdo. Mañana, antes de ir a clase, ven a verme a casa y haré el hechizo.`)							
 						]
 				},
 				{
@@ -127,19 +108,13 @@
 					'type':'TEMP_TEXT',
 					'content':
 						[
-							$sce.trustAsHtml(`A la mañana siguiente, Tito se pasó por casa de la bruja, que lo
-								convirtió en un niño verde. Y así se fue el niño al colegio, tan contento
-								y como si no pasase nada raro.`),
+							$sce.trustAsHtml(`A la mañana siguiente, Tito se pasó por casa de la bruja, que lo convirtió en un niño verde. Y así se fue el niño al colegio, tan contento y como si no pasase nada raro.`),
 
-							$sce.trustAsHtml(`Cuando entró en el colegio, los profesores se pusieron muy nerviosos,
-								le riñeron, y quisieron expulsarlo de allí, así que llamaron de inmediato
-								a su padre, que no sabía dónde meterse. ¡Su propio hijo, violando la
-								ley de normalidad! Eso era algo que no podía soportar.`),
+							$sce.trustAsHtml(`Cuando entró en el colegio, los profesores se pusieron muy nerviosos, le riñeron, y quisieron expulsarlo de allí, así que llamaron de inmediato a su padre, que no sabía dónde meterse. ¡Su propio hijo, violando la ley de normalidad! Eso era algo que no podía soportar.`),
 
 							$sce.trustAsHtml(`Una niña se levantó de la mesa y se dirigió a Tito:`),
 
-							$sce.trustAsHtml(`- Me gusta tu nuevo estilo. Yo también estoy harta de ser normal.
-							Dime cómo lo has conseguido, porque yo quiero ser rosa.`)
+							$sce.trustAsHtml(`- Me gusta tu nuevo estilo. Yo también estoy harta de ser normal. Dime cómo lo has conseguido, porque yo quiero ser rosa.`)
 						]
 				},
 				{
@@ -147,21 +122,16 @@
 					'type':'TEMP_TEXT',
 					'content':
 						[
-							$sce.trustAsHtml(`Otro niño se levantó gritando que él quería ser rojo, y luego otro
-							diciendo que quería ser violenta, y otro diciendo que quería tener la
-							piel de lunares.`),
+							$sce.trustAsHtml(`Otro niño se levantó gritando que él quería ser rojo, y luego otro diciendo que quería ser violenta, y otro diciendo que quería tener la piel de lunares.`),
 
 							$sce.trustAsHtml(`Tito, muy satisfecho, le dijo a su padre:`),
 
 							$sce.trustAsHtml(`- Me parece papá, que vas a tener que eliminar la ley de normalidad,
 							porque si no este pueblo se va a quedar sin niños.`),
 
-							$sce.trustAsHtml(`Ese día el alcalde cambió la ley y, desde entonces, lo normal en
-							Villanormal es que cada uno elija ser como quiera y que todos se
-							acepten tal y como son.`),
+							$sce.trustAsHtml(`Ese día el alcalde cambió la ley y, desde entonces, lo normal en Villanormal es que cada uno elija ser como quiera y que todos se acepten tal y como son.`),
 
-							$sce.trustAsHtml(`La que no para de trabajar es la bruja, que ahora es la persona más
-							importante del pueblo.`)
+							$sce.trustAsHtml(`La que no para de trabajar es la bruja, que ahora es la persona más importante del pueblo.`)
 						]
 				},
 				{
