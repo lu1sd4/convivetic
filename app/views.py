@@ -60,6 +60,8 @@ from django.http import JsonResponse
 
 import json
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 class Index(ListView):
 	template_name = 'app/index.html'
 	context_object_name = 'thread_list'
@@ -94,12 +96,32 @@ class Forums(FormView):
 	template_name = 'app/forums.html'
 	model = Thread
 	form_class = ThreadForm
-	success_url = '/forums'
+	success_url = '/forums'    
 
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
-		context['thread_list'] = Thread.objects.all()
-		context['order'] = 'new'
+		page = self.request.GET.get('page', 1)
+
+		try:
+			order = self.kwargs['order']
+		except KeyError:
+			order = 'new'
+		context['order'] = order		
+		if order == 'new':
+			thread_list = Thread.objects.all().order_by('-pub_date')
+		elif order == 'popular':
+			thread_list = Thread.objects.all().annotate(likes=Count('comment')).order_by('-likes')
+			
+		paginator = Paginator(thread_list, 8)
+			    
+		try:
+			threads = paginator.page(page)
+		except PageNotAnInteger:
+			threads = paginator.page(1)
+		except EmptyPage:
+			threads = paginator.page(paginator.num_pages)
+		context['thread_list'] = threads
+
 		return context
 
 	def post(self, request, *args, **kwargs):		
@@ -422,17 +444,10 @@ class CreateExperience(LoginRequiredMixin, FormView):
 		else:
 			return self.form_invalid(form)			
 
-class ExperiencesView(ListView):
-	template_name = 'app/experiences.html'
-	context_object_name = 'experiences'
-	queryset = Experience.objects.order_by('pub_date').filter(status='A')
-	paginate_by = 8
 
-	def get_context_data(self, **kwargs):
-		context = super(ExperiencesView, self).get_context_data(**kwargs)
-		context['order'] = 'new'
-		return context;
 
+class AboutUsView(TemplateView):
+	template_name= "app/about_us.html"
 
 class ContactUsView(TemplateView):
 	template_name = "app/contact_us.html"
@@ -560,6 +575,17 @@ class ExperienceRemoveDislike(LoginRequiredMixin, View):
 
 		return JsonResponse(data)
 
+class ExperiencesView(ListView):
+	template_name = 'app/experiences.html'
+	context_object_name = 'experiences'
+	queryset = Experience.objects.order_by('pub_date').filter(status='A')
+	paginate_by = 8
+
+	def get_context_data(self, **kwargs):
+		context = super(ExperiencesView, self).get_context_data(**kwargs)
+		context['order'] = 'new'
+		return context;
+
 class ExperiencesOrdered(ListView):
 	template_name = 'app/experiences.html'
 	context_object_name = 'experiences'
@@ -623,7 +649,6 @@ class UserIsAdminMixin(UserPassesTestMixin):
 	def test_func(self):
 		group =  Group.objects.get(name="Administrador")
 		return group in self.request.user.groups.all()
-
 
 class PendingExperiences(UserIsAdminMixin, View):
 	def get(self, request, *args, **kwargs):
