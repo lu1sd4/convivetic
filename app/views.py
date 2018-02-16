@@ -413,6 +413,8 @@ class ExperiencesView(ListView):
 		context['order'] = 'new'
 		return context;
 
+class AboutUsView(TemplateView):
+	template_name= "app/about_us.html"
 
 class ContactUsView(TemplateView):
 	template_name = "app/contact_us.html"

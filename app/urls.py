@@ -35,6 +35,7 @@ urlpatterns = [
 	path('profile', login_required(views.update_profile), name="profile"),
 	path('experiences', ExperiencesView.as_view(), name="experiences"),
 	path('contact-us', ContactUsView.as_view(), name="contact-us"),
+	path('about-us', AboutUsView.as_view(), name="about-us"),
 	path('send_email', views.ContactUsSendEmail, name="contact_us_send_email"),
 	path('document', DocumentView.as_view(), name="document"),
 	path('experiences/manage', ManageExperiencesView.as_view(), name="experiences_manage"),
