@@ -14,7 +14,7 @@ urlpatterns = [
 	path('login', Login.as_view(), name='login'),
 	path('logout', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
 	path('api/users/<str:user_id>', UsernameCheck.as_view(), name='username_check'),
-	path('api/users/<str:user_id>', UsernameCheck.as_view(), name='username_check'),	
+	path('activate/<str:uidb64>/<str:token>', views.activate, name='activate'),
 	path('password_reset_request/', PasswordReset.as_view(), name='password_reset_request'),
 	path('password_reset_request_done/', PasswordResetDone.as_view(), name='password_reset_done'),
 	path('password_reset_confirm/<uidb64>/<token>', PasswordResetConfirm.as_view(), name='password_reset_confirm'),
