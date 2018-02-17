@@ -115,8 +115,8 @@ LOGOUT_REDIRECT_URL = 'index'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'camilo.perez.dussan@gmail.com'
-EMAIL_HOST_PASSWORD = '..19136333'
+EMAIL_HOST_USER = 'convivetic.e@gmail.com'
+EMAIL_HOST_PASSWORD = 'y72rsQ8z'
 EMAIL_PORT = 587
 
 # For YouTube uploads

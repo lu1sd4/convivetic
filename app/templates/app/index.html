@@ -1,4 +1,5 @@
 {% extends 'app/base.html' %}
+{% load static %}
 
 {% block content %} 
 	<div class="container-fluid p-container">
@@ -165,7 +166,7 @@
 					<button class="btn btn-primary">Contáctanos</button>
 				</div>
 				<div class="right-c">
-					<img class="rounded" src="http://via.placeholder.com/400x208">
+					<img class="rounded" src="{% static 'app/img/img6.jpg' %}">
 				</div>
 			</div>
 		</div>
@@ -182,7 +183,7 @@
 					<button class="btn btn-primary">Comenzar</button>
 				</div>
 			</div>
-			<img src="http://via.placeholder.com/2560x563">
+			<img src="{% static 'app/img/img7.jpg' %}">
 
 		</div>
 
