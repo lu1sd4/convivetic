@@ -57,4 +57,6 @@ urlpatterns = [
 	path('guide_general/<int:pk>', login_required(GuideView.as_view()), name="guides"),
 	path('crossword', CrossWordView.as_view(), name="crossword"),
 	path('search', SearchView.as_view(), name="search"),
+	path('guides/addAnswer', AddAnswerView.as_view(), name="add_answer"),
+	path('guides/addReview', AddToolboxReview.as_view(), name="add_review")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -351,6 +351,11 @@ class Answer(models.Model):
 		on_delete=models.SET_NULL,
 		null=True
 	)
+	answer = models.CharField(
+		max_length = 600,
+		default = '',
+	)
+	
 
 class Guide(models.Model):
 	pass

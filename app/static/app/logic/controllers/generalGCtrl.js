@@ -19,13 +19,22 @@
 		that.TEMP_TEST_MULTIPLE = 'TEMP_TEST_MULTIPLE';
 		that.TEMP_ACTIVITY = 'TEMP_ACTIVITY';
 		that.TEMP_CROSSWORD = 'TEMP_CROSSWORD';
+		that.CONST_SEND_ANS = 'Enviar respuestas';
 
-		/* Constantes para feedback de respuestas */
+		/* Variables/const para feedback de respuestas */
 		that.GOOD_ANSWER = '¡Muy bien!';
 		that.BAD_ANSWER = 'Respuesta Incorrecta';
 		that.currentFeedback = '';
 		that.userHasResponded = false;
-		
+		that.finished = false; //El usuario terminó la guía?
+
+		/* Varibles para almacenar respuestas */
+		that.requests = []; //Almacena las respuestas dadas por el usuario en el formulario
+		that.config = {
+            headers : {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+            }
+        };
 
 		/* Mapeo de las guías */
 		that.guide1 = {
@@ -34,6 +43,7 @@
 					'id':1,
 					'type': 'TEMP_INTRO',
 					'content':'CON TOLERANCIA CONSTRUIMOS PAZ',
+					'required':false
 				},
 				{
 					'id':2,
@@ -68,7 +78,8 @@
 							$sce.trustAsHtml(`<span class="text-success">Tolerancia</span> se refiere a la acción y efecto de tolerar. Como tal, la tolerancia se basa en el respeto hacia lo otro o lo que es diferente de lo propio, y puede manifestarse como un acto de indulgencia ante algo
 							que no se quiere o no se puede impedir, o como el <span class="text-warning">hecho de soportar o aguantar a alguien o algo.<span>`),
 							$sce.trustAsHtml(`La palabra <span class="text-info">proviene del latín tolerantĭa</span>, que significa cualidad de quien puede aguantar, soportar o aceptar.`),
-						]
+						],
+					'required':false
 				},
 				{
 					'id':7,
@@ -78,7 +89,8 @@
 							$sce.trustAsHtml(`La tolerancia es un <span class="text-success">valor moral</span> que implica el <span class="text-warning">respeto íntegro hacia el otro</span>, hacia sus ideas, prácticas o creencias, independientemente de que choquen o sean diferentes de las nuestras.`), 
 							$sce.trustAsHtml(`En este sentido, la tolerancia es también el <span class="text-secondary">reconocimiento de las
 							diferencias inherentes a la naturaleza humana</span>, a la diversidad de las culturas, las religiones o las maneras de ser o de actuar.`)
-						]
+						],
+					'required':false
 				},
 				{
 					'id':8,
@@ -91,7 +103,8 @@
 
 							$sce.trustAsHtml(`Poco a poco, la gente empezó a ser más y más antipática con ella. La mujer estaba muy enfadada, pues no entendía qué pasaba. Solo un niño, Tito, el hijo del alcalde, era amable con ella.`)
 						],
-					'title':'LA TOLERANCIA'
+					'title':'LA TOLERANCIA',
+					'required':false
 				},
 				{
 					'id':9,
@@ -101,7 +114,8 @@
 							$sce.trustAsHtml(`- Te tratan así porque eres diferente -le dijo el niño-. Para ellos no eres normal. Pero a mí… A mí me encantaría ser diferente.`),
 
 							$sce.trustAsHtml(`- ¿Cómo de diferente? -preguntó la mujer.<br> - Me encantaría ser un niño verde -dijo Tito.<br> - ¿Y que haría tu padre entonces? -preguntó la mujer.<br> - Supongo que no le quedaría más remedio que cambiar la ley de normalidad para que no me echaran del pueblo -dijo el niño, riendo solo de pensarlo.<br> - Yo puedo ayudarte si quieres -dijo la mujer-. Soy bruja. Estoy jubilada, pero todavía puedo hacer hechizos interesantes.<br> - ¡Claro!<br> - De acuerdo. Mañana, antes de ir a clase, ven a verme a casa y haré el hechizo.`)							
-						]
+						],
+					'required':false
 				},
 				{
 					'id':10,
@@ -115,7 +129,9 @@
 							$sce.trustAsHtml(`Una niña se levantó de la mesa y se dirigió a Tito:`),
 
 							$sce.trustAsHtml(`- Me gusta tu nuevo estilo. Yo también estoy harta de ser normal. Dime cómo lo has conseguido, porque yo quiero ser rosa.`)
-						]
+						],
+					'required':false
+
 				},
 				{
 					'id':11,
@@ -132,12 +148,14 @@
 							$sce.trustAsHtml(`Ese día el alcalde cambió la ley y, desde entonces, lo normal en Villanormal es que cada uno elija ser como quiera y que todos se acepten tal y como son.`),
 
 							$sce.trustAsHtml(`La que no para de trabajar es la bruja, que ahora es la persona más importante del pueblo.`)
-						]
+						],
+					'required':false
 				},
 				{
 					'id':12,
 					'type':'TEMP_ACTIVITY',
 					'content':'Sopa de letras',
+					'required':false
 				},
 				{
 					'id':13,
@@ -166,7 +184,8 @@
 				{
 					'id':16,
 					'type':'TEMP_CROSSWORD',
-					'content':'Crucigrama'
+					'content':'Crucigrama',
+					'required':false
 				},
 				{
 					'id':17,
@@ -191,12 +210,20 @@
 		*/
 		that.nextState = () => {
 			that.reviewRequirements();
+
+			if(that.finished){
+				that.sendAnswers();
+				return;
+			}
+
 			//Se si cumplen los requisitios del estado actual o no hay requisitos ...
-			if((that.currentStateObj.required && that.userHasResponded) || that.currentStateObj.required == undefined){
+			if((that.currentStateObj.required && that.userHasResponded) || that.currentStateObj.required == false){
+				that.saveAnswer();
 				that.currentGuideIndex++; 
 				that.currentStateObj = that.currentGuide.states[that.currentGuideIndex];
 				that.currentTemplate = that.currentStateObj.type;
 				that.updateLoader();
+
 
 				that.answersVisibles = false; //Reiniciar el estado de las preguntas
 				that.restartViews();
@@ -242,7 +269,7 @@
 		/*
 		* Activa la opción de mostrar respuestas de una pregunta y muestra el feedback del footer
 		*/
-		that.showAnswersAndFeedback = (answer) => {
+		that.showAnswersAndFeedback = (answer, ans_n) => {
 			that.answersVisibles = true;
 			angular.element(".next-btn").addClass("next-btn-feedback");
 			if(that.currentStateObj.correct == that.currentStateObj.answers.indexOf(answer)){
@@ -252,6 +279,9 @@
 				angular.element(".footer-guide").addClass("bad-answer");
 				that.currentFeedback = that.BAD_ANSWER;
 			}
+
+			angular.element(".ans-"+ans_n).addClass("selected");
+
 		}
 
 		/*
@@ -263,6 +293,7 @@
 			angular.element(".next-btn").removeClass("next-btn-feedback");
 
 			that.currentFeedback = '';
+			that.currentAnswer = '';
 			that.userHasResponded = false;
 
 			//Vista de intro
@@ -273,8 +304,10 @@
 		* Se encarga de verificar si el estado actual es el último
 		*/
 		that.verifyLast = () => {
-			if(that.currentGuideIndex == (that.currentGuide.states.length)-1)
-				angular.element(".next-btn").text("Enviar respuestas");
+			if(that.currentGuideIndex == (that.currentGuide.states.length)-1){
+				angular.element(".next-btn").text(that.CONST_SEND_ANS);
+				that.finished = true;
+			}
 		}
 
 		that.reviewRequirements = () =>{
@@ -292,6 +325,83 @@
 					break;
 			}
 		}
+
+		that.saveAnswer = () =>{
+			let currentAnswer = '';
+			switch(that.currentStateObj.type){
+				case that.TEMP_TEST:
+					currentAnswer = angular.element(".test_input").val();		
+					break;
+				case that.TEMP_TEST_IMAGE:
+					currentAnswer = angular.element(".test_image_input").val();
+					break;
+				case that.TEMP_TEST_MULTIPLE:
+					currentAnswer = angular.element(".selected").text();
+					break;
+			}	
+
+			if(currentAnswer != undefined && currentAnswer  != ''){
+				let data = $.param({
+					id:2,
+					answer:currentAnswer,
+					toolbox:1
+				});
+
+				let request = () =>{
+					return new Promise((resolve, reject) => {
+						$http.post("/guides/addAnswer", data , that.config).then(function successCallBack(res){
+							console.log("Exitoso");
+						}, function errorCallback(resp){
+							console.log("Error");
+						});
+					});
+				}
+
+				that.requests.push(request);	
+			}
+		}
+
+		that.sendAnswers = () =>{
+			let addReview = () =>{
+
+				let data = $.param({
+					toolbox:1
+				});
+
+				return new Promise((resolve, reject) =>{
+					$http.post("/guides/addReview", data, that.config).then(function successCallBack(res){
+						console.log("Exitoso");
+					}, function errorCallback(res){
+						console.log("Error");
+					});
+				});
+			}
+
+			Promise.all([that.requests[0](), that.requests[1](), that.requests[2](),
+				that.requests[3](),that.requests[4](),that.requests[5](),
+				that.requests[6](), addReview()]).then(values=>{
+				console.log("Exitoso");
+
+			}, reason =>{
+				console.log(values);
+			});
+		}
+
+		that.testFunc = () =>{
+			let data = $.param({
+				id:1,
+				answer:"daniel"
+			});
+
+			$http.post("/guides/addAnswer", data , that.config).then(function successCallBack(res){
+				console.log("Exitoso");
+			}, function errorCallback(resp){
+				console.log("Error");
+			});
+		};
+
+		//that.testFunc();
+
 
 	}
 

@@ -62,6 +62,15 @@ import json
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
+
+
+def handler404(request, exception, template_name='app/404.html'):
+    return render(request, template_name, status=404)
+
+def handler500(request, exception, template_name='app/500.html'):
+    return render(request, template_name, status=500)
+
 class Index(ListView):
 	template_name = 'app/index.html'
 	context_object_name = 'thread_list'
@@ -753,3 +762,20 @@ class SearchView(TemplateView):
 		context['threads'] = Thread.objects.filter(description__contains=q).annotate(thlikes=Count('like')).order_by('-thlikes')[0:10]
 		context['experiences'] = Experience.objects.filter(content__contains=q).annotate(xplikes=Count('experienceslike')).order_by('-xplikes')[0:10]
 		return context
+
+class AddAnswerView(View):
+	def post(self, request, *args, **kwargs):
+		question_id = request.POST.get("id")
+		question = Question.objects.get(pk=question_id)
+		usr = self.request.user
+		answer = request.POST.get("answer")
+		Answer.objects.create(question = question, user = usr, answer = answer)
+		return HttpResponse(status=200)
+
+class AddToolboxReview(View):
+	def post(self, request, *args, **kwargs):
+		toolbox_id = request.POST.get("toolbox")
+		toolbox = Toolbox.objects.get(pk=toolbox_id)
+		usr = self.request.user
+		ToolboxUser.objects.create(toolbox = toolbox, user = usr)
+		return HttpResponse(status=200)
