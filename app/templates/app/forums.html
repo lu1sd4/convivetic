@@ -40,9 +40,19 @@
 
 	 		{% else %}
 
-	 		<div class="alert alert-info text-center" ng-show="fCtrl.currentState == fCtrl.normalState " ng-click="fCtrl.newDiscussion()" role="alert">	 			
-			  No hay ningún foro en ConviveTIC, ¡Crea el tuyo!</a>.
-			</div>
+	 			{% if request.user.is_authenticated %}
+
+	 			<div class="alert alert-info text-center" ng-show="fCtrl.currentState == fCtrl.normalState " ng-click="fCtrl.newDiscussion()" role="alert">	 			
+			  		No hay ningún foro en ConviveTIC, ¡Crea el tuyo!
+				</div>
+
+				{% else %}  
+
+				<a class="alert alert-info text-center" href="{% url 'login' %}?next=/forums">
+					No hay ningún foro en ConviveTIC, ¡Crea el tuyo!
+				</a>
+
+				{% endif %}
 
 	 		{% endif %}
 

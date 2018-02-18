@@ -17,7 +17,7 @@
 		that.pendingExperiences = '';
 		that.initPending = initPending;
 
-		function initPending{
+		function initPending(){
 			$http.get("/experiences/api/pendingexperiences").then(function(response) {			
 		        that.pendingExperiences = response.data.count;
 		    },function(){ });	
