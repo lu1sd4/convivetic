@@ -743,3 +743,13 @@ class GuideView(TemplateView):
 
 class CrossWordView(TemplateView):
 	template_name = 'app/crossword.html'
+
+class SearchView(TemplateView):
+	template_name = 'app/search.html'
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		q = self.request.GET.get('q')
+		context['q'] = q
+		context['threads'] = Thread.objects.filter(description__contains=q).annotate(thlikes=Count('like')).order_by('-thlikes')[0:10]
+		context['experiences'] = Experience.objects.filter(content__contains=q).annotate(xplikes=Count('experienceslike')).order_by('-xplikes')[0:10]
+		return context

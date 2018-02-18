@@ -86,9 +86,9 @@
 					<h4>ConviveTIC Muestra <span class=>Experiencias</span> del conflicto armado</h4>
 
 					<div class="search-box rounded">
-						<form>
+						<form action="{% url 'search' %}">
 							<i class="fas fa-search"></i>
-							<input class="input-box" type="text" placeholder="Busca experiencias y foros del conflicto armado en Colombia">	
+							<input class="input-box" name="q" type="text" placeholder="Busca experiencias y foros del conflicto armado en Colombia">
 						</form>
 					</div>
 
