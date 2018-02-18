@@ -15,10 +15,13 @@
 		that.getMobileMenu = getMobileMenu;
 		
 		that.pendingExperiences = '';
+		that.initPending = initPending;
 
-		$http.get("/experiences/api/pendingexperiences").then(function(response) {			
-	        that.pendingExperiences = response.data.count;
-	    },function(){ });
+		function initPending(){
+			$http.get("/experiences/api/pendingexperiences").then(function(response) {			
+		        that.pendingExperiences = response.data.count;
+		    },function(){ });	
+		}
 
 		function getMobileMenu(){
 			that.mMenuIsActive = !that.mMenuIsActive;

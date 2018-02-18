@@ -62,6 +62,15 @@ import json
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
+
+
+def handler404(request, exception, template_name='app/404.html'):
+    return render(request, template_name, status=404)
+
+def handler500(request, exception, template_name='app/500.html'):
+    return render(request, template_name, status=500)
+
 class Index(ListView):
 	template_name = 'app/index.html'
 	context_object_name = 'thread_list'
@@ -72,6 +81,11 @@ class Index(ListView):
 		context['secondary_threads'] = Thread.objects.annotate(likes=Count('like')).order_by('pub_date')[4:8]
 		context['experiences'] = Experience.objects.filter(status='A').order_by('pub_date')[:9]
 		context['th_quantity'] = Thread.objects.all().count()
+		group =  Group.objects.get(name="Administrador")
+		if group in self.request.user.groups.all():
+			pending_experiences = Experience.objects.filter(status='P').count()
+			if pending_experiences > 0:
+				messages.info(self.request, "Tienes "+str(pending_experiences)+" Experiencia(s) pendientes por revisar.")
 		return context
 
 
@@ -338,6 +352,7 @@ def register_user(request):
 				mail_subject, message, to=[to_email]
 			)
 			email.send()
+			messages.success(request, 'Te has registrado. Recibirás un correo electrónico con instrucciones para completar la activación de tu cuenta.')
 			return redirect('/')
 	else:
 		user_form = UserForm(prefix="user", initial={'group' : 1})
@@ -383,9 +398,8 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        # login(request, user)
-        # return redirect('home')
-        return HttpResponse('Gracias por confirmar tu correo. Ahora puedes iniciar sesión.')
+        messages.success(request, 'Gracias por confirmar tu correo. Ahora puedes iniciar sesión.')
+        return redirect('/')
     else:
         return HttpResponse('Tu enlace de activación no es válido.')
 
@@ -407,7 +421,8 @@ class PasswordResetComplete(PasswordResetCompleteView):
 def youtube_token_v(request):
 	data = { 
 		'token' : youtube_token.get_youtube_token(),
-		'apiKey' : settings.API_KEY
+		'apiKey' : settings.API_KEY,
+		'folderId' : settings.DRIVE_FOLDER_ID
 	}
 	return(JsonResponse(data))
 

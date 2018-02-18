@@ -2988,3 +2988,22 @@ progress {
   font-size: 1.2em;
   font-weight: 100;
 }
+.custom-404 {
+  text-align: center;
+  padding: 60px 20px;
+}
+.custom-404 .error-status {
+  font-size: 8em;
+  font-weight: 300;
+  color: #fff;
+}
+.login-dec > .custom-404:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+}
+.login-dec > .custom-404:nth-child(1) .error-status:nth-child(1) {
+  font-size: 4em;
+}
+.login-dec > .custom-404:nth-child(1) .error-status:nth-child(2) {
+  margin-top: -60px;
+}
