@@ -1,0 +1,11 @@
+{% load random_image  %}
+
+{% if thread.video_url %}
+	<img class="rounded-circle" src="https://img.youtube.com/vi/{{thread.video_url}}/0.jpg">
+{% elif thread.img %}
+	<img class="rounded-circle" src="{{thread.img.url}}" alt=""></img>
+{% elif thread.audio_url %}
+	<img class="rounded-circle" src="{{ MEDIA_URL }}{% random_image 'img/audioposts' %}">
+{% else %}
+	<img class="rounded-circle" src="{{ MEDIA_URL }}{% random_image 'img/textposts' %}">
+{% endif %}

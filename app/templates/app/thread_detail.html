@@ -1,6 +1,7 @@
  {% extends 'app/base.html' %}
  {% load static %}
  {% load widget_tweaks %}
+ {% load random_image  %}
 
  {% block content %}
 
@@ -10,7 +11,15 @@
 	 	
 		<div class="detail-c">
 			<div class="prof-image">
-				<img class="rounded-circle" src="http://via.placeholder.com/75x75">
+				{% if object.video_url %}
+					<img class="rounded-circle" src="https://img.youtube.com/vi/{{object.video_url}}/0.jpg">
+				{% elif object.img %}
+					<img class="rounded-circle" src="{{object.img.url}}" alt=""></img>
+				{% elif object.audio_url %}
+					<img class="rounded-circle" src="{{ MEDIA_URL }}{% random_image 'img/audioposts' %}">
+				{% else %}
+					<img class="rounded-circle" src="{{ MEDIA_URL }}{% random_image 'img/textposts' %}">
+				{% endif %}
 			</div>			
 
 			<div class="detail-right">
@@ -36,7 +45,7 @@
 
 					{% if object.img %}
 						<h6><small>Imagen:</small></h6>
-						<img src="/media/{{object.img}}" alt="" class="rounded thread-det-img">
+						<img src="{{object.img.url}}" alt="" class="rounded thread-det-img">
 					{% endif %}
 
 					{% if object.video_url %}

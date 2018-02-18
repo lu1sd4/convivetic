@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -103,7 +104,7 @@ ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(ENV_PATH,'media/')
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 # Auth options
 

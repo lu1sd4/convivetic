@@ -20,7 +20,7 @@
 					{% for thread in threads %}
 					<div class="results-item rounded">
 						<div class="mf-image">
-							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+							{% include 'app/thread_thumbnail.html' %}
 						</div>
 						<div class="my-forum-inline">
 							<div class="for-data">
@@ -47,22 +47,22 @@
 				{% if not experiences %}
 					<div class="alert alert-info text-center"><p>No se encontraron experiencias</p></div>
 				{% else %}
-					{% for exp in experiences %}
+					{% for thread in experiences %}
 					<div class="results-item rounded">
 						<div class="mf-image">
-							<img class="rounded-circle" src="http://via.placeholder.com/75x75">	
+							{% include 'app/thread_thumbnail.html' %}
 						</div>
 						<div class="my-forum-inline">
 							<div class="for-data">
-								<a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a>
+								<a href="{% url 'experience-detail' thread.id %}">{{thread.title}}</a>
 								<div class="comment-c">
 									<i class="far fa-thumbs-up"></i>
-									<div class="like-counter">{{exp.experienceslike_set.count}}</div>
+									<div class="like-counter">{{thread.experienceslike_set.count}}</div>
 								</div>
 							</div>						
 							<div class="my-forum-publisher">
-								<p class="mf-date">{{exp.pub_date}}</p>
-								<p class="mf-name">{{exp.author.get_full_name}}</p>
+								<p class="mf-date">{{thread.pub_date}}</p>
+								<p class="mf-name">{{thread.author.get_full_name}}</p>
 							</div>
 
 						</div>

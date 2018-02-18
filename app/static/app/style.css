@@ -677,9 +677,15 @@ progress {
 }
 .forum-section .forum-c .forum .f-image {
   margin-right: 20px;
+  width: 75px;
+  height: 75px;
+}
+.forum-section .forum-c .forum .f-image img {
+  width: 100%;
+  height: 100%;
 }
 .forum-section .forum-c .forum .forum-inline {
-  width: 100%;
+  width: 80%;
 }
 .forum-section .forum-c .forum .forum-item {
   display: flex;
@@ -1167,7 +1173,13 @@ progress {
 }
 .forums-container .forum .f-image {
   margin-right: 2.6%;
-  width: 10%;
+  margin-right: 20px;
+  width: 75px;
+  height: 75px;
+}
+.forums-container .forum .f-image img {
+  width: 100%;
+  height: 100%;
 }
 .forums-container .forum .forum-inline {
   width: 88.4%;
@@ -1407,7 +1419,12 @@ progress {
 }
 .gral-df-container .f-detail-container .detail-c .prof-image {
   margin-right: 3%;
-  width: 10%;
+  width: 75px;
+  height: 75px;
+}
+.gral-df-container .f-detail-container .detail-c .prof-image img {
+  width: 100%;
+  height: 100%;
 }
 .gral-df-container .f-detail-container .detail-c .detail-right {
   display: flex;
@@ -2180,7 +2197,13 @@ progress {
 }
 .my-forums-c .my-forums-wrapper .mf-image {
   margin-right: 2.6%;
-  width: 10%;
+  margin-right: 20px;
+  width: 75px;
+  height: 75px;
+}
+.my-forums-c .my-forums-wrapper .mf-image img {
+  width: 100%;
+  height: 100%;
 }
 .my-forums-c .my-forums-wrapper .my-forum-inline {
   width: 88.4%;
@@ -3031,7 +3054,13 @@ progress {
 }
 .search-container .results-content .mf-image {
   margin-right: 2.6%;
-  width: 20%;
+  margin-right: 20px;
+  width: 75px;
+  height: 75px;
+}
+.search-container .results-content .mf-image img {
+  width: 100%;
+  height: 100%;
 }
 .search-container .results-content .my-forum-inline {
   width: 75%;

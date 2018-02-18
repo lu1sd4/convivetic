@@ -32,7 +32,7 @@
 				{% for exp in pending_experiences %}
 
 					<div class="mexperience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
+						{% include 'app/exp_thumbnail.html' %}
 						<div class="exp-data">
 							<div class="detail-c">
 								<div class="popular-data-c">
@@ -71,7 +71,7 @@
 			{% for exp in approved_experiences %}
 				
 					<div class="mexperience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
+						{% include 'app/exp_thumbnail.html' %}
 						<div class="exp-data">
 							<div class="detail-c">
 								<div class="popular-data-c">
@@ -106,7 +106,7 @@
 			{% for exp in rejected_experiences %}
 				
 					<div class="mexperience">
-						<img class="rounded" src="http://via.placeholder.com/320x186">
+						{% include 'app/exp_thumbnail.html' %}
 						<div class="exp-data">
 							<div class="detail-c">
 								<div class="popular-data-c">
