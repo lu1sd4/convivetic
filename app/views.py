@@ -62,6 +62,15 @@ import json
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
+
+
+def handler404(request, exception, template_name='app/404.html'):
+    return render(request, template_name, status=404)
+
+def handler500(request, exception, template_name='app/500.html'):
+    return render(request, template_name, status=500)
+
 class Index(ListView):
 	template_name = 'app/index.html'
 	context_object_name = 'thread_list'
