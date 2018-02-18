@@ -25,10 +25,10 @@
 			that.imgTypes = ['image/png', 'image/gif', 'image/png', 'image/jpeg', 'image/bmp', 'image/webp']
 			that.uploadStartTime = 0;
 			that.videoId = '';
-			that.audioUrl
+			that.audioUrl = '';
+			that.folderId = '';
 			that.uploadComplete = false;
 			that.status_polling_interval = 10 * 1000;
-			that.folderId = "1PXtw_L0urVh8VdToKUthWT-FiR4ZsKZl";
 
 			that.option_text = 1
 			that.option_video = 2
@@ -155,9 +155,9 @@
 				$.ajax({
 			    	type: 'POST',
 			    	url: '../youtube_token',
-			    	success : function(data){
-			    		console.log("success")		    		
-			    		that.accessToken = data.token;			    		
+			    	success : function(data){    		
+			    		that.accessToken = data.token;
+			    		that.folderId = data.folderId;	    		
 			    		that.uploadAudio(file);								    		
 			    	},
 			    	error : function(data){
@@ -176,8 +176,7 @@
 				$.ajax({
 			    	type: 'POST',
 			    	url: '../youtube_token',
-			    	success : function(data){
-			    		console.log("success")								    		
+			    	success : function(data){							    		
 			    		that.accessToken = data.token;
 			    		that.apiKey = data.apiKey;
 			    		that.uploadVideo(file);							    		

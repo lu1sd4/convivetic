@@ -9,6 +9,14 @@
 		<h3>Mis comentarios</h3>
 		<hr>
 
+		{% if my_comments.count == 0 %}
+
+			<div class="alert alert-info" role="alert">
+			  No tienes ningún comentario, prueba <a href="{% url 'forums' %}" class="alert-link">comentando algún foro</a>.
+			</div>
+
+		{% endif %}
+
 		{% for mcomment in my_comments %}
 
 		<div class="mcomment rounded">

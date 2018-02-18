@@ -338,6 +338,7 @@ def register_user(request):
 				mail_subject, message, to=[to_email]
 			)
 			email.send()
+			messages.success(request, 'Te has registrado. Recibirás un correo electrónico con instrucciones para completar la activación de tu cuenta.')
 			return redirect('/')
 	else:
 		user_form = UserForm(prefix="user", initial={'group' : 1})
@@ -383,9 +384,8 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        # login(request, user)
-        # return redirect('home')
-        return HttpResponse('Gracias por confirmar tu correo. Ahora puedes iniciar sesión.')
+        messages.success(request, 'Gracias por confirmar tu correo. Ahora puedes iniciar sesión.')
+        return redirect('/')
     else:
         return HttpResponse('Tu enlace de activación no es válido.')
 
@@ -407,7 +407,8 @@ class PasswordResetComplete(PasswordResetCompleteView):
 def youtube_token_v(request):
 	data = { 
 		'token' : youtube_token.get_youtube_token(),
-		'apiKey' : settings.API_KEY
+		'apiKey' : settings.API_KEY,
+		'folderId' : settings.DRIVE_FOLDER_ID
 	}
 	return(JsonResponse(data))
 
