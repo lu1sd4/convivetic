@@ -760,7 +760,7 @@ class SearchView(TemplateView):
 		q = self.request.GET.get('q')
 		context['q'] = q
 		context['threads'] = Thread.objects.filter(description__contains=q).annotate(thlikes=Count('like')).order_by('-thlikes')[0:10]
-		context['experiences'] = Experience.objects.filter(content__contains=q).annotate(xplikes=Count('experienceslike')).order_by('-xplikes')[0:10]
+		context['experiences'] = Experience.objects.filter(content__contains=q, status='A').annotate(xplikes=Count('experienceslike')).order_by('-xplikes')[0:10]
 		return context
 
 class AddAnswerView(View):
