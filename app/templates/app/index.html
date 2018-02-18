@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %} 
-	<div class="container-fluid p-container">
+	<div class="container-fluid p-container" ng-controller="indexController as ixCtrl">
 		<section class="exp-section">
 			<div class="exp-gra-c">
 				<h3 class="border exp-section-title">Experiencias</h3>
@@ -36,10 +36,21 @@
 
 					{% endfor %}
 
+					{% if messages %}
+					    {% for message in messages %}
+					    	{% if message.tags == 'success' %}
+					    <p style="display:none" ng-init="ixCtrl.successToast('{{ message }}')">{{ message }}</p>
+					    	{% endif %}
+					    	{% if message.tags == 'info' %}
+					    <p style="display:none" ng-init="ixCtrl.infoToast('{{ message }}')">{{ message }}</p>
+					    	{% endif %}
+					    {% endfor %}
+					{% endif %}
+
 				</div>
 
 				<div class="more-exp">
-					<a href="{% url 'experiences' %}" >Mostrar todo ({{experiences.count}}+) <i>></i></a>	
+					<a href="{% url 'experiences' %}" >Mostrar todo ({{experiences.count}}) </a>	
 				</div>	
 
 			</div>
@@ -191,3 +202,9 @@
 	
 	
 {% endblock %}
+
+ {% block scripts %} 
+
+ 	<script type="text/javascript" src="{% static 'app/logic/controllers/indexController.js' %}"></script>
+
+ {% endblock %}

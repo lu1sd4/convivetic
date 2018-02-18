@@ -127,6 +127,7 @@ CLIENT_ID = '367931440425-7d9ukeoek3s1pacp66f4ou9vvgds0lk9.apps.googleuserconten
 CLIENT_SECRET = 'pUC0H5AH9S7oIjCpPOXUBmcf'
 SCOPE = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.scripts https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.upload'
 API_KEY = 'AIzaSyA6hCsmPkcjbcWNHqrXAR-7KHHwN92ONLk'
+DRIVE_FOLDER_ID = '1PXtw_L0urVh8VdToKUthWT-FiR4ZsKZl'
 
 # User creds
 

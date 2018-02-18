@@ -106,7 +106,7 @@
 			<div class="sec-nav-c">
 				<ul>
 					{% if request.user|has_group:"Administrador" %}
-						<li><a href="{% url 'experiences_manage' %}">Administrar experiencias <span class="badge  badge-primary">{[{ hCtrl.pendingExperiences }]}</span></a></li>
+						<li ng-init="hCtrl.initPending()"><a href="{% url 'experiences_manage' %}">Administrar experiencias <span class="badge  badge-primary">{[{ hCtrl.pendingExperiences }]}</span></a></li>
 					{% endif %}
 					<li class="medium-li"><a href="{% url 'my-forums' %}">Mis foros</a></li>
 					<li class="large-li"><a href="{% url 'my-experiences' %}">Mis experiencias</a></li>
