@@ -12,10 +12,17 @@
 		var that = this;
 
 		that.successToast = successToast;
+		that.infoToast = infoToast;
 
 		function successToast(message){
 			swal(message, {
 				icon: "success"
+			})
+		}
+
+		function infoToast(message){
+			swal(message, {
+				icon: "info"
 			})
 		}
 

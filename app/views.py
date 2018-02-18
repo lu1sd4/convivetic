@@ -72,6 +72,11 @@ class Index(ListView):
 		context['secondary_threads'] = Thread.objects.annotate(likes=Count('like')).order_by('pub_date')[4:8]
 		context['experiences'] = Experience.objects.filter(status='A').order_by('pub_date')[:9]
 		context['th_quantity'] = Thread.objects.all().count()
+		group =  Group.objects.get(name="Administrador")
+		if group in self.request.user.groups.all():
+			pending_experiences = Experience.objects.filter(status='P').count()
+			if pending_experiences > 0:
+				messages.info(self.request, "Tienes "+str(pending_experiences)+" Experiencia(s) pendientes por revisar.")
 		return context
 
 

@@ -38,14 +38,19 @@
 
 					{% if messages %}
 					    {% for message in messages %}
+					    	{% if message.tags == 'success' %}
 					    <p style="display:none" ng-init="ixCtrl.successToast('{{ message }}')">{{ message }}</p>
+					    	{% endif %}
+					    	{% if message.tags == 'info' %}
+					    <p style="display:none" ng-init="ixCtrl.infoToast('{{ message }}')">{{ message }}</p>
+					    	{% endif %}
 					    {% endfor %}
 					{% endif %}
 
 				</div>
 
 				<div class="more-exp">
-					<a href="{% url 'experiences' %}" >Mostrar todo ({{experiences.count}}) <i>></i></a>	
+					<a href="{% url 'experiences' %}" >Mostrar todo ({{experiences.count}}) </a>	
 				</div>	
 
 			</div>
