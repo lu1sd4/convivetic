@@ -1,6 +1,7 @@
  {% extends 'app/base.html' %}
  {% load static %}
  {% load widget_tweaks %}
+ {% load random_image  %}
 
  {% block content %}
 
@@ -10,7 +11,15 @@
 	 	
 		<div class="detail-c">
 			<div class="prof-image">
-				<img class="rounded-circle" src="http://via.placeholder.com/75x75">
+				{% if object.video_url %}
+					<img class="rounded-circle" src="https://img.youtube.com/vi/{{object.video_url}}/0.jpg">
+				{% elif object.img %}
+					<img class="rounded-circle" src="{{object.img.url}}" alt=""></img>
+				{% elif object.audio_url %}
+					<img class="rounded-circle" src="{{ MEDIA_URL }}{% random_image 'img/audioposts' %}">
+				{% else %}
+					<img class="rounded-circle" src="{{ MEDIA_URL }}{% random_image 'img/textposts' %}">
+				{% endif %}
 			</div>			
 
 			<div class="detail-right">
@@ -36,7 +45,7 @@
 
 					{% if object.img %}
 						<h6><small>Imagen:</small></h6>
-						<img src="/media/{{object.img}}" alt="" class="rounded thread-det-img">
+						<img src="{{object.img.url}}" alt="" class="rounded thread-det-img">
 					{% endif %}
 
 					{% if object.video_url %}
@@ -70,12 +79,34 @@
 
 						<div class="detail-n">
 							<div class="forum-likes">
-								<div ng-click="fdCtrl.vote()" class="thread-like" ng-class="{'active' : fdCtrl.likeStatus == fdCtrl.like_like }"><i class="fas fa-thumbs-up"></i></div>
+								<div class="thread-like"
+								{% if request.user.is_authenticated %}
+									ng-click="fdCtrl.vote()" 
+									ng-class="{'active' : fdCtrl.likeStatus == fdCtrl.like_like }"
+								{% else %}
+									data-toggle="tooltip" data-placement="left" title="Para votar debes iniciar sesión"
+								{% endif %}
+								>
+
+									<i class="fas fa-thumbs-up"></i>
+
+								</div>
 								<h5 id="likes">{[{fdCtrl.likes}]}</h5>
 							</div>
 							<div class="filler"></div>			
 							<div class="forum-dislikes">
-								<div ng-click="fdCtrl.unvote()" class="thread-dislike" ng-class="{'active' : fdCtrl.likeStatus == fdCtrl.like_dislike }"><i class="fas fa-thumbs-down"></i></div>
+								<div class="thread-dislike" 
+								{% if request.user.is_authenticated %}
+									ng-click="fdCtrl.unvote()" 
+									ng-class="{'active' : fdCtrl.likeStatus == fdCtrl.like_dislike }"
+								{% else %}
+									data-toggle="tooltip" data-placement="left" title="Para votar debes iniciar sesión"								
+								{% endif %}
+								>
+
+									<i class="fas fa-thumbs-down"></i>
+
+								</div>
 								<h5 id="dislikes">{[{fdCtrl.dislikes}]}</h5>
 							</div>
 						</div>						

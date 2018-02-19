@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '9u7ysc$0@*&m*n319=)ea^#+lwz$erc=ebl0rd9kg=4zb7ep*@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '192.168.1.69']
 
@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
         },
     },
@@ -103,7 +104,7 @@ ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(ENV_PATH,'media/')
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 # Auth options
 
@@ -127,9 +128,9 @@ CLIENT_ID = '367931440425-7d9ukeoek3s1pacp66f4ou9vvgds0lk9.apps.googleuserconten
 CLIENT_SECRET = 'pUC0H5AH9S7oIjCpPOXUBmcf'
 SCOPE = 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/drive.scripts https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.upload'
 API_KEY = 'AIzaSyA6hCsmPkcjbcWNHqrXAR-7KHHwN92ONLk'
-DRIVE_FOLDER_ID = '1PXtw_L0urVh8VdToKUthWT-FiR4ZsKZl'
+DRIVE_FOLDER_ID = '1lBJJTL73djrHXaSssIr-3gHE9QPkJ96Q'
 
 # User creds
 
-REFRESH_TOKEN = '1/fOJ7MVeJzeYNbym_6Qwsrkh5Fim2LtXIdtVBLwyKjy4'
-ACCESS_TOKEN = 'ya29.GlxABaTlnqWLvABrhPqNv6UtAMcAoKd2lp0IZeUxTcGup29kRA59WUxlmSXOew4L6nxkUD90-10wd1Xunvdn79pnk8jrwtSkLeHX1VBsIDheXoRFVeUulbfXL4HAmQ'
+REFRESH_TOKEN = '1/-MIfoXnTYScaGGfjNDqS2I0YTsx_jNB0hLpbxzGUxXg'
+ACCESS_TOKEN = 'ya29.GltmBWhETDQ9npXjZnXG9c7gj7fNHKeE9DU_pIH-Cvad-_41rs1dwbF-G9XCElmQdqqhw6gE6x8EJGRrmm1ZNCZViIstp4_wt_DIDyFlAy0duaZq-4nYv-UIBWMN'

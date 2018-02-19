@@ -752,3 +752,30 @@ class GuideView(TemplateView):
 
 class CrossWordView(TemplateView):
 	template_name = 'app/crossword.html'
+
+class SearchView(TemplateView):
+	template_name = 'app/search.html'
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		q = self.request.GET.get('q')
+		context['q'] = q
+		context['threads'] = Thread.objects.filter(description__contains=q).annotate(thlikes=Count('like')).order_by('-thlikes')[0:10]
+		context['experiences'] = Experience.objects.filter(content__contains=q, status='A').annotate(xplikes=Count('experienceslike')).order_by('-xplikes')[0:10]
+		return context
+
+class AddAnswerView(View):
+	def post(self, request, *args, **kwargs):
+		question_id = request.POST.get("id")
+		question = Question.objects.get(pk=question_id)
+		usr = self.request.user
+		answer = request.POST.get("answer")
+		Answer.objects.create(question = question, user = usr, answer = answer)
+		return HttpResponse(status=200)
+
+class AddToolboxReview(View):
+	def post(self, request, *args, **kwargs):
+		toolbox_id = request.POST.get("toolbox")
+		toolbox = Toolbox.objects.get(pk=toolbox_id)
+		usr = self.request.user
+		ToolboxUser.objects.create(toolbox = toolbox, user = usr)
+		return HttpResponse(status=200)
