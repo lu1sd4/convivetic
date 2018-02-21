@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/imagehover.css/1.0/css/imagehover.min.css">
 	<link rel="stylesheet" type="text/css" href="{% static 'app/logic/crossword/style.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'app/logic/wordsearch/style.css' %}" />
 </head>
 <body ng-app='conviveticApp' ng-cloak class="guides-body" ng-controller="guidesController as gc">
 
@@ -36,23 +37,27 @@
 				<h1>{[{gc.currentStateObj.content}]}</h1>
 			</div>
 
-			<div class="guide guide-test" ng-if="gc.currentTemplate == gc.TEMP_TEST">
+			<div class="guide guide-test compressed" ng-if="gc.currentTemplate == gc.TEMP_TEST">
 				<h2>{[{gc.currentStateObj.content}]}</h2>
 				<textarea class="form-control test_input" cols="30" rows="8" placeholder="Escribe tu opinión"></textarea>
 
 			</div>
 
-			<div class="guide guide-text" ng-if="gc.currentTemplate == gc.TEMP_TEXT">
+			<div class="guide guide-text compressed" ng-if="gc.currentTemplate == gc.TEMP_TEXT">
 				<h3>{[{gc.currentStateObj.title}]}</h3>
 				<p ng-repeat="cc in gc.currentStateObj.content" ng-bind-html="cc"></p>
 			</div>
 
-			<div class="guide guide-text" ng-if="gc.currentTemplate == gc.TEMP_ACTIVITY">
-				<h3>{[{gc.currrentStateObj.title}]}</h3>
-				<p>{[{gc.currentStateObj.content}]}</p>
+			<div class="guide guide-text wordsearch" ng-show="gc.currentTemplate == gc.TEMP_ACTIVITY">
+
+				<div class="searchword-container">
+					<div id='puzzle'></div>
+					<div id='words'></div>
+				</div>
+				<!--<div><button id='solve'>Solve Puzzle</button></div>-->
 			</div>
 
-			<div class="guide guide-test-img" ng-if="gc.currentTemplate == gc.TEMP_TEST_IMAGE">
+			<div class="guide guide-test-img compressed" ng-if="gc.currentTemplate == gc.TEMP_TEST_IMAGE">
 
 				<div class="guide-image">
 					<img class="rounded" src="{[{gc.currentStateObj.img_url}]}" alt="">
@@ -64,7 +69,7 @@
 
 			</div>
 
-			<div class="guide guide-question-multiple" ng-if="gc.currentTemplate == gc.TEMP_TEST_MULTIPLE">
+			<div class="guide guide-question-multiple compressed" ng-if="gc.currentTemplate == gc.TEMP_TEST_MULTIPLE">
 				<h2>{[{gc.currentStateObj.content}]}</h2>
 
 				<div class="answers-w">
@@ -105,7 +110,7 @@
 
 	<script type="text/javascript" src="{% static 'app/libs/jquery/dist/jquery.min.js' %}"></script>
 	
-	<!--<script type="text/javascript" src="{% static 'app/logic/crossword/lib/jquery.hotkeys.js' %}"></script>
+	<script type="text/javascript" src="{% static 'app/logic/crossword/lib/jquery.hotkeys.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/logic/crossword/lib/jquery.cookie.js' %}"></script>
 	<script type="text/javascript" src="{% static 'app/logic/crossword/crossword.js' %}"></script>
 	<script type="text/javascript">
@@ -115,7 +120,29 @@
 	    crossw1rd1 = new Crossw1rd('container1');
 	    crossw1rd1.init('puzzle');
 	  });
-	</script>-->
+	</script>
+	
+	<script type="text/javascript" src="{% static 'app/logic/wordsearch/wordfind.js' %}"></script> 
+	<script type="text/javascript" src="{% static 'app/logic/wordsearch/wordfindgame.js' %}"></script> 
+	<script>
+
+	  var words = ['Paz','tolerancia', 'amistad', 'respeto', 'escucha', 'dialogo', 'reflexion',
+					'convivencia', 'aceptacion', 'bondad', 'paciencia', 'perdon', 'calma'];
+
+	  // start a word find game
+	  var gamePuzzle = wordfindgame.create(words, '#puzzle', '#words');
+
+	  $('#solve').click( function() {
+	    wordfindgame.solve(gamePuzzle, words);
+	  });
+
+	  var puzzle = wordfind.newPuzzle(
+	    words, 
+	    {height: 18, width:18, fillBlanks: false}
+	  );
+	  wordfind.print(puzzle);
+
+	</script>
 
 
 	<script type="text/javascript" src="{% static 'app/libs/tether/dist/js/tether.min.js' %}"></script>
@@ -136,6 +163,8 @@
 
 	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	
 	
 
 </body>
