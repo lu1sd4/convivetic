@@ -176,6 +176,30 @@ ul {
 .con-footer-secondary {
   background-color: #455a64;
   height: 60px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.con-footer-secondary >div {
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+}
+.con-footer-secondary >div a {
+  color: rgba(255,255,255,0.902);
+}
+.con-footer-secondary >div a:hover {
+  color: #bbb;
+}
+.con-footer-secondary .contact-address {
+  text-align: right;
+  flex-direction: row;
+}
+.con-footer-secondary .contact-social {
+  text-align: left;
+}
+.con-footer-secondary .contact-social a {
+  margin: 0px 5px;
 }
 .subheader {
   background-image: url("img/header.jpg");
@@ -851,7 +875,7 @@ progress {
   max-width: 300px;
   font-weight: 700;
   font-size: 50px;
-  color: #484848;
+  color: rgba(255,255,255,0.902);
   line-height: 1.2;
 }
 .start-section .start-content .float-content button {
@@ -2440,6 +2464,9 @@ progress {
   color: #fff;
   padding: 8px;
 }
+.contact-form-container {
+  margin-bottom: 100px;
+}
 .contact-form-container .contact-form > div {
   display: flex;
   flex-direction: row;
@@ -2495,25 +2522,6 @@ progress {
 .contact-map #map {
   height: 400px;
   background-color: #808080;
-}
-.contact-info {
-  margin: 100px 0px;
-  height: 300px;
-  flex-grow: 1;
-  background-color: #008489;
-  min-width: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.contact-info .contact-social {
-  margin-top: 20px;
-}
-.contact-info .contact-social a {
-  margin: 0px 20px;
-  color: #fff;
-  opacity: 0.6;
 }
 .title-container {
   width: 55%;
