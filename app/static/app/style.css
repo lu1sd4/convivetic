@@ -1158,8 +1158,11 @@ progress {
 .forums-container .forum-header .top-section .forum-header-new .options-c .publish-btn:hover {
   background-color: #007478;
 }
-.forums-container .forum-header .top-section .top-description {
+.forums-container .forum-header .top-section .forum-header-desc .top-description {
   font-weight: 300;
+}
+.forums-container .forum-header .forum-header-empty {
+  margin-top: 1em;
 }
 .forums-container .forum {
   margin-top: 2.5em;
@@ -2763,7 +2766,7 @@ progress {
   right: 0;
   bottom: 0;
   height: 500px;
-  width: 700px;
+  width: 1000px;
 }
 .gmain-content .gmain-wrapper {
   align-items: center;
@@ -2772,6 +2775,9 @@ progress {
   justify-content: center;
   height: 100%;
   width: 100%;
+}
+.gmain-content .gmain-wrapper .compressed {
+  max-width: 700px;
 }
 .gmain-content .gmain-wrapper .guide-title {
   text-align: center;
@@ -2863,6 +2869,10 @@ progress {
 }
 .gmain-content .gmain-wrapper .guide-text p.final-p {
   text-align: center;
+}
+.gmain-content .gmain-wrapper .wordsearch {
+  display: flex;
+  justify-content: center;
 }
 .gmain-content .gmain-wrapper .guide-question-multiple h2 {
   color: #484848;

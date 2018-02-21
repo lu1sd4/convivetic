@@ -20,13 +20,14 @@ class LoginForm(auth_forms.AuthenticationForm):
 	)
 
 class UserForm(auth_forms.UserCreationForm):
-	groups = forms.ModelChoiceField(queryset=Group.objects.exclude(name='Administrador'),
+	group = forms.ModelChoiceField(queryset=Group.objects.exclude(name='Administrador'),
 								   required=True,
-								   empty_label='¿Qué tipo de usuario eres?')
+								   empty_label='¿Qué tipo de usuario eres?',
+								   label='Grupo')
 
 	class Meta:
 		model = User
-		fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'groups']
+		fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'group']
 		labels = {
 			'username' : 'Nombre de usuario',
 			'password1' : 'Contraseña',
@@ -50,8 +51,9 @@ class UserForm(auth_forms.UserCreationForm):
 		self.fields['password2'].label = 'Confirmar contraseña'
 
 class UserUpdateForm(forms.ModelForm):
-	group = forms.ModelChoiceField(queryset=Group.objects.all(),
-								   required=True)
+	group = forms.ModelChoiceField(queryset=Group.objects.exclude(name='Administrador'),
+								   required=True,
+								   label='Grupo')
 	class Meta:
 		model = User
 		fields = ['first_name', 'last_name', 'email', 'group']
