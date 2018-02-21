@@ -90,6 +90,11 @@ ul {
 			-o-transition max-height 1s 
 			transition max-height 1s*/
 }
+.nav-c .nav-mobile .menu-list a {
+  text-decoration: none;
+  color: #484848 !important;
+  padding: 0 1em !important;
+}
 .nav-c .nav-mobile .nav-mob-btn {
   height: 43px;
   width: 43px;
@@ -2786,6 +2791,12 @@ progress {
   height: 50px;
   width: 200px;
   margin-top: 3em;
+}
+.gmain-content .gmain-wrapper .guide-fill .blanks_cont {
+  line-height: 2.5;
+}
+.gmain-content .gmain-wrapper .guide-fill .blanks_cont button {
+  height: 38px !important;
 }
 .gmain-content .gmain-wrapper .guide-intro {
   background-color: #fff;

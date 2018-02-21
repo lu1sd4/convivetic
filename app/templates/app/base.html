@@ -50,11 +50,13 @@
 			<div class="nav-mobile" ng-class="{'active' : hCtrl.mMenuIsActive == true}">
 				<button class="nav-mob-btn" ng-click="hCtrl.getMobileMenu()"><i class="fa fa-bars"></i></button>
 				<ul class="menu-list">
-					<li>Quiénes Somos</li>
-					<li>Foros</li>
-					<li>Experiencias</li>
-					<li>Ingreso</li>
-					<li>Contacto</li>
+					<li><a class="nav-link active" href="{% url 'index' %}">Inicio</a></li>
+					<li><a class="nav-link" href="{% url 'forums' %}">Foros</a></li>
+					<li><a class="nav-link" href="{% url 'experiences' %}">Experiencias</a></li>
+					<li><a class="nav-link" href="{% url 'about-us' %}">Quiénes Somos</a></li>
+					<li><a class="nav-link" href="{% url 'contact-us' %}">Contacto</a></li>
+					<li><a class="nav-link" href="{% url 'document' %}">Documentos</a></li>
+					
 					{% if request.user.is_authenticated %}
 
 					<div class="dropdown">
