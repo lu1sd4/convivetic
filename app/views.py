@@ -333,8 +333,11 @@ def register_user(request):
 		user_form = UserForm(request.POST, prefix="user")
 		profile_form = ProfileForm(request.POST, prefix="profile")
 		if user_form.is_valid() and profile_form.is_valid():
-			user = user_form.save(commit=False)	
+			user = user_form.save(commit=False)			
 			user.is_active = False
+			user.save()
+			user.groups.clear()
+			user.groups.add(user_form.cleaned_data['group'])
 			user.save()
 			profile = profile_form.save(commit=False)
 			profile.user = user

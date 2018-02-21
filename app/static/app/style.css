@@ -1134,8 +1134,11 @@ progress {
 .forums-container .forum-header .top-section .forum-header-new .options-c .publish-btn:hover {
   background-color: #007478;
 }
-.forums-container .forum-header .top-section .top-description {
+.forums-container .forum-header .top-section .forum-header-desc .top-description {
   font-weight: 300;
+}
+.forums-container .forum-header .forum-header-empty {
+  margin-top: 1em;
 }
 .forums-container .forum {
   margin-top: 2.5em;

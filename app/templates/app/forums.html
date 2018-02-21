@@ -25,8 +25,10 @@
 			 		</div>
 			 	</div>
 			 	<br>
-			 	<h5 class="top-description">Ponemos a tu disposición un espacio para discutir con los demás usuarios de ConviveTIC sobre temas del conflicto o plantear tu propio tema de discusión.</h5>
-			 	<h5 class="top-description">Puedes poner contenido multimedia en las discusiones. {% if not request.user.is_authenticated %}<a href="{% url 'login' %}?next=/forums">¡Comienza a dialogar!</a>{% endif %}</h5>
+			 	<div class="forum-header-desc" ng-show="fCtrl.currentState == fCtrl.normalState">
+				 	<h6 class="top-description">Ponemos a tu disposición un espacio para discutir con los demás usuarios de ConviveTIC sobre temas del conflicto o plantear tu propio tema de discusión.</h6>
+				 	<h6 class="top-description">Puedes poner contenido multimedia en las discusiones. {% if not request.user.is_authenticated %}<a href="{% url 'login' %}?next=/forums">¡Comienza a dialogar!</a>{% endif %}</h6>
+			 	</div>
 	 		</div>
 
 	 		{% if thread_list.paginator.count > 0 %}
@@ -42,7 +44,7 @@
 
 	 			{% if request.user.is_authenticated %}
 
-	 			<div class="alert alert-info text-center" ng-show="fCtrl.currentState == fCtrl.normalState " ng-click="fCtrl.newDiscussion()" role="alert">	 			
+	 			<div class="alert alert-info text-center forum-header-empty" ng-show="fCtrl.currentState == fCtrl.normalState " ng-click="fCtrl.newDiscussion()" role="alert">	 			
 			  		No hay ningún foro en ConviveTIC, ¡Crea el tuyo!
 				</div>
 
