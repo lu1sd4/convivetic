@@ -2915,52 +2915,69 @@ progress {
   margin-left: auto;
 }
 .nexp-container {
+  background-color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  padding: 30px 45px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 2rem;
+  justify-content: center;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  max-width: 900px;
+  margin-top: 3em;
+  width: 100%;
 }
-.nexp-container .nexp-content {
-  width: 90%;
+@media (max-width: 768px) {
+  .nexp-container {
+    padding: 30px 20px !important;
+  }
 }
-.nexp-container .nexp-content .new-experience {
+.nexp-container .forum-footer {
+  display: flex;
+  justify-content: center;
+}
+.nexp-container .forum-footer button {
+  min-width: 125px;
+  width: 30%;
+}
+.nexp-container .new-experience {
   margin-top: 1.5em;
 }
-.nexp-container .nexp-content .new-experience .form-control::-webkit-input-placeholder {
+.nexp-container .new-experience .form-control::-webkit-input-placeholder {
   color: #ebebeb /* WebKit, Blink, Edge */;
 }
-.nexp-container .nexp-content .new-experience .form-control:-moz-placeholder {
+.nexp-container .new-experience .form-control:-moz-placeholder {
   color: #ebebeb /* Mozilla Firefox 4 to 18 */;
 }
-.nexp-container .nexp-content .new-experience .form-control::-moz-placeholder {
+.nexp-container .new-experience .form-control::-moz-placeholder {
   color: #ebebeb /* Mozilla Firefox 19+ */;
 }
-.nexp-container .nexp-content .new-experience .form-control:-ms-input-placeholder {
+.nexp-container .new-experience .form-control:-ms-input-placeholder {
   color: #ebebeb /* Internet Explorer 10-11 */;
 }
-.nexp-container .nexp-content .new-experience .form-control::-ms-input-placeholder {
+.nexp-container .new-experience .form-control::-ms-input-placeholder {
   color: #ebebeb /* Microsoft Edge */;
 }
-.nexp-container .nexp-content .new-experience .title-input {
+.nexp-container .new-experience .title-input {
   font-size: 20px;
 }
-.nexp-container .nexp-content .new-experience .forum-type {
+.nexp-container .new-experience .forum-type {
   display: flex;
   justify-content: space-around;
 }
-.nexp-container .nexp-content .new-experience .f-type-data {
+.nexp-container .new-experience .f-type-data {
   margin-top: 2em;
 }
 @media (max-width: 575.99px) {
-  .nexp-container .nexp-content .new-experience .f-type-data input {
+  .nexp-container .new-experience .f-type-data input {
     overflow: hidden;
     width: 100%;
   }
 }
-.nexp-container .nexp-content .new-experience .img-hidden-field {
+.nexp-container .new-experience .img-hidden-field {
   display: none;
 }
-.nexp-container .nexp-content .new-experience .media-type-container {
+.nexp-container .new-experience .media-type-container {
   width: 100%;
 }
 .about-us .info-1 {
@@ -3164,4 +3181,67 @@ progress {
 }
 .login-dec > .custom-404:nth-child(1) .error-status:nth-child(2) {
   margin-top: -60px;
+}
+.my-exp-c {
+  background-color: #f7f7f7;
+}
+.mtb-content {
+  margin-top: 1rem;
+}
+.mtb-content .mtb-item {
+  padding: 15px;
+}
+.mtb-content .mtb-item .mtb-item-content {
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0,0,0,0.14), 0 2px 2px rgba(0,0,0,0.1);
+  transition: box-shadow 0.5s;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #484848;
+}
+.mtb-content .mtb-item .mtb-item-content .mtb-user {
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+.mtb-content .mtb-item .mtb-item-content .mtb-title {
+  font-weight: 300;
+}
+.mtb-content .mtb-item .mtb-item-content:hover {
+  box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.2);
+  border: 1px #fefefe solid;
+  cursor: pointer;
+  text-decoration: none;
+}
+.comment-tb-container {
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+  padding-bottom: 4em;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.comment-tb-container .comment-tb-content {
+  background-color: #fff;
+  padding: 30px 45px;
+  margin-top: 3em;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+}
+.comment-tb-container .question-title {
+  font-weight: 300;
+}
+.alert-secondary {
+  color: #383d41;
+  background-color: #e2e3e5;
+  border-color: #d6d8db;
+}
+.alert-light {
+  color: #818182;
+  background-color: #fefefe;
+  border-color: #fdfdfe;
 }

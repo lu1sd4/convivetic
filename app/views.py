@@ -782,3 +782,9 @@ class AddToolboxReview(View):
 		usr = self.request.user
 		ToolboxUser.objects.create(toolbox = toolbox, user = usr)
 		return HttpResponse(status=200)
+
+class ManageToolboxesView(UserIsAdminMixin, TemplateView):
+	template_name = "app/manage_toolboxes.html"
+
+class CommentToolboxView(UserIsAdminMixin, TemplateView):
+	template_name = "app/comment_toolbox.html"

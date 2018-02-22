@@ -1,0 +1,122 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="my-exp-c">
+	<div class="my-exp-wrapper" ng-controller="manageToolboxesController as mtCtrl">
+
+		<h3>Cajas de herramientas</h3>
+		<hr>
+
+		<ul class="nav nav-pills">
+		  <li class="nav-item">
+		    <a class="nav-link" ng-class="{ 'active' : mtCtrl.current_tab == mtCtrl.PENDING_TAB }" href="javascript:void(0)" ng-click="mtCtrl.switchTab(mtCtrl.PENDING_TAB)" >Sin comentar</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" ng-class="{ 'active' : mtCtrl.current_tab == mtCtrl.COMMENTED_TAB }" ng-click="mtCtrl.switchTab(mtCtrl.COMMENTED_TAB)" href="javascript:void(0)">Comentadas</a>
+		  </li>
+		 </ul>
+
+		 <div class="mtb-content row">
+		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
+		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
+			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
+		 		</a>
+		 	</div>
+		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
+		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
+			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
+		 		</a>
+		 	</div>
+		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
+		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
+			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
+		 		</a>
+		 	</div>
+		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
+		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
+			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
+		 		</a>
+		 	</div>
+		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
+		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
+			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
+		 		</a>
+		 	</div>
+		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
+		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
+			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
+		 		</a>
+		 	</div>
+		 </div>
+
+
+		{% if pending_toolboxes %}
+
+			<div class="mtb-content row" ng-show="mtCtrl.current_tab == mtCtrl.PENDING_TAB">
+
+			{% for tb in pending_toolboxes %}
+
+				<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
+			 			<h5 class="mtb-user text-center">{{tb.user.full_name}}</h5>
+				 		<h4 class="mtb-title text-center">{{tb.toolbox.name}}</h4>			 	
+			 		</a>
+			 	</div>
+
+			{% endfor %}
+
+			</div>
+
+		{% else %}
+
+			<div class="text-center" ng-show="mtCtrl.current_tab == mtCtrl.PENDING_TAB">
+			<br>
+			<h3>No hay ninguna caja de herramientas sin comentar</h3>
+			</div>
+
+		{% endif %}
+
+		{% if commented_toolboxes %}
+
+			<div class="mtb-content row" ng-show="mtCtrl.current_tab == mtCtrl.COMMENTED_TAB">
+
+			{% for tb in commented_toolboxes %}
+
+				<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			 		<a class="mtb-item-content rounded" href="#">
+			 			<h5 class="mtb-user text-center">{{tb.user.full_name}}</h5>
+				 		<h4 class="mtb-title text-center">{{tb.toolbox.name}}</h4>			 	
+			 		</a>
+			 	</div>
+
+			{% endfor %}
+
+			</div>
+
+		{% else %}
+
+			<div class="text-center" ng-show="mtCtrl.current_tab == mtCtrl.COMMENTED_TAB">
+			<br>
+			<h3>No has comentado ninguna caja de herramientas</h3>
+			</div>
+
+		{% endif %}
+
+	</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script type="text/javascript" src="{% static 'app/logic/controllers/manageToolboxesController.js' %}"></script>
+
+{% endblock %}

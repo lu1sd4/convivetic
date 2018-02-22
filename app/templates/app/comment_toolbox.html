@@ -1,0 +1,108 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="comment-tb-container">
+	<div class="comment-tb-content">
+		<h3 class="tb-title">Caja de herramientas 1</h3>
+		<h4 class="tb-user">Respuestas de <span class="text-primary">Daniel Estiven Rico Posada</span></h4>
+		<hr>
+
+		<div class="tb-question-text">
+			<h5 class="question-title">Pregunta 1</h5>
+			<p>Tipo: Abierta</p>
+			<div class="alert alert-light">
+				<p><strong>Pregunta:</strong></p>
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+			</div>
+			<div class="alert alert-secondary">
+				<p><strong>Respuesta:</strong></p>
+				<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+			</div>
+			<small>Comentario</small>
+			<textarea class="form-control" rows="3"></textarea>
+		</div>
+		<hr>
+
+		<div class="tb-question-image">
+			<h5 class="question-title">Pregunta 2</h5>
+			<p>Tipo: Abierta con imagen</p>
+			<div class="alert alert-light">
+				<p><strong>Imagen:</strong></p>
+				<div class="text-center">
+					<img src="http://via.placeholder.com/200x200">
+				</div>
+				<p><strong>Pregunta:</strong></p>
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+			</div>
+			<div class="alert alert-secondary">
+				<p><strong>Respuesta:</strong></p>
+				<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+			</div>
+			<small>Comentario</small>
+			<textarea class="form-control" rows="3"></textarea>
+		</div>
+		<hr>
+
+		<div class="tb-question-activity">
+			<h5 class="question-title">Pregunta 3</h5>
+			<p>Tipo: Sopa de letras</p>
+			<div class="alert alert-success">
+				<p class="text-center">Resuelta</p>
+			</div>
+		</div>
+		<hr>
+
+		<div class="tb-question-multiple">
+			<h5 class="question-title">Pregunta 4</h5>
+			<p>Tipo: Selección múltiple - Única respuesta</p>
+			<div class="alert alert-light">
+				<p><strong>Pregunta</strong></p>
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+				<p><strong>Opciones</strong></p>
+				<ul class="list-inline">
+				  <li class="list-inline-item p-2">Opción 1</li>
+				  <li class="list-inline-item p-2 bg-success text-white">Opción 2</li>
+				  <li class="list-inline-item p-2">Opción 3</li>
+				  <li class="list-inline-item p-2">Opción 4</li>
+				</ul>				
+			</div>
+			<div class="alert alert-secondary">
+				<p><strong>Respuesta</strong></p>
+				<p>Opción 1</p>
+			</div>
+			<small>Comentario</small>
+			<textarea class="form-control" rows="3"></textarea>
+		</div>
+		<hr>
+
+		<div class="tb-question-activity">
+			<h5 class="question-title">Pregunta 5</h5>
+			<p>Tipo: Crucigrama</p>
+			<div class="alert alert-success">
+				<p class="text-center">Resuelta</p>
+			</div>
+		</div>
+		<hr>
+
+		<div class="tb-question-multiple">
+			<h5 class="question-title">Pregunta 6</h5>
+			<p>Tipo: Completar el texto</p>
+			<div class="alert alert-light">
+				<p><strong>Frase correcta</strong></p>
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>		
+			</div>
+			<div class="alert alert-secondary">
+				<p><strong>Respuesta</strong></p>
+				<p>Lorem Ipsum is <strong>not simply</strong> dummy texto of the <strong>textile</strong> and <strong>typesetting</strong> industry.</p>
+			</div>
+			<small>Comentario</small>
+			<textarea class="form-control" rows="3"></textarea>
+		</div>
+		<hr>
+
+	</div>
+</div>
+
+{% endblock %}
