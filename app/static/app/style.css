@@ -3254,6 +3254,10 @@ progress {
   max-width: 900px;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
 }
+.comment-tb-container .comment-tb-content hr {
+  margin-top: 5em;
+  margin-bottom: 5em;
+}
 .comment-tb-container .question-title {
   font-weight: 300;
 }
