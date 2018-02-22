@@ -19,6 +19,7 @@
 		that.TEMP_TEST_MULTIPLE = 'TEMP_TEST_MULTIPLE';
 		that.TEMP_ACTIVITY = 'TEMP_ACTIVITY';
 		that.TEMP_CROSSWORD = 'TEMP_CROSSWORD';
+		that.TEMP_FILL_THE_BLANKS = 'TEMP_FILL_THE_BLANKS';
 		that.CONST_SEND_ANS = 'Enviar respuestas';
 
 		/* Variables/const para feedback de respuestas */
@@ -45,6 +46,13 @@
 					'content':'CON TOLERANCIA CONSTRUIMOS PAZ',
 					'required':false
 				},
+				{
+					'id':1,
+					'type': 'TEMP_FILL_THE_BLANKS',
+					'content':'CON TOLERANCIA CONSTRUIMOS PAZ',
+					'required':false
+				},
+				
 				{
 					'id':2,
 					'type': 'TEMP_TEST',

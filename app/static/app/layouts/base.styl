@@ -5,6 +5,7 @@ links-color = #008489
 dark-links-color = #007478
 blocks-background = #f7f7f7
 primary-color = #008489
+white-color = rgba(255,255,255,0.902)
 
 body
 	background-color #fff
@@ -89,6 +90,11 @@ ul
 			-ms-transition max-height 1s 
 			-o-transition max-height 1s 
 			transition max-height 1s*/
+				
+			a
+				text-decoration none
+				color texts-color !important
+				padding 0 1em !important
 		
 		.nav-mob-btn
 			height 43px
@@ -182,6 +188,28 @@ ul
 .con-footer-secondary
 	background-color #455a64
 	height 60px
+	display flex
+	justify-content center
+	flex-wrap wrap
+	
+	>div 
+		margin 0 15px
+		display flex
+		align-items center
+		
+		a
+			color white-color
+		a:hover
+			color #bbb	
+	
+	.contact-address
+		text-align right
+		flex-direction row
+		
+	.contact-social
+		text-align left	
+		a
+			margin 0px 5px
 
 .subheader
 	background-image url('img/header.jpg')
