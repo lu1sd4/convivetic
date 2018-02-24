@@ -38,7 +38,7 @@
         };
 
 		/* Mapeo de las guías */
-		that.guide1 = {
+		/*that.guide = {
 			'states':[
 				{
 					'id':1,
@@ -203,19 +203,65 @@
 					]
 				}
 			]
-		}
+		}*/
+		that.guide = {};
 
 		/* Variables del estado de la guia */
 		that.currentTemplate =  that.TEMP_INTRO; //En qué plantilla se encuentra actualmente
-		that.currentGuide = that.guide1; //Guía actual (1,2,3)
+		that.currentGuide = {"states":[]};
 		that.currentGuideIndex = 0; //Indica la pos en el arreglo de estado de la guía
-		that.currentStateObj = that.currentGuide.states[that.currentGuideIndex]; //Obtiene el objeto con la info del estado actual
-		that.statesQuantity = that.currentGuide.states.length; //Cantidad de estados de la guía
+		that.currentStateObj = {}; //Obtiene el objeto con la info del estado actual
+		that.statesQuantity = 0; //Cantidad de estados de la guía
 		that.answersVisibles = false; //Indica si deben mostrarse o no las respuestas de la pregunta actual. 
 
+		that.guideInfo = null;
 		
 		that.init = (data) =>{
-			console.log(data);
+			
+			that.guideInfo = data[0].fields || {};
+			data = data.slice(1, data.length);
+			let questions = [];
+			
+			data.forEach(function(e){
+
+				let question = {};
+				question["id"] = e.pk;
+				question["type"] = e.fields.q_type; 
+				question["required"] = e.fields.required;
+
+				switch(question["type"]){
+					case that.TEMP_INTRO:
+					case that.TEMP_TEST:
+					case that.TEMP_ACTIVITY:
+					case that.TEMP_CROSSWORD:
+						question["content"] = e.fields.content;
+
+						break;
+
+					case that.TEMP_TEXT:
+						question["content"] = $sce.trustAsHtml(e.fields.content);
+						break;
+
+					case that.TEMP_TEST_MULTIPLE:
+						question["answers"] = e.fields.answers_av;
+						question["content"] = $sce.trustAsHtml(e.fields.content);
+						question["correct"] = e.fields.correct_answer;
+						break;
+
+					case that.TEMP_TEST_IMAGE:
+						question["img_url"] = e.fields.img;
+						question["content"] = e.fields.content;
+						break;
+				}
+
+				questions.push(question);
+				
+			});
+
+			that.guide["states"] = questions;
+			that.currentGuide = that.guide;
+			that.statesQuantity = that.currentGuide.states.length;
+			that.currentStateObj = that.currentGuide.states[0];
 		}
 
 		/*
@@ -228,12 +274,14 @@
 				that.sendAnswers();
 				return;
 			}
+			
 
 			//Se si cumplen los requisitios del estado actual o no hay requisitos ...
 			if((that.currentStateObj.required && that.userHasResponded) || that.currentStateObj.required == false){
 				that.saveAnswer();
 				that.currentGuideIndex++; 
 				that.currentStateObj = that.currentGuide.states[that.currentGuideIndex];
+				console.log(that.currentStateObj);
 				that.currentTemplate = that.currentStateObj.type;
 				that.updateLoader();
 
@@ -244,6 +292,7 @@
 			}else{
 				swal("Respuesta requerida", "Para continuar debes dar una respuesta");
 			}
+
 		}
 
 
@@ -324,6 +373,7 @@
 		}
 
 		that.reviewRequirements = () =>{
+
 			switch(that.currentStateObj.type){
 				case that.TEMP_TEST:
 					(angular.element(".test_input").val().trim() != "") ? that.userHasResponded=true : that.userHasResponded=false;
@@ -399,22 +449,6 @@
 				console.log(values);
 			});
 		}
-
-		that.testFunc = () =>{
-			let data = $.param({
-				id:1,
-				answer:"daniel"
-			});
-
-			$http.post("/guides/addAnswer", data , that.config).then(function successCallBack(res){
-				console.log("Exitoso");
-			}, function errorCallback(resp){
-				console.log("Error");
-			});
-		};
-
-		//that.testFunc();
-
 
 	}
 

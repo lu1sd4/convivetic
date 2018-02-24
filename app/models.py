@@ -317,11 +317,10 @@ class Question(models.Model):
 		default = False,
 		choices = YES_NO_CHOICES
 	)
-	correct_answer = models.CharField(
-		max_length = 100,
-		default = '' ,
-		null=True,
-		blank=True
+	correct_answer = models.PositiveIntegerField(
+		default = 0,
+		null = True,
+		blank = True
 	)
 	required = models.BooleanField(
 		default=False,

@@ -62,7 +62,7 @@ import json
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core import serializers
-
+from django.http import Http404
 
 
 
@@ -757,7 +757,14 @@ class GuideView(TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		pk = self.kwargs["pk"]
-		context["toolbox"] = serializers.serialize("json", list(Toolbox.objects.filter(guide_n=1)) + list(Question.objects.filter(toolbox=1)))
+		toolbox = list(Toolbox.objects.filter(guide_n=pk))
+		questions = list(Question.objects.filter(toolbox=pk))
+
+		if(len(toolbox) != 0 and len(questions) != 0):
+			context["toolbox"] = serializers.serialize("json", toolbox + questions)
+		else:
+			raise Http404
+
 		return context
 
 class CrossWordView(TemplateView):
