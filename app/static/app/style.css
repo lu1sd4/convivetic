@@ -423,9 +423,10 @@ progress {
   width: 25em;
 }
 .p-container {
-  margin-top: 3em;
+  padding-top: 3em;
   padding-left: 80px;
   padding-right: 80px;
+  background-color: #f7f7f7;
 }
 @media (max-width: 991.99px) {
   .p-container {
@@ -457,6 +458,7 @@ progress {
   margin-left: 15px;
 }
 .exp-section .exp-gra-c .experiences-c .experience {
+  background-color: #fff;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
   margin-top: 1.7em;
   height: auto;
@@ -584,6 +586,7 @@ progress {
   margin-left: 15px;
 }
 .forum-section .forum-c .f-aside {
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   margin-top: 2em;
@@ -646,6 +649,7 @@ progress {
   margin-right: 3.33%;
   margin-top: 2em;
   width: 35%;
+  background-color: #fff;
 }
 @media (max-width: 575.99px) {
   .forum-section .forum-c .forum {
@@ -782,8 +786,7 @@ progress {
   justify-content: center;
   height: auto;
   min-height: 400px;
-  margin-top: 3.5em;
-  padding: 20px;
+  padding-top: 3.5em;
 }
 .block-expl .contact-section {
   display: flex;
@@ -3002,6 +3005,9 @@ progress {
 .nexp-container .new-experience .media-type-container {
   width: 100%;
 }
+.about-us {
+  background-color: #f7f7f7;
+}
 .about-us .info-1 {
   position: relative;
   height: 576px;
@@ -3034,11 +3040,12 @@ progress {
 .container-items-about-us {
   width: 65%;
   margin: auto;
+  padding-bottom: 80px;
 }
 .container-items-about-us .item-about-us {
-  margin-bottom: 80px;
   margin-top: 80px;
   padding-bottom: 30px;
+  background-color: #fff;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
 .container-items-about-us .item-about-us >div img {
