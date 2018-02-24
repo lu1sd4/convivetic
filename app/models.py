@@ -35,7 +35,8 @@ TEMPLATE_CHOICES = [
 	('TEMP_TEXT', 'TEMP_TEXT'),
 	('TEMP_ACTIVITY', 'TEMP_ACTIVITY'),
 	('TEMP_TEST_MULTIPLE', 'TEMP_TEST_MULTIPLE'),
-	('TEMP_CROSSWORD', 'TEMP_CROSSWORD'),	
+	('TEMP_CROSSWORD', 'TEMP_CROSSWORD'),
+	('TEMP_FILL_THE_BLANKS', 'TEMP_FILL_THE_BLANKS')	
 ]
 
 class UserProfile(models.Model):
@@ -298,7 +299,7 @@ class Question(models.Model):
 		default = 'TEMP_TEST'
 	)
 	content = models.CharField(
-		max_length = 700,
+		max_length = 1500,
 		default = ''
 	)
 	img = models.CharField(
@@ -339,6 +340,12 @@ class Question(models.Model):
 		Toolbox,
 		on_delete=models.CASCADE,
 		default=1
+	)
+	fill_answer = models.CharField(
+		max_length = 700,
+		default = '',
+		null = True,
+		blank = True
 	)
 
 

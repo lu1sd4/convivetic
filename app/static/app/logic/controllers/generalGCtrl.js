@@ -150,8 +150,7 @@
 
 							$sce.trustAsHtml(`Tito, muy satisfecho, le dijo a su padre:`),
 
-							$sce.trustAsHtml(`- Me parece papá, que vas a tener que eliminar la ley de normalidad,
-							porque si no este pueblo se va a quedar sin niños.`),
+							$sce.trustAsHtml(`- Me parece papá, que vas a tener que eliminar la ley de normalidad, porque si no este pueblo se va a quedar sin niños.`),
 
 							$sce.trustAsHtml(`Ese día el alcalde cambió la ley y, desde entonces, lo normal en Villanormal es que cada uno elija ser como quiera y que todos se acepten tal y como son.`),
 
@@ -232,7 +231,6 @@
 				switch(question["type"]){
 					case that.TEMP_INTRO:
 					case that.TEMP_TEST:
-					case that.TEMP_ACTIVITY:
 					case that.TEMP_CROSSWORD:
 						question["content"] = e.fields.content;
 
@@ -240,17 +238,33 @@
 
 					case that.TEMP_TEXT:
 						question["content"] = $sce.trustAsHtml(e.fields.content);
+						if(e.fields.title)
+							question["title"] = e.fields.title;
+						
 						break;
 
 					case that.TEMP_TEST_MULTIPLE:
-						question["answers"] = e.fields.answers_av;
 						question["content"] = $sce.trustAsHtml(e.fields.content);
 						question["correct"] = e.fields.correct_answer;
+						let answers = e.fields.answers_av.split(",");
+						question["answers"] = answers;
+
 						break;
 
 					case that.TEMP_TEST_IMAGE:
 						question["img_url"] = e.fields.img;
 						question["content"] = e.fields.content;
+						break;
+
+					case that.TEMP_FILL_THE_BLANKS:
+						question["content"] = $sce.trustAsHtml(e.fields.content);
+						question["fill_answer"] = e.fields.fill_answer;
+						question["title"] = e.fields.title;
+						break;
+
+					case that.TEMP_ACTIVITY:
+						question["content"] = e.fields.content;
+						question["title"] = e.fields.title;
 						break;
 				}
 
@@ -281,7 +295,6 @@
 				that.saveAnswer();
 				that.currentGuideIndex++; 
 				that.currentStateObj = that.currentGuide.states[that.currentGuideIndex];
-				console.log(that.currentStateObj);
 				that.currentTemplate = that.currentStateObj.type;
 				that.updateLoader();
 
@@ -420,7 +433,8 @@
 					});
 				}
 
-				that.requests.push(request);	
+				that.requests.push(request);
+				console.log(that.requests);
 			}
 		}
 
