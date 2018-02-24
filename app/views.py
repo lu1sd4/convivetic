@@ -61,6 +61,7 @@ from django.http import JsonResponse
 import json
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core import serializers
 
 
 
@@ -752,6 +753,12 @@ class BoxView(ListView):
 
 class GuideView(TemplateView):
 	template_name = 'app/guide_general.html'
+	
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		pk = self.kwargs["pk"]
+		context["toolbox"] = serializers.serialize("json", list(Toolbox.objects.filter(guide_n=1)) + list(Question.objects.filter(toolbox=1)))
+		return context
 
 class CrossWordView(TemplateView):
 	template_name = 'app/crossword.html'

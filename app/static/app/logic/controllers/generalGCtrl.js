@@ -213,6 +213,11 @@
 		that.statesQuantity = that.currentGuide.states.length; //Cantidad de estados de la guía
 		that.answersVisibles = false; //Indica si deben mostrarse o no las respuestas de la pregunta actual. 
 
+		
+		that.init = (data) =>{
+			console.log(data);
+		}
+
 		/*
 		* Cambia al siguiente estado de la guia, se acciona con el botón siguiente
 		*/

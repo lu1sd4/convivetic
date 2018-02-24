@@ -271,6 +271,9 @@ class Toolbox(models.Model):
 		max_length = 100,
 		default = ''
 	)
+	guide_n = models.PositiveIntegerField(
+		default = 0
+	)
 
 class ToolboxUser(models.Model):
 	toolbox = models.ForeignKey(
