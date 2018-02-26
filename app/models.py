@@ -304,7 +304,9 @@ class Question(models.Model):
 	)
 	content_templ = models.CharField(
 		max_length = 1500,
-		default = ''
+		default = '',
+		null=True,
+		blank=True
 	)
 	img = models.CharField(
 		max_length = 100,

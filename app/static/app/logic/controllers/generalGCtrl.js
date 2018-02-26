@@ -26,7 +26,7 @@
 		that.GOOD_ANSWER = '¡Muy bien!';
 		that.BAD_ANSWER = 'Respuesta Incorrecta';
 		that.currentFeedback = '';
-		that.userHasResponded = false;
+		window.userHasResponded = false;
 		that.finished = false; //El usuario terminó la guía?
 
 		/* Varibles para almacenar respuestas */
@@ -219,8 +219,8 @@
 			
 			that.guideInfo = data[0].fields || {};
 			data = data.slice(1, data.length);
-			console.log(data);
 			let questions = [];
+			var words = [];
 			
 			data.forEach(function(e){
 
@@ -267,6 +267,7 @@
 					case that.TEMP_ACTIVITY:
 						question["content"] = e.fields.content;
 						question["title"] = e.fields.title;
+						words = e.fields.content.split(",");
 						break;
 				}
 
@@ -278,6 +279,19 @@
 			that.currentGuide = that.guide;
 			that.statesQuantity = that.currentGuide.states.length;
 			that.currentStateObj = that.currentGuide.states[0];
+
+			// start a word find game
+			var gamePuzzle = wordfindgame.create(words, '#puzzle', '#words');
+
+			$('#solve').click( function() {
+				wordfindgame.solve(gamePuzzle, words);
+			});
+
+			var puzzle = wordfind.newPuzzle(
+				words, 
+				{height: 18, width:18, fillBlanks: false}
+			);
+			wordfind.print(puzzle);
 		}
 
 		/*
@@ -293,7 +307,7 @@
 			
 
 			//Se si cumplen los requisitios del estado actual o no hay requisitos ...
-			if((that.currentStateObj.required && that.userHasResponded) || that.currentStateObj.required == false){
+			if((that.currentStateObj.required && userHasResponded) || that.currentStateObj.required == false){
 				that.saveAnswer();
 				that.currentGuideIndex++; 
 				that.currentStateObj = that.currentGuide.states[that.currentGuideIndex];
@@ -347,18 +361,21 @@
 		* Activa la opción de mostrar respuestas de una pregunta y muestra el feedback del footer
 		*/
 		that.showAnswersAndFeedback = (answer, ans_n) => {
-			that.answersVisibles = true;
-			angular.element(".next-btn").addClass("next-btn-feedback");
-			if(that.currentStateObj.correct == that.currentStateObj.answers.indexOf(answer)){
-				angular.element(".footer-guide").addClass("good-answer");
-				that.currentFeedback = that.GOOD_ANSWER;
-			}else{
-				angular.element(".footer-guide").addClass("bad-answer");
-				that.currentFeedback = that.BAD_ANSWER;
+
+			if(userHasResponded == false){
+				that.answersVisibles = true;
+				angular.element(".next-btn").addClass("next-btn-feedback");
+				if(that.currentStateObj.correct == that.currentStateObj.answers.indexOf(answer)){
+					angular.element(".footer-guide").addClass("good-answer");
+					that.currentFeedback = that.GOOD_ANSWER;
+				}else{
+					angular.element(".footer-guide").addClass("bad-answer");
+					that.currentFeedback = that.BAD_ANSWER;
+				}
+
+				angular.element(".ans-"+ans_n).addClass("selected");
+				userHasResponded = true;
 			}
-
-			angular.element(".ans-"+ans_n).addClass("selected");
-
 		}
 
 		/*
@@ -371,7 +388,7 @@
 
 			that.currentFeedback = '';
 			that.currentAnswer = '';
-			that.userHasResponded = false;
+			userHasResponded = false;
 
 			//Vista de intro
 			angular.element(".test_input").val("");
@@ -391,15 +408,15 @@
 
 			switch(that.currentStateObj.type){
 				case that.TEMP_TEST:
-					(angular.element(".test_input").val().trim() != "") ? that.userHasResponded=true : that.userHasResponded=false;
+					(angular.element(".test_input").val().trim() != "") ? userHasResponded=true : userHasResponded=false;
 					break;
 
 				case that.TEMP_TEST_IMAGE:
-					(angular.element(".test_image_input").val().trim() != "") ? that.userHasResponded=true : that.userHasResponded=false;
+					(angular.element(".test_image_input").val().trim() != "") ? userHasResponded=true : userHasResponded=false;
 					break;
 
 				case that.TEMP_TEST_MULTIPLE:
-					(that.answersVisibles) ? that.userHasResponded = true : that.userHasResponded = false;
+					(that.answersVisibles) ? userHasResponded = true : userHasResponded = false;
 					break;
 			}
 		}

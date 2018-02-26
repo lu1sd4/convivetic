@@ -2890,6 +2890,8 @@ progress {
 .gmain-content .gmain-wrapper .wordsearch {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  max-width: 745px;
 }
 .gmain-content .gmain-wrapper .guide-question-multiple h2 {
   color: #484848;
