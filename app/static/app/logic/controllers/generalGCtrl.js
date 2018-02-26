@@ -304,7 +304,6 @@
 				that.sendAnswers();
 				return;
 			}
-			
 
 			//Se si cumplen los requisitios del estado actual o no hay requisitos ...
 			if((that.currentStateObj.required && userHasResponded) || that.currentStateObj.required == false){
