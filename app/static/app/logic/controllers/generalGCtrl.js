@@ -475,7 +475,13 @@
 
 				return new Promise((resolve, reject) =>{
 					$http.post("/guides/addReview", data, that.config).then(function successCallBack(res){
-						console.log("Exitoso");
+						console.log("success");
+						setTimeout(function(){
+							swal("Respuestas Almacenadas", "¡Gracias!", "success")
+							.then((value) => {
+							  location.href = "/";
+							});
+						}, 1500);
 					}, function errorCallback(res){
 						console.log("Error");
 					});
@@ -484,12 +490,12 @@
 
 			Promise.all([that.requests[0](), that.requests[1](), that.requests[2](),
 				that.requests[3](),that.requests[4](),that.requests[5](),
-				that.requests[6](), addReview()]).then(values=>{
-				console.log("Exitoso");
+				that.requests[6](), addReview()]).then(([r1, r2, r3, r4, r5, r6, r7, r8])=>{
 
-			}, reason =>{
-				console.log(values);
-			});
+				
+				}, reason =>{
+					console.log(values);
+				});
 		}
 
 	}
