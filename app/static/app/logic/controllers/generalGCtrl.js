@@ -219,6 +219,7 @@
 			
 			that.guideInfo = data[0].fields || {};
 			data = data.slice(1, data.length);
+			console.log(data);
 			let questions = [];
 			
 			data.forEach(function(e){
@@ -260,6 +261,7 @@
 						question["content"] = $sce.trustAsHtml(e.fields.content);
 						question["fill_answer"] = e.fields.fill_answer;
 						question["title"] = e.fields.title;
+						question["content_temp"] = e.fields.content_templ;
 						break;
 
 					case that.TEMP_ACTIVITY:
@@ -414,13 +416,23 @@
 				case that.TEMP_TEST_MULTIPLE:
 					currentAnswer = angular.element(".selected").text();
 					break;
+				case that.TEMP_FILL_THE_BLANKS:
+					let selects = document.getElementsByClassName("fill-option");
+					currentAnswer = that.currentStateObj.content_temp;
+
+					for (var i = 0; i < selects.length; i++) {
+						let sel_resp = (selects[i].options[selects[i].selectedIndex]).text;
+						currentAnswer = currentAnswer.replace("#", sel_resp);
+					}
+
+					break;
 			}	
 
 			if(currentAnswer != undefined && currentAnswer  != ''){
 				let data = $.param({
-					id:2,
+					id:that.currentStateObj.id,
 					answer:currentAnswer,
-					toolbox:1
+					toolbox:that.guideInfo.guide_n
 				});
 
 				let request = () =>{
