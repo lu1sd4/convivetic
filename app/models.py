@@ -302,6 +302,12 @@ class Question(models.Model):
 		max_length = 1500,
 		default = ''
 	)
+	content_templ = models.CharField(
+		max_length = 1500,
+		default = '',
+		null=True,
+		blank=True
+	)
 	img = models.CharField(
 		max_length = 100,
 		default = '',

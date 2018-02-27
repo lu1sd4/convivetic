@@ -26,7 +26,7 @@
 		that.GOOD_ANSWER = '¡Muy bien!';
 		that.BAD_ANSWER = 'Respuesta Incorrecta';
 		that.currentFeedback = '';
-		that.userHasResponded = false;
+		window.userHasResponded = false;
 		that.finished = false; //El usuario terminó la guía?
 
 		/* Varibles para almacenar respuestas */
@@ -220,6 +220,7 @@
 			that.guideInfo = data[0].fields || {};
 			data = data.slice(1, data.length);
 			let questions = [];
+			var words = [];
 			
 			data.forEach(function(e){
 
@@ -260,11 +261,13 @@
 						question["content"] = $sce.trustAsHtml(e.fields.content);
 						question["fill_answer"] = e.fields.fill_answer;
 						question["title"] = e.fields.title;
+						question["content_temp"] = e.fields.content_templ;
 						break;
 
 					case that.TEMP_ACTIVITY:
 						question["content"] = e.fields.content;
 						question["title"] = e.fields.title;
+						words = e.fields.content.split(",");
 						break;
 				}
 
@@ -276,6 +279,19 @@
 			that.currentGuide = that.guide;
 			that.statesQuantity = that.currentGuide.states.length;
 			that.currentStateObj = that.currentGuide.states[0];
+
+			// start a word find game
+			var gamePuzzle = wordfindgame.create(words, '#puzzle', '#words');
+
+			$('#solve').click( function() {
+				wordfindgame.solve(gamePuzzle, words);
+			});
+
+			var puzzle = wordfind.newPuzzle(
+				words, 
+				{height: 18, width:18, fillBlanks: false}
+			);
+			wordfind.print(puzzle);
 		}
 
 		/*
@@ -288,10 +304,9 @@
 				that.sendAnswers();
 				return;
 			}
-			
 
 			//Se si cumplen los requisitios del estado actual o no hay requisitos ...
-			if((that.currentStateObj.required && that.userHasResponded) || that.currentStateObj.required == false){
+			if((that.currentStateObj.required && userHasResponded) || that.currentStateObj.required == false){
 				that.saveAnswer();
 				that.currentGuideIndex++; 
 				that.currentStateObj = that.currentGuide.states[that.currentGuideIndex];
@@ -345,18 +360,21 @@
 		* Activa la opción de mostrar respuestas de una pregunta y muestra el feedback del footer
 		*/
 		that.showAnswersAndFeedback = (answer, ans_n) => {
-			that.answersVisibles = true;
-			angular.element(".next-btn").addClass("next-btn-feedback");
-			if(that.currentStateObj.correct == that.currentStateObj.answers.indexOf(answer)){
-				angular.element(".footer-guide").addClass("good-answer");
-				that.currentFeedback = that.GOOD_ANSWER;
-			}else{
-				angular.element(".footer-guide").addClass("bad-answer");
-				that.currentFeedback = that.BAD_ANSWER;
+
+			if(userHasResponded == false){
+				that.answersVisibles = true;
+				angular.element(".next-btn").addClass("next-btn-feedback");
+				if(that.currentStateObj.correct == that.currentStateObj.answers.indexOf(answer)){
+					angular.element(".footer-guide").addClass("good-answer");
+					that.currentFeedback = that.GOOD_ANSWER;
+				}else{
+					angular.element(".footer-guide").addClass("bad-answer");
+					that.currentFeedback = that.BAD_ANSWER;
+				}
+
+				angular.element(".ans-"+ans_n).addClass("selected");
+				userHasResponded = true;
 			}
-
-			angular.element(".ans-"+ans_n).addClass("selected");
-
 		}
 
 		/*
@@ -369,7 +387,7 @@
 
 			that.currentFeedback = '';
 			that.currentAnswer = '';
-			that.userHasResponded = false;
+			userHasResponded = false;
 
 			//Vista de intro
 			angular.element(".test_input").val("");
@@ -389,15 +407,15 @@
 
 			switch(that.currentStateObj.type){
 				case that.TEMP_TEST:
-					(angular.element(".test_input").val().trim() != "") ? that.userHasResponded=true : that.userHasResponded=false;
+					(angular.element(".test_input").val().trim() != "") ? userHasResponded=true : userHasResponded=false;
 					break;
 
 				case that.TEMP_TEST_IMAGE:
-					(angular.element(".test_image_input").val().trim() != "") ? that.userHasResponded=true : that.userHasResponded=false;
+					(angular.element(".test_image_input").val().trim() != "") ? userHasResponded=true : userHasResponded=false;
 					break;
 
 				case that.TEMP_TEST_MULTIPLE:
-					(that.answersVisibles) ? that.userHasResponded = true : that.userHasResponded = false;
+					(that.answersVisibles) ? userHasResponded = true : userHasResponded = false;
 					break;
 			}
 		}
@@ -414,13 +432,23 @@
 				case that.TEMP_TEST_MULTIPLE:
 					currentAnswer = angular.element(".selected").text();
 					break;
+				case that.TEMP_FILL_THE_BLANKS:
+					let selects = document.getElementsByClassName("fill-option");
+					currentAnswer = that.currentStateObj.content_temp;
+
+					for (var i = 0; i < selects.length; i++) {
+						let sel_resp = (selects[i].options[selects[i].selectedIndex]).text;
+						currentAnswer = currentAnswer.replace("#", sel_resp);
+					}
+
+					break;
 			}	
 
 			if(currentAnswer != undefined && currentAnswer  != ''){
 				let data = $.param({
-					id:2,
+					id:that.currentStateObj.id,
 					answer:currentAnswer,
-					toolbox:1
+					toolbox:that.guideInfo.guide_n
 				});
 
 				let request = () =>{
@@ -447,7 +475,13 @@
 
 				return new Promise((resolve, reject) =>{
 					$http.post("/guides/addReview", data, that.config).then(function successCallBack(res){
-						console.log("Exitoso");
+						console.log("success");
+						setTimeout(function(){
+							swal("Respuestas Almacenadas", "¡Gracias!", "success")
+							.then((value) => {
+							  location.href = "/";
+							});
+						}, 1500);
 					}, function errorCallback(res){
 						console.log("Error");
 					});
@@ -456,12 +490,12 @@
 
 			Promise.all([that.requests[0](), that.requests[1](), that.requests[2](),
 				that.requests[3](),that.requests[4](),that.requests[5](),
-				that.requests[6](), addReview()]).then(values=>{
-				console.log("Exitoso");
+				that.requests[6](), addReview()]).then(([r1, r2, r3, r4, r5, r6, r7, r8])=>{
 
-			}, reason =>{
-				console.log(values);
-			});
+				
+				}, reason =>{
+					console.log(values);
+				});
 		}
 
 	}
