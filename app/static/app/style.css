@@ -1171,6 +1171,9 @@ progress {
 .forums-container .forum-header .forum-header-empty {
   margin-top: 1em;
 }
+.forums-container .forum-header .forum-header-empty:hover {
+  cursor: pointer;
+}
 .forums-container .forum {
   margin-top: 2.5em;
 }
@@ -1946,7 +1949,6 @@ progress {
   color: #fff;
   background-color: rgba(59,171,59,0.6);
   border-color: rgba(59,171,59,0.6);
-  border-width: 3px;
 }
 .exp-section .exp-gra-c .experiences-c .experience.exp-invitation .inv-text {
   font-weight: 300;
@@ -2602,10 +2604,9 @@ progress {
   }
 }
 .guides-container {
-  display: flex;
   padding: 80px;
-  justify-content: center;
   min-height: 600px;
+  background-color: #f7f7f7;
 }
 @media (max-width: 567.99px) {
   .guides-container {
@@ -2629,6 +2630,7 @@ progress {
   justify-content: center;
   width: 31.333%;
   max-height: 300px;
+  margin-top: 2rem;
 }
 .guides-container .guides-wrapper .guide h5 {
   font-weight: 500;
@@ -2638,7 +2640,7 @@ progress {
   text-align: center;
   font-weight: 300;
 }
-.guides-container .guides-wrapper .guide button {
+.guides-container .guides-wrapper .guide .btn {
   background: #008489;
   width: 200px;
 }
@@ -3223,14 +3225,15 @@ progress {
 }
 .mtb-content .mtb-item .mtb-item-content {
   background-color: #fff;
-  box-shadow: 0 0 2px rgba(0,0,0,0.14), 0 2px 2px rgba(0,0,0,0.1);
-  transition: box-shadow 0.5s;
+  box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.1);
+  transition: box-shadow 0.2s;
   min-height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   color: #484848;
+  padding: 10px;
 }
 .mtb-content .mtb-item .mtb-item-content .mtb-user {
   font-weight: 300;
@@ -3240,8 +3243,7 @@ progress {
   font-weight: 300;
 }
 .mtb-content .mtb-item .mtb-item-content:hover {
-  box-shadow: 0 0 4px rgba(0,0,0,0.14), 0 4px 8px rgba(0,0,0,0.2);
-  border: 1px #fefefe solid;
+  box-shadow: 0 0 4px rgba(0,132,137,0.25), 0 4px 8px rgba(0,132,137,0.4);
   cursor: pointer;
   text-decoration: none;
 }

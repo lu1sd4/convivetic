@@ -746,10 +746,19 @@ class ThreadCommentDeleteView(LoginRequiredMixin, View):
 		except Experience.DoesNotExist:
 			return JsonResponse(status=403, data={'error':True, 'message':'El comentario no existe'})
 
-class BoxView(ListView):
+class BoxView(TemplateView):
 	template_name='app/box.html'
-	context_object_name = 'guides'
-	model = Guide
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		current_user = self.request.user
+		solved_by_user = ToolboxUser.objects.filter(user=current_user).values('toolbox')
+		unsolved_toolboxes = Toolbox.objects.exclude(id__in=solved_by_user)
+		solved_toolboxes = Toolbox.objects.filter(id__in=solved_by_user)
+		context['unsolved'] = unsolved_toolboxes
+		context['solved'] = solved_toolboxes
+		return context
+
 
 class GuideView(TemplateView):
 	template_name = 'app/guide_general.html'
@@ -759,7 +768,6 @@ class GuideView(TemplateView):
 		pk = self.kwargs["pk"]
 		toolbox = list(Toolbox.objects.filter(guide_n=pk))
 		questions = list(Question.objects.filter(toolbox=pk))
-
 		if(len(toolbox) != 0 and len(questions) != 0):
 			context["toolbox"] = serializers.serialize("json", toolbox + questions)
 		else:
@@ -802,3 +810,6 @@ class ManageToolboxesView(UserIsAdminMixin, TemplateView):
 
 class CommentToolboxView(UserIsAdminMixin, TemplateView):
 	template_name = "app/comment_toolbox.html"
+
+class ViewToolboxCommentView(LoginRequiredMixin, TemplateView):
+	template_name = "app/view_toolbox_comment.html"
