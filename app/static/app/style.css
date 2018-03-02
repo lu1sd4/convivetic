@@ -207,7 +207,7 @@ ul {
   margin: 0px 5px;
 }
 .subheader {
-  background-image: url("img/header.jpg");
+  background: linear-gradient(rgba(0,0,0,0.66), rgba(0,0,0,0.5)), url("img/banner2.jpg");
   height: 220px;
   display: flex;
   justify-content: center;
@@ -585,7 +585,6 @@ progress {
   margin-left: 15px;
 }
 .forum-section .forum-c .f-aside {
-  background-color: #fff;
   display: flex;
   flex-direction: column;
   margin-top: 2em;
@@ -628,6 +627,7 @@ progress {
   }
 }
 .forum-section .forum-c .f-aside .forum-invitation {
+  background-color: #fff;
   border: 2px solid #dadada;
   padding: 25px;
   text-align: center;
@@ -771,6 +771,7 @@ progress {
   font-size: 18px;
   margin-top: 1.5em;
   margin-left: 15px;
+  margin-bottom: 1em;
 }
 .more-forum a {
   color: #008489;
@@ -779,7 +780,7 @@ progress {
   font-size: 17px;
 }
 .block-expl {
-  background-color: #f7f7f7;
+  background-color: #ededed;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -857,6 +858,11 @@ progress {
   padding-right: 0;
   margin-right: 0;
   margin-left: 0;
+}
+.start-section .start-img {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), url("img/img7.jpg");
+  width: 100%;
+  height: 100%;
 }
 .start-section .start-c {
   height: 100%;
@@ -1848,6 +1854,7 @@ progress {
   margin-left: 15px;
 }
 .exp-section .exp-gra-c .experiences-c .experience {
+  background-color: #fff;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
   margin-top: 1.7em;
   height: auto;
@@ -1936,6 +1943,7 @@ progress {
   width: 100%;
 }
 .exp-section .exp-gra-c .experiences-c .experience.exp-invitation {
+  background-color: #5cb85c;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1952,6 +1960,9 @@ progress {
 }
 .exp-section .exp-gra-c .experiences-c .experience.exp-invitation .inv-text {
   font-weight: 300;
+}
+.exp-section .exp-gra-c .experiences-c .experience.exp-invitation:hover {
+  background-color: #5cb85c !important;
 }
 .exp-d-c {
   display: flex;
@@ -2328,6 +2339,7 @@ progress {
   flex-wrap: wrap;
 }
 .my-exp-c .my-exp-wrapper .my-exp-content .mexperience {
+  background: #fff;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -3069,6 +3081,9 @@ progress {
 .container-items-about-us .item-about-us >div:nth-child(2) p {
   font-size: 1.2em;
   font-weight: 100;
+}
+.wrap-container {
+  background-color: #f7f7f7;
 }
 .search-container {
   padding-bottom: 3rem;

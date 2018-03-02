@@ -3,7 +3,7 @@
 {% if exp.video_url %}
 	<img class="rounded" src="https://img.youtube.com/vi/{{exp.video_url}}/0.jpg">
 {% elif exp.img %}
-	<img class="rounded" src="{{object.img.url}}"></img>
+	<img class="rounded" src="{{exp.img.url}}"></img>
 {% elif exp.audio_url %}
 	<img class="rounded" src="{{ MEDIA_URL }}{% random_image 'img/audioposts' %}">
 {% else %}
