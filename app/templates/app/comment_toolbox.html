@@ -3,106 +3,135 @@
 
 {% block content %}
 
-<div class="comment-tb-container">
+<div class="comment-tb-container" ng-controller="commentToolboxController as ctCtrl">
 	<div class="comment-tb-content">
-		<h3 class="tb-title">Caja de herramientas 1</h3>
-		<h4 class="tb-user">Respuestas de <span class="text-primary">Daniel Estiven Rico Posada</span></h4>
+		<h3 class="tb-title">{{ toolbox.name }}</h3>
+		<h4 class="tb-user">Respuestas de <span class="text-primary">{{ user.get_full_name }}</span></h4>
 		<hr>
 
-		<div class="tb-question-text">
-			<h5 class="question-title">Pregunta 1</h5>
-			<p>Tipo: Abierta</p>
-			<div class="alert alert-light">
-				<p><strong>Pregunta:</strong></p>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-			</div>
-			<div class="alert alert-secondary">
-				<p><strong>Respuesta:</strong></p>
-				<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-			</div>
-			<small>Comentario</small>
-			<textarea class="form-control" rows="3"></textarea>
-		</div>
-		<hr>
+		{% for question in questions %}
 
-		<div class="tb-question-image">
-			<h5 class="question-title">Pregunta 2</h5>
-			<p>Tipo: Abierta con imagen</p>
-			<div class="alert alert-light">
-				<p><strong>Imagen:</strong></p>
-				<div class="text-center">
-					<img src="http://via.placeholder.com/200x200">
-				</div>
-				<p><strong>Pregunta:</strong></p>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-			</div>
-			<div class="alert alert-secondary">
-				<p><strong>Respuesta:</strong></p>
-				<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-			</div>
-			<small>Comentario</small>
-			<textarea class="form-control" rows="3"></textarea>
-		</div>
-		<hr>
+			{% with answer=answers|get_list_item:forloop.counter %}
 
-		<div class="tb-question-activity">
-			<h5 class="question-title">Pregunta 3</h5>
-			<p>Tipo: Sopa de letras</p>
-			<div class="alert alert-success">
-				<p class="text-center">Resuelta</p>
-			</div>
-		</div>
-		<hr>
+				{% if question.q_type == 'TEMP_TEST' %}
 
-		<div class="tb-question-multiple">
-			<h5 class="question-title">Pregunta 4</h5>
-			<p>Tipo: Selección múltiple - Única respuesta</p>
-			<div class="alert alert-light">
-				<p><strong>Pregunta</strong></p>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-				<p><strong>Opciones</strong></p>
-				<ul class="list-inline">
-				  <li class="list-inline-item p-2">Opción 1</li>
-				  <li class="list-inline-item p-2 bg-success text-white">Opción 2</li>
-				  <li class="list-inline-item p-2">Opción 3</li>
-				  <li class="list-inline-item p-2">Opción 4</li>
-				</ul>				
-			</div>
-			<div class="alert alert-secondary">
-				<p><strong>Respuesta</strong></p>
-				<p>Opción 1</p>
-			</div>
-			<small>Comentario</small>
-			<textarea class="form-control" rows="3"></textarea>
-		</div>
-		<hr>
+					<div class="tb-question-text">
+						<h5 class="question-title">Pregunta {{ forloop.counter }}</h5>
+						<p>Tipo: Abierta</p>
+						<div class="alert alert-light">
+							<p><strong>Pregunta:</strong></p>
+							<p>{{ question.content }}</p>
+						</div>
+						<div class="alert alert-secondary">
+							<p><strong>Respuesta:</strong></p>
+							<p>{{ answer.answer }}</p>
+						</div>
+						<small>Comentario</small>
+						<textarea class="form-control" rows="3" ng-model="ctCtrl.comment[{{ forloop.counter }}]"></textarea>
+					</div>
+					<hr>
 
-		<div class="tb-question-activity">
-			<h5 class="question-title">Pregunta 5</h5>
-			<p>Tipo: Crucigrama</p>
-			<div class="alert alert-success">
-				<p class="text-center">Resuelta</p>
-			</div>
-		</div>
-		<hr>
+				{% elif question.q_type == 'TEMP_TEST_IMAGE' %}
 
-		<div class="tb-question-multiple">
-			<h5 class="question-title">Pregunta 6</h5>
-			<p>Tipo: Completar el texto</p>
-			<div class="alert alert-light">
-				<p><strong>Frase correcta</strong></p>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>		
-			</div>
-			<div class="alert alert-secondary">
-				<p><strong>Respuesta</strong></p>
-				<p>Lorem Ipsum is <strong>not simply</strong> dummy texto of the <strong>textile</strong> and <strong>typesetting</strong> industry.</p>
-			</div>
-			<small>Comentario</small>
-			<textarea class="form-control" rows="3"></textarea>
+					<div class="tb-question-image">
+						<h5 class="question-title">Pregunta {{ forloop.counter }}</h5>
+						<p>Tipo: Abierta con imagen</p>
+						<div class="alert alert-light">
+							<p><strong>Imagen:</strong></p>
+							<div class="text-center">
+								<img src="{{ question.img }}">
+							</div>
+							<p><strong>Pregunta:</strong></p>
+							<p>{{ question.content }}</p>
+						</div>
+						<div class="alert alert-secondary">
+							<p><strong>Respuesta:</strong></p>
+							<p>{{ answer.answer }}</p>
+						</div>
+						<small>Comentario</small>
+						<textarea class="form-control" rows="3" ng-model="ctCtrl.comment[{{ forloop.counter }}]"></textarea>
+					</div>
+					<hr>
+
+				{% elif question.q_type == 'TEMP_FILL_THE_BLANKS' %}
+
+					<div class="tb-question-multiple">
+						<h5 class="question-title">Pregunta {{ forloop.counter }}</h5>
+						<p>Tipo: Completar el texto</p>
+						<div class="alert alert-light">
+							<p><strong>Frase correcta</strong></p>
+							<p>{{ question.fill_answer }}</p>		
+						</div>
+						<div class="alert alert-secondary">
+							<p><strong>Respuesta</strong></p>
+							<p>{{ answer.answer }}</p>
+						</div>
+						<small>Comentario</small>
+						<textarea class="form-control" rows="3" ng-model="ctCtrl.comment[{{ forloop.counter }}]"></textarea>
+					</div>
+					<hr>
+
+				{% elif question.q_type == 'TEMP_ACTIVITY' %}
+
+					<div class="tb-question-activity">
+						<h5 class="question-title">Pregunta {{ forloop.counter }}</h5>
+						<p>Tipo: Sopa de letras</p>
+						<div class="alert alert-success">
+							<p class="text-center">Resuelta</p>
+						</div>
+					</div>
+					<hr>
+
+				{% elif question.q_type == 'TEMP_TEST_MULTIPLE' %}
+
+					<div class="tb-question-multiple">
+						<h5 class="question-title">Pregunta {{ forloop.counter }}</h5>
+						<p>Tipo: Selección múltiple - Única respuesta</p>
+						<div class="alert alert-light">
+							<p><strong>Pregunta</strong></p>
+							<p>{{ question.content }}</p>
+							<p><strong>Opciones</strong></p>
+							<p>{{ question.answers_av }}</p>	
+							<p><strong>Respuesta correcta</strong></p>
+							<p>Opción {{ option_letters|get_item:question.correct_answer }}</p>	
+						</div>
+						<div class="alert alert-secondary">
+							<p><strong>Respuesta</strong></p>
+							<p>Opción {{ option_letters|get_item:question.correct_answer }}</p>
+						</div>
+						<small>Comentario</small>
+						<textarea class="form-control" rows="3" ng-model="ctCtrl.comment[{{ forloop.counter }}]"></textarea>
+					</div>
+					<hr>
+
+				{% elif question.q_type == 'TEMP_CROSSWORD' %}
+
+					<div class="tb-question-activity">
+						<h5 class="question-title">Pregunta {{ forloop.counter }}</h5>
+						<p>Tipo: Crucigrama</p>
+						<div class="alert alert-success">
+							<p class="text-center">Resuelta</p>
+						</div>
+					</div>
+					<hr>
+
+				{% endif %}
+			{% endwith %}
+		{% endfor %}
+
+		<div class="text-center">
+			<button class="btn btn-primary">Guardar comentarios</button>
 		</div>
-		<hr>
+
+		<br>
 
 	</div>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script type="text/javascript" src="{% static 'app/logic/controllers/commentToolboxController.js' %}"></script>
 
 {% endblock %}

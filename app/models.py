@@ -288,8 +288,8 @@ class ToolboxUser(models.Model):
 	)
 	comment = models.CharField(
 		max_length = 500,
-		null=True,
-		blank=True
+		blank=True,
+		default=''
 	)
 
 class Question(models.Model):

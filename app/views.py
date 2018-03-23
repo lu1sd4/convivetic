@@ -807,9 +807,38 @@ class AddToolboxReview(View):
 
 class ManageToolboxesView(UserIsAdminMixin, TemplateView):
 	template_name = "app/manage_toolboxes.html"
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		pending_toolboxes = ToolboxUser.objects.filter(comment__exact='')
+		context['pending_toolboxes'] = pending_toolboxes
+		commented_toolboxes = ToolboxUser.objects.exclude(comment__exact='')
+		context['commented_toolboxes'] = commented_toolboxes
+		return context
+
 
 class CommentToolboxView(UserIsAdminMixin, TemplateView):
 	template_name = "app/comment_toolbox.html"
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+
+		context['option_letters'] = { 0: 'A', 1: 'B', 2: 'C', 3: 'D' }
+
+		user_id = kwargs['user_id']
+		user = User.objects.get(id=user_id)
+
+		tb_id = kwargs['tb_id']
+		toolbox = Toolbox.objects.get(id=tb_id)
+		
+		context['toolbox'] = toolbox
+		context['user'] = user
+		
+		questions = toolbox.question_set.exclude(q_type__exact='TEMP_INTRO').exclude(q_type__exact='TEMP_TEXT').order_by('order')		
+		context['questions'] = questions
+		
+		answers = user.answer_set.filter(question__in=questions).order_by('question__order')
+		context['answers'] = answers
+
+		return context
 
 class ViewToolboxCommentView(LoginRequiredMixin, TemplateView):
 	template_name = "app/view_toolbox_comment.html"

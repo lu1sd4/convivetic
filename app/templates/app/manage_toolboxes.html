@@ -18,46 +18,7 @@
 		  </li>
 		 </ul>
 
-		 <div class="mtb-content row">
-		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
-		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
-			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
-		 		</a>
-		 	</div>
-		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
-		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
-			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
-		 		</a>
-		 	</div>
-		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
-		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
-			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
-		 		</a>
-		 	</div>
-		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
-		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
-			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
-		 		</a>
-		 	</div>
-		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
-		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
-			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
-		 		</a>
-		 	</div>
-		 	<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-		 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
-		 			<h5 class="mtb-user text-center">Daniel Estiven Rico Posada</h5>
-			 		<h4 class="mtb-title text-center">Caja 1</h4>			 	
-		 		</a>
-		 	</div>
-		 </div>
-
-
+		 
 		{% if pending_toolboxes %}
 
 			<div class="mtb-content row" ng-show="mtCtrl.current_tab == mtCtrl.PENDING_TAB">
@@ -65,8 +26,8 @@
 			{% for tb in pending_toolboxes %}
 
 				<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-			 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' %}">
-			 			<h5 class="mtb-user text-center">{{tb.user.full_name}}</h5>
+			 		<a class="mtb-item-content rounded" href="{% url 'toolbox_comment' user_id=tb.user.id tb_id=tb.toolbox.id %}">
+			 			<h5 class="mtb-user text-center">{{tb.user.get_full_name}}</h5>
 				 		<h4 class="mtb-title text-center">{{tb.toolbox.name}}</h4>			 	
 			 		</a>
 			 	</div>
@@ -92,8 +53,8 @@
 
 				<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
 			 		<a class="mtb-item-content rounded" href="#">
-			 			<h5 class="mtb-user text-center">{{tb.user.full_name}}</h5>
-				 		<h4 class="mtb-title text-center">{{tb.toolbox.name}}</h4>			 	
+			 			<h5 class="mtb-user text-center">{{tb.user.get_full_name}}</h5>
+				 		<h4 class="mtb-title text-center">{{tb.toolbox.name}}</h4>		 	
 			 		</a>
 			 	</div>
 
