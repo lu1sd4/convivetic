@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="comment-tb-container" ng-controller="commentToolboxController as ctCtrl">
+<div class="comment-tb-container" ng-controller="commentToolboxController as ctCtrl" ng-init="ctCtrl.init({{user_id}}, {{toolbox.id}})">
 	<div class="comment-tb-content">
 		<h3 class="tb-title">{{ toolbox.name }}</h3>
 		<h4 class="tb-user">Respuestas de <span class="text-primary">{{ user.get_full_name }}</span></h4>
@@ -120,7 +120,7 @@
 		{% endfor %}
 
 		<div class="text-center">
-			<button class="btn btn-primary">Guardar comentarios</button>
+			<button class="btn btn-primary" ng-click="ctCtrl.saveComment()" >Guardar comentarios</button>
 		</div>
 
 		<br>

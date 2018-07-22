@@ -58,7 +58,7 @@
 			{% for toolbox in solved %}
 
 		 		<div class="mtb-item col-xs-12 col-sm-6 col-md-4">
-			 		<a class="mtb-item-content rounded" href="{% url 'guides' toolbox.guide_n %}">
+			 		<a class="mtb-item-content rounded" href="{% url 'view_toolbox_comment' toolbox.id %}">
 			 			<p class="mtb-user text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et massa lectus. Vivamus tortor urna, gravida quis nunc at, imperdiet dapibus sapien. Quisque id ex quis leo pretium varius sed ut lacus.</p>
 				 		<h4 class="mtb-title text-center">{{toolbox.name}}</h4>			 	
 			 		</a>

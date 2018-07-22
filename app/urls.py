@@ -61,5 +61,6 @@ urlpatterns = [
 	path('guides/addReview', AddToolboxReview.as_view(), name="add_review"),
 	path('guides/manage', ManageToolboxesView.as_view(), name="toolboxes_manage"),
 	path('guides/comment/<str:user_id>/<str:tb_id>', CommentToolboxView.as_view(), name="toolbox_comment"),
-	path('guides/view_comment', ViewToolboxCommentView.as_view(), name="view_toolbox_comment")
+	path('guides/view_comment/<str:tb_id>', ViewToolboxCommentView.as_view(), name="view_toolbox_comment"),
+	path('toolbox/api/comment', ToolboxAddCommentApiView.as_view(), name="addtbxcomment")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

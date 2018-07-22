@@ -840,5 +840,40 @@ class CommentToolboxView(UserIsAdminMixin, TemplateView):
 
 		return context
 
+class ToolboxAddCommentApiView(UserIsAdminMixin, View):
+	def post(self, request, *args, **kwargs):	
+		data = json.loads(request.body)
+		toolbox_id = data.get("toolbox_id")
+		toolbox = Toolbox.objects.get(pk=toolbox_id)
+		user_id = data.get("user_id")
+		user = User.objects.get(pk=user_id)
+		tbUsr = ToolboxUser.objects.get(toolbox = toolbox, user = user)
+		tbUsr.comment = data.get("comment")
+		tbUsr.save()
+		return HttpResponse(status=200)
+
 class ViewToolboxCommentView(LoginRequiredMixin, TemplateView):
 	template_name = "app/view_toolbox_comment.html"
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+
+		context['option_letters'] = { 0: 'A', 1: 'B', 2: 'C', 3: 'D' }
+
+		user = self.request.user
+
+		tb_id = kwargs['tb_id']
+		toolbox = Toolbox.objects.get(id=tb_id)
+		
+		context['toolbox'] = toolbox
+		context['user'] = user
+		
+		questions = toolbox.question_set.exclude(q_type__exact='TEMP_INTRO').exclude(q_type__exact='TEMP_TEXT').order_by('order')		
+		context['questions'] = questions
+		
+		answers = user.answer_set.filter(question__in=questions).order_by('question__order')
+		context['answers'] = answers
+
+		tbUsr = ToolboxUser.objects.get(toolbox = toolbox, user = user)
+		context['comment'] = tbUsr.comment
+
+		return context

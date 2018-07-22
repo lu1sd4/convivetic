@@ -19,6 +19,7 @@
 
 		that.init = init;
 		that.commentToString = commentToString;		
+		that.saveComment = saveComment;
 
 		function init(uid, tbid){
 			that.user_id = uid;
@@ -29,7 +30,7 @@
 			var result = "";
 			for(var c in that.comment){
 				if(that.comment[c]){
-					result += that.comment[c] + '<br>';
+					result += '<p><strong>Pregunta ' + c + '</strong></p><p>' + that.comment[c] + '</p>';
 				}
 			}
 			return result;
@@ -37,10 +38,11 @@
 
 		function saveComment(){
 			var data = {
-				user_id = that.user_id,
-				toolbox_id = that.toolbox_id,
-				comment = that.commentToString()
+				user_id : that.user_id,
+				toolbox_id : that.toolbox_id,
+				comment : that.commentToString()
 			};
+			console.log(data);
 			$http.post('/toolbox/api/comment', data).then(function(){
 				location.replace('/guides/manage');
 			});

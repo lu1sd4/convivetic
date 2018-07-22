@@ -52,10 +52,10 @@
 			{% for tb in commented_toolboxes %}
 
 				<div class="mtb-item col-xs-12 col-sm-6 col-md-4 col-lg-3">
-			 		<a class="mtb-item-content rounded" href="#">
+			 		<div class="mtb-item-content rounded">
 			 			<h5 class="mtb-user text-center">{{tb.user.get_full_name}}</h5>
 				 		<h4 class="mtb-title text-center">{{tb.toolbox.name}}</h4>		 	
-			 		</a>
+					 </div>
 			 	</div>
 
 			{% endfor %}
