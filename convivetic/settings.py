@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import dj_database_url
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,10 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '9u7ysc$0@*&m*n319=)ea^#+lwz$erc=ebl0rd9kg=4zb7ep*@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '192.168.1.69', '192.168.0.15']
-
+DEBUG = False
 
 # Application definition
 
@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
+    'django.contrib.messages',    
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'widget_tweaks',
     'app'
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -66,6 +68,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media'
             ],
+            'debug': DEBUG
         },
     },
 ]
@@ -82,6 +85,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+DATABASES['default'].update(dj_database_url.config())
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -102,7 +107,6 @@ USE_TZ = True
 
 ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 
-STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(ENV_PATH,'media/')
 MEDIA_URL = '/media/'
 
@@ -134,3 +138,22 @@ DRIVE_FOLDER_ID = '1lBJJTL73djrHXaSssIr-3gHE9QPkJ96Q'
 
 REFRESH_TOKEN = '1/-MIfoXnTYScaGGfjNDqS2I0YTsx_jNB0hLpbxzGUxXg'
 ACCESS_TOKEN = 'ya29.GltmBWhETDQ9npXjZnXG9c7gj7fNHKeE9DU_pIH-Cvad-_41rs1dwbF-G9XCElmQdqqhw6gE6x8EJGRrmm1ZNCZViIstp4_wt_DIDyFlAy0duaZq-4nYv-UIBWMN'
+
+
+# Host headers
+
+ALLOWED_HOSTS = ['conviveetic.herokuapp.com', 'localhost', '127.0.0.1']
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())

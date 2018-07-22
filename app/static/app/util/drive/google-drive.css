@@ -28,7 +28,7 @@ body{
 }
 
 .breadcrumb-arrow{
-    background:url(images/arrow_right.png) no-repeat 0 3px;
+    
     display:inline-block;
     height:16px;
     width:11px;
@@ -123,11 +123,11 @@ body{
 }
 
 #button-reload {
-    background:url(images/button_reload.png) no-repeat;
+    
 }
 
 #button-share {
-    background:url(images/button_share.png) no-repeat;
+    
 }
 
 #button-share.flash{
@@ -135,11 +135,11 @@ body{
 }
 
 #button-addfolder {
-    background:url(images/button_addfolder.png) no-repeat;
+    
 }
 
 #button-upload {
-    background:url(images/button_upload.png) no-repeat;
+    
 }
 
 .button-box{
@@ -155,19 +155,19 @@ body{
 }
 
 .button-delete {
-    background:url(images/button_delete.png) no-repeat;
+    
 }
 
 .button-info {
-    background:url(images/button_info.png) no-repeat;
+    
 }
 
 .button-download {
-    background:url(images/button_download.png) no-repeat;
+    
 }
 
 .button-text {
-    background:url(images/button_text.png) no-repeat;
+    
 }
 
 /*************** END Google Drive Box ***************/

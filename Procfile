@@ -1,0 +1,1 @@
+web: gunicorn convivetic.wsgi --log-file=-
