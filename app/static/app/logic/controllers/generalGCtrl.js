@@ -489,9 +489,9 @@
 			}
 
 			Promise.all([that.requests[0](), that.requests[1](), that.requests[2](),
-				that.requests[3](),that.requests[4](),that.requests[5](),
-				that.requests[6](), addReview()]).then(([r1, r2, r3, r4, r5, r6, r7, r8])=>{
-
+				that.requests[3](),that.requests[4](),that.requests[5](), addReview()]).then(([r1, r2, r3, r4, r5, r6, r7, r8])=>{
+				
+					swal("Agregado Exitosamente!!");
 				
 				}, reason =>{
 					console.log(values);
