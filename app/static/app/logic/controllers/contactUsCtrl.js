@@ -15,6 +15,7 @@
 		that.comment = "";
 		that.phone = "";
 		that.sendForm = sendForm;
+		that.refreshForm = refreshForm;
 		that.contactUsMessage = contactUsMessage;
 		that.showSuccessMessage = showSuccessMessage;
 		that.showErrorMessage = showErrorMessage;
@@ -34,11 +35,11 @@
 			    	type: 'POST',
 			    	url: '../../send_email',
 			    	data: {
-						'name': "",
-						'lastname': "",
-						'email': "",
-						'comment': "",
-						'phone': ""
+						'name': that.name,
+						'lastname': that.lastname,
+						'email': that.email,
+						'comment': that.comment,
+						'phone': that.phone
 					},
 			    	success : function(data){
 			    		if (data.type == "Success") {

@@ -45,14 +45,16 @@ function Crossw1rd(container_id) {
 			self.drawGrid();
 			self.drawControls();
 			self.adjustDimensions();
-			self.mapKeyBindings();
+      self.mapKeyBindings();
+      /*
 			// check for & load saved state
 			var state = $.cookie('crossw1rd.'+id);
 			if (state!=null) self.resume(state);
 			// turn on autosave
 			if (self.autosave) {
 				setInterval(self.save, 1000);
-			}
+      }
+      */
     });
   }
 
@@ -571,16 +573,17 @@ function Crossw1rd(container_id) {
 
   // save the puzzle state to a cookie
   this.save = function() {
+    /*
     if (!self.saved) {
       $.cookie('crossw1rd.'+self.id, self.getState(), {expires:365});
       self.saved = true;
-    }
+    }*/
   }
 
   // clear the puzzle and delete saved state
   this.reset = function() {
     if (confirm('Reset: Are you sure?')) {
-      $.removeCookie('crossw1rd.'+self.id);
+      // $.removeCookie('crossw1rd.'+self.id);
       self.init(self.id);
     }
   }

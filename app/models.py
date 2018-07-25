@@ -272,6 +272,10 @@ class Toolbox(models.Model):
 		max_length = 100,
 		default = ''
 	)
+	description = models.CharField(
+		max_length = 1000,
+		default = ''
+	)
 	guide_n = models.PositiveIntegerField(
 		default = 0
 	)

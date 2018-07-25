@@ -481,10 +481,11 @@ def ContactUsSendEmail(request):
 		lastname = request.POST.get('lastname', '')
 		email = request.POST.get('email', '')
 		comment = request.POST.get('comment', '')
+		comment = 'Correo: ' + email + '\nNombre: ' + name + ' ' + lastname + '\n\n' + 'Mensaje:\n' + comment
 		phone = request.POST.get('phone', '')
 		data={}
 		try:
-			message = EmailMessage('luisdaniel.ld24@gmail.com', comment, to=[email])
+			message = EmailMessage(subject='Nuevo mensaje en la página', body=comment, from_email=email, to=[settings.EMAIL_HOST_USER])
 			message.send()
 			data["type"] = "Success",
 			data["message"] = "¡ Envio exitoso !"
