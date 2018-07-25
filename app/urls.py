@@ -2,7 +2,6 @@ from django.urls import path, re_path
 
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
-from django.conf.urls.static import static
 
 from . import views
 
@@ -61,4 +60,4 @@ urlpatterns = [
 	path('guides/comment/<str:user_id>/<str:tb_id>', CommentToolboxView.as_view(), name="toolbox_comment"),
 	path('guides/view_comment/<str:tb_id>', ViewToolboxCommentView.as_view(), name="view_toolbox_comment"),
 	path('toolbox/api/comment', ToolboxAddCommentApiView.as_view(), name="addtbxcomment")
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
