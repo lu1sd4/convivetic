@@ -31,7 +31,7 @@
 
 								<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
 								<div class="content-c">
-									<p>{{exp.content}}</p>
+									<p>{{exp.content|striptags}}</p>
 								</div>								
 
 							</div>							

@@ -32,7 +32,7 @@
 
 							<div class="exp-title"><a href="{% url 'experience-detail' exp.id %}">{{exp.title}}</a></div>
 							<div class="content-c">
-								<p>{{exp.content}}</p>
+								<p>{{exp.content|striptags}}</p>
 							</div>
 							<p class="text-muted text-right"><small>{{ exp.pub_date }}</small></p>
 							<div class="publisher"><i class="fas fa-user"></i>{% if request.user.is_authenticated and request.user == exp.author %}
