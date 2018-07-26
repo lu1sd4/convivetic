@@ -13,11 +13,11 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import dj_database_url
 import django_heroku
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -36,16 +36,44 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',    
-    'whitenoise.runserver_nostatic',
+    'django.contrib.messages',
     'django.contrib.staticfiles',
+    'storages',
     'widget_tweaks',
     'app'
 ]
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'app/static'),
+]
+
+AWS_ACCESS_KEY_ID = 'AKIAJVF5YUWFF4JPMDVQ'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_FILE_EXPIRE = 200
+AWS_PRELOAD_METADATA = True
+AWS_QUERYSTRING_AUTH = False
+
+DEFAULT_FILE_STORAGE = 'convivetic.aws.utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'convivetic.aws.utils.StaticRootS3BotoStorage'
+
+AWS_STORAGE_BUCKET_NAME = 'convivetic-assets'
+
+S3_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = 'https://%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_ROOT = MEDIA_URL
+STATIC_URL = S3_URL + 'static/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -103,14 +131,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-ENV_PATH = os.path.abspath(os.path.dirname(__file__))
-
-MEDIA_ROOT = os.path.join(ENV_PATH,'media/')
-MEDIA_URL = '/media/'
-
 # Auth options
 
 LOGIN_URL = 'login'
@@ -145,15 +165,5 @@ ACCESS_TOKEN = 'ya29.GltmBWhETDQ9npXjZnXG9c7gj7fNHKeE9DU_pIH-Cvad-_41rs1dwbF-G9X
 
 ALLOWED_HOSTS = ['conviveetic.herokuapp.com', 'localhost', '127.0.0.1']
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+#django_heroku.settings(locals())

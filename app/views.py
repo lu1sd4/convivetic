@@ -384,7 +384,7 @@ def update_profile(request):
         		'profile_form': profile_form
             })
         else:
-            messages.error(request, 'Please correct the error below.')
+            messages.error(request, 'El formulario no es válido.')
     else:
         user_form = UserUpdateForm(instance=request.user, initial={'group' : request.user.groups.get().pk})
         profile_form = ProfileForm(instance=request.user.userprofile)

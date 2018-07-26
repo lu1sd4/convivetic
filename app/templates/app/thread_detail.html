@@ -1,7 +1,6 @@
  {% extends 'app/base.html' %}
  {% load static %}
  {% load widget_tweaks %}
- {% load random_image  %}
 
  {% block content %}
 
@@ -16,9 +15,9 @@
 				{% elif object.img %}
 					<img class="rounded-circle" src="{{object.img.url}}" alt=""></img>
 				{% elif object.audio_url %}
-					<img class="rounded-circle" src="{{ MEDIA_URL }}{% random_image 'img/audioposts' %}">
+					<img class="rounded-circle" src="{% static 'app/img/defaults/audioposts/1.jpeg' %}">
 				{% else %}
-					<img class="rounded-circle" src="{{ MEDIA_URL }}{% random_image 'img/textposts' %}">
+					<img class="rounded-circle" src="{% static 'app/img/defaults/textposts/1.jpg' %}">
 				{% endif %}
 			</div>			
 
@@ -39,7 +38,7 @@
 					</ul>
 				</div>
 
-				<p>{{object.description}}</p>
+				<div>{{object.description|safe}}</div>
 
 				<div class="detail-c-din">
 
@@ -218,7 +217,7 @@
 						</div>
 
 						<div class="comment-detail">
-							<p>{{c.content}}</p>
+							{{c.content|safe}}
 						</div>
 
 						{% if c.img or c.video_url or c.audio_url %}
