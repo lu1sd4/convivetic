@@ -768,7 +768,7 @@ class GuideView(TemplateView):
 		context = super().get_context_data(**kwargs)
 		pk = self.kwargs["pk"]
 		toolbox = list(Toolbox.objects.filter(guide_n=pk))
-		questions = list(Question.objects.filter(toolbox=pk))
+		questions = list(Question.objects.filter(toolbox=pk).order_by('order'))
 		if(len(toolbox) != 0 and len(questions) != 0):
 			context["toolbox"] = serializers.serialize("json", toolbox + questions)
 		else:
