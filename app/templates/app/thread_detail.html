@@ -217,7 +217,7 @@
 						</div>
 
 						<div class="comment-detail">
-							<p>{{c.content}}</p>
+							{{c.content|safe}}
 						</div>
 
 						{% if c.img or c.video_url or c.audio_url %}
