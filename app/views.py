@@ -868,7 +868,7 @@ class ViewToolboxCommentView(LoginRequiredMixin, TemplateView):
 		context['toolbox'] = toolbox
 		context['user'] = user
 		
-		questions = toolbox.question_set.exclude(q_type__exact='TEMP_INTRO').exclude(q_type__exact='TEMP_TEXT').order_by('order')		
+		questions = toolbox.question_set.exclude(q_type__exact='TEMP_INTRO').exclude(q_type__exact='TEMP_TEXT').exclude(q_type__exact='TEMP_FILL_THE_BLANKS').order_by('order')		
 		context['questions'] = questions
 		
 		answers = user.answer_set.filter(question__in=questions).order_by('question__order')
