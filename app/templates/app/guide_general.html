@@ -84,16 +84,16 @@
 				<div class="answers-w">
 					<div class="top-answers">
 						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[0], 1)" class="answers ans-1 rounded" 
-						ng-class="gc.validateAnswer(gc.currentStateObj.answers[0], 2)">{[{gc.currentStateObj.answers[0]}]}</a>
-						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[1], 3)" class="answers ans-2 rounded" 
-						ng-class="gc.validateAnswer(gc.currentStateObj.answers[1], 4)">{[{gc.currentStateObj.answers[1]}]}</a>
+						ng-class="gc.validateAnswer(gc.currentStateObj.answers[0], 1)">{[{gc.currentStateObj.answers[0]}]}</a>
+						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[1], 2)" class="answers ans-2 rounded" 
+						ng-class="gc.validateAnswer(gc.currentStateObj.answers[1], 2)">{[{gc.currentStateObj.answers[1]}]}</a>
 					</div>
 					
 					<div class="bottom-answers">
-						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[2])" class="answers ans-3 rounded"
-						ng-class="gc.validateAnswer(gc.currentStateObj.answers[2])">{[{gc.currentStateObj.answers[2]}]}</a>
-						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[3])" class="answers ans-4 rounded"
-						ng-class="gc.validateAnswer(gc.currentStateObj.answers[3])">{[{gc.currentStateObj.answers[3]}]}</a>
+						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[2], 3)" class="answers ans-3 rounded"
+						ng-class="gc.validateAnswer(gc.currentStateObj.answers[2], 3)">{[{gc.currentStateObj.answers[2]}]}</a>
+						<a ng-click="gc.showAnswersAndFeedback(gc.currentStateObj.answers[3], 4)" class="answers ans-4 rounded"
+						ng-class="gc.validateAnswer(gc.currentStateObj.answers[3], 4)">{[{gc.currentStateObj.answers[3]}]}</a>
 					</div>
 				</div>
 			</div>
@@ -113,7 +113,7 @@
 	<footer class="footer-guide">
 		<div class="footer-w">
 			<p ng-if="gc.answersVisibles">{[{ gc.currentFeedback }]}</p>
-			<button class="btn btn-primary next-btn" ng-click="gc.nextState()" ng-click="gc.previousState()">Siguiente</button>
+			<button class="btn btn-primary next-btn" ng-click="gc.nextState()">Siguiente</button>
 		</div>
 	</footer>
 

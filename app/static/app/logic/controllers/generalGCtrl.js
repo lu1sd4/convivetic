@@ -361,6 +361,8 @@
 		*/
 		that.showAnswersAndFeedback = (answer, ans_n) => {
 
+			console.log("Show");
+			console.log(userHasResponded);
 			if(userHasResponded == false){
 				that.answersVisibles = true;
 				angular.element(".next-btn").addClass("next-btn-feedback");
@@ -372,6 +374,7 @@
 					that.currentFeedback = that.BAD_ANSWER;
 				}
 
+				console.log(ans_n);
 				angular.element(".ans-"+ans_n).addClass("selected");
 				userHasResponded = true;
 			}
@@ -421,6 +424,7 @@
 		}
 
 		that.saveAnswer = () =>{
+
 			let currentAnswer = '';
 			switch(that.currentStateObj.type){
 				case that.TEMP_TEST:
@@ -443,6 +447,9 @@
 
 					break;
 			}	
+
+			console.log("Respuestas");
+			console.log(currentAnswer);
 
 			if(currentAnswer != undefined && currentAnswer  != ''){
 				let data = $.param({
